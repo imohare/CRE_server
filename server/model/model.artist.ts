@@ -1,7 +1,14 @@
-const { Sequelize, Model, DataTypes } = require('sequelize');
-const sequelize = new Sequelize('sqlite::memory:');
+import { InferAttributes } from "sequelize/types";
 
-class Artist extends Model<Artist>{ //extends Model<Artist>
+const { Sequelize, Model, DataTypes, InferAttributes, } = require('sequelize');
+//env 
+const sequelize = require('./db.ts')
+const HOST = process.env.HOST || 'localhost'
+const PASSWORD = process.env.PASSWORD
+
+//Passing parameters
+
+class Artist extends Model<InferAttributes<Artist>, InferCreationAttributes<Artist>>{ //extends Model<Artist>
     declare eth_address: string;
     declare website: string;
     declare instagram: string;
@@ -20,6 +27,6 @@ Artist.init({
     spotify: DataTypes.STRING,
     username: DataTypes.STRING
 
-}, { sequelize, modelName: 'artist' });
+}, { sequelize, modelName: 'Artist' });
 
 
