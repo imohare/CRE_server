@@ -1,6 +1,6 @@
-import { InferAttributes } from "sequelize/types";
+// import { InferAttributes } from "sequelize/types";
 
-const { Sequelize, Model, DataTypes, InferAttributes, } = require('sequelize');
+import { Sequelize, Model, DataTypes, InferAttributes, InferCreationAttributes } from 'sequelize';
 //env 
 const sequelize = require('./db.ts')
 const HOST = process.env.HOST || 'localhost'
