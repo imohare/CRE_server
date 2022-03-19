@@ -1,16 +1,16 @@
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.sequelize = void 0;
 const { Sequelize } = require('sequelize');
-const HOST = process.env.HOST || 'localhost'
-const PASSWORD = process.env.PASSWORD
+const HOST = process.env.HOST || 'localhost';
+const PASSWORD = process.env.PASSWORD;
 const USER = process.env.USER;
 
-
 //Passing parameters
-const sequelize = new Sequelize('cre', USER, PASSWORD, {
+exports.sequelize = new Sequelize('cre', USER, PASSWORD, {
     host: HOST,
     dialect: 'postgres'
 });
-
 
 try {
     sequelize.authenticate();
@@ -20,6 +20,3 @@ try {
 } catch (error) {
     console.error('Unable to connect to the database:', error);
 };
-
-module.exports = sequelize;
-
