@@ -12,6 +12,11 @@ class Merchandise extends Model<InferAttributes<Merchandise>, InferAttributes<Me
     declare type: string;
     declare description: string;
     //foreign--> token id
+
+
+    //since TS cannot determine modoel asssociations at compile time
+    //we have to declare them here purely virtually
+
 }
 
 Merchandise.init({
