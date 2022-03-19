@@ -3,11 +3,9 @@ import {
   DataTypes, 
   Model, 
   Sequelize, 
-  HasManyCountAssociationsMixin, 
   HasManyGetAssociationsMixin, 
   HasManyHasAssociationMixin, 
-  BelongsToSetAssociationMixin, 
-  BelongsToGetAssociationMixin
+  HasManyAddAssociationMixin
 } from 'sequelize';
 
 import { Album } from './album';
@@ -28,21 +26,39 @@ class Artist extends Model {
   public createdAt!: Date;
   public updatedAt!: Date;
 
-  //Events association methods
+  //Event association with methods
+  public addEvent!: HasManyAddAssociationMixin<Event, number>;
+  public getEvents!: HasManyGetAssociationsMixin<Event>;
 
-  //Album association methods
-  
-  //Merchandise association methods
+  // Event association without methods
+  public hasEvent!: HasManyHasAssociationMixin<Event, number>;
+  public hasEvents!: HasManyHasAssociationMixin<Event, number>;
+
+  // Album association with methods
+  public addAlbum!: HasManyAddAssociationMixin<Album, number>;
+  public getAlbums!: HasManyGetAssociationsMixin<Album>;
+
+  // Album association without methods
+  public hasAlbum!: HasManyHasAssociationMixin<Album, number>;
+  public hasAlbums!: HasManyHasAssociationMixin<Album, number>;
+
+  //Merchandise association with methods
+  public addMerchandise!: HasManyAddAssociationMixin<Merchandise, number>;
+  public getMerchandises!: HasManyGetAssociationsMixin<Merchandise>;
+
+  //Merchandise association without methods
+  public hasMerchandise!: HasManyHasAssociationMixin<Merchandise, number>;
+  public hasMerchandises!: HasManyHasAssociationMixin<Merchandise, number>;
 
   // Populated for inclusions
   public readonly events?: Event[];
   public readonly albums?: Album[];
-  public readonly merchandise?: Merchandise[];
+  public readonly merchandises?: Merchandise[];
 
   public static associations: {
     events: Association<Artist, Event>;
     albums: Association<Artist, Album>;
-    merchandise: Association<Artist, Merchandise>
+    merchandises: Association<Artist, Merchandise>
   }
 
   public static initialize(sequelize: Sequelize) {

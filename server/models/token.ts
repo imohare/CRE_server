@@ -3,11 +3,8 @@ import {
   DataTypes, 
   Model, 
   Sequelize, 
-  HasManyCountAssociationsMixin, 
-  HasManyGetAssociationsMixin, 
-  HasManyHasAssociationMixin, 
   BelongsToSetAssociationMixin, 
-  BelongsToGetAssociationMixin
+  BelongsToGetAssociationMixin,
 } from 'sequelize';
 
 import { Album } from './album';
@@ -27,13 +24,21 @@ class Token extends Model {
   public createdAt!: Date;
   public updatedAt!: Date;
 
-  // Album association methods
+  // Album association with methods
+  public getAlbum?: BelongsToGetAssociationMixin<Album>;
+  public setArtist?: BelongsToSetAssociationMixin<Album, number>;
 
-  // Event association methods
-  
-  // Merchandise association methods
+  // Event association with methods
+  public getEvent?: BelongsToGetAssociationMixin<Event>;
+  public setEvent?: BelongsToSetAssociationMixin<Event, number>;
 
-  // Consumer association methods
+  // Merchandise association with methods
+  public getMerchandise?: BelongsToGetAssociationMixin<Merchandise>;
+  public setMerchandise?: BelongsToSetAssociationMixin<Merchandise, number>;
+
+  // Consumer association with methods
+  public getConsumer!: BelongsToGetAssociationMixin<Consumer>;
+  public setConsumer!: BelongsToSetAssociationMixin<Consumer, number>;
   
   // Populated for inclusions
   public readonly associated_to_album?: Album;
