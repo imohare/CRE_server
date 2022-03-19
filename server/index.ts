@@ -3,7 +3,7 @@ const Express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 // const router = require('./router/router.js')
-//need to hve sessions so you can tell apart users
+
 //authentication:
 const cookieParser = require('cookie-parser')
 const session = require('express-session');
