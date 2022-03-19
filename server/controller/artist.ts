@@ -1,3 +1,4 @@
+import { Request, Response } from 'express';
 import { Artist } from "../models";
 
 async function createArtist(req: Request, res: Response) {
