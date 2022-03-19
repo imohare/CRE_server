@@ -57,7 +57,7 @@ class Consumer extends Model {
           defaultValue: 'unnamed location'
         },
         points: {
-          type: DataTypes.NUMBER,
+          type: DataTypes.INTEGER,
           defaultValue: 0
         },
         email: {

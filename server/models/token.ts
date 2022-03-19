@@ -61,15 +61,15 @@ class Token extends Model {
           defaultValue: 'no image uploaded'
         },
         consumer_points: {
-          type: DataTypes.NUMBER,
+          type: DataTypes.INTEGER,
           allowNull: false
         },
         total_editions: {
-          type: DataTypes.NUMBER,
+          type: DataTypes.INTEGER,
           allowNull: false
         },
         token_type: {
-          type: DataTypes.STRING,
+          type: DataTypes.INTEGER,
           allowNull: false
         }
       }, 
