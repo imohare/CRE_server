@@ -2,8 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const db_1 = require("./db");
-const HOST = process.env.HOST || 'localhost';
-const PASSWORD = process.env.PASSWORD;
 const Consumer = db_1.sequelize.define('Consumer', {
     consumer_id: {
         type: sequelize_1.DataTypes.INTEGER.UNSIGNED,

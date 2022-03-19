@@ -1,7 +1,5 @@
 import { DataTypes, ModelDefined, Optional, SmallIntegerDataType} from 'sequelize';
 import { sequelize } from './db';
-const HOST = process.env.HOST || 'localhost'
-const PASSWORD = process.env.PASSWORD
 
 interface TokenAttributes {
   token_id: number;

@@ -1,7 +1,5 @@
 import { DataTypes, ModelDefined, Optional} from 'sequelize';
 import { sequelize } from './db';
-const HOST = process.env.HOST || 'localhost'
-const PASSWORD = process.env.PASSWORD
 
 interface ConsumerAttributes {
   consumer_id: number;
