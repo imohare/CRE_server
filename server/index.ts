@@ -2,7 +2,7 @@ require('dotenv').config();
 const Express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
-// const router = require('./router/router.js')
+const { router } = require('./router.ts')
 
 //authentication:
 const cookieParser = require('cookie-parser')
@@ -32,6 +32,6 @@ app.use(cookieParser());
 app.use(cors()); //how do u decide what corss to allow
 app.use(Express.json()); //body parssesr
 app.use(morgan('short'));
-// app.use(router);
+app.use(router);
 
 app.listen(process.env.PORT, () => console.log(`listening port${process.env.PORT}`))
