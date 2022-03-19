@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
-import { Event, Artist } from "../models";
+import { Album, Artist } from "../models";
 
-async function getEvents(req: Request, res: Response) {
+async function getAlbums(req: Request, res: Response) {
   try {
-    const _events = await Event.findAll();
-    res.json(_events);
+    const _albums = await Album.findAll();
+    res.json(_albums);
     res.status(200);
   } catch (error) {
     console.log(error);
@@ -13,10 +13,10 @@ async function getEvents(req: Request, res: Response) {
   }
 }
 
-async function getEvent(req: Request, res: Response) {
+async function getAlbum(req: Request, res: Response) {
   try {
-    const _event = await Event.findByPk(req.params.id);
-    res.json(_event);
+    const _album = await Album.findByPk(req.params.id);
+    res.json(_album);
     res.status(200);
   } catch (error) {
     console.log(error);
@@ -25,7 +25,7 @@ async function getEvent(req: Request, res: Response) {
   }
 }
 
-async function createEvent(req: Request, res: Response) {
+async function createAlbum(req: Request, res: Response) {
   try {
     if (!req.body.artistId) {
       res.send(400);
@@ -38,17 +38,16 @@ async function createEvent(req: Request, res: Response) {
         res.status(400);
         res.json('Artist not found');
       } else {
-        const _event = await Event.create({
+        const _album = await Album.create({
           name: req.body.name,
-          address: req.body.address,
-          date: req.body.date,
+          year: req.body.year,
           description: req.body.description
         });
 
-        _event
+        _album
           .setArtist(artist)
-          .then((_event) => {
-            res.json(_event);
+          .then((_album) => {
+            res.json(_album);
             res.status(201);
           })
           .catch((err) => {
@@ -63,4 +62,9 @@ async function createEvent(req: Request, res: Response) {
   }
 }
 
-export { createEvent, getEvents, getEvent}
+async function getArtistAlbums(req: Request, res: Response) {}
+
+async function getArtistAlbum(req: Request, res: Response) {}
+
+
+export { createAlbum, getAlbums, getAlbum, getArtistAlbums, getArtistAlbum }

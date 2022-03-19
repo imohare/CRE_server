@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
-import { Merchandise, Artist } from "../models";
+import { Event, Artist } from "../models";
 
-async function getMerchandises(req: Request, res: Response) {
+async function getEvents(req: Request, res: Response) {
   try {
-    const _merchandises = await Merchandise.findAll();
-    res.json(_merchandises);
+    const _events = await Event.findAll();
+    res.json(_events);
     res.status(200);
   } catch (error) {
     console.log(error);
@@ -13,10 +13,10 @@ async function getMerchandises(req: Request, res: Response) {
   }
 }
 
-async function getMerchandise(req: Request, res: Response) {
+async function getEvent(req: Request, res: Response) {
   try {
-    const _merchandise = await Merchandise.findByPk(req.params.id);
-    res.json(_merchandise);
+    const _event = await Event.findByPk(req.params.id);
+    res.json(_event);
     res.status(200);
   } catch (error) {
     console.log(error);
@@ -25,7 +25,7 @@ async function getMerchandise(req: Request, res: Response) {
   }
 }
 
-async function createMerchandise(req: Request, res: Response) {
+async function createEvent(req: Request, res: Response) {
   try {
     if (!req.body.artistId) {
       res.send(400);
@@ -38,9 +38,10 @@ async function createMerchandise(req: Request, res: Response) {
         res.status(400);
         res.json('Artist not found');
       } else {
-        const _event = await Merchandise.create({
+        const _event = await Event.create({
           name: req.body.name,
-          type: req.body.type,
+          address: req.body.address,
+          date: req.body.date,
           description: req.body.description
         });
 
@@ -62,4 +63,8 @@ async function createMerchandise(req: Request, res: Response) {
   }
 }
 
-export { createMerchandise, getMerchandises, getMerchandise}
+async function getArtistEvents(req: Request, res: Response) {}
+
+async function getArtistEvent(req: Request, res: Response) {}
+
+export { createEvent, getEvents, getEvent }

@@ -12,3 +12,7 @@ async function createArtist(req: Request, res: Response) {
     spotify: req.body.spotify,
   })
 }
+
+async function getArtist(req: Request, res: Response) {}
+
+export { createArtist, getArtist };
