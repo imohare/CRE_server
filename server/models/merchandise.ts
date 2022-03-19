@@ -7,15 +7,16 @@ import {
   HasManyGetAssociationsMixin, 
   HasManyHasAssociationMixin, 
   BelongsToSetAssociationMixin, 
-  BelongsToGetAssociationMixin
+  BelongsToGetAssociationMixin,
+  HasManyAddAssociationMixin
 } from 'sequelize';
 
 import { Artist } from './artist';
 import { Token } from './token';
 
-class Album extends Model {
+class Merchandise extends Model {
   public name!: string;
-  public year!: Date;
+  public type!: string;
   public description?: string;
 
   //Auto-generated
@@ -23,17 +24,26 @@ class Album extends Model {
   public createdAt!: Date;
   public updatedAt!: Date;
 
-  //Artist association methods
+  // Artist association with methods
+  public getArtist!: BelongsToGetAssociationMixin<Artist>;
+  public setArtist!: BelongsToSetAssociationMixin<Artist, number>;
 
-  //Token association methods
+  // Token association with methods
+  public countTokens!: HasManyCountAssociationsMixin;
+  public addToken!: HasManyAddAssociationMixin<Token, number>; //how do we add like 100 tokens at once?
+  public getTokens!: HasManyGetAssociationsMixin<Token>;
+
+  // Token association without methods
+  public hasToken!: HasManyHasAssociationMixin<Token, number>;
+  public hasTokens!: HasManyHasAssociationMixin<Token, number>;
   
   // Populated for inclusions
   public readonly artist!: Artist;
   public readonly tokens?: Token[];
 
   public static associations: {
-    artist: Association<Artist, Album>;
-    tokens: Association<Album, Token>;
+    artist: Association<Artist, Merchandise>;
+    tokens: Association<Merchandise, Token>;
   }
 
   public static initialize(sequelize: Sequelize) {
@@ -43,8 +53,8 @@ class Album extends Model {
           type: DataTypes.STRING,
           allowNull: false
         },
-        year: {
-          type: DataTypes.DATE,
+        type: {
+          type: DataTypes.STRING,
           allowNull: false
         },
         description: {
@@ -54,4 +64,4 @@ class Album extends Model {
     {sequelize})
   }
 }
-export { Album };
+export { Merchandise };

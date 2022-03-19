@@ -4,6 +4,7 @@ import {
   Model, 
   Sequelize, 
   HasManyCountAssociationsMixin, 
+  HasManyAddAssociationMixin, 
   HasManyGetAssociationsMixin, 
   HasManyHasAssociationMixin, 
   BelongsToSetAssociationMixin, 
@@ -13,9 +14,9 @@ import {
 import { Artist } from './artist';
 import { Token } from './token';
 
-class Merchandise extends Model {
+class Album extends Model {
   public name!: string;
-  public type!: string;
+  public year!: Date;
   public description?: string;
 
   //Auto-generated
@@ -23,17 +24,26 @@ class Merchandise extends Model {
   public createdAt!: Date;
   public updatedAt!: Date;
 
-  //Artist association methods
+  // Artist association with methods
+  public getArtist!: BelongsToGetAssociationMixin<Artist>;
+  public setArtist!: BelongsToSetAssociationMixin<Artist, number>;
 
-  //Token association methods
-  
+  // Token association with methods
+  public countTokens!: HasManyCountAssociationsMixin;
+  public addToken!: HasManyAddAssociationMixin<Token, number>; //how do we add like 100 tokens at once?
+  public getTokens!: HasManyGetAssociationsMixin<Token>;
+
+  // Token association without methods
+  public hasToken!: HasManyHasAssociationMixin<Token, number>;
+  public hasTokens!: HasManyHasAssociationMixin<Token, number>;
+
   // Populated for inclusions
   public readonly artist!: Artist;
   public readonly tokens?: Token[];
 
   public static associations: {
-    artist: Association<Artist, Merchandise>;
-    tokens: Association<Merchandise, Token>;
+    artist: Association<Artist, Album>;
+    tokens: Association<Album, Token>;
   }
 
   public static initialize(sequelize: Sequelize) {
@@ -43,8 +53,8 @@ class Merchandise extends Model {
           type: DataTypes.STRING,
           allowNull: false
         },
-        type: {
-          type: DataTypes.STRING,
+        year: {
+          type: DataTypes.DATE,
           allowNull: false
         },
         description: {
@@ -54,4 +64,4 @@ class Merchandise extends Model {
     {sequelize})
   }
 }
-export { Merchandise };
+export { Album };

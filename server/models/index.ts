@@ -11,7 +11,7 @@ const USER = process.env.USER || '';
 const PASSWORD = process.env.PASSWORD || '';
 const dialect = 'postgres';
 const options = {
-    dialect: dialect,
+    dialect: 'postgres',
     port: Number(process.env.PORT) || ''
 };
 

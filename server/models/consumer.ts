@@ -1,13 +1,12 @@
 import {
+
   Association,
   DataTypes,
   Model,
   Sequelize,
-  HasManyCountAssociationsMixin,
   HasManyGetAssociationsMixin,
   HasManyHasAssociationMixin,
-  BelongsToSetAssociationMixin,
-  BelongsToGetAssociationMixin
+  HasManyAddAssociationMixin
 } from 'sequelize';
 
 import { Token } from './token';
@@ -19,12 +18,18 @@ class Consumer extends Model {
   public points?: number;
   public email!: string;
 
-  //Auto-generated
+  // Auto-generated
   public id!: number;
   public createdAt!: Date;
   public updatedAt!: Date;
 
-  //Tokens association methods
+  // Tokens association with methods
+  public addToken!: HasManyAddAssociationMixin<Token, number>;
+  public getTokens!: HasManyGetAssociationsMixin<Token>;
+
+  // Tokens association without methods
+  public hasToken!: HasManyHasAssociationMixin<Token, number>
+  public hasTokens!: HasManyHasAssociationMixin<Token, number>
 
   // Populated for inclusions
   public readonly tokens?: Token[];
