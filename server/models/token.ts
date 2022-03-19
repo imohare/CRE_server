@@ -1,9 +1,9 @@
 import {
-  Association, 
-  DataTypes, 
-  Model, 
-  Sequelize, 
-  BelongsToSetAssociationMixin, 
+  Association,
+  DataTypes,
+  Model,
+  Sequelize,
+  BelongsToSetAssociationMixin,
   BelongsToGetAssociationMixin,
 } from 'sequelize';
 
@@ -39,7 +39,7 @@ class Token extends Model {
   // Consumer association with methods
   public getConsumer!: BelongsToGetAssociationMixin<Consumer>;
   public setConsumer!: BelongsToSetAssociationMixin<Consumer, number>;
-  
+
   // Populated for inclusions
   public readonly associated_to_album?: Album;
   public readonly associated_to_event?: Event;
@@ -72,8 +72,8 @@ class Token extends Model {
           type: DataTypes.INTEGER,
           allowNull: false
         }
-      }, 
-    {sequelize})
+      },
+      { sequelize })
   }
 }
 export { Token };

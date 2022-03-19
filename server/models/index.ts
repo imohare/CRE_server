@@ -1,5 +1,4 @@
 import { Sequelize } from 'sequelize';
-
 import { Artist } from './artist';
 import { Album } from './album';
 import { Consumer } from './consumer';
@@ -57,7 +56,7 @@ Consumer.hasMany(Token);
 
 //Create database tables
 try {
-    sequelize.sync({force: false});
+    sequelize.sync({ force: false });
 } catch (error) {
     console.error('Unable to connect to the database:', error);
 };

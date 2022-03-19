@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { Artist } from "../models";
 
 async function createArtist(req: Request, res: Response) {
+  console.log('in create Artist controller')
   const _artist = await Artist.create({
     eth_address: req.body.eth_address,
     username: req.body.username,
@@ -11,8 +12,10 @@ async function createArtist(req: Request, res: Response) {
     discord: req.body.discord,
     spotify: req.body.spotify,
   })
+  res.send(_artist);
 }
 
 async function getArtist(req: Request, res: Response) {}
 
 export { createArtist, getArtist };
+

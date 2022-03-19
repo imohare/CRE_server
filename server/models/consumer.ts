@@ -1,10 +1,11 @@
 import {
-  Association, 
-  DataTypes, 
-  Model, 
-  Sequelize, 
-  HasManyGetAssociationsMixin, 
-  HasManyHasAssociationMixin, 
+
+  Association,
+  DataTypes,
+  Model,
+  Sequelize,
+  HasManyGetAssociationsMixin,
+  HasManyHasAssociationMixin,
   HasManyAddAssociationMixin
 } from 'sequelize';
 
@@ -25,7 +26,7 @@ class Consumer extends Model {
   // Tokens association with methods
   public addToken!: HasManyAddAssociationMixin<Token, number>;
   public getTokens!: HasManyGetAssociationsMixin<Token>;
-  
+
   // Tokens association without methods
   public hasToken!: HasManyHasAssociationMixin<Token, number>
   public hasTokens!: HasManyHasAssociationMixin<Token, number>
@@ -61,11 +62,11 @@ class Consumer extends Model {
           defaultValue: 0
         },
         email: {
-          type: DataTypes.STRING, 
+          type: DataTypes.STRING,
           allowNull: false
         },
       },
-    {sequelize})
+      { sequelize })
   }
 }
 export { Consumer }
