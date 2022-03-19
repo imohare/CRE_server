@@ -1,4 +1,4 @@
-import IEvent from './Event';
+import { IEvent } from './Event';
 
 
-export {IEvent}
+export type { IEvent }
