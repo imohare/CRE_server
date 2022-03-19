@@ -1,5 +1,6 @@
-import Login from '/Pages/Login';
+import LandingPage from './Landing';
+import LoginPage from './Login';
+import RegisterPage from './Register';
 
 
-
-export default { Login };
+export { LandingPage, LoginPage, RegisterPage };

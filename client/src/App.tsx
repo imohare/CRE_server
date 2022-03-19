@@ -1,4 +1,3 @@
-import './App.css';
 //Router
 import {
   BrowserRouter,
@@ -7,13 +6,18 @@ import {
 } from 'react-router-dom';
 //Pages
 import {
- Landing
-} from '/Pages';
+  LandingPage,
+  LoginPage,
+  RegisterPage
+} from './Pages';
 
-const App = (
+const App:React.FunctionComponent = () => (
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={ <Landing /> } />
+      <Route path="/login" element={ <LoginPage /> } />
+      <Route path="/register" element={<RegisterPage />} />
+      <Route path="/artist" element={<LandingPage />} />
+      <Route path="/" element={ <LandingPage /> } />
     </Routes>
   </BrowserRouter>
 );
