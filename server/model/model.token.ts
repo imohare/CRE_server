@@ -9,7 +9,7 @@ interface TokenAttributes {
   consumer_points: number;
   quantity: number;
   number_purchased: number;
-  token_type: string;
+  token_type: 'event' | 'album' | 'mechandise';
   createdAt: Date;
 }
 
@@ -44,7 +44,7 @@ TokenCreationAttributes
       defaultValue: 0
     },
     token_type: {
-      type: new DataTypes.STRING,
+      type: DataTypes.ENUM('event', 'album', 'merchandise')
     },
     createdAt: DataTypes.DATE,
   },
