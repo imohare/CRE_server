@@ -62,4 +62,4 @@ async function createAlbum(req: Request, res: Response) {
   }
 }
 
-export { createAlbum }
+export { createAlbum, getAlbums, getAlbum}
