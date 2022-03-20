@@ -8,7 +8,9 @@ import {
 import {
   LandingPage,
   LoginPage,
-  RegisterPage
+  RegisterPage,
+  EventPage,
+  ArtistPage
 } from './Pages';
 
 const App:React.FunctionComponent = () => (
@@ -16,7 +18,8 @@ const App:React.FunctionComponent = () => (
     <Routes>
       <Route path="/login" element={ <LoginPage /> } />
       <Route path="/register" element={<RegisterPage />} />
-      <Route path="/artist" element={<LandingPage />} />
+      <Route path="/artist" element={<ArtistPage />} />
+      <Route path="/event" element={ <EventPage /> } />
       <Route path="/" element={ <LandingPage /> } />
     </Routes>
   </BrowserRouter>
