@@ -61,6 +61,7 @@ async function createAlbumToken(req: Request, res: Response) {
     res.json(error);
   }
 }
+
 async function getArtistAlbumTokens(req: Request, res: Response) {}
 async function getConsumerAlbumTokens(req: Request, res: Response) {}
 

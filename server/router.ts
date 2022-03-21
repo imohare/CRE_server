@@ -7,6 +7,8 @@ const { createEvent, getEvent, getEvents, getArtistEvents, getArtistEvent } = re
 const { createMerchandise, getMerchandises, getMerchandise, getArtistMerchandises, getArtistMerchandise } = require('./controllers/merchandise.ts');
 const { createConsumer, getConsumer } = require('./controllers/consumer.ts');
 const { createAlbumToken, getAlbumToken, getAlbumTokens } = require('./controllers/albumToken.ts');
+const { createMerchandiseToken, getMerchandiseToken, getMerchandiseTokens } = require('./controllers/merchandiseToken.ts');
+
 
 // Artist
 router.post('/createArtist', createArtist);
@@ -37,6 +39,11 @@ router.get('/getArtistMerchandise/:merchandiseId/:artistId', getArtistMerchandis
 router.post('/createAlbumToken/:albumId', createAlbumToken);
 router.get('/getAlbumToken/:tokenId', getAlbumToken);
 router.get('/getAlbumTokens', getAlbumTokens);
+// Merchandise Token 
+router.post('/createMerchandiseToken/:merchandiseId', createMerchandiseToken);
+router.get('/getMerchandiseToken/:tokenId', getMerchandiseToken);
+router.get('/getMerchandiseTokens', getMerchandiseTokens);
+
 
 
 export { router };
