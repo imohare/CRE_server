@@ -45,7 +45,7 @@ async function createAlbum(req: Request, res: Response) {
       } else {
         console.log(' before create album', req.body)
         const _album = await Album.create(req.body);
-        console.log("album", _album);
+        //console.log("album", _album);
 
         _album
           .setArtist(artist)
