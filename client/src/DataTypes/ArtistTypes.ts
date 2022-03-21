@@ -1,9 +1,9 @@
 interface IArtist {
+    id?: number; //(?) as added on server side
     name: string;
     address: string;
     date: Date;
     description?: string;
-    id: number;
     createdAt?: string;
     updatedAt?: string;
 }
