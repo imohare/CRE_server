@@ -7,7 +7,6 @@ import {
 //Pages
 import {
   LandingPage,
-  LoginPage,
   RegisterPage,
   EventPage,
   ArtistPage
@@ -16,7 +15,6 @@ import {
 const App:React.FunctionComponent = () => (
   <BrowserRouter>
     <Routes>
-      <Route path="/login" element={ <LoginPage /> } />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/artist" element={<ArtistPage />} />
       <Route path="/event" element={ <EventPage /> } />

@@ -5,7 +5,7 @@ const LandingPage: React.FunctionComponent = () => (
   <>
     <h1>Landing page</h1>
     <p>public view without personalisation but with login/signup option</p>
-    <Link to="/login">login or sign up</Link>
+    <button>login</button>
     <p>for user and artist with personalised components at the top</p>
     <p>user view with recommendations</p>
     <Link to="/event">each link to an event </Link>/<Link to="/artist"> artist</Link>
