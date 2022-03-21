@@ -1,9 +1,8 @@
 import LandingPage from './Landing';
-import LoginPage from './Login';
 import RegisterPage from './Register';
 import ArtistPage from './Artist';
 import EventPage from './Event';
 
+//exports all the pages from one central location into app
 
-
-export { LandingPage, LoginPage, RegisterPage, EventPage, ArtistPage };
+export { LandingPage, RegisterPage, EventPage, ArtistPage };
