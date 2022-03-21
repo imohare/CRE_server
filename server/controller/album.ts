@@ -3,7 +3,7 @@ import { Album, Artist } from "../models";
 
 async function getAlbums(req: Request, res: Response) {
   try {
-    const _albums = await Album.findAll();
+    const _albums: Album[] = await Album.findAll();
     res.json(_albums);
     res.status(200);
   } catch (error) {
@@ -62,4 +62,4 @@ async function createAlbum(req: Request, res: Response) {
   }
 }
 
-export { createAlbum, getAlbums, getAlbum}
+export { createAlbum, getAlbums, getAlbum }
