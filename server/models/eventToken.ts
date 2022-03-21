@@ -50,12 +50,16 @@ class EventToken extends Model {
           type: DataTypes.INTEGER,
           allowNull: false
         },
+        edition_number: {
+          type: DataTypes.INTEGER,
+          allowNull: false
+        },
         total_editions: {
           type: DataTypes.INTEGER,
           allowNull: false
         },
         token_type: {
-          type: DataTypes.INTEGER,
+          type: DataTypes.STRING,
           allowNull: false
         }
       },
