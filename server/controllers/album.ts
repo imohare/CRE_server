@@ -63,6 +63,4 @@ async function getArtistAlbums(req: Request, res: Response) { }
 
 async function getArtistAlbum(req: Request, res: Response) { }
 
-
-// export { createAlbum, getAlbums, getAlbum, getArtistAlbums, getArtistAlbum }
 module.exports = { createAlbum, getAlbums, getAlbum, getArtistAlbums, getArtistAlbum };
