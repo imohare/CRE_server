@@ -12,7 +12,7 @@ import {
 } from 'sequelize';
 
 import { Artist } from './artist';
-import { Token } from './token';
+import { MerchandiseToken } from './merchandiseToken';
 
 class Merchandise extends Model {
   public name!: string;
@@ -29,21 +29,21 @@ class Merchandise extends Model {
   public setArtist!: BelongsToSetAssociationMixin<Artist, number>;
 
   // Token association with methods
-  public countTokens!: HasManyCountAssociationsMixin;
-  public addToken!: HasManyAddAssociationMixin<Token, number>; //how do we add like 100 tokens at once?
-  public getTokens!: HasManyGetAssociationsMixin<Token>;
+  public countMerchandiseTokens!: HasManyCountAssociationsMixin;
+  public addMercandiseToken!: HasManyAddAssociationMixin<MerchandiseToken, number>; //how do we add like 100 tokens at once?
+  public getMerchandiseTokens!: HasManyGetAssociationsMixin<MerchandiseToken>;
 
   // Token association without methods
-  public hasToken!: HasManyHasAssociationMixin<Token, number>;
-  public hasTokens!: HasManyHasAssociationMixin<Token, number>;
+  public hasMerchandiseToken!: HasManyHasAssociationMixin<MerchandiseToken, number>;
+  public hasMerchandiseTokens!: HasManyHasAssociationMixin<MerchandiseToken, number>;
   
   // Populated for inclusions
   public readonly artist!: Artist;
-  public readonly tokens?: Token[];
+  public readonly merchandiseTokens?: MerchandiseToken[];
 
   public static associations: {
     artist: Association<Artist, Merchandise>;
-    tokens: Association<Merchandise, Token>;
+    tokens: Association<Merchandise, MerchandiseToken>;
   }
 
   public static initialize(sequelize: Sequelize) {
