@@ -1,6 +1,6 @@
 import express from 'express';
 const router = express.Router();
-const { createArtist } = require('./controller/artist.ts')
+const { createArtist } = require('./controllers/artist.ts')
 
 router.post('/createArtist', createArtist);
 
