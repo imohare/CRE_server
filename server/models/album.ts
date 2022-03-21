@@ -16,7 +16,7 @@ import { Token } from './token';
 
 class Album extends Model {
   public name!: string;
-  public year!: string;
+  public year!: Date;
   public description?: string;
 
   //Auto-generated
@@ -54,7 +54,7 @@ class Album extends Model {
           allowNull: false
         },
         year: {
-          type: DataTypes.STRING,
+          type: DataTypes.DATE,
           allowNull: false
         },
         description: {
