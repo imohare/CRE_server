@@ -38,18 +38,21 @@ async function createAlbumToken(req: Request, res: Response) {
         res.status(400);
         res.json('Album not found');
       } else {
-        const _token = await AlbumToken.create(req.body);
-
-        _token
-          .setAlbum(album)
-          .then((_token) => {
+        console.log("re.body", req.body)
+        const _token = AlbumToken.build(
+          {
+            image: req.body.image,
+            consumer_points: req.body.consumer_points,
+            edition_number: req.body.edition_number,
+            total_editions: req.body.total_editions,
+            token_type: req.body.token_type
+          }
+          );
+          await _token.save();
+          await _token.setAlbum(album);
+          console.log('token', _token)
             res.json(_token);
             res.status(201);
-          })
-
-          .catch((err) => {
-            res.json('Database Error - createAlbum failing')
-          });
       }
     }
   } catch (error) {

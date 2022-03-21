@@ -31,12 +31,12 @@ class AlbumToken extends Model {
   public setConsumer!: BelongsToSetAssociationMixin<Consumer, number>;
 
   // Populated for inclusions
-  public readonly associated_to_album!: Album;
-  public readonly owned_by?: Consumer;
+  public readonly AlbumId!: Album;
+  public readonly ConsumerId?: Consumer;
 
   public static associations: {
-    associated_to_album: Association<Album, AlbumToken>;
-    owned_by: Association<AlbumToken, Consumer>;
+    AlbumId: Association<Album, AlbumToken>;
+    ConsumerId: Association<Consumer, AlbumToken>;
   }
 
   public static initialize(sequelize: Sequelize) {
