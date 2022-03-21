@@ -8,6 +8,9 @@ import LoginModal from '../Components/FormComponents/DataComponents/LoginModal';
 import StyledPage from '../Styles/styledComponents/styledPage';
 //styling
 
+//form context
+import { FormContextProvider } from '../Data/FormConfigs/FormContext';
+
 const LandingPage: React.FunctionComponent = () => {
 
   //public view
@@ -20,19 +23,18 @@ const LandingPage: React.FunctionComponent = () => {
      setIsVisible(prevVisibility => !prevVisibility)
   }
 
-
-  
-
   return (
     //if user, display personalised component on top -> artist || user - else, have a login sign up option
     <StyledPage>
       <h1>Landing page</h1>
       <p>public view without personalisation but with login/signup option</p>
+      <FormContextProvider>
       {
         isVisible
         ?  <LoginModal onCancel={toggleLogin} isVisible={isVisible} isArtist={isArtist} setIsArtist={setIsArtist} />
         : null
-      }
+        }
+        </FormContextProvider>
       <Button type="primary" onClick={ toggleLogin }>login</Button>
       <p>for user and artist with personalised components at the top</p>
       <p>user view with recommendations</p>

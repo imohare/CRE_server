@@ -1,9 +1,19 @@
-import { ReactHTMLElement } from "react";
+interface IAttributes {
+  id: string;
+  name: string;
+  label: string;
+}
+interface IConsumerForm {
+  [key: string]: any;
+}
 
 interface IFormContext { 
-  consumerInfo: {
-    [key: string]: any;
-  } 
-  setConsumerInfo: React.Dispatch<React.SetStateAction<object>>
-  consumerConfig
+  consumerInfo: IConsumerForm;
+  setConsumerInfo: React.Dispatch<React.SetStateAction<any>>;
+  consumerConfig: {
+    attr: IAttributes;
+    required: boolean;
+  }[];
 }
+
+export type { IFormContext };

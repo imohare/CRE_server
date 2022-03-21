@@ -1,32 +1,32 @@
 //react
-import { useState } from 'react';
-
+import { useState, useContext } from 'react';
 //antd imports
 import { Modal, Button } from 'antd'
 //components
 import FormTemplate from '../ReuseableComponents/FormTemplate';
 //data
-
+import {FormContext} from '../../../Data/FormConfigs/FormContext';
 //styling
 
 //onCancel toggles setVisible in parent component
 interface ModalProps { 
-  onCancel: any; //should be a clickhandler function? React.MouseEvent does not work
+  onCancel: any; 
   isVisible: boolean;
-  setIsArtist: any; //should be a clickhandler function? React.Mouse
+  setIsArtist: any; //should be a dispatch?
   isArtist: boolean
 };
 
 
 const LoginModal = ({ onCancel, isVisible, setIsArtist, isArtist }: ModalProps) => {
 
- 
+  const { consumerConfig } = useContext(FormContext)
+
+  //default displays form, on submit changes from form to success or failure message
+  const [formContent, setFormContent] = useState(<FormTemplate config={isArtist ? consumerConfig : consumerConfig} />);
+  
   const loginAs = (artist: boolean) => {
     setIsArtist(artist)
   }
-
-  //default displays form, on submit changes from form to success or failure message
-  const [formContent, setFormContent] = useState(<FormTemplate config={isArtist ? artistConfig : userConfig}/>);
     
   const submitUser = () => {
     setFormContent(<p>success</p>)
