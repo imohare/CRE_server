@@ -1,5 +1,4 @@
 import {
-
   Association,
   DataTypes,
   Model,

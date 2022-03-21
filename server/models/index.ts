@@ -61,4 +61,4 @@ try {
     console.error('Unable to connect to the database:', error);
 };
 
-export { sequelize as Database, Artist, Album, Event, Merchandise, Token };
+export { sequelize as Database, Artist, Album, Consumer, Event, Merchandise, Token };
