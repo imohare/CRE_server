@@ -87,7 +87,36 @@ async function getArtistMerchandises(req: Request, res: Response) {
   }
 }
 
-async function getArtistMerchandise(req: Request, res: Response) {}
+async function getArtistMerchandise(req: Request, res: Response) {
+  try {
+    if (!req.params.artistId || !req.params.merchandiseId) {
+      res.status(400);
+      res.json('incorrect schema for request');
+    } else {
+      const artistId = req.params.artistId;
+      const merchandiseId = req.params.merchandiseId;
+      const artist = await Artist.findByPk(artistId);
+      const merchandise = await Merchandise.findByPk(merchandiseId);
+
+      if (!artist) {
+        res.status(400);
+        res.json('Artist not found');
+      } else if (!merchandise) {
+        res.status(400);
+        res.json('Album not found');
+      }
+      else {
+        const _merchandise = await Merchandise.findAll({where: {id: merchandiseId, ArtistId: artistId}});
+        res.json(_merchandise);
+        res.status(201);
+      }
+    }
+  } catch (error) {
+    console.log('error');
+    res.status(500);
+    res.json(error);
+  }
+}
 
 
 export { createMerchandise, getMerchandises, getMerchandise, getArtistMerchandises, getArtistMerchandise }
