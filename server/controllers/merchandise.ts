@@ -15,7 +15,7 @@ async function getMerchandises(req: Request, res: Response) {
 
 async function getMerchandise(req: Request, res: Response) {
   try {
-    const _merchandise = await Merchandise.findByPk(req.params.id);
+    const _merchandise = await Merchandise.findByPk(req.params.merchandiseId);
     res.json(_merchandise);
     res.status(200);
   } catch (error) {
