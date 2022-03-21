@@ -26,7 +26,6 @@ async function getArtist(req: Request, res: Response) {
   }
  }
 
-
 async function getArtists(req: Request, res: Response) {
   try {
     const _artists = await Artist.findAll();
@@ -38,6 +37,5 @@ async function getArtists(req: Request, res: Response) {
     res.json(error);
   }
 }
-
 
 export { createArtist, getArtist, getArtists };

@@ -11,7 +11,18 @@ async function createConsumer(req: Request, res: Response) {
   })
   res.send(_consumer);
 }
-async function getConsumer(req: Request, res: Response) {}
+
+async function getConsumer(req: Request, res: Response) {
+  try {
+    const _consumer = await Consumer.findByPk(req.params.consumerId);
+    res.json(_consumer);
+    res.status(200);
+  } catch (error) {
+    console.log(error);
+    res.status(500);
+    res.json(error);
+  }
+}
 async function patchConsumerPoints(req: Request, res: Response) {}
 
 export { createConsumer, getConsumer, patchConsumerPoints }
