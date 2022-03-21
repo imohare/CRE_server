@@ -16,7 +16,7 @@ class Consumer extends Model {
   public eth_address!: string;
   public username!: string;
   public location?: string;
-  public points?: number;
+  public points!: number;
   public email!: string;
 
   // Auto-generated
@@ -41,7 +41,7 @@ class Consumer extends Model {
   public hasMerchandiseTokens!: HasManyHasAssociationMixin<MerchandiseToken, number>
 
   // Populated for inclusions
-  public readonly albumTokens?: AlbumToken[];
+  public readonly albumTokens!: AlbumToken[];
   public readonly eventTokens?: AlbumToken[];
   public readonly merchandiseTokens?: AlbumToken[];
 

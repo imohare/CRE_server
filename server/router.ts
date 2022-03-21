@@ -9,6 +9,7 @@ const { createConsumer, getConsumer } = require('./controllers/consumer.ts');
 const { createAlbumToken, getAlbumToken, getAlbumTokens } = require('./controllers/albumToken.ts');
 const { createMerchandiseToken, getMerchandiseToken, getMerchandiseTokens } = require('./controllers/merchandiseToken.ts');
 const { createEventToken, getEventToken, getEventTokens } = require('./controllers/EventToken.ts');
+const { consumerAlbumTokenPurchase } = require('./controllers/purchases.ts');
 
 // Artist
 router.post('/createArtist', createArtist);
@@ -55,6 +56,7 @@ router.post('/createEventToken/:eventId', createEventToken);
 router.get('/getEventToken/:tokenId', getEventToken);
 router.get('/getEventTokens', getEventTokens);
 
-
+// Purchases
+router.patch('/consumerAlbumTokenPurchase/:consumerId/:tokenId', consumerAlbumTokenPurchase);
 
 export { router };
