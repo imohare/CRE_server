@@ -7,12 +7,12 @@
 //is inupt in props
 
 interface Props { 
-  config: any
+  config: { [key: string]: any }[];
 }
 
 const FormTemplate = ({ config }: Props) => {
   return (
-    <div>{ config.msg }</div>
+    <div>{ config[0].msg }</div>
   )
 }
 

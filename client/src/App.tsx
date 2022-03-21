@@ -17,12 +17,14 @@ import GlobalStyles from './Styles/globalStyles';
 const App:React.FunctionComponent = () => (
   <BrowserRouter>
     <GlobalStyles />
+    <UserContextProvider>
     <Routes>
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/artist" element={<ArtistPage />} />
       <Route path="/event" element={ <EventPage /> } />
       <Route path="/" element={ <LandingPage /> } />
-    </Routes>
+      </Routes>
+    </UserContextProvider>
   </BrowserRouter>
 );
 
