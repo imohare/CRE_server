@@ -8,7 +8,9 @@ import {
   HasManyAddAssociationMixin
 } from 'sequelize';
 
-import { Token } from './token';
+import { AlbumToken } from './albumToken';
+import { EventToken } from './eventToken';
+import { MerchandiseToken } from './merchandiseToken';
 
 class Consumer extends Model {
   public eth_address!: string;
@@ -22,19 +24,29 @@ class Consumer extends Model {
   public createdAt!: Date;
   public updatedAt!: Date;
 
-  // Tokens association with methods
-  public addToken!: HasManyAddAssociationMixin<Token, number>;
-  public getTokens!: HasManyGetAssociationsMixin<Token>;
+  // AlbumToken association with methods
+  public addAlbumToken!: HasManyAddAssociationMixin<AlbumToken, number>;
+  public getTokens!: HasManyGetAssociationsMixin<AlbumToken>;
 
-  // Tokens association without methods
-  public hasToken!: HasManyHasAssociationMixin<Token, number>
-  public hasTokens!: HasManyHasAssociationMixin<Token, number>
+  // AlbumTokens association without methods
+  public hasAlbumToken!: HasManyHasAssociationMixin<AlbumToken, number>
+  public hasAlbumTokens!: HasManyHasAssociationMixin<AlbumToken, number>
+
+  // AlbumToken association with methods
+  public addEventToken!: HasManyAddAssociationMixin<EventToken, number>;
+  public getEventTokens!: HasManyGetAssociationsMixin<EventToken>;
+  
+  // AlbumTokens association without methods
+  public hasMerchandiseToken!: HasManyHasAssociationMixin<AlbumToken, number>
+  public hasMerchandiseTokens!: HasManyHasAssociationMixin<MerchandiseToken, number>
 
   // Populated for inclusions
-  public readonly tokens?: Token[];
+  public readonly albumTokens?: AlbumToken[];
+  public readonly eventTokens?: AlbumToken[];
+  public readonly merchandiseTokens?: AlbumToken[];
 
   public static associations: {
-    tokens: Association<Token, Consumer>;
+    albumTokens: Association<AlbumToken, Consumer>;
   }
 
   public static initialize(sequelize: Sequelize) {
