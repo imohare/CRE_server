@@ -39,17 +39,5 @@ async function getArtists(req: Request, res: Response) {
   }
 }
 
-async function getArtistAlbums(req: Request, res: Response) {
-  try {
-    const _artist = await Artist.findByPk(req.params.artistId);
-    res.json(_artist);
-    res.status(200);
-  } catch (error) {
-    console.log(error);
-    res.status(500);
-    res.json(error);
-  }
- }
 
-
-export { createArtist, getArtist, getArtists, getArtistAlbums };
+export { createArtist, getArtist, getArtists };

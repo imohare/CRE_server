@@ -3,7 +3,7 @@ const router = express.Router();
 
 const { createArtist, getArtist, getArtists } = require('./controllers/artist.ts');
 const { createAlbum, getAlbum, getAlbums, getArtistAlbums } = require('./controllers/album.ts');
-const { createEvent, getEvent, getEvents } = require('./controllers/event.ts')
+const { createEvent, getEvent, getEvents, getArtistEvents } = require('./controllers/event.ts')
 const { createMerchandise, getMerchandises, getMerchandise } = require('./controllers/merchandise.ts');
 
 //Artist
@@ -23,5 +23,7 @@ router.get('/getMerchandise/:merchandiseId', getMerchandise);
 router.post('/createEvent/:artistId', createEvent);
 router.get('/getEvents', getEvents);
 router.get('/getEvent/:eventId', getEvent);
+router.get('/getArtistEvents/:artistId', getArtistEvents);
+
 
 export { router };
