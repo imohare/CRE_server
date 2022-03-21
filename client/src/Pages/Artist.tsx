@@ -1,4 +1,7 @@
+//react
 import { Link } from 'react-router-dom';
+//components
+//styling
 
 const ArtistPage: React.FunctionComponent = () => {
 //if artist, display with additional update authorisation

@@ -1,4 +1,8 @@
-const RegisterPage:React.FunctionComponent = () => (
+//react
+//components
+//styling
+
+const RegisterPage: React.FunctionComponent = () => (
   <h1>register page</h1>
 )
 
