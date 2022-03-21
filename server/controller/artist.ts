@@ -21,8 +21,4 @@ async function createArtist(req: Request, res: Response) {
 
 //get artists
 
-
-
-
-
 export { createArtist };
