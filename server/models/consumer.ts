@@ -42,7 +42,7 @@ class Consumer extends Model {
 
   // Populated for inclusions
   public readonly albumTokens!: AlbumToken[];
-  public readonly eventTokens?: AlbumToken[];
+  public readonly eventTokens!: AlbumToken[];
   public readonly merchandiseTokens?: AlbumToken[];
 
   public static associations: {

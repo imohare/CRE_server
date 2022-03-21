@@ -1,14 +1,14 @@
 import { Request, Response } from 'express';
-import { AlbumToken, Consumer } from "../models";
+import { AlbumToken, Consumer, EventToken } from "../models";
 
-async function consumerTokenAllocation(req: Request, res: Response) {
+async function consumerAlbumTokenAllocation(req: Request, res: Response) {
   try {
-    if (!req.params.consumerId || !req.params.tokenId) {
+    if (!req.params.consumerId || !req.params.albumTokenId) {
       res.status(400);
       res.json('incorrect schema for request');
     } else {
       const _consumer = await Consumer.findByPk(req.params.consumerId);
-      const _albumToken = await AlbumToken.findByPk(req.params.tokenId);
+      const _albumToken = await AlbumToken.findByPk(req.params.albumTokenId);
       if (!_consumer || !_albumToken) {
         res.status(400);
         res.json('Consumer or Album Token not found');
@@ -17,6 +17,33 @@ async function consumerTokenAllocation(req: Request, res: Response) {
           .setConsumer(_consumer)
           .then((_albumToken) => {
             res.json(_albumToken);
+            res.status(201);
+          })
+      }
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500);
+    res.json(error);
+  }
+}
+
+async function consumerEventTokenAllocation(req: Request, res: Response) {
+  try {
+    if (!req.params.consumerId || !req.params.eventTokenId) {
+      res.status(400);
+      res.json('incorrect schema for request');
+    } else {
+      const _consumer = await Consumer.findByPk(req.params.consumerId);
+      const _eventToken = await EventToken.findByPk(req.params.eventTokenId);
+      if (!_consumer || !_eventToken) {
+        res.status(400);
+        res.json('Consumer or Event Token not found');
+      } else {
+        _eventToken
+          .setConsumer(_consumer)
+          .then((_eventToken) => {
+            res.json(_eventToken);
             res.status(201);
           })
       }
@@ -51,4 +78,4 @@ async function consumerTokenAllocation(req: Request, res: Response) {
 //           }
 //         }
 
-export { consumerTokenAllocation };
+export { consumerAlbumTokenAllocation, consumerEventTokenAllocation };

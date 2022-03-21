@@ -73,10 +73,7 @@ async function getConsumerAlbumTokens(req: Request, res: Response) {
       const consumerId = req.params.consumerId;
 
       const album = await Album.findByPk(albumId);
-      console.log("album", album)
       const consumer = await Consumer.findByPk(consumerId);
-      console.log("consumer", consumer)
-
 
       if (!album) {
         res.status(400);
@@ -86,7 +83,6 @@ async function getConsumerAlbumTokens(req: Request, res: Response) {
         res.json('Consumer not found');
        } else {
          const _tokens = await AlbumToken.findAll({where: {AlbumId: albumId, ConsumerId: consumerId} });
-         console.log("tokens", _tokens)
          res.json(_tokens);
          res.status(201);
       }
@@ -96,7 +92,7 @@ async function getConsumerAlbumTokens(req: Request, res: Response) {
     console.log('error');
     res.status(500);
     res.json(error);
-}
+  }
 }
 
 
