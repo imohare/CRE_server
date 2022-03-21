@@ -15,7 +15,7 @@ async function getMerchandises(req: Request, res: Response) {
 
 async function getMerchandise(req: Request, res: Response) {
   try {
-    const _merchandise = await Merchandise.findByPk(req.params.id);
+    const _merchandise = await Merchandise.findByPk(req.params.merchandiseId);
     res.json(_merchandise);
     res.status(200);
   } catch (error) {
@@ -27,11 +27,11 @@ async function getMerchandise(req: Request, res: Response) {
 
 async function createMerchandise(req: Request, res: Response) {
   try {
-    if (!req.body.artistId) {
+    if (!req.params.artistId) {
       res.send(400);
       res.json('incorrect schema for request');
     } else {
-      const artistId = req.body.artistId;
+      const artistId = req.params.artistId;
       const artist = await Artist.findByPk(artistId);
 
       if (!artist) {
