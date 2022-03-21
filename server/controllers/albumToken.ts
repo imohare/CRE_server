@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { AlbumToken, Album } from "../models";
+import { AlbumToken, Album, Consumer } from "../models";
 
 async function getAlbumTokens(req: Request, res: Response) {
   try {
@@ -38,7 +38,6 @@ async function createAlbumToken(req: Request, res: Response) {
         res.status(400);
         res.json('Album not found');
       } else {
-        console.log("re.body", req.body)
         const _token = AlbumToken.build(
           {
             image: req.body.image,
@@ -63,6 +62,38 @@ async function createAlbumToken(req: Request, res: Response) {
 }
 
 async function getArtistAlbumTokens(req: Request, res: Response) {}
-async function getConsumerAlbumTokens(req: Request, res: Response) {}
+
+async function getConsumerAlbumTokens(req: Request, res: Response) {
+  try {
+    if (!req.params.albumId || !req.params.consumerId) {
+      res.status(400);
+      res.json('incorrect schema for request');
+    } else {
+      const albumId = req.params.albumId;
+      const consumerId = req.params.consumerId;
+
+      const album = await Album.findByPk(albumId);
+      const consumer = await Consumer.findByPk(consumerId);
+
+      if (!album) {
+        res.status(400);
+        res.json('Album not found');
+      } else if (!consumer) {
+        res.status(400);
+        res.json('Consumer not found');
+       } else {
+         const _tokens = await AlbumToken.findAll({where: {AlbumId: albumId, ConsumerId: consumerId} });
+         res.json(_tokens);
+         res.status(201);
+      }
+    }
+  }
+  catch (error) {
+    console.log('error');
+    res.status(500);
+    res.json(error);
+  }
+}
+
 
 export { getAlbumTokens, getAlbumToken, createAlbumToken, getArtistAlbumTokens, getConsumerAlbumTokens }

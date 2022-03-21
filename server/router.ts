@@ -6,9 +6,10 @@ const { createAlbum, getAlbum, getAlbums, getArtistAlbums, getArtistAlbum } = re
 const { createEvent, getEvent, getEvents, getArtistEvents, getArtistEvent } = require('./controllers/event.ts')
 const { createMerchandise, getMerchandises, getMerchandise, getArtistMerchandises, getArtistMerchandise } = require('./controllers/merchandise.ts');
 const { createConsumer, getConsumer } = require('./controllers/consumer.ts');
-const { createAlbumToken, getAlbumToken, getAlbumTokens } = require('./controllers/albumToken.ts');
-const { createMerchandiseToken, getMerchandiseToken, getMerchandiseTokens } = require('./controllers/merchandiseToken.ts');
-const { createEventToken, getEventToken, getEventTokens } = require('./controllers/EventToken.ts');
+const { createAlbumToken, getAlbumToken, getAlbumTokens, getConsumerAlbumTokens } = require('./controllers/albumToken.ts');
+const { createMerchandiseToken, getMerchandiseToken, getMerchandiseTokens, getConsumerMerchandiseTokens } = require('./controllers/merchandiseToken.ts');
+const { createEventToken, getEventToken, getEventTokens, getConsumerEventTokens } = require('./controllers/EventToken.ts');
+const { consumerAlbumTokenAllocation, consumerEventTokenAllocation, consumerMerchandiseTokenAllocation } = require('./controllers/tokenAllocation.ts');
 
 // Artist
 router.post('/createArtist', createArtist);
@@ -44,17 +45,23 @@ router.get('/getArtistMerchandise/:merchandiseId/:artistId', getArtistMerchandis
 router.post('/createAlbumToken/:albumId', createAlbumToken);
 router.get('/getAlbumToken/:tokenId', getAlbumToken);
 router.get('/getAlbumTokens', getAlbumTokens);
+router.get('/getConsumerAlbumTokens/:albumId/:consumerId', getConsumerAlbumTokens);
 
 // Merchandise Token 
 router.post('/createMerchandiseToken/:merchandiseId', createMerchandiseToken);
 router.get('/getMerchandiseToken/:tokenId', getMerchandiseToken);
 router.get('/getMerchandiseTokens', getMerchandiseTokens);
+router.get('/getConsumerMerchandiseTokens/:merchandiseId/:consumerId', getConsumerMerchandiseTokens);
 
 // Event Token 
 router.post('/createEventToken/:eventId', createEventToken);
 router.get('/getEventToken/:tokenId', getEventToken);
 router.get('/getEventTokens', getEventTokens);
+router.get('/getConsumerEventTokens/:eventId/:consumerId', getConsumerEventTokens);
 
-
+// Token Allocation
+router.patch('/consumerAlbumTokenAllocation/:consumerId/:albumTokenId', consumerAlbumTokenAllocation);
+router.patch('/consumerEventTokenAllocation/:consumerId/:eventTokenId', consumerEventTokenAllocation);
+router.patch('/consumerMerchandiseTokenAllocation/:consumerId/:merchandiseTokenId', consumerMerchandiseTokenAllocation);
 
 export { router };

@@ -23,6 +23,5 @@ async function getConsumer(req: Request, res: Response) {
     res.json(error);
   }
 }
-async function patchConsumerPoints(req: Request, res: Response) {}
 
-export { createConsumer, getConsumer, patchConsumerPoints }
+export { createConsumer, getConsumer }

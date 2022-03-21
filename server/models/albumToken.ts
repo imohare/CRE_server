@@ -32,7 +32,7 @@ class AlbumToken extends Model {
 
   // Populated for inclusions
   public readonly AlbumId!: Album;
-  public readonly ConsumerId?: Consumer;
+  public readonly ConsumerId!: Consumer;
 
   public static associations: {
     AlbumId: Association<Album, AlbumToken>;
