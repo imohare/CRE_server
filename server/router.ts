@@ -7,9 +7,9 @@ const { createEvent, getEvent, getEvents, getArtistEvents, getArtistEvent } = re
 const { createMerchandise, getMerchandises, getMerchandise, getArtistMerchandises, getArtistMerchandise } = require('./controllers/merchandise.ts');
 const { createConsumer, getConsumer } = require('./controllers/consumer.ts');
 const { createAlbumToken, getAlbumToken, getAlbumTokens, getConsumerAlbumTokens } = require('./controllers/albumToken.ts');
-const { createMerchandiseToken, getMerchandiseToken, getMerchandiseTokens } = require('./controllers/merchandiseToken.ts');
+const { createMerchandiseToken, getMerchandiseToken, getMerchandiseTokens, getConsumerMerchandiseTokens } = require('./controllers/merchandiseToken.ts');
 const { createEventToken, getEventToken, getEventTokens, getConsumerEventTokens } = require('./controllers/EventToken.ts');
-const { consumerAlbumTokenAllocation, consumerEventTokenAllocation } = require('./controllers/tokenAllocation.ts');
+const { consumerAlbumTokenAllocation, consumerEventTokenAllocation, consumerMerchandiseTokenAllocation } = require('./controllers/tokenAllocation.ts');
 
 // Artist
 router.post('/createArtist', createArtist);
@@ -51,6 +51,7 @@ router.get('/getConsumerAlbumTokens/:albumId/:consumerId', getConsumerAlbumToken
 router.post('/createMerchandiseToken/:merchandiseId', createMerchandiseToken);
 router.get('/getMerchandiseToken/:tokenId', getMerchandiseToken);
 router.get('/getMerchandiseTokens', getMerchandiseTokens);
+router.get('/getConsumerMerchandiseTokens/:merchandiseId/:consumerId', getConsumerMerchandiseTokens);
 
 // Event Token 
 router.post('/createEventToken/:eventId', createEventToken);
@@ -61,5 +62,6 @@ router.get('/getConsumerEventTokens/:eventId/:consumerId', getConsumerEventToken
 // Token Allocation
 router.patch('/consumerAlbumTokenAllocation/:consumerId/:albumTokenId', consumerAlbumTokenAllocation);
 router.patch('/consumerEventTokenAllocation/:consumerId/:eventTokenId', consumerEventTokenAllocation);
+router.patch('/consumerMerchandiseTokenAllocation/:consumerId/:merchandiseTokenId', consumerMerchandiseTokenAllocation);
 
 export { router };

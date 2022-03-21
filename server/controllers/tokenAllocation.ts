@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { AlbumToken, Consumer, EventToken } from "../models";
+import { AlbumToken, Consumer, EventToken, MerchandiseToken } from "../models";
 
 async function consumerAlbumTokenAllocation(req: Request, res: Response) {
   try {
@@ -55,6 +55,33 @@ async function consumerEventTokenAllocation(req: Request, res: Response) {
   }
 }
 
+async function consumerMerchandiseTokenAllocation(req: Request, res: Response) {
+  try {
+    if (!req.params.consumerId || !req.params.merchandiseTokenId) {
+      res.status(400);
+      res.json('incorrect schema for request');
+    } else {
+      const _consumer = await Consumer.findByPk(req.params.consumerId);
+      const _merchandiseToken = await MerchandiseToken.findByPk(req.params.merchandiseTokenId);
+      if (!_consumer || !_merchandiseToken) {
+        res.status(400);
+        res.json('Consumer or Merchandise Token not found');
+      } else {
+        _merchandiseToken
+          .setConsumer(_consumer)
+          .then((_merchandiseToken) => {
+            res.json(_merchandiseToken);
+            res.status(201);
+          })
+      }
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500);
+    res.json(error);
+  }
+}
+
 // async function consumerPointsIncrease(req: Request, res: Response) {
 //           try {
 //             if (!req.params.consumerId || !req.params.tokenId) {
@@ -78,4 +105,4 @@ async function consumerEventTokenAllocation(req: Request, res: Response) {
 //           }
 //         }
 
-export { consumerAlbumTokenAllocation, consumerEventTokenAllocation };
+export { consumerAlbumTokenAllocation, consumerEventTokenAllocation, consumerMerchandiseTokenAllocation };

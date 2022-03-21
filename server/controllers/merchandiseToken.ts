@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { MerchandiseToken, Merchandise } from "../models";
+import { Consumer, MerchandiseToken, Merchandise } from "../models";
 
 async function getMerchandiseTokens(req: Request, res: Response) {
   try {
@@ -64,6 +64,36 @@ async function createMerchandiseToken(req: Request, res: Response) {
 
 
 async function getArtistMerchandiseTokens(req: Request, res: Response) {}
-async function getConsumerMerchandiseTokens(req: Request, res: Response) {}
+async function getConsumerMerchandiseTokens(req: Request, res: Response) {
+  try {
+    if (!req.params.merchandiseId || !req.params.consumerId) {
+      res.status(400);
+      res.json('incorrect schema for request');
+    } else {
+      const merchandiseId = req.params.merchandiseId;
+      const consumerId = req.params.consumerId;
+
+      const merchandise = await Merchandise.findByPk(merchandiseId);
+      const consumer = await Consumer.findByPk(consumerId);
+
+      if (!merchandise) {
+        res.status(400);
+        res.json('Merchandise not found');
+      } else if (!consumer) {
+        res.status(400);
+        res.json('Consumer not found');
+       } else {
+         const _tokens = await MerchandiseToken.findAll({where: {MerchandiseId: merchandiseId, ConsumerId: consumerId} });
+         res.json(_tokens);
+         res.status(201);
+      }
+    }
+  }
+  catch (error) {
+    console.log('error');
+    res.status(500);
+    res.json(error);
+  }
+}
 
 export { getMerchandiseTokens, getMerchandiseToken, createMerchandiseToken, getArtistMerchandiseTokens, getConsumerMerchandiseTokens }
