@@ -15,7 +15,7 @@ async function getAlbums(req: Request, res: Response) {
 
 async function getAlbum(req: Request, res: Response) {
   try {
-    const _album = await Album.findByPk(req.params.id);
+    const _album = await Album.findByPk(req.params.albumId);
     res.json(_album);
     res.status(200);
   } catch (error) {
@@ -26,26 +26,19 @@ async function getAlbum(req: Request, res: Response) {
 }
 
 async function createAlbum(req: Request, res: Response) {
-  console.log("in createAlbum")
   try {
     if (!req.params.artistId) {
       res.status(400);
       res.json('incorrect schema for request');
-      console.log("not correct schema")
     } else {
       const artistId = req.params.artistId;
-      // console.log("artistId", artistId);
-      // const artist = await Artist.findOne({ where: { id: artistId } });
       const artist = await Artist.findByPk(artistId);
-      // console.log("artist", artist);
 
       if (!artist) {
         res.status(400);
         res.json('Artist not found');
       } else {
-        console.log(' before create album', req.body)
         const _album = await Album.create(req.body);
-        console.log("album", _album);
 
         _album
           .setArtist(artist)
@@ -60,7 +53,6 @@ async function createAlbum(req: Request, res: Response) {
       }
     }
   } catch (error) {
-    //console.log(error);
     console.log('error');
     res.status(500);
     res.json(error);
