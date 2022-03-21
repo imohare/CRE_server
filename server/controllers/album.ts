@@ -103,8 +103,8 @@ async function getArtistAlbum(req: Request, res: Response) {
         res.json('Album not found');
       }
       else {
-        const _albums = await Album.findAll({where: {id: albumId, ArtistId: artistId}});
-        res.json(_albums);
+        const _album = await Album.findAll({where: {id: albumId, ArtistId: artistId}});
+        res.json(_album);
         res.status(201);
       }
     }
