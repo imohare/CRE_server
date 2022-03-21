@@ -1,13 +1,13 @@
 import {
-  Association, 
-  DataTypes, 
-  Model, 
-  Sequelize, 
-  HasManyCountAssociationsMixin, 
-  HasManyAddAssociationMixin, 
-  HasManyGetAssociationsMixin, 
-  HasManyHasAssociationMixin, 
-  BelongsToSetAssociationMixin, 
+  Association,
+  DataTypes,
+  Model,
+  Sequelize,
+  HasManyCountAssociationsMixin,
+  HasManyAddAssociationMixin,
+  HasManyGetAssociationsMixin,
+  HasManyHasAssociationMixin,
+  BelongsToSetAssociationMixin,
   BelongsToGetAssociationMixin
 } from 'sequelize';
 
@@ -16,7 +16,7 @@ import { Token } from './token';
 
 class Album extends Model {
   public name!: string;
-  public year!: Date;
+  public year!: string;
   public description?: string;
 
   //Auto-generated
@@ -54,14 +54,14 @@ class Album extends Model {
           allowNull: false
         },
         year: {
-          type: DataTypes.DATE,
+          type: DataTypes.STRING,
           allowNull: false
         },
         description: {
           type: DataTypes.STRING,
         }
-      }, 
-    {sequelize})
+      },
+      { sequelize })
   }
 }
 export { Album };
