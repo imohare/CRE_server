@@ -5,7 +5,7 @@ const { createArtist, getArtist, getArtists } = require('./controllers/artist.ts
 const { createAlbum, getAlbum, getAlbums, getArtistAlbums, getArtistAlbum } = require('./controllers/album.ts');
 const { createEvent, getEvent, getEvents, getArtistEvents, getArtistEvent } = require('./controllers/event.ts')
 const { createMerchandise, getMerchandises, getMerchandise, getArtistMerchandises, getArtistMerchandise } = require('./controllers/merchandise.ts');
-const { createConsumer, getConsumer } = require('./controllers/consumer.ts');
+const { createConsumer, getConsumer, patchConsumerPoints } = require('./controllers/consumer.ts');
 
 // Artist
 router.post('/createArtist', createArtist);
@@ -20,6 +20,9 @@ router.get('/getArtistAlbum/:albumId/:artistId', getArtistAlbum);
 // Consumer 
 router.post('/createConsumer', createConsumer);
 router.get('/getConsumer/:consumerId', getConsumer);
+router.put('/patchConsumerPoints/:consumerId', patchConsumerPoints);
+
+
 // Event
 router.post('/createEvent/:artistId', createEvent);
 router.get('/getEvents', getEvents);

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Consumer } from "../models";
+import { Consumer, sequelize } from "../models";
 
 async function createConsumer(req: Request, res: Response) {
   const _consumer = await Consumer.create({
@@ -23,6 +23,23 @@ async function getConsumer(req: Request, res: Response) {
     res.json(error);
   }
 }
-async function patchConsumerPoints(req: Request, res: Response) {}
+async function patchConsumerPoints(req: Request, res: Response) {
+  try {
+    const consumerId = req.params.consumerId;
+    const _consumer = await Consumer.increment({ points: 1 }, { where: { id: consumerId } });
+    const consumerUpdatedPoints = await Consumer.findByPk(req.params.consumerId);
+    res.send(consumerUpdatedPoints);
+
+
+
+  }
+  catch (error) {
+    console.log(error);
+    res.status(500);
+    res.json(error);
+  }
+
+
+}
 
 export { createConsumer, getConsumer, patchConsumerPoints }
