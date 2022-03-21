@@ -59,7 +59,30 @@ async function createAlbum(req: Request, res: Response) {
   }
 }
 
-async function getArtistAlbums(req: Request, res: Response) { }
+async function getArtistAlbums(req: Request, res: Response) {
+  try {
+    if (!req.params.artistId) {
+      res.status(400);
+      res.json('incorrect schema for request');
+    } else {
+      const artistId = req.params.artistId;
+      const artist = await Artist.findByPk(artistId);
+
+      if (!artist) {
+        res.status(400);
+        res.json('Artist not found');
+      } else {
+        const _album = await Album.findAll({where: {ArtistId: artistId}});
+        res.json(_album);
+        res.status(201);
+      }
+    }
+  } catch (error) {
+    console.log('error');
+    res.status(500);
+    res.json(error);
+  }
+ }
 
 async function getArtistAlbum(req: Request, res: Response) { }
 
