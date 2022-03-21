@@ -79,8 +79,8 @@ async function getArtistEvents(req: Request, res: Response) {
         res.status(400);
         res.json('Artist not found');
       } else {
-        const _event = await Event.findAll({where: {ArtistId: artistId}});
-        res.json(_event);
+        const _events = await Event.findAll({where: {ArtistId: artistId}});
+        res.json(_events);
         res.status(201);
       }
     }

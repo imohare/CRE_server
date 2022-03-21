@@ -62,7 +62,30 @@ async function createMerchandise(req: Request, res: Response) {
   }
 }
 
-async function getArtistMerchandises(req: Request, res: Response) {}
+async function getArtistMerchandises(req: Request, res: Response) {
+  try {
+    if (!req.params.artistId) {
+      res.status(400);
+      res.json('incorrect schema for request');
+    } else {
+      const artistId = req.params.artistId;
+      const artist = await Artist.findByPk(artistId);
+
+      if (!artist) {
+        res.status(400);
+        res.json('Artist not found');
+      } else {
+        const _merchandises = await Merchandise.findAll({where: {ArtistId: artistId}});
+        res.json(_merchandises);
+        res.status(201);
+      }
+    }
+  } catch (error) {
+    console.log('error');
+    res.status(500);
+    res.json(error);
+  }
+}
 
 async function getArtistMerchandise(req: Request, res: Response) {}
 
