@@ -63,4 +63,8 @@ async function createEvent(req: Request, res: Response) {
   }
 }
 
-export { createEvent, getEvents, getEvent}
+async function getArtistEvents(req: Request, res: Response) {}
+
+async function getArtistEvent(req: Request, res: Response) {}
+
+export { createEvent, getEvents, getEvent }

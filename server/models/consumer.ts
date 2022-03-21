@@ -69,4 +69,4 @@ class Consumer extends Model {
       { sequelize })
   }
 }
-export { Consumer };
+export { Consumer }

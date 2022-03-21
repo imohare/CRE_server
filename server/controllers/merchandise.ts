@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
-import { Album, Artist } from "../models";
+import { Merchandise, Artist } from "../models";
 
-async function getAlbums(req: Request, res: Response) {
+async function getMerchandises(req: Request, res: Response) {
   try {
-    const _albums: Album[] = await Album.findAll();
-    res.json(_albums);
+    const _merchandises = await Merchandise.findAll();
+    res.json(_merchandises);
     res.status(200);
   } catch (error) {
     console.log(error);
@@ -13,10 +13,10 @@ async function getAlbums(req: Request, res: Response) {
   }
 }
 
-async function getAlbum(req: Request, res: Response) {
+async function getMerchandise(req: Request, res: Response) {
   try {
-    const _album = await Album.findByPk(req.params.id);
-    res.json(_album);
+    const _merchandise = await Merchandise.findByPk(req.params.id);
+    res.json(_merchandise);
     res.status(200);
   } catch (error) {
     console.log(error);
@@ -25,7 +25,7 @@ async function getAlbum(req: Request, res: Response) {
   }
 }
 
-async function createAlbum(req: Request, res: Response) {
+async function createMerchandise(req: Request, res: Response) {
   try {
     if (!req.body.artistId) {
       res.send(400);
@@ -38,16 +38,16 @@ async function createAlbum(req: Request, res: Response) {
         res.status(400);
         res.json('Artist not found');
       } else {
-        const _album = await Album.create({
+        const _event = await Merchandise.create({
           name: req.body.name,
-          year: req.body.year,
+          type: req.body.type,
           description: req.body.description
         });
 
-        _album
+        _event
           .setArtist(artist)
-          .then((_album) => {
-            res.json(_album);
+          .then((_event) => {
+            res.json(_event);
             res.status(201);
           })
           .catch((err) => {
@@ -62,4 +62,9 @@ async function createAlbum(req: Request, res: Response) {
   }
 }
 
-export { createAlbum, getAlbums, getAlbum }
+async function getArtistMerchandises(req: Request, res: Response) {}
+
+async function getArtistMerchandise(req: Request, res: Response) {}
+
+
+export { createMerchandise, getMerchandises, getMerchandise, getArtistMerchandises, getArtistMerchandise }
