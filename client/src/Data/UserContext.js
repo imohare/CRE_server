@@ -17,7 +17,7 @@ export const UserContextProvider = ({ children }) => {
 
   
   return (
-    <UserContext.Provider value={{ consumerInfo, setUserInfo, userConfig }}>
+    <UserContext.Provider value={{ consumerInfo, setConsumerInfo, userConfig }}>
     { ...children }
     </UserContext.Provider>
   )
