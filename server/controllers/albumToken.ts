@@ -33,8 +33,8 @@ async function createAlbumToken(req: Request, res: Response) {
     } else {
       const artistId = req.params.artistId
       const albumId = req.params.albumId;
-      const album = await Album.findByPk(albumId);
       const artist = await Artist.findByPk(artistId);
+      const album = await Album.findByPk(albumId);
 
       if (!album) {
         res.status(400);

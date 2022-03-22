@@ -45,6 +45,10 @@ Artist.hasMany(Merchandise);
 AlbumToken.belongsTo(Artist);
 Artist.hasMany(AlbumToken);
 
+// Artist - EventToken associations
+EventToken.belongsTo(Artist);
+Artist.hasMany(EventToken);
+
 // Album - AlbumToken associations
 AlbumToken.belongsTo(Album);
 Album.hasMany(AlbumToken);

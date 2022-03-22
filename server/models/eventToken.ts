@@ -7,6 +7,7 @@ import {
   BelongsToGetAssociationMixin,
 } from 'sequelize';
 
+import { Artist } from './artist';
 import { Event } from './event';
 import { Consumer } from './consumer';
 
@@ -22,6 +23,10 @@ class EventToken extends Model {
   public updatedAt!: Date;
 
   // Event association with methods
+  public getArtist!: BelongsToGetAssociationMixin<Artist>;
+  public setArtist!: BelongsToSetAssociationMixin<Artist, number>;
+
+  // Event association with methods
   public getEvent!: BelongsToGetAssociationMixin<Event>;
   public setEvent!: BelongsToSetAssociationMixin<Event, number>;
 
@@ -30,11 +35,13 @@ class EventToken extends Model {
   public setConsumer!: BelongsToSetAssociationMixin<Consumer, number>;
 
   // Populated for inclusions
-  public readonly associated_to_event!: Event;
+  public readonly artist!: Artist;
+  public readonly event!: Event;
   public readonly owned_by!: Consumer;
 
   public static associations: {
-    associated_to_event: Association<Event, EventToken>;
+    artist: Association<Artist, EventToken>;
+    event: Association<Event, EventToken>;
     owned_by: Association<EventToken, Consumer>;
   }
 

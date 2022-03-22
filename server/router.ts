@@ -8,7 +8,7 @@ const { createMerchandise, getMerchandises, getMerchandise, getArtistMerchandise
 const { createConsumer, getConsumer } = require('./controllers/consumer.ts');
 const { createAlbumToken, getAlbumToken, getAlbumTokens, getConsumerAlbumTokens, getArtistAlbumsTokens } = require('./controllers/albumToken.ts');
 const { createMerchandiseToken, getMerchandiseToken, getMerchandiseTokens, getConsumerMerchandiseTokens } = require('./controllers/merchandiseToken.ts');
-const { createEventToken, getEventToken, getEventTokens, getConsumerEventTokens } = require('./controllers/EventToken.ts');
+const { createEventToken, getEventToken, getEventTokens, getConsumerEventTokens, getArtistEventsTokens } = require('./controllers/EventToken.ts');
 const { consumerAlbumTokenAllocation, consumerEventTokenAllocation, consumerMerchandiseTokenAllocation } = require('./controllers/tokenAllocation.ts');
 
 // Artist
@@ -55,10 +55,11 @@ router.get('/getMerchandiseTokens', getMerchandiseTokens);
 router.get('/getConsumerMerchandiseTokens/:merchandiseId/:consumerId', getConsumerMerchandiseTokens);
 
 // Event Token 
-router.post('/createEventToken/:eventId', createEventToken);
+router.post('/createEventToken/:artistId/:eventId', createEventToken);
 router.get('/getEventToken/:tokenId', getEventToken);
 router.get('/getEventTokens', getEventTokens);
 router.get('/getConsumerEventTokens/:eventId/:consumerId', getConsumerEventTokens);
+router.get('/getArtistEventsTokens/:artistId', getArtistEventsTokens);
 
 // Token Allocation
 router.patch('/consumerAlbumTokenAllocation/:consumerId/:albumTokenId', consumerAlbumTokenAllocation);
