@@ -16,7 +16,6 @@ class Consumer extends Model {
   public eth_address!: string;
   public username!: string;
   public location?: string;
-  public points!: number;
   public email!: string;
 
   // Auto-generated
@@ -67,10 +66,6 @@ class Consumer extends Model {
         location: {
           type: DataTypes.STRING,
           defaultValue: 'unnamed location'
-        },
-        points: {
-          type: DataTypes.INTEGER,
-          defaultValue: 0
         },
         email: {
           type: DataTypes.STRING,
