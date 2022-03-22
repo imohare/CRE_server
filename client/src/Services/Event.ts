@@ -1,8 +1,6 @@
-import { IEvent } from "../Data/DataTypes/EventType"
-
+import { IEvent } from "../Data/DataTypes/Event"
 const BASE_URL = 'http://localhost:3001';
 
-//create Event
 const createEvent = (event: IEvent) => {
     const requestOptions = {
         method: 'POST',
@@ -14,36 +12,28 @@ const createEvent = (event: IEvent) => {
         .catch(err => console.log(err, "Error"))
 }
 
-//getEvents
 const getEvents = () => {
     return fetch(`${BASE_URL}/getEvents`)
         .then(res => res.json())
         .catch((err => console.log(err, "error")))
 }
 
-//getEventById
 const getEventById = (eventId: number) => {
     return fetch(`${BASE_URL}/getEvent/${eventId}`)
         .then(res => res.json())
         .catch((err => console.log(err, "error")))
 }
 
-
-//getEventsByArtist
 const getEventsByArtistId = (artistId: number) => {
     return fetch(`${BASE_URL}/getArtistEvents/${artistId}`)
         .then(res => res.json())
         .catch((err => console.log(err, "error")))
 }
 
-//getArtistEvent --> personally do not see the point of this function ...
 const getArtistEventByEventAndArtistId = (eventId: number, artistId: number) => {
     return fetch(`${BASE_URL}/getArtistEvent/${eventId}/${artistId}`)
         .then(res => res.json())
         .catch((err => console.log(err, "error")))
 }
-
-
-
 
 export { createEvent, getEvents, getEventById, getEventsByArtistId, getArtistEventByEventAndArtistId }
