@@ -11,7 +11,7 @@ import { Artist } from './artist';
 import { Consumer } from './consumer';
 
 class Points extends Model {
-  public points!: string;
+  public points!: number;
 
   // Auto-generated
   public id!: number;

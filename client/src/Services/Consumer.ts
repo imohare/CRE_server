@@ -1,10 +1,6 @@
 import { IConsumer } from "../Data/DataTypes";
-
-//BASEURI
 const BASE_URL = 'http://localhost:3001'
 
-
-//createConsumer
 const createConsumer = (consumer: IConsumer) => {
     const requestOptions = {
         method: 'POST',
@@ -16,14 +12,15 @@ const createConsumer = (consumer: IConsumer) => {
         .catch(err => console.log(err, "error"))
 }
 
-//getConsumerById
 const getConsumerById = (consumerId: number) => {
     fetch(`${BASE_URL}/getConsumer/${consumerId}`)
         .then(res => res.json())
         .catch(err => console.log(err))
 }
 
-//**patch consumer points
-// patchConsumerPoints=()=>{} //not done yet
+const deleteConsumer = (consumerId: number) => {
+    return fetch(`${BASE_URL}/deleteConsumer/${consumerId}`, 
+    {method: "DELETE"});
+}
 
-export { createConsumer, getConsumerById }
+export { createConsumer, getConsumerById, deleteConsumer }

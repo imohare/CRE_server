@@ -67,8 +67,6 @@ async function createMerchandiseToken(req: Request, res: Response) {
   }
 }
 
-
-
 async function getArtistMerchandisesTokens(req: Request, res: Response) {
   try {
     if (!req.params.artistId) {
