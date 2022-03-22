@@ -37,13 +37,13 @@ const getEventsByArtistId = (artistId: number) => {
 }
 
 //getArtistEvent --> personally do not see the point of this function ...
-const getArtistEventByEventAndArtistId = (eventId: number, artistId: numbers) => {
+const getArtistEventByEventAndArtistId = (eventId: number, artistId: number) => {
     return fetch(`${BASE_URL}/getArtistEvent/${eventId}/${artistId}`)
         .then(res => res.json())
         .catch((err => console.log(err, "error")))
 }
-    
-}
 
 
-export { createEvent, getEvents, getEventById, getEventsByArtistId }
+
+
+export { createEvent, getEvents, getEventById, getEventsByArtistId, getArtistEventByEventAndArtistId }
