@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
-import { Album, Artist } from "../models";
+import { Album, AlbumToken, Artist } from "../models";
 
 async function getAlbums(req: Request, res: Response) {
   try {
     const _albums: Album[] = await Album.findAll();
-    res.json(_albums);
     res.status(200);
+    res.json(_albums);
   } catch (error) {
     console.log(error);
     res.status(500);
@@ -16,8 +16,8 @@ async function getAlbums(req: Request, res: Response) {
 async function getAlbum(req: Request, res: Response) {
   try {
     const _album = await Album.findByPk(req.params.albumId);
-    res.json(_album);
     res.status(200);
+    res.json(_album);
   } catch (error) {
     console.log(error);
     res.status(500);
@@ -43,8 +43,8 @@ async function createAlbum(req: Request, res: Response) {
         _album
           .setArtist(artist)
           .then((_album) => {
-            res.json(_album);
             res.status(201);
+            res.json(_album);
           })
 
           .catch((err) => {
@@ -53,7 +53,6 @@ async function createAlbum(req: Request, res: Response) {
       }
     }
   } catch (error) {
-    console.log('error');
     res.status(500);
     res.json(error);
   }
@@ -73,8 +72,8 @@ async function getArtistAlbums(req: Request, res: Response) {
         res.json('Artist not found');
       } else {
         const _albums = await Album.findAll({where: {ArtistId: artistId}});
-        res.json(_albums);
         res.status(201);
+        res.json(_albums);
       }
     }
   } catch (error) {
@@ -103,8 +102,8 @@ async function getArtistAlbum(req: Request, res: Response) {
         res.json('Album not found');
       } else {
         const _album = await Album.findAll({where: {id: albumId, ArtistId: artistId}});
-        res.json(_album);
         res.status(201);
+        res.json(_album);
       }
     }
   } catch (error) {
@@ -114,4 +113,12 @@ async function getArtistAlbum(req: Request, res: Response) {
   }
  }
 
-module.exports = { createAlbum, getAlbums, getAlbum, getArtistAlbums, getArtistAlbum };
+ async function deleteAlbum(req: Request, res: Response) {
+   const albumId = req.params.albumId;
+   await AlbumToken.destroy({where: {AlbumId: albumId}});
+   await Album.destroy({where: {id: albumId}});
+   res.status(201);
+   res.json();
+ }
+
+module.exports = { createAlbum, getAlbums, getAlbum, getArtistAlbums, getArtistAlbum, deleteAlbum };

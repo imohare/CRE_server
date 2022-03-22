@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Consumer, sequelize } from "../models";
+import { AlbumToken, Consumer, EventToken, MerchandiseToken, Points } from "../models";
 
 async function createConsumer(req: Request, res: Response) {
   const _consumer = await Consumer.create({
@@ -23,5 +23,15 @@ async function getConsumer(req: Request, res: Response) {
   }
 }
 
+async function deleteConsumer(req: Request, res: Response) {
+  const consumerId = req.params.consumerId;
+  await AlbumToken.destroy({where: {ConsumerId: consumerId}});
+  await EventToken.destroy({where: {ConsumerId: consumerId}});
+  await MerchandiseToken.destroy({where: {ConsumerId: consumerId}});
+  await Points.destroy({where: {ConsumerId: consumerId}});
+  await Consumer.destroy({where: {id: consumerId}});
+  res.status(201);
+  res.json();
+}
 
-export { createConsumer, getConsumer }
+export { createConsumer, getConsumer, deleteConsumer }

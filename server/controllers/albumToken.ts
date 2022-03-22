@@ -52,13 +52,12 @@ async function createAlbumToken(req: Request, res: Response) {
             edition_number: req.body.edition_number,
             total_editions: req.body.total_editions,
           }
-
         );
         await _token.save();
         await _token.setArtist(artist);
         await _token.setAlbum(album);
-        res.json(_token);
         res.status(201);
+        res.json(_token);
       }
     }
   } catch (error) {
@@ -114,8 +113,8 @@ async function getConsumerAlbumTokens(req: Request, res: Response) {
         res.json('Consumer not found');
       } else {
         const _tokens = await AlbumToken.findAll({ where: { AlbumId: albumId, ConsumerId: consumerId } });
-        res.json(_tokens);
         res.status(201);
+        res.json(_tokens);
       }
     }
   }
@@ -125,7 +124,5 @@ async function getConsumerAlbumTokens(req: Request, res: Response) {
     res.json(error);
   }
 }
-
-
 
 export { getAlbumTokens, getAlbumToken, createAlbumToken, getConsumerAlbumTokens, getArtistAlbumsTokens }
