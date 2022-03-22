@@ -1,9 +1,10 @@
 //react
 //antd imports
-import { Form, Button, Input, InputNumber, Cascader } from 'antd';
-import { isNullishCoalesce } from 'typescript';
+import { Form, Button, Input, InputNumber, DatePicker } from 'antd';
 //components
 //styling
+import { motion, } from 'framer-motion';
+import { StaggerParentVariant, StaggerItemVariant } from '../../../Styles/animations/formAnimations';
 
 //final state: mapping through formfields for configuration object that 
 //is inupt in props
@@ -19,12 +20,13 @@ const FormTemplate = ({ config }: Props) => {
   }
   const formField = (type: string) => {
     switch (type) {
-      case ('text'): {
-        return (<Input></Input>)
-      }
+      case ('text'): return (<Input></Input>);
+      case ('number'): return (<InputNumber></InputNumber>)
+      case ('date'): return (<DatePicker> {/*date is inside the return value _d: Date*/} </DatePicker>)
     }
-}
-
+  }
+  
+  
   return config ? (
     <Form
       labelCol={{
@@ -39,23 +41,35 @@ const FormTemplate = ({ config }: Props) => {
         console.log(changedValues, 'allvalues', allValues)
       }}
     >
-
+      <motion.div
+        variants={StaggerParentVariant}
+        initial="hidden"
+        animate="show"
+        exit="exit"
+      >
       {config.map(item => {
         const { type, attr } = item;
         const { rules } = item;
         return (
+
+          <motion.div
+            variants={StaggerItemVariant}
+          >
           <Form.Item {...attr} rules={rules}>
             {
               formField(type)
             }
-          
-          </Form.Item>
+            </Form.Item>
+            </motion.div>
         )
       })
-      }
+        }
+        <motion.div>
       <Form.Item>
         <Button type="primary" htmlType="submit">submit</Button>
-      </Form.Item>
+          </Form.Item>
+          </motion.div>
+        </motion.div>
    </Form>
   ) 
   : (<div>no configuration object available</div>)

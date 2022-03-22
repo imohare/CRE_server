@@ -41,6 +41,21 @@ export const FormContextProvider = ({ children }: ContextProps ) => {
     },
     {
       attr: {
+        id: 'last_name',
+        name: 'last name',
+        key: 'lastname',
+        label: 'last name',
+      }, 
+      rules: [
+        {
+          required: true,
+          message: 'Please enter your username!',
+        },
+      ],
+      type: 'text'
+    },
+    {
+      attr: {
         id: 'location',
         name: 'location',
         key: 'location',
