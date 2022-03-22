@@ -10,7 +10,7 @@ const { createConsumer, getConsumer } = require('./controllers/consumer.ts');
 const { createAlbumToken, getAlbumToken, getAlbumTokens, getConsumerAlbumTokens, getArtistAlbumsTokens } = require('./controllers/albumToken.ts');
 const { createMerchandiseToken, getMerchandiseToken, getMerchandiseTokens, getConsumerMerchandiseTokens, getArtistMerchandisesTokens } = require('./controllers/merchandiseToken.ts');
 const { createEventToken, getEventToken, getEventTokens, getConsumerEventTokens, getArtistEventsTokens } = require('./controllers/EventToken.ts');
-const { consumerAlbumTokenAllocation, consumerEventTokenAllocation, consumerMerchandiseTokenAllocation } = require('./controllers/tokenAllocation.ts');
+const { albumTokenPurchase, eventTokenPurchase, merchandiseTokenPurchase } = require('./controllers/purchasing.ts');
 
 // Artist
 router.post('/createArtist', createArtist);
@@ -50,12 +50,10 @@ router.get('/getAlbumTokens', getAlbumTokens);
 router.get('/getConsumerAlbumTokens/:albumId/:consumerId', getConsumerAlbumTokens);
 router.get('/getArtistAlbumsTokens/:artistId', getArtistAlbumsTokens);
 
-
 // Merchandise Token 
 router.post('/createMerchandiseToken/:artistId/:merchandiseId', createMerchandiseToken);
 router.get('/getMerchandiseToken/:tokenId', getMerchandiseToken);
 router.get('/getMerchandiseTokens', getMerchandiseTokens);
-
 router.get('/getConsumerMerchandiseTokens/:merchandiseId/:consumerId', getConsumerMerchandiseTokens);
 router.get('/getArtistMerchandisesTokens/:artistId', getArtistMerchandisesTokens);
 
@@ -63,10 +61,13 @@ router.get('/getArtistMerchandisesTokens/:artistId', getArtistMerchandisesTokens
 router.post('/createEventToken/:artistId/:eventId', createEventToken);
 router.get('/getEventToken/:tokenId', getEventToken);
 router.get('/getEventTokens', getEventTokens);
-
 router.get('/getConsumerEventTokens/:eventId/:consumerId', getConsumerEventTokens);
 router.get('/getArtistEventsTokens/:artistId', getArtistEventsTokens);
 
+// Purchasing
+router.patch('/albumTokenPurchase/:artistId/:consumerId/:albumTokenId', albumTokenPurchase);
+router.patch('/eventTokenPurchase/:artistId/:consumerId/:eventTokenId', eventTokenPurchase);
+router.patch('/merchandiseTokenPurchase/:artistId/:consumerId/:merchandiseTokenId', merchandiseTokenPurchase);
 
 
 export { router };
