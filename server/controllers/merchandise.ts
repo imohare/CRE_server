@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Merchandise, Artist } from "../models";
+import { Merchandise, Artist, MerchandiseToken } from "../models";
 
 async function getMerchandises(req: Request, res: Response) {
   try {
@@ -118,5 +118,12 @@ async function getArtistMerchandise(req: Request, res: Response) {
   }
 }
 
+async function deleteMerchandise(req: Request, res: Response) {
+  const merchandiseId = req.params.merchandiseId;
+  await MerchandiseToken.destroy({where: {MerchandiseId: merchandiseId}});
+  await Merchandise.destroy({where: {id: merchandiseId}});
+  res.status(201);
+  res.json();
+}
 
-export { createMerchandise, getMerchandises, getMerchandise, getArtistMerchandises, getArtistMerchandise }
+export { createMerchandise, getMerchandises, getMerchandise, getArtistMerchandises, getArtistMerchandise, deleteMerchandise }
