@@ -15,7 +15,6 @@ class EventToken extends Model {
   public consumer_points!: number;
   public edition_number!: number;
   public total_editions!: number;
-  public token_type!: string;
 
   // Auto-generated
   public id!: number;
@@ -58,10 +57,6 @@ class EventToken extends Model {
           type: DataTypes.INTEGER,
           allowNull: false
         },
-        token_type: {
-          type: DataTypes.STRING,
-          allowNull: false
-        }
       },
       { sequelize })
   }

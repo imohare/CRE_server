@@ -44,7 +44,6 @@ async function createAlbumToken(req: Request, res: Response) {
             consumer_points: req.body.consumer_points,
             edition_number: req.body.edition_number,
             total_editions: req.body.total_editions,
-            token_type: req.body.token_type
           }
           );
           await _token.save();
@@ -123,4 +122,4 @@ async function getConsumerAlbumTokens(req: Request, res: Response) {
 }
 
 
-export { getAlbumTokens, getAlbumToken, createAlbumToken, getArtistAlbumTokens, getConsumerAlbumTokens }
+export { getAlbumTokens, getAlbumToken, createAlbumToken, getConsumerAlbumTokens }
