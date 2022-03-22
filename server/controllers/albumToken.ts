@@ -65,34 +65,31 @@ async function createAlbumToken(req: Request, res: Response) {
   }
 }
 
-// async function getArtistAlbumTokens(req: Request, res: Response) {
-//   try {
-//     if (!req.params.artistId || !req.params.albumId) {
-//       res.status(400);
-//       res.json('incorrect schema for request');
-//     } else {
-//       const artistId = req.params.artistId;
-//       const albumId = req.params.albumId;
+async function getArtistAlbumsTokens(req: Request, res: Response) {
+  try {
+    if (!req.params.artistId) {
+      res.status(400);
+      res.json('incorrect schema for request');
+    } else {
 
-//       const artist = await Artist.findByPk(artistId);
-//       const album = await Album.findByPk(albumId);
+      const artistId = req.params.artistId;
+      const artist = await Artist.findByPk(artistId);
 
-//       if (!album) {
-//         res.status(400);
-//         res.json('Album not found');
-//       } else if (!artist) {
-//         res.status(400);
-//         res.json('Artist not found');       
-//       } else {
-//         const _tokens = await AlbumToken.findAll({where:{AlbumId: albumId, } }
-//       }
-//     }
-//   catch (error) {
-//     console.log('error');
-//     res.status(500);
-//     res.json(error);
-//   }
-// }
+      if (!artist) {
+        res.status(400);
+        res.json('Artist not found');       
+      } else {
+        const _tokens = await AlbumToken.findAll({where:{ ArtistId: artistId }});
+        res.json(_tokens);
+      }
+    }
+  }
+  catch (error) {
+    console.log('error');
+    res.status(500);
+    res.json(error);
+  }
+}
 
 async function getConsumerAlbumTokens(req: Request, res: Response) {
   try {
@@ -127,4 +124,4 @@ async function getConsumerAlbumTokens(req: Request, res: Response) {
 }
 
 
-export { getAlbumTokens, getAlbumToken, createAlbumToken, getConsumerAlbumTokens }
+export { getAlbumTokens, getAlbumToken, createAlbumToken, getConsumerAlbumTokens, getArtistAlbumsTokens }
