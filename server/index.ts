@@ -17,7 +17,7 @@ app.use(
         name: 'sessionId',
         saveUninitialized: false,
         resave: false,
-        secret: process.env.SECRET,//save into env long run
+        secret: process.env.SECRET,
         cookie: {
             maxAge: 1000 * 60 * 60 * 24, //1 day
             sameSite: true,
@@ -28,9 +28,8 @@ app.use(
 );
 
 app.use(cookieParser());
-
-app.use(cors()); //how do u decide what corss to allow
-app.use(Express.json()); //body parssesr
+app.use(cors()); 
+app.use(Express.json());
 app.use(morgan('short'));
 app.use(router);
 
