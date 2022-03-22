@@ -1,7 +1,7 @@
 import { IAlbumToken } from "Data/DataTypes"
 const BASE_URL = 'http://localhost:3001'
 
-const postAlbumToken = (album: IAlbumToken, artistId: number, consumerId: number) => {
+const createAlbumToken = (album: IAlbumToken, artistId: number, consumerId: number) => {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -36,4 +36,4 @@ const getArtistsAlbumTokens = (artistId: number) => {
         .catch(err => console.log(err, "errors"))
 }
 
-export { postAlbumToken, getAlbumTokenById, getAlbumTokens, getConsumersAlbumTokens, getArtistsAlbumTokens }
+export { createAlbumToken, getAlbumTokenById, getAlbumTokens, getConsumersAlbumTokens, getArtistsAlbumTokens }

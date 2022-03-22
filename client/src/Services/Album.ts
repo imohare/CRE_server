@@ -26,17 +26,22 @@ const getAlbumById = (albumId: number) => {
         .catch(err => console.log(err, "error"))
 }
 
-const getAllAlbumsOfArtist = (artistId: number) => {
+const getAllAlbumsbyArtistId = (artistId: number) => {
     return fetch(`${BASE_URL}/getArtistAlbums/${artistId}`)
         .then(res => res.json)
         .catch(err => console.log(err, "error"))
 }
 
-const getThisAlbumByArtist = (albumId: number, artistId: number) => {
+const getAlbumbyArtistId = (albumId: number, artistId: number) => {
     return fetch(`${BASE_URL}/getArtistAlbum/${albumId}/${artistId}`)
         .then(res => res.json())
         .catch(err => console.log(err, "error"))
 }
 
-export { createAlbum, getAllAlbums, getAlbumById, getAllAlbumsOfArtist, getThisAlbumByArtist }
+const deleteAlbum = (albumId: number) => {
+    return fetch(`${BASE_URL}/deleteAlbum/${albumId}`, 
+    {method: "DELETE"});
+}
+
+export { createAlbum, getAllAlbums, getAlbumById, getAllAlbumsbyArtistId, getAlbumbyArtistId, deleteAlbum }
 

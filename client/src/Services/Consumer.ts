@@ -18,4 +18,9 @@ const getConsumerById = (consumerId: number) => {
         .catch(err => console.log(err))
 }
 
-export { createConsumer, getConsumerById }
+const deleteConsumer = (consumerId: number) => {
+    return fetch(`${BASE_URL}/deleteConsumer/${consumerId}`, 
+    {method: "DELETE"});
+}
+
+export { createConsumer, getConsumerById, deleteConsumer }

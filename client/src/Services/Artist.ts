@@ -24,4 +24,9 @@ const getArtistById = (artistId: number) => {
         .catch(err => console.log(err, "error"))
 }
 
-export { createArtist, getArtists, getArtistById }
+const deleteArtist = (artistId: number) => {
+    return fetch(`${BASE_URL}/deleteArtist/${artistId}`, 
+    {method: "DELETE"});
+}
+
+export { createArtist, getArtists, getArtistById, deleteArtist }

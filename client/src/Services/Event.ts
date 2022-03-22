@@ -36,4 +36,9 @@ const getArtistEventByEventAndArtistId = (eventId: number, artistId: number) => 
         .catch((err => console.log(err, "error")))
 }
 
-export { createEvent, getEvents, getEventById, getEventsByArtistId, getArtistEventByEventAndArtistId }
+const deleteEvent = (eventId: number) => {
+    return fetch(`${BASE_URL}/deleteEvent/${eventId}`, 
+    {method: "DELETE"});
+}
+
+export { createEvent, getEvents, getEventById, getEventsByArtistId, getArtistEventByEventAndArtistId, deleteEvent }
