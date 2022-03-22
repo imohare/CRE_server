@@ -1,47 +1,48 @@
-import { IMerch } from "../Data/DataTypes/MerchTypes"
 
-const BASE_URL = 'http://localhost:3001';
+import { IMerchandise } from "../Data/DataTypes"
+const BASE_URL = 'http://localhost:3001'
 
-const createMerch = (merch: IMerch) => {
+const createMerchandise = (merchandise: IMerchandise, artistId: number) => {
     const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(merch)
+        headers: {
+            'Content-Type': 'application/json',
+            body: JSON.stringify(merchandise)
+        }
     }
-    return fetch(BASE_URL, requestOptions)
+    return fetch(`${BASE_URL}/createMerchandise/${artistId}`, requestOptions)
         .then(res => res.json())
-        .catch(err => console.log(err, "Error"))
+        .catch(err => console.log(err, "error"))
 }
 
-//getEvents
-const getMerch = () => {
-    return fetch(`${BASE_URL}/getMerch`)
+const getAllMerchandises = () => {
+    return fetch(`${BASE_URL}/getMerchandises`)
         .then(res => res.json())
-        .catch((err => console.log(err, "error")))
+        .catch(err => console.log(err, "error"))
 }
 
-//getEventById
-const getMerchById = (merchId: number) => {
-    return fetch(`${BASE_URL}/getMerch/${merchId}`)
+const getMerchandiseById = (merchandiseId: number) => {
+    return fetch(`${BASE_URL}/getMerchandise/${merchandiseId}`)
         .then(res => res.json())
-        .catch((err => console.log(err, "error")))
+        .catch(err => console.log(err, "error"))
 }
 
-
-//getEventsByArtist
-const getMerchByArtistId = (artistId: number) => {
-    return fetch(`${BASE_URL}/getArtistEvents/${artistId}`)
-        .then(res => res.json())
-        .catch((err => console.log(err, "error")))
+const getAllMerchandisesbyArtistId = (artistId: number) => {
+    return fetch(`${BASE_URL}/getArtistMerchandises/${artistId}`)
+        .then(res => res.json)
+        .catch(err => console.log(err, "error"))
 }
 
-//getArtistEvent --> personally do not see the point of this function ...
-const getArtistMerchByMerchAndArtistId = (merchId: number, artistId: number) => {
-    return fetch(`${BASE_URL}/getArtistEvent/${merchId}/${artistId}`)
+const getMerchandisebyArtistId = (merchandiseId: number, artistId: number) => {
+    return fetch(`${BASE_URL}/getArtistMerchandise/${merchandiseId}/${artistId}`)
         .then(res => res.json())
-        .catch((err => console.log(err, "error")))
+        .catch(err => console.log(err, "error"))
 }
 
+const deleteMerchandise = (merchandiseId: number) => {
+    return fetch(`${BASE_URL}/deleteMerchandise/${merchandiseId}`,
+        { method: "DELETE" });
+}
 
+export { createMerchandise, getAllMerchandises, getMerchandiseById, getAllMerchandisesbyArtistId, getMerchandisebyArtistId, deleteMerchandise }
 
-export { createMerch, getMerch, getMerchById, getMerchByArtistId, getArtistMerchByMerchAndArtistId }
