@@ -27,7 +27,6 @@ router.get('/getArtistAlbum/:albumId/:artistId', getArtistAlbum);
 // Consumer 
 router.post('/createConsumer', createConsumer);
 router.get('/getConsumer/:consumerId', getConsumer);
-router.put('/patchConsumerPoints/:consumerId', patchConsumerPoints);
 
 // Event
 router.post('/createEvent/:artistId', createEvent);
