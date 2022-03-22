@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { AlbumToken, Consumer, EventToken, MerchandiseToken } from "../models";
+import { AlbumToken, Artist, Consumer, EventToken, MerchandiseToken, Points } from "../models";
 
 async function consumerAlbumTokenAllocation(req: Request, res: Response) {
   try {
@@ -30,22 +30,42 @@ async function consumerAlbumTokenAllocation(req: Request, res: Response) {
 
 async function consumerEventTokenAllocation(req: Request, res: Response) {
   try {
-    if (!req.params.consumerId || !req.params.eventTokenId) {
+    if (!req.params.consumerId || !req.params.eventTokenId || !req.params.artistId) {
       res.status(400);
       res.json('incorrect schema for request');
     } else {
-      const _consumer = await Consumer.findByPk(req.params.consumerId);
-      const _eventToken = await EventToken.findByPk(req.params.eventTokenId);
-      if (!_consumer || !_eventToken) {
+      const consumerId = req.params.consumerId;
+      const eventTokenId = req.params.eventTokenId;
+      const artistId = req.params.artistId;
+      const _consumer = await Consumer.findByPk(consumerId);
+      const _eventToken = await EventToken.findByPk(eventTokenId);
+      const _artist = await Artist.findByPk(artistId);
+
+      if (!_consumer) {
         res.status(400);
-        res.json('Consumer or Event Token not found');
+        res.json('Consumer not found');
+      } else if (!_eventToken) {
+        res.status(400);
+        res.json('Event Token not found');
+      } else if (!_artist) {
+        res.status(400);
+        res.json('Artist Token not found');
       } else {
         _eventToken
           .setConsumer(_consumer)
-          .then((_eventToken) => {
-            res.json(_eventToken);
-            res.status(201);
-          })
+        
+        const _points = await Points.findOne({where: {ArtistId: artistId, ConsumerId: consumerId}})
+        if (!_points) {
+          const newPoints = await Points.create({points: _eventToken.consumer_points})
+          await newPoints.setArtist(_artist);
+          await newPoints.setConsumer(_consumer);
+          res.json();
+
+        } else {
+          await _points.update({points: _points.points + _eventToken.consumer_points});
+          await _points.save();
+          res.json();
+        }
       }
     }
   } catch (error) {
@@ -81,28 +101,5 @@ async function consumerMerchandiseTokenAllocation(req: Request, res: Response) {
     res.json(error);
   }
 }
-
-// async function consumerPointsIncrease(req: Request, res: Response) {
-//           try {
-//             if (!req.params.consumerId || !req.params.tokenId) {
-//               res.status(400);
-//               res.json('incorrect schema for request');
-//             } else {
-//               const _consumer = await Consumer.findByPk(req.params.consumerId);
-//               const _albumToken = await AlbumToken.findByPk(req.params.tokenId);
-//               if (!_consumer || !_albumToken) {
-//                 res.status(400);
-//                 res.json('Consumer or Album Token not found');
-//               } else {
-//                 const newPoints = _consumer.points += _albumToken.consumer_points;
-//                 //_consumer.update(set points = newPoints)
-//               }
-//             }
-//           } catch (error) {
-//             console.log(error);
-//             res.status(500);
-//             res.json(error);
-//           }
-//         }
 
 export { consumerAlbumTokenAllocation, consumerEventTokenAllocation, consumerMerchandiseTokenAllocation };
