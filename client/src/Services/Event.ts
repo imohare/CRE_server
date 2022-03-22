@@ -45,5 +45,4 @@ const getArtistEventByEventAndArtistId = (eventId: number, artistId: number) => 
 
 
 
-
 export { createEvent, getEvents, getEventById, getEventsByArtistId, getArtistEventByEventAndArtistId }
