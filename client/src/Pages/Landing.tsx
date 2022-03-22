@@ -16,8 +16,6 @@ const LandingPage: React.FunctionComponent = () => {
   //public view
   //login popup is set to visible on clicking the login button and to invisible on clicking cancel on Modal component:
   const [isVisible, setIsVisible] = useState(false);
-  //sets the modal to display artist or user-login
-  const [isArtist, setIsArtist] = useState(true);
 
   const toggleLogin = () => {
      setIsVisible(prevVisibility => !prevVisibility)
@@ -31,11 +29,11 @@ const LandingPage: React.FunctionComponent = () => {
       <FormContextProvider>
       {
         isVisible
-        ?  <LoginModal onCancel={toggleLogin} isVisible={isVisible} isArtist={isArtist} setIsArtist={setIsArtist} />
+        ?  <LoginModal onCancel={toggleLogin} isVisible={isVisible}  />
         : null
         }
         </FormContextProvider>
-      <Button type="primary" onClick={ toggleLogin }>login</Button>
+      <Button type="primary" onClick={ toggleLogin }>sign up</Button>
       <p>for user and artist with personalised components at the top</p>
       <p>user view with recommendations</p>
       <Link to="/event">each link to an event </Link>/<Link to="/artist"> artist</Link>

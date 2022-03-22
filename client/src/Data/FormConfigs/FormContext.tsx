@@ -27,25 +27,55 @@ export const FormContextProvider = ({ children }: ContextProps ) => {
     {
       attr: {
         id: 'username',
+        name: 'username',
         key: 'username',
         label: 'Username',
       }, 
-      required: true
+      rules: [
+        {
+          required: true,
+          message: 'Please enter your username!',
+        },
+      ],
+      type: 'text'
     },
     {
       attr: {
         id: 'location',
+        name: 'location',
         key: 'location',
         label: 'Location',
       },
-      required: false
+      rules: [
+        {
+          required: false,
+        },
+      ],
+      type: 'number'
     }
   ];
+  const artistConfig = [
+    {
+      attr: {
+        id: 'artistname',
+        name: 'artistname',
+        key: 'artistname',
+        label: 'Name',
+      }, 
+      rules: [
+        {
+          required: true,
+          message: 'Please select time!',
+        },
+      ],
+      type: 'text'
+    },
+  ]
   
+  //wrap the formtemplate in the parent component
   return (
-    <FormContext.Provider value={{ consumerInfo, setConsumerInfo, consumerConfig }}>
+    <FormContext.Provider value={{ consumerInfo, setConsumerInfo, consumerConfig, artistConfig }}>
       { children }
-    
     </FormContext.Provider>
   ); 
 }
