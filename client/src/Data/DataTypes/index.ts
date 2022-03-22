@@ -1,6 +1,6 @@
-import { IArtist } from '../../DataTypes/ArtistTypes';
-import { IAlbum } from 'Data/DataTypes/AlbumTypes';
-import { IConsumer } from 'DataTypes//ConsumerTypes';
-import { IEvent } from 'DataTypes/EventType';
+import { IArtist } from './ArtistTypes';
+import { IAlbum } from './AlbumTypes';
+import { IConsumer } from './ConsumerTypes';
+import { IEvent } from './EventType';
 
 export type { IArtist, IAlbum, IConsumer, IEvent }

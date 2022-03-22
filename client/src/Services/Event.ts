@@ -1,4 +1,4 @@
-import { IEvent } from "DataTypes/EventType"
+import { IEvent } from "../Data/DataTypes/EventType"
 
 const BASE_URL = 'http://localhost:3001';
 

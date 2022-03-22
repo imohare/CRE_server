@@ -1,6 +1,6 @@
 //imports event type from DataTypes EventTypes
 //gets all events and saves them to the EventContext once a minute or so
-import { IArtist } from "DataTypes"
+import { IArtist } from "../Data/DataTypes"
 
 
 //BASEURI

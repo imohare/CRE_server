@@ -1,4 +1,4 @@
-import { IConsumer } from "DataTypes";
+import { IConsumer } from "../Data/DataTypes";
 
 //BASEURI
 const BASE_URL = 'http://localhost:3001'

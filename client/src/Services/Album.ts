@@ -1,4 +1,4 @@
-import { IAlbum } from "DataTypes"
+import { IAlbum } from "../Data/DataTypes"
 const BASE_URL = 'http://localhost:3001'
 
 //create album
