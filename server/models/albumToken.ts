@@ -8,6 +8,7 @@ import {
 } from 'sequelize';
 
 import { Album } from './album';
+import { Artist } from './artist';
 import { Consumer } from './consumer';
 
 class AlbumToken extends Model {
@@ -21,6 +22,10 @@ class AlbumToken extends Model {
   public createdAt!: Date;
   public updatedAt!: Date;
 
+  // Artist association with methods
+  public getArtist!: BelongsToGetAssociationMixin<Artist>;
+  public setArtist!: BelongsToSetAssociationMixin<Artist, number>;
+
   // Album association with methods
   public getAlbum!: BelongsToGetAssociationMixin<Album>;
   public setAlbum!: BelongsToSetAssociationMixin<Album, number>;
@@ -30,10 +35,12 @@ class AlbumToken extends Model {
   public setConsumer!: BelongsToSetAssociationMixin<Consumer, number>;
 
   // Populated for inclusions
+  public readonly ArtistId!: Artist;
   public readonly AlbumId!: Album;
   public readonly ConsumerId!: Consumer;
 
   public static associations: {
+    ArtistId: Association<Artist, AlbumToken>;
     AlbumId: Association<Album, AlbumToken>;
     ConsumerId: Association<Consumer, AlbumToken>;
   }

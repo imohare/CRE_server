@@ -42,7 +42,7 @@ router.get('/getArtistMerchandises/:artistId', getArtistMerchandises);
 router.get('/getArtistMerchandise/:merchandiseId/:artistId', getArtistMerchandise);
 
 // Album Token 
-router.post('/createAlbumToken/:albumId', createAlbumToken);
+router.post('/createAlbumToken/:artistId/:albumId', createAlbumToken);
 router.get('/getAlbumToken/:tokenId', getAlbumToken);
 router.get('/getAlbumTokens', getAlbumTokens);
 router.get('/getConsumerAlbumTokens/:albumId/:consumerId', getConsumerAlbumTokens);

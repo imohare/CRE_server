@@ -27,16 +27,21 @@ async function getAlbumToken(req: Request, res: Response) {
 
 async function createAlbumToken(req: Request, res: Response) {
   try {
-    if (!req.params.albumId) {
+    if (!req.params.albumId || !req.params.artistId) {
       res.status(400);
       res.json('incorrect schema for request');
     } else {
+      const artistId = req.params.artistId
       const albumId = req.params.albumId;
       const album = await Album.findByPk(albumId);
+      const artist = await Artist.findByPk(artistId);
 
       if (!album) {
         res.status(400);
         res.json('Album not found');
+      } else if (!artist) {
+        res.status(400);
+        res.json('Artist not found');
       } else {
         const _token = AlbumToken.build(
           {
@@ -47,8 +52,8 @@ async function createAlbumToken(req: Request, res: Response) {
           }
           );
           await _token.save();
+          await _token.setArtist(artist);
           await _token.setAlbum(album);
-          console.log('token', _token)
             res.json(_token);
             res.status(201);
       }
