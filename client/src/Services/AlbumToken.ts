@@ -1,5 +1,4 @@
 import { IAlbumToken } from "Data/DataTypes"
-import { resolveSoa } from "dns"
 const BASE_URL = 'http://localhost:3001'
 
 //postAlbumToken
