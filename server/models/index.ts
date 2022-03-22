@@ -7,6 +7,7 @@ import { Event } from './event';
 import { EventToken } from './eventToken';
 import { Merchandise } from './merchandise';
 import { MerchandiseToken } from './merchandiseToken';
+import { Points } from './points';
 
 const HOST = process.env.HOST || '';
 const USER = process.env.USER || '';
@@ -24,7 +25,7 @@ export const sequelize = new Sequelize('cre', USER, PASSWORD, {
 });
 
 // Initialise each model 
-let models = [Artist, Album, Consumer, Event, Merchandise, AlbumToken, EventToken, MerchandiseToken];
+let models = [Artist, Album, AlbumToken, Consumer, Event, EventToken, Merchandise, MerchandiseToken, Points];
 models.forEach((model) => model.initialize(sequelize));
 
 // Associations
@@ -40,7 +41,19 @@ Artist.hasMany(Event);
 Merchandise.belongsTo(Artist);
 Artist.hasMany(Merchandise);
 
-// Album - Token associations
+// Artist - AlbumToken associations
+AlbumToken.belongsTo(Artist);
+Artist.hasMany(AlbumToken);
+
+// Artist - EventToken associations
+EventToken.belongsTo(Artist);
+Artist.hasMany(EventToken);
+
+// Artist - MerchandiseToken associations
+MerchandiseToken.belongsTo(Artist);
+Artist.hasMany(MerchandiseToken);
+
+// Album - AlbumToken associations
 AlbumToken.belongsTo(Album);
 Album.hasMany(AlbumToken);
 
@@ -64,6 +77,14 @@ Consumer.hasMany(EventToken);
 MerchandiseToken.belongsTo(Consumer);
 Consumer.hasMany(MerchandiseToken);
 
+// Points - Consumer associations
+Points.belongsTo(Consumer);
+Consumer.hasMany(Points);
+
+// Points - Artist associations
+Points.belongsTo(Artist);
+Artist.hasMany(Points);
+
 //Create database tables
 try {
     sequelize.sync({ force: false });
@@ -71,4 +92,4 @@ try {
     console.error('Unable to connect to the database:', error);
 };
 
-export { sequelize as Database, Artist, Album, AlbumToken, Consumer, Event, EventToken, Merchandise, MerchandiseToken};
+export { sequelize as Database, Artist, Album, AlbumToken, Consumer, Event, EventToken, Merchandise, MerchandiseToken, Points};

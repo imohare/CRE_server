@@ -6,7 +6,6 @@ async function createConsumer(req: Request, res: Response) {
     eth_address: req.body.eth_address,
     username: req.body.username,
     location: req.body.location,
-    points: 0,
     email: req.body.email,
   })
   res.send(_consumer);

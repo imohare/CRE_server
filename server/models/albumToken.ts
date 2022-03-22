@@ -9,6 +9,7 @@ import {
 
 
 import { Album } from './album';
+import { Artist } from './artist';
 import { Consumer } from './consumer';
 
 class AlbumToken extends Model {
@@ -22,17 +23,15 @@ class MerchandiseToken extends Model {
   public consumer_points!: number;
   public edition_number!: number;
   public total_editions!: number;
-  public token_type!: string;
 
   // Auto-generated
   public id!: number;
   public createdAt!: Date;
   public updatedAt!: Date;
 
-
-  // Merchandise association with methods
-  public getMerchandise!: BelongsToGetAssociationMixin<Merchandise>;
-  public setMerchandise!: BelongsToSetAssociationMixin<Merchandise, number>;
+  // Artist association with methods
+  public getArtist!: BelongsToGetAssociationMixin<Artist>;
+  public setArtist!: BelongsToSetAssociationMixin<Artist, number>;
 
   // Album association with methods
   public getAlbum!: BelongsToGetAssociationMixin<Album>;
@@ -43,11 +42,12 @@ class MerchandiseToken extends Model {
   public setConsumer!: BelongsToSetAssociationMixin<Consumer, number>;
 
   // Populated for inclusions
-
+  public readonly ArtistId!: Artist;
   public readonly AlbumId!: Album;
   public readonly ConsumerId!: Consumer;
 
   public static associations: {
+    ArtistId: Association<Artist, AlbumToken>;
     AlbumId: Association<Album, AlbumToken>;
     ConsumerId: Association<Consumer, AlbumToken>;
 
@@ -79,10 +79,6 @@ class MerchandiseToken extends Model {
           type: DataTypes.INTEGER,
           allowNull: false
         },
-        token_type: {
-          type: DataTypes.STRING,
-          allowNull: false
-        }
       },
       { sequelize })
   }

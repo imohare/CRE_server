@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
-
-import { EventToken, Event, Consumer } from "../models";
+import { Artist, EventToken, Event, Consumer } from "../models";
 
 
 async function getEventTokens(req: Request, res: Response) {
@@ -29,30 +28,34 @@ async function getEventToken(req: Request, res: Response) {
 
 async function createEventToken(req: Request, res: Response) {
   try {
-    if (!req.params.eventId) {
+    if (!req.params.eventId || !req.params.artistId) {
       res.status(400);
       res.json('incorrect schema for request');
     } else {
+      const artistId = req.params.artistId;
       const eventId = req.params.eventId;
       const event = await Event.findByPk(eventId);
+      const artist = await Artist.findByPk(artistId);
 
       if (!event) {
         res.status(400);
         res.json('Event not found');
+      } else if (!artist) {
+        res.status(400);
+        res.json('Artist not found');
       } else {
-        console.log("re.body", req.body)
         const _token = EventToken.build(
           {
             image: req.body.image,
             consumer_points: req.body.consumer_points,
             edition_number: req.body.edition_number,
             total_editions: req.body.total_editions,
-            token_type: req.body.token_type
           }
+
         );
         await _token.save();
         await _token.setEvent(event);
-        console.log('token', _token)
+        await _token.setArtist(artist);
         res.json(_token);
         res.status(201);
       }
@@ -64,7 +67,31 @@ async function createEventToken(req: Request, res: Response) {
   }
 }
 
-async function getArtistEventTokens(req: Request, res: Response) { }
+async function getArtistEventsTokens(req: Request, res: Response) {
+  try {
+    if (!req.params.artistId) {
+      res.status(400);
+      res.json('incorrect schema for request');
+    } else {
+
+      const artistId = req.params.artistId;
+      const artist = await Artist.findByPk(artistId);
+
+      if (!artist) {
+        res.status(400);
+        res.json('Artist not found');
+      } else {
+        const _tokens = await EventToken.findAll({ where: { ArtistId: artistId } });
+        res.json(_tokens);
+      }
+    }
+  }
+  catch (error) {
+    console.log('error');
+    res.status(500);
+    res.json(error);
+  }
+}
 
 async function getConsumerEventTokens(req: Request, res: Response) {
   try {
@@ -98,4 +125,4 @@ async function getConsumerEventTokens(req: Request, res: Response) {
   }
 }
 
-export { getEventTokens, getEventToken, createEventToken, getArtistEventTokens, getConsumerEventTokens }
+export { getEventTokens, getEventToken, createEventToken, getArtistEventsTokens, getConsumerEventTokens }

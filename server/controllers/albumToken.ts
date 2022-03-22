@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { AlbumToken, Album, Consumer } from "../models";
+import { AlbumToken, Album, Artist, Consumer } from "../models";
 
 async function getAlbumTokens(req: Request, res: Response) {
   try {
@@ -28,16 +28,21 @@ async function getAlbumToken(req: Request, res: Response) {
 
 async function createAlbumToken(req: Request, res: Response) {
   try {
-    if (!req.params.albumId) {
+    if (!req.params.albumId || !req.params.artistId) {
       res.status(400);
       res.json('incorrect schema for request');
     } else {
+      const artistId = req.params.artistId
       const albumId = req.params.albumId;
+      const artist = await Artist.findByPk(artistId);
       const album = await Album.findByPk(albumId);
 
       if (!album) {
         res.status(400);
         res.json('Album not found');
+      } else if (!artist) {
+        res.status(400);
+        res.json('Artist not found');
       } else {
 
         const _token = AlbumToken.build(
@@ -46,12 +51,12 @@ async function createAlbumToken(req: Request, res: Response) {
             consumer_points: req.body.consumer_points,
             edition_number: req.body.edition_number,
             total_editions: req.body.total_editions,
-            token_type: req.body.token_type
           }
+
         );
         await _token.save();
+        await _token.setArtist(artist);
         await _token.setAlbum(album);
-        console.log('token', _token)
         res.json(_token);
         res.status(201);
       }
@@ -63,8 +68,31 @@ async function createAlbumToken(req: Request, res: Response) {
   }
 }
 
-async function getArtistAlbumTokens(req: Request, res: Response) { }
+async function getArtistAlbumsTokens(req: Request, res: Response) {
+  try {
+    if (!req.params.artistId) {
+      res.status(400);
+      res.json('incorrect schema for request');
+    } else {
 
+      const artistId = req.params.artistId;
+      const artist = await Artist.findByPk(artistId);
+
+      if (!artist) {
+        res.status(400);
+        res.json('Artist not found');
+      } else {
+        const _tokens = await AlbumToken.findAll({ where: { ArtistId: artistId } });
+        res.json(_tokens);
+      }
+    }
+  }
+  catch (error) {
+    console.log('error');
+    res.status(500);
+    res.json(error);
+  }
+}
 
 async function getConsumerAlbumTokens(req: Request, res: Response) {
   try {
@@ -100,4 +128,4 @@ async function getConsumerAlbumTokens(req: Request, res: Response) {
 
 
 
-export { getAlbumTokens, getAlbumToken, createAlbumToken, getArtistAlbumTokens, getConsumerAlbumTokens }
+export { getAlbumTokens, getAlbumToken, createAlbumToken, getConsumerAlbumTokens, getArtistAlbumsTokens }
