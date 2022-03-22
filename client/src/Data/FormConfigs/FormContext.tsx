@@ -27,7 +27,7 @@ export const FormContextProvider = ({ children }: ContextProps ) => {
     {
       attr: {
         id: 'username',
-        name: 'username',
+        key: 'username',
         label: 'Username',
       }, 
       required: true
@@ -35,7 +35,7 @@ export const FormContextProvider = ({ children }: ContextProps ) => {
     {
       attr: {
         id: 'location',
-        name: 'location',
+        key: 'location',
         label: 'Location',
       },
       required: false
@@ -44,7 +44,7 @@ export const FormContextProvider = ({ children }: ContextProps ) => {
   
   return (
     <FormContext.Provider value={{ consumerInfo, setConsumerInfo, consumerConfig }}>
-      {children}
+      { children }
     
     </FormContext.Provider>
   ); 

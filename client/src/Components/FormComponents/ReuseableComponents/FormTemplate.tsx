@@ -1,5 +1,6 @@
 //react
 //antd imports
+import { Form, Input } from 'antd';
 //components
 //styling
 
@@ -11,8 +12,16 @@ interface Props {
 }
 
 const FormTemplate = ({ config }: Props) => {
- return config ? (
-    <div>{ config[0].required ? <p>field is required</p> : <p>you dumbo!</p> }</div>
+  return config ? (
+    <Form>
+      {config.map(item => (
+        <Form.Item {...item.attr}>
+          <Input></Input>
+        </Form.Item>
+      ))
+      
+      }
+   </Form>
   ) 
   : (<div>nope</div>)
 }

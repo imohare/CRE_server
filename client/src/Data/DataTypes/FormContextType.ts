@@ -1,6 +1,6 @@
 interface IAttributes {
   id: string;
-  name: string;
+  key: string;
   label: string;
 }
 interface IConsumerForm {
