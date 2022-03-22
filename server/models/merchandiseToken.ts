@@ -25,7 +25,7 @@ class MerchandiseToken extends Model {
   // Artist association
   public getArtist!: BelongsToGetAssociationMixin<Artist>;
   public setArtist!: BelongsToSetAssociationMixin<Artist, number>;
-  
+
   // Merchandise association
   public getMerchandise!: BelongsToGetAssociationMixin<Merchandise>;
   public setMerchandise!: BelongsToSetAssociationMixin<Merchandise, number>;

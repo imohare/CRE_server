@@ -7,11 +7,18 @@ import {
   BelongsToGetAssociationMixin,
 } from 'sequelize';
 
+
 import { Album } from './album';
 import { Artist } from './artist';
 import { Consumer } from './consumer';
 
 class AlbumToken extends Model {
+
+import { Merchandise } from './merchandise';
+import { Consumer } from './consumer';
+
+class MerchandiseToken extends Model {
+
   public image?: string;
   public consumer_points!: number;
   public edition_number!: number;
@@ -43,6 +50,14 @@ class AlbumToken extends Model {
     ArtistId: Association<Artist, AlbumToken>;
     AlbumId: Association<Album, AlbumToken>;
     ConsumerId: Association<Consumer, AlbumToken>;
+
+  public readonly associated_to_merchandise!: Merchandise;
+  public readonly owned_by?: Consumer;
+
+  public static associations: {
+    associated_to_merchandise: Association<Merchandise, MerchandiseToken>;
+    owned_by: Association<MerchandiseToken, Consumer>;
+
   }
 
   public static initialize(sequelize: Sequelize) {
@@ -68,4 +83,6 @@ class AlbumToken extends Model {
       { sequelize })
   }
 }
+
+export { MerchandiseToken };
 export { AlbumToken };

@@ -30,7 +30,9 @@ class EventToken extends Model {
   public getEvent!: BelongsToGetAssociationMixin<Event>;
   public setEvent!: BelongsToSetAssociationMixin<Event, number>;
 
+
   // Consumer association
+
   public getConsumer!: BelongsToGetAssociationMixin<Consumer>;
   public setConsumer!: BelongsToSetAssociationMixin<Consumer, number>;
 

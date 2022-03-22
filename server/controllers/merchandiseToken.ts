@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { Artist, Consumer, MerchandiseToken, Merchandise } from "../models";
 
+
 async function getMerchandiseTokens(req: Request, res: Response) {
   try {
     const _tokens: MerchandiseToken[] = await MerchandiseToken.findAll();
@@ -33,7 +34,7 @@ async function createMerchandiseToken(req: Request, res: Response) {
     } else {
       const artistId = req.params.artistId
       const merchandiseId = req.params.merchandiseId;
-      const artist = await Artist.findByPk(artistId);      
+      const artist = await Artist.findByPk(artistId);
       const merchandise = await Merchandise.findByPk(merchandiseId);
 
       if (!merchandise) {
@@ -51,12 +52,12 @@ async function createMerchandiseToken(req: Request, res: Response) {
             edition_number: req.body.edition_number,
             total_editions: req.body.total_editions,
           }
-          );
-          await _token.save();
-          await _token.setArtist(artist);
-          await _token.setMerchandise(merchandise);
-            res.json(_token);
-            res.status(201);
+        );
+        await _token.save();
+        await _token.setArtist(artist);
+        await _token.setMerchandise(merchandise);
+        res.json(_token);
+        res.status(201);
       }
     }
   } catch (error) {
@@ -65,6 +66,7 @@ async function createMerchandiseToken(req: Request, res: Response) {
     res.json(error);
   }
 }
+
 
 
 async function getArtistMerchandisesTokens(req: Request, res: Response) {
@@ -79,9 +81,9 @@ async function getArtistMerchandisesTokens(req: Request, res: Response) {
 
       if (!artist) {
         res.status(400);
-        res.json('Artist not found');       
+        res.json('Artist not found');
       } else {
-        const _tokens = await MerchandiseToken.findAll({where:{ ArtistId: artistId }});
+        const _tokens = await MerchandiseToken.findAll({ where: { ArtistId: artistId } });
         res.json(_tokens);
       }
     }
@@ -111,10 +113,10 @@ async function getConsumerMerchandiseTokens(req: Request, res: Response) {
       } else if (!consumer) {
         res.status(400);
         res.json('Consumer not found');
-       } else {
-         const _tokens = await MerchandiseToken.findAll({where: {MerchandiseId: merchandiseId, ConsumerId: consumerId} });
-         res.json(_tokens);
-         res.status(201);
+      } else {
+        const _tokens = await MerchandiseToken.findAll({ where: { MerchandiseId: merchandiseId, ConsumerId: consumerId } });
+        res.json(_tokens);
+        res.status(201);
       }
     }
   }

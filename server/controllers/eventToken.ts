@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { Artist, EventToken, Event, Consumer } from "../models";
 
+
 async function getEventTokens(req: Request, res: Response) {
   try {
     const _tokens: EventToken[] = await EventToken.findAll();
@@ -50,12 +51,13 @@ async function createEventToken(req: Request, res: Response) {
             edition_number: req.body.edition_number,
             total_editions: req.body.total_editions,
           }
-          );
-          await _token.save();
-          await _token.setEvent(event);
-          await _token.setArtist(artist);
-            res.json(_token);
-            res.status(201);
+
+        );
+        await _token.save();
+        await _token.setEvent(event);
+        await _token.setArtist(artist);
+        res.json(_token);
+        res.status(201);
       }
     }
   } catch (error) {
@@ -77,9 +79,9 @@ async function getArtistEventsTokens(req: Request, res: Response) {
 
       if (!artist) {
         res.status(400);
-        res.json('Artist not found');       
+        res.json('Artist not found');
       } else {
-        const _tokens = await EventToken.findAll({where:{ ArtistId: artistId }});
+        const _tokens = await EventToken.findAll({ where: { ArtistId: artistId } });
         res.json(_tokens);
       }
     }
@@ -109,10 +111,10 @@ async function getConsumerEventTokens(req: Request, res: Response) {
       } else if (!consumer) {
         res.status(400);
         res.json('Consumer not found');
-       } else {
-         const _tokens = await EventToken.findAll({where: {EventId: eventId, ConsumerId: consumerId} });
-         res.json(_tokens);
-         res.status(201);
+      } else {
+        const _tokens = await EventToken.findAll({ where: { EventId: eventId, ConsumerId: consumerId } });
+        res.json(_tokens);
+        res.status(201);
       }
     }
   }

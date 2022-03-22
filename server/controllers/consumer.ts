@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Consumer } from "../models";
+import { Consumer, sequelize } from "../models";
 
 async function createConsumer(req: Request, res: Response) {
   const _consumer = await Consumer.create({
@@ -22,5 +22,6 @@ async function getConsumer(req: Request, res: Response) {
     res.json(error);
   }
 }
+
 
 export { createConsumer, getConsumer }

@@ -1,13 +1,14 @@
 import {
-  Association, 
-  DataTypes, 
-  Model, 
-  Sequelize, 
-  HasManyGetAssociationsMixin, 
-  HasManyHasAssociationMixin, 
+  Association,
+  DataTypes,
+  Model,
+  Sequelize,
+  HasManyGetAssociationsMixin,
+  HasManyHasAssociationMixin,
   HasManyAddAssociationMixin
 } from 'sequelize';
 
+//add for associations later
 import { Album } from './album';
 import { Merchandise } from './merchandise';
 import { Event } from './event';
@@ -76,7 +77,7 @@ class Artist extends Model {
             msg: 'An artist with this username already exists.'
           }
         },
-        website: {          
+        website: {
           type: DataTypes.STRING,
         },
         instagram: {
@@ -91,8 +92,8 @@ class Artist extends Model {
         spotify: {
           type: DataTypes.STRING,
         }
-      }, 
-    {sequelize})
+      },
+      { sequelize })
   }
 }
 export { Artist };
