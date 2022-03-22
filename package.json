@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "react-router": "^6.2.2",
+    "react-router-dom": "^6.2.2"
+  },
+  "name": "cre",
+  "description": "Web3 Token Earning Social Media Network",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imohare/CRE.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/imohare/CRE/issues"
+  },
+  "homepage": "https://github.com/imohare/CRE#readme"
+}
