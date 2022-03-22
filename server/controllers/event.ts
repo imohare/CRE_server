@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Event, Artist } from "../models";
+import { Event, Artist, EventToken } from "../models";
 
 async function getEvents(req: Request, res: Response) {
   try {
@@ -14,7 +14,6 @@ async function getEvents(req: Request, res: Response) {
 }
 
 async function getEvent(req: Request, res: Response) {
-  console.log("in get event");
   try {
     const _event = await Event.findByPk(req.params.eventId);
     console.log(_event, "event");
@@ -28,7 +27,6 @@ async function getEvent(req: Request, res: Response) {
 }
 
 async function createEvent(req: Request, res: Response) {
-  console.log("in create Event");
   try {
     if (!req.params.artistId) {
       res.send(400);
@@ -122,4 +120,12 @@ async function getArtistEvent(req: Request, res: Response) {
   }
  }
 
-export { createEvent, getEvents, getEvent, getArtistEvents, getArtistEvent }
+ async function deleteEvent(req: Request, res: Response) {
+  const eventId = req.params.eventId;
+  await EventToken.destroy({where: {EventId: eventId}});
+  await Event.destroy({where: {id: eventId}});
+  res.status(201);
+  res.json();
+ }
+
+export { createEvent, getEvents, getEvent, getArtistEvents, getArtistEvent, deleteEvent }

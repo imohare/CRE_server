@@ -1,21 +1,29 @@
 import express from 'express';
 const router = express.Router();
 
-const { createArtist, getArtist, getArtists } = require('./controllers/artist.ts');
-const { createAlbum, getAlbum, getAlbums, getArtistAlbums, getArtistAlbum } = require('./controllers/album.ts');
-const { createEvent, getEvent, getEvents, getArtistEvents, getArtistEvent } = require('./controllers/event.ts')
-const { createMerchandise, getMerchandises, getMerchandise, getArtistMerchandises, getArtistMerchandise } = require('./controllers/merchandise.ts');
+const { createArtist, getArtist, getArtists, deleteArtist } = require('./controllers/artist.ts');
 
-const { createConsumer, getConsumer } = require('./controllers/consumer.ts');
+const { createAlbum, getAlbum, getAlbums, getArtistAlbums, getArtistAlbum, deleteAlbum } = require('./controllers/album.ts');
+
+const { createEvent, getEvent, getEvents, getArtistEvents, getArtistEvent, deleteEvent } = require('./controllers/event.ts')
+
+const { createMerchandise, getMerchandises, getMerchandise, getArtistMerchandises, getArtistMerchandise, deleteMerchandise } = require('./controllers/merchandise.ts');
+
+const { createConsumer, getConsumer, deleteConsumer } = require('./controllers/consumer.ts');
+
 const { createAlbumToken, getAlbumToken, getAlbumTokens, getConsumerAlbumTokens, getArtistAlbumsTokens } = require('./controllers/albumToken.ts');
+
 const { createMerchandiseToken, getMerchandiseToken, getMerchandiseTokens, getConsumerMerchandiseTokens, getArtistMerchandisesTokens } = require('./controllers/merchandiseToken.ts');
+
 const { createEventToken, getEventToken, getEventTokens, getConsumerEventTokens, getArtistEventsTokens } = require('./controllers/EventToken.ts');
+
 const { albumTokenPurchase, eventTokenPurchase, merchandiseTokenPurchase } = require('./controllers/purchasing.ts');
 
 // Artist
 router.post('/createArtist', createArtist);
 router.get('/getArtists', getArtists);
 router.get('/getArtist/:artistId', getArtist);
+router.delete('/deleteArtist/:artistId', deleteArtist);
 
 // Album
 router.post('/createAlbum/:artistId', createAlbum);
@@ -23,10 +31,12 @@ router.get('/getAlbums', getAlbums);
 router.get('/getAlbum/:albumId', getAlbum);
 router.get('/getArtistAlbums/:artistId', getArtistAlbums);
 router.get('/getArtistAlbum/:albumId/:artistId', getArtistAlbum);
+router.delete('/deleteAlbum/:albumId', deleteAlbum);
 
 // Consumer 
 router.post('/createConsumer', createConsumer);
 router.get('/getConsumer/:consumerId', getConsumer);
+router.delete('/deleteConsumer/:consumerId', deleteConsumer);
 
 // Event
 router.post('/createEvent/:artistId', createEvent);
@@ -34,6 +44,7 @@ router.get('/getEvents', getEvents);
 router.get('/getEvent/:eventId', getEvent);
 router.get('/getArtistEvents/:artistId', getArtistEvents);
 router.get('/getArtistEvent/:eventId/:artistId', getArtistEvent);
+router.delete('/deleteEvent/:eventId', deleteEvent);
 
 // Merchandise
 router.post('/createMerchandise/:artistId', createMerchandise);
@@ -41,6 +52,7 @@ router.get('/getMerchandises', getMerchandises);
 router.get('/getMerchandise/:merchandiseId', getMerchandise);
 router.get('/getArtistMerchandises/:artistId', getArtistMerchandises);
 router.get('/getArtistMerchandise/:merchandiseId/:artistId', getArtistMerchandise);
+router.delete('/deleteMerchandise/:merchandiseId', deleteMerchandise);
 
 // Album Token 
 router.post('/createAlbumToken/:artistId/:albumId', createAlbumToken);
@@ -67,6 +79,5 @@ router.get('/getArtistEventsTokens/:artistId', getArtistEventsTokens);
 router.patch('/albumTokenPurchase/:artistId/:consumerId/:albumTokenId', albumTokenPurchase);
 router.patch('/eventTokenPurchase/:artistId/:consumerId/:eventTokenId', eventTokenPurchase);
 router.patch('/merchandiseTokenPurchase/:artistId/:consumerId/:merchandiseTokenId', merchandiseTokenPurchase);
-
 
 export { router };
