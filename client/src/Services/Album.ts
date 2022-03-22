@@ -19,14 +19,14 @@ const createAlbum = (album: IAlbum, artistId: number) => {
 //get all Albums
 
 const getAllAlbums = () => {
-    fetch(`${BASE_URL}/getAlbums`)
+    return fetch(`${BASE_URL}/getAlbums`)
         .then(res => res.json())
         .catch(err => console.log(err, "error"))
 }
 
 //getAlbumById
 const getAlbumById = (albumId: number) => {
-    fetch(`${BASE_URL}/getAlbum/${albumId}`)
+    return fetch(`${BASE_URL}/getAlbum/${albumId}`)
         .then(res => res.json())
         .catch(err => console.log(err, "error"))
 }
@@ -35,7 +35,7 @@ const getAlbumById = (albumId: number) => {
 //getAllAlbumsOfArtist
 
 const getAllAlbumsOfArtist = (artistId: number) => {
-    fetch(`${BASE_URL}/getArtistAlbums/${artistId}`)
+    return fetch(`${BASE_URL}/getArtistAlbums/${artistId}`)
         .then(res => res.json)
         .catch(err => console.log(err, "error"))
 }
@@ -43,7 +43,7 @@ const getAllAlbumsOfArtist = (artistId: number) => {
 
 //getThisAlbumByArtist
 const getThisAlbumByArtist = (albumId: number, artistId: number) => {
-    fetch(`${BASE_URL}/getArtistAlbum/${albumId}/${artistId}`)
+    return fetch(`${BASE_URL}/getArtistAlbum/${albumId}/${artistId}`)
         .then(res => res.json())
         .catch(err => console.log(err, "error"))
 }

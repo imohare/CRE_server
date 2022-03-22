@@ -27,12 +27,13 @@ class EventToken extends Model {
   public setEvent!: BelongsToSetAssociationMixin<Event, number>;
 
   // Consumer association with methods
-  public getConsumer?: BelongsToGetAssociationMixin<Consumer>;
-  public setConsumer?: BelongsToSetAssociationMixin<Consumer, number>;
+
+  public getConsumer!: BelongsToGetAssociationMixin<Consumer>;
+  public setConsumer!: BelongsToSetAssociationMixin<Consumer, number>;
 
   // Populated for inclusions
   public readonly associated_to_event!: Event;
-  public readonly owned_by?: Consumer;
+  public readonly owned_by!: Consumer;
 
   public static associations: {
     associated_to_event: Association<Event, EventToken>;
