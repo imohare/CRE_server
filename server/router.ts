@@ -9,7 +9,7 @@ const { createConsumer, getConsumer } = require('./controllers/consumer.ts');
 const { createAlbumToken, getAlbumToken, getAlbumTokens, getConsumerAlbumTokens, getArtistAlbumsTokens } = require('./controllers/albumToken.ts');
 const { createMerchandiseToken, getMerchandiseToken, getMerchandiseTokens, getConsumerMerchandiseTokens, getArtistMerchandisesTokens } = require('./controllers/merchandiseToken.ts');
 const { createEventToken, getEventToken, getEventTokens, getConsumerEventTokens, getArtistEventsTokens } = require('./controllers/EventToken.ts');
-const { consumerAlbumTokenAllocation, consumerEventTokenAllocation, consumerMerchandiseTokenAllocation } = require('./controllers/purchasing.ts');
+const { albumTokenPurchase, eventTokenPurchase, consumerMerchandiseTokenAllocation } = require('./controllers/purchasing.ts');
 
 // Artist
 router.post('/createArtist', createArtist);
@@ -63,8 +63,8 @@ router.get('/getConsumerEventTokens/:eventId/:consumerId', getConsumerEventToken
 router.get('/getArtistEventsTokens/:artistId', getArtistEventsTokens);
 
 // Purchasing
-router.patch('/consumerAlbumTokenAllocation/:consumerId/:albumTokenId', consumerAlbumTokenAllocation);
-router.patch('/consumerEventTokenAllocation/:artistId/:consumerId/:eventTokenId', consumerEventTokenAllocation);
+router.patch('/albumTokenPurchase/:artistId/:consumerId/:albumTokenId', albumTokenPurchase);
+router.patch('/eventTokenPurchase/:artistId/:consumerId/:eventTokenId', eventTokenPurchase);
 router.patch('/consumerMerchandiseTokenAllocation/:consumerId/:merchandiseTokenId', consumerMerchandiseTokenAllocation);
 
 export { router };
