@@ -7,6 +7,7 @@ import {
   BelongsToGetAssociationMixin,
 } from 'sequelize';
 
+import { Artist } from './artist';
 import { Merchandise } from './merchandise';
 import { Consumer } from './consumer';
 
@@ -21,21 +22,27 @@ class MerchandiseToken extends Model {
   public createdAt!: Date;
   public updatedAt!: Date;
 
-  // Merchandise association with methods
+  // Artist association
+  public getArtist!: BelongsToGetAssociationMixin<Artist>;
+  public setArtist!: BelongsToSetAssociationMixin<Artist, number>;
+  
+  // Merchandise association
   public getMerchandise!: BelongsToGetAssociationMixin<Merchandise>;
   public setMerchandise!: BelongsToSetAssociationMixin<Merchandise, number>;
 
-  // Consumer association with methods
+  // Consumer association
   public getConsumer!: BelongsToGetAssociationMixin<Consumer>;
   public setConsumer!: BelongsToSetAssociationMixin<Consumer, number>;
 
   // Populated for inclusions
-  public readonly associated_to_merchandise!: Merchandise;
-  public readonly owned_by?: Consumer;
+  public readonly ArtistId!: Artist;
+  public readonly MerchandiseId!: Merchandise;
+  public readonly ConsumerId!: Consumer;
 
   public static associations: {
-    associated_to_merchandise: Association<Merchandise, MerchandiseToken>;
-    owned_by: Association<MerchandiseToken, Consumer>;
+    ArtistId: Association<Artist, MerchandiseToken>;
+    MerchandiseId: Association<Merchandise, MerchandiseToken>;
+    ConsumerId: Association<MerchandiseToken, Consumer>;
   }
 
   public static initialize(sequelize: Sequelize) {

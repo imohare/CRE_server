@@ -22,15 +22,15 @@ class EventToken extends Model {
   public createdAt!: Date;
   public updatedAt!: Date;
 
-  // Event association with methods
+  // Artist association
   public getArtist!: BelongsToGetAssociationMixin<Artist>;
   public setArtist!: BelongsToSetAssociationMixin<Artist, number>;
 
-  // Event association with methods
+  // Event association
   public getEvent!: BelongsToGetAssociationMixin<Event>;
   public setEvent!: BelongsToSetAssociationMixin<Event, number>;
 
-  // Consumer association with methods
+  // Consumer association
   public getConsumer!: BelongsToGetAssociationMixin<Consumer>;
   public setConsumer!: BelongsToSetAssociationMixin<Consumer, number>;
 
