@@ -20,7 +20,7 @@ const App:React.FunctionComponent = () => (
     <GlobalStyles />
     {/* <UserContextProvider> */}
     <Routes>
-      <Route path="/register" element={<RegisterPage />} />
+      {/* <Route path="/register" element={<RegisterPage />} /> */}
       <Route path="/artist" element={<ArtistPage />} />
       <Route path="/event" element={ <EventPage /> } />
       <Route path="/" element={ <LandingPage /> } />
