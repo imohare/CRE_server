@@ -28,7 +28,6 @@ const getEventById = (eventId: number) => {
         .catch((err => console.log(err, "error")))
 }
 
-
 //getEventsByArtist
 const getEventsByArtistId = (artistId: number) => {
     return fetch(`${BASE_URL}/getArtistEvents/${artistId}`)
