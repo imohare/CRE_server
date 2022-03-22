@@ -23,8 +23,6 @@ const getConsumerById = (consumerId: number) => {
         .catch(err => console.log(err))
 }
 
-
-
 //**patch consumer points
 // patchConsumerPoints=()=>{} //not done yet
 
