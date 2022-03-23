@@ -125,4 +125,30 @@ async function getConsumerAlbumTokens(req: Request, res: Response) {
   }
 }
 
-export { getAlbumTokens, getAlbumToken, createAlbumToken, getConsumerAlbumTokens, getArtistAlbumsTokens }
+async function getConsumerAlbumTokensByConsumerId(req: Request, res: Response) {
+  try {
+    if (!req.params.consumerId) {
+      res.status(400);
+      res.json('incorrect schema for request');
+    } else {
+      const consumerId = req.params.consumerId;
+      const consumer = await Consumer.findByPk(consumerId);
+      
+      if (!consumer) {
+        res.status(400);
+        res.json('Consumer not found');
+      } else {
+        const _tokens = await AlbumToken.findAll({ where: {ConsumerId: consumerId } });
+        res.json(_tokens);
+        res.status(201);
+      }
+    }
+  }
+  catch (error) {
+    console.log('error');
+    res.status(500);
+    res.json(error);
+  }
+}
+
+export { getAlbumTokens, getAlbumToken, createAlbumToken, getConsumerAlbumTokens, getArtistAlbumsTokens, getConsumerAlbumTokensByConsumerId }
