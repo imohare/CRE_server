@@ -39,12 +39,7 @@ async function createEvent(req: Request, res: Response) {
         res.status(400);
         res.json('Artist not found');
       } else {
-        const _event = await Event.create({
-          name: req.body.name,
-          address: req.body.address,
-          date: req.body.date,
-          description: req.body.description
-        });
+        const _event = await Event.create(req.body);
 
         _event
           .setArtist(artist)

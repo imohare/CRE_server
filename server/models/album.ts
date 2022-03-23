@@ -18,6 +18,7 @@ class Album extends Model {
   public name!: string;
   public year!: Date;
   public description?: string;
+  public number_of_editions!: number;
 
   //Auto-generated
   public id!: number;
@@ -59,6 +60,10 @@ class Album extends Model {
         },
         description: {
           type: DataTypes.STRING,
+        },
+        number_of_editions: {
+          type: DataTypes.INTEGER,
+          allowNull: false
         }
       },
       { sequelize })

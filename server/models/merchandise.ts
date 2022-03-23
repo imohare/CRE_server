@@ -18,6 +18,7 @@ class Merchandise extends Model {
   public name!: string;
   public type!: string;
   public description?: string;
+  public number_of_editions!: number;
 
   //Auto-generated
   public id!: number;
@@ -59,6 +60,10 @@ class Merchandise extends Model {
         },
         description: {
           type: DataTypes.STRING,
+        }, 
+        number_of_editions: {
+          type: DataTypes.INTEGER,
+          allowNull: false
         }
       }, 
     {sequelize})

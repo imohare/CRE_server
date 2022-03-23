@@ -16,8 +16,6 @@ class AlbumToken extends Model {
 
   public image?: string;
   public consumer_points!: number;
-  public edition_number!: number;
-  public total_editions!: number;
 
   // Auto-generated
   public id!: number;
@@ -55,14 +53,6 @@ class AlbumToken extends Model {
           defaultValue: 'no image uploaded'
         },
         consumer_points: {
-          type: DataTypes.INTEGER,
-          allowNull: false
-        },
-        edition_number: {
-          type: DataTypes.INTEGER,
-          allowNull: false
-        },
-        total_editions: {
           type: DataTypes.INTEGER,
           allowNull: false
         },

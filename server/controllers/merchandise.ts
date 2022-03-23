@@ -38,11 +38,7 @@ async function createMerchandise(req: Request, res: Response) {
         res.status(400);
         res.json('Artist not found');
       } else {
-        const _event = await Merchandise.create({
-          name: req.body.name,
-          type: req.body.type,
-          description: req.body.description
-        });
+        const _event = await Merchandise.create(req.body);
 
         _event
           .setArtist(artist)

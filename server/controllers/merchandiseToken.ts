@@ -45,14 +45,7 @@ async function createMerchandiseToken(req: Request, res: Response) {
         res.json('Artist not found');
       } else {
         console.log("re.body", req.body)
-        const _token = MerchandiseToken.build(
-          {
-            image: req.body.image,
-            consumer_points: req.body.consumer_points,
-            edition_number: req.body.edition_number,
-            total_editions: req.body.total_editions,
-          }
-        );
+        const _token = MerchandiseToken.build(req.body);
         await _token.save();
         await _token.setArtist(artist);
         await _token.setMerchandise(merchandise);

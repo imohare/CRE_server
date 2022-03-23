@@ -44,15 +44,7 @@ async function createEventToken(req: Request, res: Response) {
         res.status(400);
         res.json('Artist not found');
       } else {
-        const _token = EventToken.build(
-          {
-            image: req.body.image,
-            consumer_points: req.body.consumer_points,
-            edition_number: req.body.edition_number,
-            total_editions: req.body.total_editions,
-          }
-
-        );
+        const _token = EventToken.build(req.body);
         await _token.save();
         await _token.setEvent(event);
         await _token.setArtist(artist);
