@@ -12,7 +12,7 @@ import {
   UserPage
 } from './Pages';
 
-import TestPage from './testing/TestPage';
+import TestPage from './Testing/TestPage';
 
 //styling
 import GlobalStyles from './Styles/globalStyles';
