@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { Album, AlbumToken, Artist } from "../models";
+import { createAlbumToken } from "./albumToken";
 
 async function getAlbums(req: Request, res: Response) {
   try {
@@ -38,7 +39,14 @@ async function createAlbum(req: Request, res: Response) {
         res.status(400);
         res.json('Artist not found');
       } else {
-        const _album = await Album.create(req.body);
+        const _album = await Album.create({
+          name: req.body.name,
+          year: req.body.year, 
+          description: req.body.description,
+          number_of_tokens: req.body.number_of_tokens,
+          tokens_image: req.body.tokens_image,
+          tokens_value: req.body.value
+        })
 
         _album
           .setArtist(artist)
@@ -46,10 +54,13 @@ async function createAlbum(req: Request, res: Response) {
             res.status(201);
             res.json(_album);
           })
-
           .catch((err) => {
             res.json('Database Error - createAlbum failing')
           });
+
+          // for (var tokens = 0; tokens < _album.number_of_tokens; tokens++) {
+          //   createAlbumToken(req, res);
+          // }
       }
     }
   } catch (error) {

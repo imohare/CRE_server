@@ -62,7 +62,7 @@ router.get('/getAlbumToken/:tokenId', getAlbumToken);
 router.get('/getAlbumTokens', getAlbumTokens);
 router.get('/getConsumerAlbumTokens/:albumId/:consumerId', getConsumerAlbumTokens);
 router.get('/getArtistAlbumsTokens/:artistId', getArtistAlbumsTokens);
-router.get('/getConsumerAlbumTokensByConsumerId/:consumerId', getConsumerAlbumTokensByConsumerId);
+//router.get('/getConsumerAlbumTokensByConsumerId/:consumerId', getConsumerAlbumTokensByConsumerId);
 
 // Merchandise Token 
 router.post('/createMerchandiseToken/:artistId/:merchandiseId', createMerchandiseToken);
@@ -81,8 +81,8 @@ router.get('/getArtistEventsTokens/:artistId', getArtistEventsTokens);
 router.get('/getConsumerEventTokensByConsumerId/:consumerId', getConsumerEventTokensByConsumerId)
 
 // Purchasing
-router.patch('/albumTokenPurchase/:artistId/:consumerId/:albumTokenId', albumTokenPurchase);
-router.patch('/eventTokenPurchase/:artistId/:consumerId/:eventTokenId', eventTokenPurchase);
-router.patch('/merchandiseTokenPurchase/:artistId/:consumerId/:merchandiseTokenId', merchandiseTokenPurchase);
+router.patch('/albumTokenPurchase/:artistId/:consumerId/:albumTokenId/:albumId', albumTokenPurchase);
+router.patch('/eventTokenPurchase/:artistId/:consumerId/:eventTokenId/:eventId', eventTokenPurchase);
+router.patch('/merchandiseTokenPurchase/:artistId/:consumerId/:merchandiseTokenId/:eventId', merchandiseTokenPurchase);
 
 export { router };

@@ -45,7 +45,7 @@ async function createAlbumToken(req: Request, res: Response) {
         res.json('Artist not found');
       } else {
 
-        const _token = AlbumToken.build(req.body);
+        const _token = AlbumToken.build();
         await _token.save();
         await _token.setArtist(artist);
         await _token.setAlbum(album);

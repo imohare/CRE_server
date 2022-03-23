@@ -14,9 +14,6 @@ import { Consumer } from './consumer';
 
 class AlbumToken extends Model {
 
-  public image?: string;
-  public consumer_points!: number;
-
   // Auto-generated
   public id!: number;
   public createdAt!: Date;
@@ -46,18 +43,7 @@ class AlbumToken extends Model {
   }
 
   public static initialize(sequelize: Sequelize) {
-    this.init(
-      {
-        image: {
-          type: DataTypes.STRING,
-          defaultValue: 'no image uploaded'
-        },
-        consumer_points: {
-          type: DataTypes.INTEGER,
-          allowNull: false
-        },
-      },
-      { sequelize })
+    this.init( {}, { sequelize } )
   }
 }
 
