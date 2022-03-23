@@ -13,7 +13,13 @@ const createConsumer = (consumer: IConsumer) => {
 }
 
 const getConsumerById = (consumerId: number) => {
-    fetch(`${BASE_URL}/getConsumer/${consumerId}`)
+    fetch(`${BASE_URL}/getConsumerById/${consumerId}`)
+        .then(res => res.json())
+        .catch(err => console.log(err))
+}
+
+const getConsumerByUsername = (consumerUsername: string) => {
+    fetch(`${BASE_URL}/getConsumerByUsername/${consumerUsername}`)
         .then(res => res.json())
         .catch(err => console.log(err))
 }
@@ -23,4 +29,4 @@ const deleteConsumer = (consumerId: number) => {
     {method: "DELETE"});
 }
 
-export { createConsumer, getConsumerById, deleteConsumer }
+export { createConsumer, getConsumerById, getConsumerByUsername, deleteConsumer }
