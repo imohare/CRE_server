@@ -15,7 +15,7 @@ async function createArtist(req: Request, res: Response) {
   res.send(_artist);
 }
 
-async function getArtistbyId(req: Request, res: Response) {
+async function getArtistById(req: Request, res: Response) {
   try {
     const _artist = await Artist.findByPk(req.params.artistId);
     res.status(200);
@@ -27,7 +27,7 @@ async function getArtistbyId(req: Request, res: Response) {
   }
  }
 
- async function getArtistbyName(req: Request, res: Response) {
+ async function getArtistByName(req: Request, res: Response) {
   try {
     const _artists = await Artist.findAll({where:{name: req.body.name}});
     res.status(200);
@@ -65,4 +65,4 @@ async function deleteArtist(req: Request, res: Response) {
   res.json();  
 }
 
-export { createArtist, getArtistbyId, getArtists, deleteArtist, getArtistbyName };
+export { createArtist, getArtistById, getArtists, deleteArtist, getArtistByName };

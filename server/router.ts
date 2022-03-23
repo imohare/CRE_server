@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 
-const { createArtist, getArtist, getArtists, deleteArtist } = require('./controllers/artist.ts');
+const { createArtist, getArtistById, getArtistByName, getArtists, deleteArtist } = require('./controllers/artist.ts');
 
 const { createAlbum, getAlbum, getAlbums, getArtistAlbums, getArtistAlbum, deleteAlbum } = require('./controllers/album.ts');
 
@@ -22,7 +22,8 @@ const { albumTokenPurchase, eventTokenPurchase, merchandiseTokenPurchase } = req
 // Artist
 router.post('/createArtist', createArtist);
 router.get('/getArtists', getArtists);
-router.get('/getArtist/:artistId', getArtist);
+router.get('/getArtistById/:artistId', getArtistById);
+router.get('/getArtistByName/:artistName', getArtistByName);
 router.delete('/deleteArtist/:artistId', deleteArtist);
 
 // Album
