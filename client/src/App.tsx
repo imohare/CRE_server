@@ -1,6 +1,6 @@
 //Router
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
+import { UserContextProvider } from './Data/UserContext';
 //Pages
 import {
   LandingPage,
@@ -12,7 +12,7 @@ import {
   UserPage
 } from './Pages';
 
-import TestPage from './testing/TestPage';
+// import TestPage from './testing/TestPage';
 
 //styling
 import GlobalStyles from './Styles/globalStyles';
@@ -22,7 +22,7 @@ import GlobalStyles from './Styles/globalStyles';
 const App:React.FunctionComponent = () => (
   <BrowserRouter>
     <GlobalStyles />
-    {/* <UserContextProvider> */}
+    <UserContextProvider> 
     <Routes>
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/artist/:artistId" element={<ArtistPage />} />
@@ -32,12 +32,12 @@ const App:React.FunctionComponent = () => (
       <Route path="/user/:consumerId" element={<UserPage />} />
 
       {/* delete after development */}
-      <Route path="/test" element={<TestPage />} />
+      {/* <Route path="/test" element={<TestPage />} /> */}
       {/* stop delete after development */}
       
       <Route path="/" element={ <LandingPage /> } />
       </Routes>
-    {/* </UserContextProvider> */}
+    </UserContextProvider>
   </BrowserRouter>
 );
 
