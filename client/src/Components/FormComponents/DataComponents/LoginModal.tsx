@@ -4,7 +4,9 @@ import { Modal, Button } from 'antd'
 //components
 import FormTemplate from '../../ReuseableComponents/FormTemplate';
 //data
-import {  FormContext } from '../../../Data/FormConfigs/FormContext';
+import { FormContext } from '../../../Data/FormConfigs/FormContext';
+//helperfunction from tools
+import { loginWithEthAddress } from '../../../Tools/FormHelpers';
 //styling
 
 //onCancel toggles setVisible in parent component
@@ -45,6 +47,13 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
     setDisplayStage(2);
   
   }
+
+  const loginHandler = (e: React.MouseEvent) => {
+    e.preventDefault();
+    loginWithEthAddress()
+  
+  }
+
     
 const submitUser = () => {
   console.log('logged in')
@@ -59,8 +68,8 @@ const submitUser = () => {
       </>)
     }
     if (displayStage === 1) return <FormTemplate onFormSubmit={ registerFormSubmit } config={isArtist ? artistConfig : consumerConfig} />
-    if (displayStage === 2) return <button>sign up with metamask</button>
-    if (displayStage === 3) return <button>log in with metamask</button>
+      if (displayStage === 2) return <button onClick={ loginHandler }>sign up with metamask</button>
+    if (displayStage === 3) return <button onClick={ loginHandler }>log in with metamask</button>
   }
   
   return (
