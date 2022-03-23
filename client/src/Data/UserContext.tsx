@@ -13,7 +13,9 @@ export const UserContext = createContext<IUserContext>(null!);
 
 export const UserContextProvider = ({ children }: IProps) => {
   const [userType, setUserType] = useState('artist');
-  
+  const [currentId, setCurrentId] = useState(0);
+  const [name, setName] = useState('')
+
   return (
     <UserContext.Provider value={{ userType, setUserType }}>
       { children } 

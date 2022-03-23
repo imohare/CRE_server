@@ -3,7 +3,7 @@ import { useState, useContext, useEffect } from 'react';
 //antd imports
 import { Modal, Button } from 'antd'
 //components
-import FormTemplate from '../ReuseableComponents/FormTemplate';
+import FormTemplate from '../../ReuseableComponents/FormTemplate';
 //data
 import { FormContext } from '../../../Data/FormConfigs/FormContext';
 //styling
@@ -54,7 +54,6 @@ const LoginModal = ({ onCancel, isVisible }: ModalProps) => {
     
   }
 
-
   return (
     <Modal
       visible={isVisible}
@@ -69,4 +68,3 @@ const LoginModal = ({ onCancel, isVisible }: ModalProps) => {
 
 export default LoginModal
 
-export { }
