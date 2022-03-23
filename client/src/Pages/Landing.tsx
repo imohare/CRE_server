@@ -1,5 +1,5 @@
 //react
-import { Component, useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 //antd imports
 import { Button } from 'antd';
@@ -39,7 +39,7 @@ const LandingPage: React.FunctionComponent = () => {
       <FormContextProvider>
       {
         isVisible
-        ?  <LoginModal onCancel={toggleLogin} isVisible={isVisible}  />
+            ? <LoginModal isVisible={isVisible} initialStage={0} onCancel={ toggleLogin } />
         : null
         }
       </FormContextProvider>

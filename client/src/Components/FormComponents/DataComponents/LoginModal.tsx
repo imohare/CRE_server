@@ -1,4 +1,3 @@
-//react
 import { useState, useContext, useEffect } from 'react';
 //antd imports
 import { Modal, Button } from 'antd'
@@ -6,64 +5,83 @@ import { Modal, Button } from 'antd'
 import FormTemplate from '../../ReuseableComponents/FormTemplate';
 //data
 import { FormContext } from '../../../Data/FormConfigs/FormContext';
+//helperfunction from tools
+import { loginWithEthAddress } from '../../../Tools/FormHelpers';
 //styling
 
 //onCancel toggles setVisible in parent component
 interface ModalProps { 
-  onCancel: any; 
   isVisible: boolean;
+  initialStage: number;
+  onCancel: any;
 };
 
 
-const LoginModal = ({ onCancel, isVisible }: ModalProps) => {
+const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
 
+  const {
+    consumerConfig,
+    artistConfig,
+    consumerInfo,
+    setConsumerInfo,
+    artistInfo,
+    setArtistInfo
+  } = useContext(FormContext)
   //sets the modal to display artist or user-login
   const [isArtist, setIsArtist] = useState(true);
-
   //sets the displayStage to 0 (buttons) 1 (artist/userform) and 2 (metamask signin)
-  const [displayStage, setDisplayStage] = useState(0);
-
-  const { consumerConfig, artistConfig } = useContext(FormContext)
+  const [displayStage, setDisplayStage] = useState(initialStage);
   
-  const displayContent = (stage: number, user: boolean) => {
-    if (stage === 0) {
+  const loginAs = (artist: boolean) => {
+    setDisplayStage(1)
+    setIsArtist(artist)
+  }
+
+  useEffect(() => {
+    displayContent()
+  }, [displayStage])
+  
+  const registerFormSubmit = (values: any) => {
+    console.log('message from the module component', values)
+    isArtist ? setArtistInfo((...prev) => { return { ...prev, ...values } }) : setConsumerInfo((prev) => { return { ...prev, ...values }})
+    setDisplayStage(2);
+  
+  }
+
+  const loginHandler = (e: React.MouseEvent) => {
+    e.preventDefault();
+    loginWithEthAddress()
+  
+  }
+
+    
+const submitUser = () => {
+  console.log('logged in')
+    }
+    
+    const displayContent = () => {
+    if (displayStage === 0) {
       return (<>
         <p>register as</p>
         <Button onClick={() => loginAs(false)}>user</Button>
         <Button onClick={() => loginAs(true)}>artist</Button>
       </>)
     }
-    if (stage === 1) return <FormTemplate config={isArtist ? artistConfig : consumerConfig} />
-    if (stage === 2) return <p>logging in with metamask</p>
+    if (displayStage === 1) return <FormTemplate onFormSubmit={ registerFormSubmit } config={isArtist ? artistConfig : consumerConfig} />
+      if (displayStage === 2) return <button onClick={ loginHandler }>sign up with metamask</button>
+    if (displayStage === 3) return <button onClick={ loginHandler }>log in with metamask</button>
   }
-  //changes formContent according to submit stage and user
-  // const [formContent, setFormContent] = useState(displayContent(0, false));
-
- 
-  // useEffect(() => { 
-  //   setFormContent(displayContent(displayStage, isArtist))
-  //  }, [isArtist, displayStage])
   
-  const loginAs = (artist: boolean) => {
-    setDisplayStage(1)
-    setIsArtist(artist)
-  }
-    
-  // const submitUser = () => {
-  //   setFormContent(<p>success</p>)
-  // }
-
   return (
     <Modal
       visible={isVisible}
-      // onOk={submitUser}
+      onOk={submitUser}
       onCancel={onCancel}
-    >
-      log in as 
-      { displayContent(displayStage, isArtist) }
+      footer={null}
+      >
+      { displayContent() }
     </Modal>
   )
 }
 
 export default LoginModal
-

@@ -11,12 +11,12 @@ import { StaggerParentVariant, StaggerItemVariant } from '../../Styles/animation
 
 interface Props { 
   config: { [key: string]: any }[] | null;
+  onFormSubmit: (values: any)=>void;
 }
 
-const FormTemplate = ({ config }: Props) => {
+const FormTemplate = ({ config, onFormSubmit }: Props) => {
   const onFinish = (values: any) => {
-    console.log('on finish working')
-    console.log(values)
+       onFormSubmit(values)
   }
   const formField = (type: string) => {
     switch (type) {
@@ -36,9 +36,7 @@ const FormTemplate = ({ config }: Props) => {
       }}
       autoComplete="on"
       onFinish={onFinish}
-      onValuesChange={(changedValues, allValues) => {
-        console.log(changedValues, 'allvalues', allValues)
-      }}
+     
     >
       <motion.div
         variants={StaggerParentVariant}
