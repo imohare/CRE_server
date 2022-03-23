@@ -6,6 +6,9 @@ import { Button } from 'antd';
 //components
 import LoginModal from '../Components/FormComponents/DataComponents/LoginModal';
 import StyledPage from '../Styles/styledComponents/styledPage';
+import ScrollList from '../Components/ReuseableComponents/ScrollList';
+import CardTemplate from '../Components/ReuseableComponents/CardTemplate';
+
 //styling
 
 //contexts
@@ -47,7 +50,21 @@ const LandingPage: React.FunctionComponent = () => {
       <Link to="/event">each link to an event </Link>/<Link to="/artist"> artist</Link>
       <p>artist view with upcoming</p>
       <Link to="/artist">each a link to an upcoming event</Link>
-
+      <ScrollList>
+        {/* map through children in here: */}
+        <CardTemplate></CardTemplate>
+        <CardTemplate></CardTemplate>
+        <CardTemplate></CardTemplate>
+        <CardTemplate></CardTemplate>
+        <CardTemplate></CardTemplate>
+        <CardTemplate></CardTemplate>
+        <CardTemplate></CardTemplate>
+        <CardTemplate></CardTemplate>
+        <CardTemplate></CardTemplate>
+        <CardTemplate></CardTemplate>
+        <CardTemplate></CardTemplate>
+        <CardTemplate></CardTemplate>
+      </ScrollList>
     </StyledPage>
   )
 }

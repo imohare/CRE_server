@@ -26,7 +26,6 @@ const FormTemplate = ({ config }: Props) => {
     }
   }
   
-  
   return config ? (
     <Form
       labelCol={{
