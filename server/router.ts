@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 
-const { createArtist, getArtist, getArtists, deleteArtist } = require('./controllers/artist.ts');
+const { createArtist, getArtistById, getArtistByName, getArtists, deleteArtist } = require('./controllers/artist.ts');
 
 const { createAlbum, getAlbum, getAlbums, getArtistAlbums, getArtistAlbum, deleteAlbum } = require('./controllers/album.ts');
 
@@ -9,7 +9,7 @@ const { createEvent, getEvent, getEvents, getArtistEvents, getArtistEvent, delet
 
 const { createMerchandise, getMerchandises, getMerchandise, getArtistMerchandises, getArtistMerchandise, deleteMerchandise } = require('./controllers/merchandise.ts');
 
-const { createConsumer, getConsumer, deleteConsumer } = require('./controllers/consumer.ts');
+const { createConsumer, getConsumerById, getConsumerByUsername, deleteConsumer } = require('./controllers/consumer.ts');
 
 const { createAlbumToken, getAlbumToken, getAlbumTokens, getConsumerAlbumTokens, getArtistAlbumsTokens } = require('./controllers/albumToken.ts');
 
@@ -22,7 +22,8 @@ const { albumTokenPurchase, eventTokenPurchase, merchandiseTokenPurchase } = req
 // Artist
 router.post('/createArtist', createArtist);
 router.get('/getArtists', getArtists);
-router.get('/getArtist/:artistId', getArtist);
+router.get('/getArtistById/:artistId', getArtistById);
+router.get('/getArtistByName/:artistName', getArtistByName);
 router.delete('/deleteArtist/:artistId', deleteArtist);
 
 // Album
@@ -35,7 +36,8 @@ router.delete('/deleteAlbum/:albumId', deleteAlbum);
 
 // Consumer 
 router.post('/createConsumer', createConsumer);
-router.get('/getConsumer/:consumerId', getConsumer);
+router.get('/getConsumerById/:consumerId', getConsumerById);
+router.get('/getConsumerByUsername/:consumerUsername', getConsumerByUsername);
 router.delete('/deleteConsumer/:consumerId', deleteConsumer);
 
 // Event

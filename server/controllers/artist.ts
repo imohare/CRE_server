@@ -4,7 +4,8 @@ import { Album, AlbumToken, Artist, Event, EventToken, Merchandise, MerchandiseT
 async function createArtist(req: Request, res: Response) {
   const _artist = await Artist.create({
     eth_address: req.body.eth_address,
-    username: req.body.username,
+    name: req.body.name,
+    profile_picture: req.body.profile_picture,
     website: req.body.username,
     instagram: req.body.instagram,
     twitter: req.body.twitter,
@@ -14,11 +15,23 @@ async function createArtist(req: Request, res: Response) {
   res.send(_artist);
 }
 
-async function getArtist(req: Request, res: Response) {
+async function getArtistById(req: Request, res: Response) {
   try {
     const _artist = await Artist.findByPk(req.params.artistId);
     res.status(200);
     res.json(_artist);
+  } catch (error) {
+    console.log(error);
+    res.status(500);
+    res.json(error);
+  }
+ }
+
+ async function getArtistByName(req: Request, res: Response) {
+  try {
+    const _artists = await Artist.findAll({where:{name: req.body.name}});
+    res.status(200);
+    res.json(_artists);
   } catch (error) {
     console.log(error);
     res.status(500);
@@ -52,4 +65,4 @@ async function deleteArtist(req: Request, res: Response) {
   res.json();  
 }
 
-export { createArtist, getArtist, getArtists, deleteArtist };
+export { createArtist, getArtistById, getArtists, deleteArtist, getArtistByName };

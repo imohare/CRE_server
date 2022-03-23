@@ -15,6 +15,7 @@ import { MerchandiseToken } from './merchandiseToken';
 class Consumer extends Model {
   public eth_address!: string;
   public username!: string;
+  public profile_picture!: string;
   public location?: string;
   public email!: string;
 
@@ -63,6 +64,10 @@ class Consumer extends Model {
             name: 'consumer_username',
             msg: 'An user with this username already exists.'
           }
+        },
+        profile_picture: {
+          type: DataTypes.STRING,
+          allowNull: false
         },
         location: {
           type: DataTypes.STRING,

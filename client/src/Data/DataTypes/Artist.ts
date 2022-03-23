@@ -1,6 +1,7 @@
 interface IArtist {
     eth_address: string,
-    username: string,
+    name: string,
+    profile_picture: string,
     website: string,
     instagram?: string,
     twitter?: string,
