@@ -9,7 +9,7 @@ const { createEvent, getEvent, getEvents, getArtistEvents, getArtistEvent, delet
 
 const { createMerchandise, getMerchandises, getMerchandise, getArtistMerchandises, getArtistMerchandise, deleteMerchandise } = require('./controllers/merchandise.ts');
 
-const { createConsumer, getConsumer, deleteConsumer } = require('./controllers/consumer.ts');
+const { createConsumer, getConsumerById, getConsumerByUsername, deleteConsumer } = require('./controllers/consumer.ts');
 
 const { createAlbumToken, getAlbumToken, getAlbumTokens, getConsumerAlbumTokens, getArtistAlbumsTokens } = require('./controllers/albumToken.ts');
 
@@ -36,7 +36,8 @@ router.delete('/deleteAlbum/:albumId', deleteAlbum);
 
 // Consumer 
 router.post('/createConsumer', createConsumer);
-router.get('/getConsumer/:consumerId', getConsumer);
+router.get('/getConsumerById/:consumerId', getConsumerById);
+router.get('/getConsumerByUsername/:consumerUsername', getConsumerByUsername);
 router.delete('/deleteConsumer/:consumerId', deleteConsumer);
 
 // Event
