@@ -12,6 +12,8 @@ import {
   UserPage
 } from './Pages';
 
+import TestPage from './testing/TestPage';
+
 //styling
 import GlobalStyles from './Styles/globalStyles';
 
@@ -27,7 +29,12 @@ const App:React.FunctionComponent = () => (
       <Route path="/album/:albumId" element={ <AlbumPage /> } />
       <Route path="/event/:eventId" element={ <EventPage /> } />
       <Route path="/merchandise/:merchandiseId" element={ <MerchandisePage /> } /> 
-      <Route path="/user/:consumerId" element={ <UserPage /> } />
+      <Route path="/user/:consumerId" element={<UserPage />} />
+
+      {/* delete after development */}
+      <Route path="/test" element={<TestPage />} />
+      {/* stop delete after development */}
+      
       <Route path="/" element={ <LandingPage /> } />
       </Routes>
     {/* </UserContextProvider> */}
