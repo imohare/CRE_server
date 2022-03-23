@@ -56,17 +56,19 @@ const UserPage: React.FunctionComponent = () => {
         <div className="nftHalf">
           <div className="eventNFTs"> Your Event NFTs:
             <ScrollList >{eventNFTs.map(
-              (eventNft) => { return <CardTemplate event={eventNft} /> })
+              (eventNft: IEventToken) => { return <CardTemplate event={eventNft} key={eventNft.id} /> })
             }</ScrollList>
             {/* <NFTList /> */}
           </div>
           <div className="albumNFTs"> Your Album NFTs: </div>
-          <ScrollList></ScrollList>
+          <ScrollList >{albumNFTs.map(
+            (albumNFT: IEventToken) => { return <CardTemplate event={albumNFT} key={albumNFT.id} /> })
+          }</ScrollList>
           <div className="merchNFTs"> Your Merch NFTs: </div>
-          <ScrollList></ScrollList>
+          <ScrollList >{merchNFTs.map(
+            (merchNFT: IEventToken) => { return <CardTemplate event={merchNFT} key={merchNFT.id} /> })
+          }</ScrollList>
         </div>
-
-
 
         <div className="personalInfoHalf">
           <div className="profilePic"></div>
