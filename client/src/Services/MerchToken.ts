@@ -18,14 +18,20 @@ const getMerchTokenById = (tokenId: number) => {
         .catch(err => console.log(err, "errors"))
 }
 
+const getConsumerMerchTokensByConsumerId = (consumerId: number) => {
+    return fetch(`${BASE_URL}/getMerchToken/${tokenId}`)
+        .then(res => res.json())
+        .catch(err => console.log(err, "errors"))
+}
+
 const getMerchTokens = () => {
     return fetch(`${BASE_URL}/getMerchTokens`)
         .then(res => res.json())
         .catch(err => console.log(err, "errors"))
 }
 
-const getConsumersMerchTokens = (merchId: number, consumerId: number) => {
-    return fetch(`${BASE_URL}/getConsumerMerchTokens/${merchId}/${consumerId}`)
+const getConsumersMerchTokensByConsumerId = (merchId: number, consumerId: number) => {
+    return fetch(`${BASE_URL}/getConsumerMerchTokensByConsumerId/${merchId}/${consumerId}`)
         .then(res => res.json())
         .catch(err => console.log(err, "errors"))
 }
@@ -36,4 +42,4 @@ const getArtistsMerchTokens = (artistId: number) => {
         .catch(err => console.log(err, "errors"))
 }
 
-export { postMerchToken, getMerchTokenById, getMerchTokens, getConsumersMerchTokens, getArtistsMerchTokens }
+export { postMerchToken, getMerchTokenById, getMerchTokens, getConsumersMerchTokensByConsumerId, getArtistsMerchTokens, getConsumerMerchTokensByConsumerId }

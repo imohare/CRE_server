@@ -27,6 +27,13 @@ const getMerchandiseById = (merchandiseId: number) => {
         .catch(err => console.log(err, "error"))
 }
 
+const getConsumerMerchTokensByConsumerId = (consumerId: number) => {
+    return fetch(`${BASE_URL}/getConsumerMerchandiseTokens/${consumerId}`)
+        .then(res => res.json)
+        .catch(err => console.log(err, "error"))
+}
+
+
 const getAllMerchandisesbyArtistId = (artistId: number) => {
     return fetch(`${BASE_URL}/getArtistMerchandises/${artistId}`)
         .then(res => res.json)
@@ -44,5 +51,5 @@ const deleteMerchandise = (merchandiseId: number) => {
         { method: "DELETE" });
 }
 
-export { createMerchandise, getAllMerchandises, getMerchandiseById, getAllMerchandisesbyArtistId, getMerchandisebyArtistId, deleteMerchandise }
+export { createMerchandise, getAllMerchandises, getMerchandiseById, getAllMerchandisesbyArtistId, getMerchandisebyArtistId, deleteMerchandise, getConsumerMerchTokensByConsumerId }
 
