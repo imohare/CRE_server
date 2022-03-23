@@ -15,7 +15,8 @@ import { Event } from './event';
 
 class Artist extends Model {
   public eth_address!: string;
-  public username!: string;
+  public name!: string;
+  public profile_picture!: string;
   public website?: string;
   public instagram?: string;
   public twitter?: string;
@@ -69,13 +70,13 @@ class Artist extends Model {
           type: DataTypes.STRING,
           allowNull: false
         },
-        username: {
+        name: {
           type: DataTypes.STRING,
           allowNull: false,
-          unique: {
-            name: 'artist_username',
-            msg: 'An artist with this username already exists.'
-          }
+        },
+        profile_picture: {
+          type: DataTypes.STRING,
+          allowNull: false,
         },
         website: {
           type: DataTypes.STRING,
