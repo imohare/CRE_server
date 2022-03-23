@@ -1,32 +1,29 @@
 import { createContext, useState } from 'react';
-import { IFormContext } from '../DataTypes/FormContextType';
+import {
+  IFormContext,
+  ContextProps,
+  IConsumerInfo,
+  IArtistInfo,
+  IAttributes,
+  IUserForm,
+  IRules
+} from '../DataTypes/FormContextType';
 //change that to ./DataTypes and put the IFomrContext into DataTypes
 
 export const FormContext = createContext<IFormContext>(null!);
 
-interface ContextProps {
-  children: React.ReactNode;
-}
-interface IConsumerInfo {
-  [key: string]: any;
-}
+
 
 //Form context with consumer and artist sign up form configs
-export const FormContextProvider = ({ children }: ContextProps ) => {
-  const [consumerInfo, setConsumerInfo] = useState<IConsumerInfo>({
-    eth_address: '',
-    username: '',
-    location: '',
-    points: 0,
-    email: '',
-    id: 0,
-    createdAt: ''
-  })
+export const FormContextProvider = ({ children }: ContextProps) => {
+  
+  const [consumerInfo, setConsumerInfo] = useState<IConsumerInfo>({})
+
+  const [artistInfo, setArtistInfo] = useState<IArtistInfo>({})
   
   const consumerConfig = [
     {
       attr: {
-        id: 'username',
         name: 'username',
         key: 'username',
         label: 'Username',
@@ -41,22 +38,20 @@ export const FormContextProvider = ({ children }: ContextProps ) => {
     },
     {
       attr: {
-        id: 'last_name',
-        name: 'last name',
-        key: 'lastname',
-        label: 'last name',
+        name: 'email',
+        key: 'email',
+        label: 'Email',
       }, 
       rules: [
         {
           required: true,
-          message: 'Please enter your username!',
+          type: 'email'
         },
       ],
       type: 'text'
     },
     {
       attr: {
-        id: 'location',
         name: 'location',
         key: 'location',
         label: 'Location',
@@ -66,30 +61,91 @@ export const FormContextProvider = ({ children }: ContextProps ) => {
           required: false,
         },
       ],
-      type: 'number'
+      type: 'text'
     }
   ];
   const artistConfig = [
     {
       attr: {
-        id: 'artistname',
-        name: 'artistname',
+        name: 'name',
         key: 'artistname',
         label: 'Name',
       }, 
       rules: [
         {
           required: true,
-          message: 'Please select time!',
+          message: 'Please enter your name!',
         },
       ],
       type: 'text'
     },
+    {
+      attr: {
+        name: 'website',
+        key: 'website',
+        label: 'Website',
+      }, 
+      rules: [
+        {
+          required: false,
+        },
+      ],
+      type: 'text'
+    }, {
+      attr: {
+        name: 'instagram',
+        key: 'instagram',
+        label: 'Instagram',
+      }, 
+      rules: [
+        {
+          required: false,
+        },
+      ],
+      type: 'text'
+    }, {
+      attr: {
+        name: 'twitter',
+        key: 'twitter',
+        label: 'Twitter',
+      }, 
+      rules: [
+        {
+          required: false,
+        },
+      ],
+      type: 'text'
+    }, {
+      attr: {
+        name: 'discord',
+        key: 'discord',
+        label: 'Discord',
+      }, 
+      rules: [
+        {
+          required: false,
+        },
+      ],
+      type: 'text'
+    },
+    {
+      attr: {
+        name: 'spotify',
+        key: 'spotify',
+        label: 'Spotify',
+      }, 
+      rules: [
+        {
+          required: false,
+        },
+      ],
+      type: 'text'
+    }
   ]
   
   //wrap the formtemplate in the parent component
   return (
-    <FormContext.Provider value={{ consumerInfo, setConsumerInfo, consumerConfig, artistConfig }}>
+    <FormContext.Provider value={{ consumerConfig, artistConfig, artistInfo, setArtistInfo, consumerInfo, setConsumerInfo }}>
       { children }
     </FormContext.Provider>
   ); 

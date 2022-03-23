@@ -12,7 +12,8 @@ interface IUserContext {
 export const UserContext = createContext<IUserContext>(null!);
 
 export const UserContextProvider = ({ children }: IProps) => {
-  const [userType, setUserType] = useState('artist');
+  //userType is going to be 'artist', 'puglic' or 'consumer'
+  const [userType, setUserType] = useState('public');
   const [currentId, setCurrentId] = useState(0);
   const [name, setName] = useState('')
 

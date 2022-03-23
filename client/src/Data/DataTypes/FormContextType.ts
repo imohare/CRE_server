@@ -1,10 +1,19 @@
+interface ContextProps {
+  children: React.ReactNode;
+}
+interface IConsumerInfo {
+  [key: string]: string;
+}
+interface IArtistInfo {
+  [key: string]: string;
+}
+
 interface IAttributes {
-  id: string;
   name: string;
   key: string;
   label: string;
 }
-interface IConsumerForm {
+interface IUserForm {
   [key: string]: string;
 }
 interface IRules {
@@ -12,18 +21,20 @@ interface IRules {
 }
 
 interface IFormContext { 
-  consumerInfo: IConsumerForm;
-  setConsumerInfo: React.Dispatch<React.SetStateAction<any>>;
+  consumerInfo: IConsumerInfo;
+  setConsumerInfo: React.Dispatch<React.SetStateAction<{[key:string]: any}>>;
   consumerConfig: {
     attr: IAttributes;
     rules: IRules[];
     type: string;
   }[];
+  artistInfo: IUserForm;
+  setArtistInfo: React.Dispatch<React.SetStateAction<{ [key: string]: any}>>
+
   artistConfig: {
     attr: IAttributes;
     rules: IRules[];
     type: string;
   }[];
 }
-
-export type { IFormContext };
+export type { IFormContext, ContextProps, IConsumerInfo, IArtistInfo, IAttributes, IUserForm, IRules }
