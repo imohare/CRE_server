@@ -4,7 +4,7 @@ import { Form, Button, Input, InputNumber, DatePicker } from 'antd';
 //components
 //styling
 import { motion, } from 'framer-motion';
-import { StaggerParentVariant, StaggerItemVariant } from '../../../Styles/animations/formAnimations';
+import { StaggerParentVariant, StaggerItemVariant } from '../../Styles/animations/formAnimations';
 
 //final state: mapping through formfields for configuration object that 
 //is inupt in props
@@ -25,7 +25,6 @@ const FormTemplate = ({ config }: Props) => {
       case ('date'): return (<DatePicker> {/*date is inside the return value _d: Date*/} </DatePicker>)
     }
   }
-  
   
   return config ? (
     <Form

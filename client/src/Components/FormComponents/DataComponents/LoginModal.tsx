@@ -3,7 +3,7 @@ import { useState, useContext, useEffect } from 'react';
 //antd imports
 import { Modal, Button } from 'antd'
 //components
-import FormTemplate from '../ReuseableComponents/FormTemplate';
+import FormTemplate from '../../ReuseableComponents/FormTemplate';
 //data
 import { FormContext } from '../../../Data/FormConfigs/FormContext';
 //styling
@@ -37,36 +37,33 @@ const LoginModal = ({ onCancel, isVisible }: ModalProps) => {
     if (stage === 2) return <p>logging in with metamask</p>
   }
   //changes formContent according to submit stage and user
-  const [formContent, setFormContent] = useState(displayContent(0, false));
+  // const [formContent, setFormContent] = useState(displayContent(0, false));
 
  
-  useEffect(() => { 
-    setFormContent(displayContent(displayStage, isArtist))
-   }, [isArtist, displayStage])
+  // useEffect(() => { 
+  //   setFormContent(displayContent(displayStage, isArtist))
+  //  }, [isArtist, displayStage])
   
   const loginAs = (artist: boolean) => {
     setDisplayStage(1)
     setIsArtist(artist)
   }
     
-  const submitUser = () => {
-    setFormContent(<p>success</p>)
-    
-  }
-
+  // const submitUser = () => {
+  //   setFormContent(<p>success</p>)
+  // }
 
   return (
     <Modal
       visible={isVisible}
-      onOk={submitUser}
+      // onOk={submitUser}
       onCancel={onCancel}
     >
       log in as 
-      { formContent }
+      { displayContent(displayStage, isArtist) }
     </Modal>
   )
 }
 
 export default LoginModal
 
-export { }
