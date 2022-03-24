@@ -4,7 +4,7 @@ import { Modal, Button } from 'antd'
 //components
 import FormTemplate from '../../ReuseableComponents/FormTemplate';
 
-import {IArtistInfo, IConsumerInfo} from '../../../Data/DataTypes/FormContextType'
+import { IArtistInfo, IConsumerInfo } from '../../../Data/DataTypes/FormContextType'
 //data
 import { FormContext } from '../../../Data/FormConfigs/FormContext';
 import { UserContext } from '../../../Data/UserContext';
@@ -15,7 +15,7 @@ import { getArtistByEthAddress } from 'Services/Artist';
 //styling
 
 //onCancel toggles setVisible in parent component
-interface ModalProps { 
+interface ModalProps {
   isVisible: boolean;
   initialStage: number;
   onCancel: any;
@@ -52,7 +52,7 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
   //sets the displayStage to 0 (buttons) 1 (artist/userform) and 2 (metamask signin)
   const [displayStage, setDisplayStage] = useState(initialStage);
 
-  
+
   const loginAs = (artist: boolean) => {
     setDisplayStage(1)
     setIsArtist(artist)
@@ -61,7 +61,7 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
   useEffect(() => {
     displayContent()
   }, [displayStage])
-  
+
   const registerFormSubmit = (values: any) => {
     isArtist ? setArtistInfo({ ...values }) : setConsumerInfo({ ...values })
     console.log('message from the context, artistInfo is:', artistInfo, 'consumer is ', consumerInfo)
@@ -82,33 +82,33 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
     }
   }
 
-  const loginHandler = async (u: boolean):Promise<void> => {
-      const check = await checkIfInDB(u);
-      if (check) {
-        const eth = await getEthAddress();
-        if (u) {
-          const artistObjResponse = await getArtistByEthAddress(eth);
-          // const { name, id } = await artistObjResponse;
-          // setCurrentId(id);
-          // setName(name)
-          setUserType('artist');
-        }
-        if (!u) {
-          const consumerObjResponse = await getConsumerByEthAddress(eth);
-          // const { username, consumerId } = consumerObjResponse;
-          // setCurrentId(id);
-          // setName(username)
-          setUserType('consumer');
-        }
+  const loginHandler = async (u: boolean): Promise<void> => {
+    const check = await checkIfInDB(u);
+    if (check) {
+      const eth = await getEthAddress();
+      if (u) {
+        const artistObjResponse = await getArtistByEthAddress(eth);
+        // const { name, id } = await artistObjResponse;
+        // setCurrentId(id);
+        // setName(name)
+        setUserType('artist');
+      }
+      if (!u) {
+        const consumerObjResponse = await getConsumerByEthAddress(eth);
+        // const { username, consumerId } = consumerObjResponse;
+        // setCurrentId(id);
+        // setName(username)
+        setUserType('consumer');
+      }
     }
-      setDisplayStage(7)
+    setDisplayStage(7)
   }
 
-const submitUser = () => {
-  console.log('logged in')
-    }
-    
-    const displayContent = () => {
+  const submitUser = () => {
+    console.log('logged in')
+  }
+
+  const displayContent = () => {
     if (displayStage === 0) {
       return (<>
         <p>register as</p>
@@ -116,27 +116,27 @@ const submitUser = () => {
         <Button onClick={() => loginAs(true)}>artist</Button>
       </>)
     }
-    if (displayStage === 1) return <FormTemplate onFormSubmit={ registerFormSubmit } config={isArtist ? artistConfig : consumerConfig} />
-      if (displayStage === 2) return <Button onClick={ registerHandler }>sign up with metamask</Button>
-      if (displayStage === 3) return <><Button onClick={() => loginHandler(true)}>log in as artist</Button><Button onClick={() => loginHandler(false)}>log in as user</Button></>
-      // 4: already registered
-      if (displayStage === 4) return <><div>You are already registered, please log in:</div><Button onClick={()=>setDisplayStage(3)}>click here to log in</Button></>
-      //7: registration failed
-      if (displayStage === 5) return <div>Registration failed for unknown reasons. Please try again and contact us if it still doesn't work</div>
-      // 5 successful registration
-      if (displayStage === 6) return <div>Thank you for registering!</div>
-      // 6: successful login
-      if (displayStage === 7) return <div>You are now logged in</div>
+    if (displayStage === 1) return <FormTemplate onFormSubmit={registerFormSubmit} config={isArtist ? artistConfig : consumerConfig} />
+    if (displayStage === 2) return <Button onClick={registerHandler}>sign up with metamask</Button>
+    if (displayStage === 3) return <><Button onClick={() => loginHandler(true)}>log in as artist</Button><Button onClick={() => loginHandler(false)}>log in as user</Button></>
+    // 4: already registered
+    if (displayStage === 4) return <><div>You are already registered, please log in:</div><Button onClick={() => setDisplayStage(3)}>click here to log in</Button></>
+    //7: registration failed
+    if (displayStage === 5) return <div>Registration failed for unknown reasons. Please try again and contact us if it still doesn't work</div>
+    // 5 successful registration
+    if (displayStage === 6) return <div>Thank you for registering!</div>
+    // 6: successful login
+    if (displayStage === 7) return <div>You are now logged in</div>
   }
-  
+
   return (
     <Modal
       visible={isVisible}
       onOk={submitUser}
       onCancel={onCancel}
-      footer={ displayStage > 5 && (<Button onClick={onCancel}>start browsing!</Button>)}
-      >
-      { displayContent() }
+      footer={displayStage > 5 && (<Button onClick={onCancel}>start browsing!</Button>)}
+    >
+      {displayContent()}
     </Modal>
   )
 }
