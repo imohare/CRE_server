@@ -1,16 +1,13 @@
 import { Request, Response } from 'express';
 import { Merchandise, Artist, MerchandiseToken } from "../models";
+import { errorHandler } from './error';
 
 async function getMerchandises(req: Request, res: Response) {
   try {
     const _merchandises = await Merchandise.findAll();
     res.json(_merchandises);
     res.status(200);
-  } catch (error) {
-    console.log(error);
-    res.status(500);
-    res.json(error);
-  }
+  } catch (error) { errorHandler(res, error) }
 }
 
 async function getMerchandise(req: Request, res: Response) {
@@ -18,11 +15,7 @@ async function getMerchandise(req: Request, res: Response) {
     const _merchandise = await Merchandise.findByPk(req.params.merchandiseId);
     res.json(_merchandise);
     res.status(200);
-  } catch (error) {
-    console.log(error);
-    res.status(500);
-    res.json(error);
-  }
+  } catch (error) { errorHandler(res, error) }
 }
 
 async function createMerchandise(req: Request, res: Response) {
@@ -31,35 +24,33 @@ async function createMerchandise(req: Request, res: Response) {
       res.send(400);
       res.json('incorrect schema for request');
     } else {
-      const artistId = req.params.artistId;
-      const artist = await Artist.findByPk(artistId);
+      const artist = await Artist.findByPk(req.params.artistId);
 
       if (!artist) {
         res.status(400);
         res.json('Artist not found');
       } else {
-        const _event = await Merchandise.create({
-          name: req.body.name,
-          type: req.body.type,
-          description: req.body.description
-        });
+        const _merchandise = await Merchandise.create(req.body);
 
-        _event
+        for (var tokens = 0; tokens < _merchandise.number_of_tokens; tokens++) {
+          const _token = MerchandiseToken.build();
+          await _token.save();
+          await _token.setArtist(artist);
+          await _token.setMerchandise(_merchandise);
+        }
+
+        _merchandise
           .setArtist(artist)
-          .then((_event) => {
-            res.json(_event);
+          .then((_merchandise) => {
+            res.json(_merchandise);
             res.status(201);
           })
           .catch((err) => {
-            res.json('Database Error - createAlbum failing')
+            res.json('Database Error - createMerchandise failing')
           });
       }
     }
-  } catch (error) {
-    console.log(error);
-    res.status(500);
-    res.json(error);
-  }
+  } catch (error) { errorHandler(res, error) }
 }
 
 async function getArtistMerchandises(req: Request, res: Response) {
@@ -80,11 +71,7 @@ async function getArtistMerchandises(req: Request, res: Response) {
         res.status(201);
       }
     }
-  } catch (error) {
-    console.log('error');
-    res.status(500);
-    res.json(error);
-  }
+  } catch (error) { errorHandler(res, error) }
 }
 
 async function getArtistMerchandise(req: Request, res: Response) {
@@ -111,11 +98,7 @@ async function getArtistMerchandise(req: Request, res: Response) {
         res.status(201);
       }
     }
-  } catch (error) {
-    console.log('error');
-    res.status(500);
-    res.json(error);
-  }
+  } catch (error) { errorHandler(res, error) }
 }
 
 async function deleteMerchandise(req: Request, res: Response) {
