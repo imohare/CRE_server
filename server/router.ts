@@ -63,7 +63,7 @@ router.get('/getAlbumToken/:tokenId', getAlbumToken);
 router.get('/getAlbumTokens', getAlbumTokens);
 router.get('/getConsumerAlbumTokens/:albumId/:consumerId', getConsumerAlbumTokens);
 router.get('/getArtistAlbumsTokens/:artistId', getArtistAlbumsTokens);
-//router.get('/getConsumerAlbumTokensByConsumerId/:consumerId', getConsumerAlbumTokensByConsumerId);
+router.get('/getConsumerAlbumTokensByConsumerId/:consumerId', getConsumerAlbumTokensByConsumerId);
 
 // Merchandise Token 
 router.get('/getMerchandiseToken/:tokenId', getMerchandiseToken);

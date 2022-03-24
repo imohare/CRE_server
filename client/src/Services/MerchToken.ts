@@ -1,16 +1,4 @@
-import { IMerchToken } from "Data/DataTypes"
 const BASE_URL = 'http://localhost:3001'
-
-const postMerchToken = (merch: IMerchToken, merchId: number, consumerId: number) => {
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(merch)
-    }
-    return fetch(`${BASE_URL}/${merchId}/${consumerId}`, requestOptions)
-        .then(res => res.json())
-        .catch(err => console.log(err, "errors"))
-}
 
 const getMerchTokenById = (tokenId: number) => {
     return fetch(`${BASE_URL}/getMerchToken/${tokenId}`)
@@ -36,4 +24,4 @@ const getArtistsMerchTokens = (artistId: number) => {
         .catch(err => console.log(err, "errors"))
 }
 
-export { postMerchToken, getMerchTokenById, getMerchTokens, getConsumersMerchTokens, getArtistsMerchTokens }
+export { getMerchTokenById, getMerchTokens, getConsumersMerchTokens, getArtistsMerchTokens }
