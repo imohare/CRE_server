@@ -21,13 +21,14 @@ const registerWithEthAddress = async (isArtist, info) => {
   let result;
   if (isArtist) result = await createArtist({ eth_address: eth, ...info });
   if (!isArtist) result = await createConsumer({ eth_address: eth, ...info });
-  console.log(result);
+  console.log("result making sure it is not yet in db: or if proper ressult is in db", result);
   return result;
 }
 
 //input param (boolean) which indicates whether user is artist or consumer
 //then checks in the corresponding DB to see if user already exists(GET)
 const checkIfInDB = async (isArtist) => {
+  console.log("is artist", isArtist)
   const eth = await getEthAddress();
   console.log(eth);
   let result;
@@ -35,11 +36,12 @@ const checkIfInDB = async (isArtist) => {
     result = await getArtistByEthAddress(eth)
     console.log("result  returned checkidb:", result)
     //the result that it is returning is a function...
-    if (!result) return null//if this does not work put in try/catch
     if (result) return result
+    if (!result) return null//if this does not work put in try/catch
   }
   if (!isArtist) {
     result = await getConsumerByEthAddress(eth)
+    console.log("consumer result in check if indb", result)
     if (!result) return null
     if (result) return result
   }

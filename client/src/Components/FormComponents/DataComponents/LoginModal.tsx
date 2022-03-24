@@ -73,7 +73,7 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
 
   const registerHandler = async () => {
     console.log('in register handler')
-    console.log('artist user info in context', artistInfo)
+    console.log('artist/consumer user info in context', artistInfo)
     const check = await checkIfInDB(isArtist); //should return falsy
     //if falsey, we want to create a new user to our DB
     if (!check) {
@@ -86,7 +86,7 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
         console.log("res", res)
       }
       if (!isArtist) { res = await registerWithEthAddress(isArtist, consumerInfo); }//setting the user in the global context
-      console.log(res, "logging res");
+      console.log(res, "user res logged");
 
       setDisplayStage(6) //successful registration
     } else {
