@@ -33,7 +33,8 @@ const getArtistByName = (artistName: string) => {
 const getArtistByEthAddress = (artistEthAddress: string) => {
     return fetch(`${BASE_URL}/getArtistByEthAddress/${artistEthAddress}`)
         .then(res => res.json)
-        .catch(err => { return null })
+        .catch(err => console.log(err))
+
 }
 
 const deleteArtist = (artistId: number) => {
