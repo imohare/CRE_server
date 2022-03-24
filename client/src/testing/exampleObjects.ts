@@ -1,6 +1,5 @@
 import { IArtist, IAlbum, IConsumer, IEvent, IMerchandise, IAlbumToken, IEventToken, IMerchToken, IPoints } from '../Data/DataTypes';
 
-
 const exampleArtist:IArtist = {
   eth_address: 'kloi876thjmnbcder56ui',
   name: 'Lancey',
