@@ -30,7 +30,9 @@ async function getArtistById(req: Request, res: Response) {
 
 async function getArtistByEthAddress(req: Request, res: Response) {
   try {
+    console.log('in backend get by eth')
     const _artist = await Artist.findOne({ where: { eth_address: req.params.eth_address } });
+    console.log('_artist :', _artist)
     res.status(200);
     res.json(_artist);
   } catch (error) {
