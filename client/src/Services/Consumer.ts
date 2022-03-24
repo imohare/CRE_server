@@ -7,25 +7,25 @@ const createConsumer = (consumer: IConsumer) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(consumer)
     }
-    fetch(`${BASE_URL}/createConsumer`, requestOptions)
+    return fetch(`${BASE_URL}/createConsumer`, requestOptions)
         .then(res => res.json())
         .catch(err => console.log(err, "error"))
 }
 
 const getConsumerById = (consumerId: number) => {
-    fetch(`${BASE_URL}/getConsumerById/${consumerId}`)
+    return fetch(`${BASE_URL}/getConsumerById/${consumerId}`)
         .then(res => res.json())
         .catch(err => console.log(err))
 }
 
 const getConsumerByUsername = (consumerUsername: string) => {
-    fetch(`${BASE_URL}/getConsumerByUsername/${consumerUsername}`)
+    return fetch(`${BASE_URL}/getConsumerByUsername/${consumerUsername}`)
         .then(res => res.json())
         .catch(err => console.log(err))
 }
 
 const getConsumerByEthAddress = (eth_address: string) => {
-    fetch(`${BASE_URL}/getConsumerByEthAddress/${eth_address}`)
+    return fetch(`${BASE_URL}/getConsumerByEthAddress/${eth_address}`)
         .then(res => res.json())
         .catch(err => console.log(err))
 }
