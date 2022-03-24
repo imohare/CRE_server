@@ -1,16 +1,13 @@
 import { Request, Response } from 'express';
 import { Event, Artist, EventToken } from "../models";
+import { errorHandler } from './error';
 
 async function getEvents(req: Request, res: Response) {
   try {
     const _events = await Event.findAll();
     res.json(_events);
     res.status(200);
-  } catch (error) {
-    console.log(error);
-    res.status(500);
-    res.json(error);
-  }
+  } catch (error) { errorHandler(res, error) }
 }
 
 async function getEvent(req: Request, res: Response) {
@@ -19,11 +16,7 @@ async function getEvent(req: Request, res: Response) {
     console.log(_event, "event");
     res.json(_event);
     res.status(200);
-  } catch (error) {
-    console.log(error);
-    res.status(500);
-    res.json(error);
-  }
+  } catch (error) { errorHandler(res, error) }
 }
 
 async function createEvent(req: Request, res: Response) {
@@ -32,22 +25,20 @@ async function createEvent(req: Request, res: Response) {
       res.send(400);
       res.json('incorrect schema for request');
     } else {
-      const artistId = req.params.artistId;
-      const artist = await Artist.findByPk(artistId);
+      const artist = await Artist.findByPk(req.params.artistId);
 
       if (!artist) {
         res.status(400);
         res.json('Artist not found');
       } else {
-        const _event = await Event.create({
-          name: req.body.name,
-          address: req.body.address, 
-          date: req.body.date,
-          description: req.body.description,
-          number_of_tokens: req.body.number_of_tokens,
-          tokens_image: req.body.tokens_image,
-          tokens_value: req.body.value
-        });
+        const _event = await Event.create(req.body);
+
+        for (var tokens = 0; tokens < _event.number_of_tokens; tokens++) {
+          const _token = EventToken.build();
+          await _token.save();
+          await _token.setArtist(artist);
+          await _token.setEvent(_event);
+        }
 
         _event
           .setArtist(artist)
@@ -56,15 +47,11 @@ async function createEvent(req: Request, res: Response) {
             res.status(201);
           })
           .catch((err) => {
-            res.json('Database Error - createAlbum failing')
+            res.json('Database Error - createEvent failing')
           });
       }
     }
-  } catch (error) {
-    console.log(error);
-    res.status(500);
-    res.json(error);
-  }
+  } catch (error) { errorHandler(res, error) }
 }
 
 async function getArtistEvents(req: Request, res: Response) {
@@ -85,11 +72,7 @@ async function getArtistEvents(req: Request, res: Response) {
         res.status(201);
       }
     }
-  } catch (error) {
-    console.log('error');
-    res.status(500);
-    res.json(error);
-  }
+  } catch (error) { errorHandler(res, error) }
  }
 
 async function getArtistEvent(req: Request, res: Response) {
@@ -116,11 +99,7 @@ async function getArtistEvent(req: Request, res: Response) {
         res.status(201);
       }
     }
-  } catch (error) {
-    console.log('error');
-    res.status(500);
-    res.json(error);
-  }
+  } catch (error) { errorHandler(res, error) }
  }
 
  async function deleteEvent(req: Request, res: Response) {

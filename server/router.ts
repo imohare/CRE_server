@@ -57,7 +57,6 @@ router.get('/getArtistMerchandise/:merchandiseId/:artistId', getArtistMerchandis
 router.delete('/deleteMerchandise/:merchandiseId', deleteMerchandise);
 
 // Album Token 
-router.post('/createAlbumToken/:artistId/:albumId', createAlbumToken);
 router.get('/getAlbumToken/:tokenId', getAlbumToken);
 router.get('/getAlbumTokens', getAlbumTokens);
 router.get('/getConsumerAlbumTokens/:albumId/:consumerId', getConsumerAlbumTokens);
@@ -65,7 +64,6 @@ router.get('/getArtistAlbumsTokens/:artistId', getArtistAlbumsTokens);
 //router.get('/getConsumerAlbumTokensByConsumerId/:consumerId', getConsumerAlbumTokensByConsumerId);
 
 // Merchandise Token 
-router.post('/createMerchandiseToken/:artistId/:merchandiseId', createMerchandiseToken);
 router.get('/getMerchandiseToken/:tokenId', getMerchandiseToken);
 router.get('/getMerchandiseTokens', getMerchandiseTokens);
 router.get('/getConsumerMerchandiseTokens/:merchandiseId/:consumerId', getConsumerMerchandiseTokens);
@@ -73,7 +71,6 @@ router.get('/getArtistMerchandisesTokens/:artistId', getArtistMerchandisesTokens
 router.get('/getConsumerMerchTokensByConsumerId/:consumerId', getConsumerMerchTokensByConsumerId);
 
 // Event Token 
-router.post('/createEventToken/:artistId/:eventId', createEventToken);
 router.get('/getEventToken/:tokenId', getEventToken);
 router.get('/getEventTokens', getEventTokens);
 router.get('/getConsumerEventTokens/:eventId/:consumerId', getConsumerEventTokens);

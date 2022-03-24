@@ -68,7 +68,11 @@ class Artist extends Model {
       {
         eth_address: {
           type: DataTypes.STRING,
-          allowNull: false
+          allowNull: false,
+          unique: {
+            name: 'artist_eth_address',
+            msg: 'An artist with this eth_address already exists.'
+          }
         },
         name: {
           type: DataTypes.STRING,
@@ -76,7 +80,7 @@ class Artist extends Model {
         },
         profile_picture: {
           type: DataTypes.STRING,
-          allowNull: false,
+          defaultValue: "https://firebasestorage.googleapis.com/v0/b/cre-6cbea.appspot.com/o/IMG_0122.jpg?alt=media&token=c53822e2-37ea-4974-b67e-833da7e823f4"
         },
         website: {
           type: DataTypes.STRING,

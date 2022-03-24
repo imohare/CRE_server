@@ -12,8 +12,6 @@ import { Merchandise } from './merchandise';
 import { Consumer } from './consumer';
 
 class MerchandiseToken extends Model {
-  public image?: string;
-  public consumer_points!: number;
 
   // Auto-generated
   public id!: number;
@@ -44,18 +42,6 @@ class MerchandiseToken extends Model {
   }
 
   public static initialize(sequelize: Sequelize) {
-    this.init(
-      {
-        image: {
-          type: DataTypes.STRING,
-          defaultValue: 'no image uploaded'
-        },
-        consumer_points: {
-          type: DataTypes.INTEGER,
-          allowNull: false
-        },
-      },
-      { sequelize })
-  }
+    this.init( {}, { sequelize } ) }
 }
 export { MerchandiseToken };

@@ -55,7 +55,11 @@ class Consumer extends Model {
       {
         eth_address: {
           type: DataTypes.STRING,
-          allowNull: false
+          allowNull: false,
+          unique: {
+            name: 'consumer_eth_address',
+            msg: 'A user with this eth_address already exists.'
+          }
         },
         username: {
           type: DataTypes.STRING,
@@ -67,7 +71,7 @@ class Consumer extends Model {
         },
         profile_picture: {
           type: DataTypes.STRING,
-          allowNull: false
+          defaultValue: "https://firebasestorage.googleapis.com/v0/b/cre-6cbea.appspot.com/o/IMG_0122.jpg?alt=media&token=c53822e2-37ea-4974-b67e-833da7e823f4"
         },
         location: {
           type: DataTypes.STRING,
@@ -75,7 +79,11 @@ class Consumer extends Model {
         },
         email: {
           type: DataTypes.STRING,
-          allowNull: false
+          allowNull: false,
+          unique: {
+            name: 'consumer_email',
+            msg: 'A user with this email already exists.'
+          }
         },
       },
       { sequelize })

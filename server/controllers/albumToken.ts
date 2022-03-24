@@ -1,17 +1,13 @@
 import { Request, Response } from 'express';
-
 import { AlbumToken, Album, Artist, Consumer } from "../models";
+import { errorHandler } from "./error";
 
 async function getAlbumTokens(req: Request, res: Response) {
   try {
     const _tokens: AlbumToken[] = await AlbumToken.findAll();
     res.json(_tokens);
     res.status(200);
-  } catch (error) {
-    console.log(error);
-    res.status(500);
-    res.json(error);
-  }
+  } catch (error) { errorHandler(res, error) }
 }
 
 async function getAlbumToken(req: Request, res: Response) {
@@ -19,45 +15,7 @@ async function getAlbumToken(req: Request, res: Response) {
     const _token = await AlbumToken.findByPk(req.params.tokenId);
     res.json(_token);
     res.status(200);
-  } catch (error) {
-    console.log(error);
-    res.status(500);
-    res.json(error);
-  }
-}
-
-async function createAlbumToken(req: Request, res: Response) {
-  try {
-    if (!req.params.albumId || !req.params.artistId) {
-      res.status(400);
-      res.json('incorrect schema for request');
-    } else {
-      const artistId = req.params.artistId
-      const albumId = req.params.albumId;
-      const artist = await Artist.findByPk(artistId);
-      const album = await Album.findByPk(albumId);
-
-      if (!album) {
-        res.status(400);
-        res.json('Album not found');
-      } else if (!artist) {
-        res.status(400);
-        res.json('Artist not found');
-      } else {
-
-        const _token = AlbumToken.build();
-        await _token.save();
-        await _token.setArtist(artist);
-        await _token.setAlbum(album);
-        res.status(201);
-        res.json(_token);
-      }
-    }
-  } catch (error) {
-    console.log('error');
-    res.status(500);
-    res.json(error);
-  }
+  } catch (error) { errorHandler(res, error) }
 }
 
 async function getArtistAlbumsTokens(req: Request, res: Response) {
@@ -78,12 +36,7 @@ async function getArtistAlbumsTokens(req: Request, res: Response) {
         res.json(_tokens);
       }
     }
-  }
-  catch (error) {
-    console.log('error');
-    res.status(500);
-    res.json(error);
-  }
+  } catch (error) { errorHandler(res, error) }
 }
 
 async function getConsumerAlbumTokens(req: Request, res: Response) {
@@ -110,12 +63,7 @@ async function getConsumerAlbumTokens(req: Request, res: Response) {
         res.json(_tokens);
       }
     }
-  }
-  catch (error) {
-    console.log('error');
-    res.status(500);
-    res.json(error);
-  }
+  } catch (error) { errorHandler(res, error) }
 }
 
-export { getAlbumTokens, getAlbumToken, createAlbumToken, getConsumerAlbumTokens, getArtistAlbumsTokens }
+export { getAlbumTokens, getAlbumToken, getConsumerAlbumTokens, getArtistAlbumsTokens }
