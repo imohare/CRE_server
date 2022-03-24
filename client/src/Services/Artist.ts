@@ -20,19 +20,19 @@ const getArtists = () => {
 
 const getArtistById = (artistId: number) => {
     return fetch(`${BASE_URL}/getArtistById/${artistId}`)
-        .then(res => res.json)
+        .then(res => res.json())
         .catch(err => console.log(err, "error"))
 }
 
 const getArtistByName = (artistName: string) => {
     return fetch(`${BASE_URL}/getArtistByName/${artistName}`)
-        .then(res => res.json)
+        .then(res => res.json())
         .catch(err => console.log(err, "error"))
 }
 
-const getArtistByEthAddress = (artistEthAddress: string) => {
-    return fetch(`${BASE_URL}/getArtistByEthAddress/${artistEthAddress}`)
-        .then(res => res.json)
+const getArtistByEthAddress = (eth_address: string) => {
+    return fetch(`${BASE_URL}/getArtistByEthAddress/${eth_address}`)
+        .then(res => res.json())
         .catch(err => console.log(err))
 
 }

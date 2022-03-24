@@ -33,6 +33,7 @@ const checkIfInDB = async (isArtist) => {
   let result;
   if (isArtist) {
     result = await getArtistByEthAddress(eth)
+    console.log("result  returned checkidb", result)
     if (!result) return null//if this does not work put in try/catch
     if (result) return result
   }
