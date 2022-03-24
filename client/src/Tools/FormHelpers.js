@@ -22,10 +22,10 @@ import '../Services/Consumer'
 
 const getEthAddress = () => {
   if (window.ethereum) {
-    return window.ethereum.request({method: 'eth_requestAccounts'})
+    return window.ethereum.request({ method: 'eth_requestAccounts' })
       .then(eth => {
-      return eth[0]
-    })
+        return eth[0]
+      })
   } else {
     console.log('no eth address found')
   }
@@ -33,16 +33,16 @@ const getEthAddress = () => {
 
 const registerWithEthAddress = async (userT, info) => {
   const eth = await getEthAddress();
-  if (userT) createArtist({...eth, ...info});
-  if (!userT) createConsumer({...eth, ...info});
+  if (userT) createArtist({ ...eth, ...info });
+  if (!userT) createConsumer({ ...eth, ...info });
 }
 
 //////////////////////////////
-const checkIfInDB = async (user) => {
+const checkIfInDB = async (artistBoolean) => {
   const eth = await getEthAddress();
   let result;
-  if (user) result = await getArtistByEthAddress(eth)
-  if (!user)result = await getConsumerByEthAddress(eth)
+  if (artistBoolean) result = await getArtistByEthAddress(eth)
+  if (!artistBoolean) result = await getConsumerByEthAddress(eth)
   return result;
 }
 
@@ -52,4 +52,4 @@ const checkIfInDB = async (user) => {
 
 
 
-export { getEthAddress, checkIfInDB, registerWithEthAddress}
+export { getEthAddress, checkIfInDB, registerWithEthAddress }
