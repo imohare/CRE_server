@@ -1,10 +1,16 @@
 interface IAlbum {
     name: string,
-    year: Date,//input will have to be with calendar
+    year: Date,
     description?: string,
+    number_of_tokens: number,
+    tokens_image: string,
+    tokens_value: number,
+
+    //auto-generated
     id?: number,
     createdAt?: Date,
-    updatedAt?: Date
+    updatedAt?: Date,
+    ArtistId?: number,
 }
 
 export type { IAlbum };
