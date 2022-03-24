@@ -26,6 +26,7 @@ async function getConsumerById(req: Request, res: Response) {
 
 async function getConsumerByEthAddress(req: Request, res: Response) {
   try {
+    console.log("in backend--> get consumer by eth address")
     const _artist = await Consumer.findOne({ where: { eth_address: req.params.eth_address } });
     res.status(200);
     res.json(_artist);
