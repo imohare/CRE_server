@@ -1,5 +1,6 @@
 import { createArtist, getArtistByEthAddress } from 'Services/Artist'
 import { createConsumer, getConsumerByEthAddress } from 'Services/Consumer'
+// import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript'
 import '../Services/Consumer'
 
 
@@ -31,22 +32,24 @@ const checkIfInDB = async (isArtist) => {
   console.log("is artist", isArtist)
   const eth = await getEthAddress();
   console.log(eth);
+
+
   let result;
   if (isArtist) {
     result = await getArtistByEthAddress(eth)
-    console.log("result  returned checkidb:", result)
     //the result that it is returning is a function...
     if (result) return result
     if (!result) return null//if this does not work put in try/catch
   }
-  if (!isArtist) {
+  else {
+    console.log(eth);
     result = await getConsumerByEthAddress(eth)
-    console.log("consumer result in check if indb", result)
-    if (!result) return null
+
     if (result) return result
+    if (!result) return null
   }
   //result should be truthy or falsy
-  return result;
+  //return result;
 }
 
 

@@ -65,27 +65,37 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
   }, [displayStage])
 
   const registerFormSubmit = (values: any) => {
-    console.log({ ...values });
     isArtist ? setArtistInfo({ ...values }) : setConsumerInfo({ ...values })
     console.log('message from the context, artistInfo is:', artistInfo, 'consumer is ', consumerInfo)
     setDisplayStage(2);
   }
 
+
+  //here now
   const registerHandler = async () => {
     console.log('in register handler')
+<<<<<<< HEAD
     console.log('artist/consumer user info in context', artistInfo)
+=======
+    console.log('artist info in context 1:" consumer info in context 2', artistInfo, consumerInfo)
+>>>>>>> aonia_login
     const check = await checkIfInDB(isArtist); //should return falsy
     //if falsey, we want to create a new user to our DB
     if (!check) {
       console.log("in! check")
       let res;
-      //stalling here!
       if (isArtist) {
-        console.log("Stalling portion artist");
         res = await registerWithEthAddress(isArtist, artistInfo)
         console.log("res", res)
       }
+<<<<<<< HEAD
       if (!isArtist) { res = await registerWithEthAddress(isArtist, consumerInfo); }//setting the user in the global context
+=======
+      if (!isArtist) {
+
+        res = await registerWithEthAddress(isArtist, consumerInfo);
+      }//setting the user in the global context
+>>>>>>> aonia_login
       console.log(res, "user res logged");
 
       setDisplayStage(6) //successful registration

@@ -26,10 +26,18 @@ async function getConsumerById(req: Request, res: Response) {
 
 async function getConsumerByEthAddress(req: Request, res: Response) {
   try {
+<<<<<<< HEAD
     console.log("in backend--> get consumer by eth address")
     const _artist = await Consumer.findOne({ where: { eth_address: req.params.eth_address } });
+=======
+    console.log(req.params.eth_address)
+    const _consumer = await Consumer.findOne({ where: { eth_address: req.params.eth_address } });
+>>>>>>> aonia_login
     res.status(200);
-    res.json(_artist);
+    console.log('this is the CONSUMER-->>>>', _consumer)
+    // res.json(_consumer);
+    res.json(_consumer);
+
   } catch (error) {
     console.log(error);
     res.status(500);
