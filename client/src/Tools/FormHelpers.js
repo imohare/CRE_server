@@ -1,36 +1,55 @@
+import { createArtist, getArtistByEthAddress } from 'Services/Artist'
+import { createConsumer, getConsumerByEthAddress } from 'Services/Consumer'
+import '../Services/Consumer'
 
-const loginWithEthAddress = () => {
-try {
+
+// const asyncCheckIfDB = async (eth) => {
+//   if (user === false) {
+//     const entry = await getConsumerByEthAddress(eth);
+//     if (entry) {
+//       return user;
+//   }
+//   else {
+//       console.log('eth address not in DB')
+//       user = await postUserC(eth);
+//       user = user.json();
+//       return user;
+//   }
+//   }
+// }
+
+
+
+const getEthAddress = () => {
   if (window.ethereum) {
-    //metamask is here
-    window.ethereum.request({ method: 'eth_requestAccounts' })
-      .then(result => {
-        setEthAddress(result[0]);
-        return result[0]
-      })
-      .then((eth) => {
-        return asyncCheckIfDB(eth);
-      })
-      .then((user) => {
-        return getNFTSC(user.eth_address);
-      }
-      )
-      .then((NFTObject) => {
-        //console.log(NFTObject.nft_groups, "nftList from .then")
-        console.log(NFTObject.nft_groups);
-        setNftCollection(NFTObject.nft_groups);
-        navigate('./dashboard', { state: NFTObject.nft_groups })
-
-
-      })
-
+    return window.ethereum.request({method: 'eth_requestAccounts'})
+      .then(eth => {
+      return eth[0]
+    })
   } else {
-    console.log("install metamask")
-  }
-}
-  catch (err) {
-    console.log(err, "error")
+    console.log('no eth address found')
   }
 }
 
-export { loginWithEthAddress }
+const registerWithEthAddress = async (userT, info) => {
+  const eth = await getEthAddress();
+  if (userT) createArtist({...eth, ...info});
+  if (!userT) createConsumer({...eth, ...info});
+}
+
+//////////////////////////////
+const checkIfInDB = async (user) => {
+  const eth = await getEthAddress();
+  let result;
+  if (user) result = await getArtistByEthAddress(eth)
+  if (!user)result = await getConsumerByEthAddress(eth)
+  return result;
+}
+
+
+
+///////////////////////////////
+
+
+
+export { getEthAddress, checkIfInDB, registerWithEthAddress}
