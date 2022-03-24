@@ -24,4 +24,4 @@ const getArtistsEventTokens = (artistId: number) => {
         .catch(err => console.log(err, "errors"))
 }
 
-export { postEventToken, getEventTokenById, getEventTokens, getConsumersEventTokens, getArtistsEventTokens }
+export { getEventTokenById, getEventTokens, getConsumersEventTokens, getArtistsEventTokens }

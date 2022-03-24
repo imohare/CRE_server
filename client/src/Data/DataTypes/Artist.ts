@@ -7,6 +7,7 @@ interface IArtist {
     twitter?: string,
     discord?: string,
     spotify?: string,
+    //auto-generated
     id?: number,
     createdAt?: Date,
     updatedAt?: Date
