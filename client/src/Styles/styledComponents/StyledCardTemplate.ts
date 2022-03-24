@@ -13,8 +13,7 @@ margin: 0 0.6rem;
 
 const StyledArtistCardTemplate = styled(StyledCardTemplate)<{ portrait: string | undefined }>`
 min-width: 18rem;
-position: absolute;
-
+position: relative;
 .portrait {
   background-image: url(${props => props.portrait || 'http://images4.fanpop.com/image/photos/23200000/The-Joker-the-joker-23255208-1400-1050.jpg' });
   background-size: cover;
@@ -35,12 +34,21 @@ position: absolute;
 } 
 `
 const StyledAlbumCardTemplate = styled(StyledCardTemplate)`
-min-width: 14rem;
-min-height: 10rem;
-background-color: white;
-
+display: grid;
+width: 300x;
+height: 300px;
+aspect-ratio: 1;
+place-items: center;
 
 background-image: url('https://p7.hiclipart.com/preview/387/453/292/phonograph-record-lp-record-45-rpm-album-clip-art-concerts.jpg'});
+
+.title {
+  font-family: Boogaloo;
+  font-size: 1.6rem;
+}
+.description {
+
+}
 `
 
 

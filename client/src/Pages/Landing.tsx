@@ -64,7 +64,6 @@ const LandingPage: React.FunctionComponent = () => {
         </FormContextProvider>
 
       <ScrollList>
-
         <ArtistCardTemplate background='https://wallpapercave.com/wp/wp7172141.jpg' artist={exampleArtist}></ArtistCardTemplate>
         <AlbumCardTemplate album={ exampleAlbum }></AlbumCardTemplate>
       </ScrollList>
