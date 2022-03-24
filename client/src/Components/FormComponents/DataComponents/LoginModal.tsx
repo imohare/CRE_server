@@ -74,15 +74,15 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
     console.log('artist user info in context', artistInfo)
     const check = await checkIfInDB(isArtist); //should return falsy
     console.log("check", check)
-    setDisplayStage(4);
+    //setDisplayStage(4);
     if (!check) {
       let res;
-      if (isArtist) res = registerWithEthAddress(isArtist, artistInfo)
-      if (!isArtist) registerWithEthAddress(isArtist, consumerInfo);//setting the user in the global context
+      if (isArtist) res = await registerWithEthAddress(isArtist, artistInfo)
+      if (!isArtist) res = await registerWithEthAddress(isArtist, consumerInfo);//setting the user in the global context
       console.log(res)
       setDisplayStage(6) //successful registration
     } else {
-      setDisplayStage(5) //registration failed, this could happen if the user is already in the db
+      setDisplayStage(4);
     }
   }
 

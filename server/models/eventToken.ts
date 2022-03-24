@@ -12,10 +12,6 @@ import { Event } from './event';
 import { Consumer } from './consumer';
 
 class EventToken extends Model {
-  public image?: string;
-  public consumer_points!: number;
-  public edition_number!: number;
-  public total_editions!: number;
 
   // Auto-generated
   public id!: number;
@@ -48,26 +44,7 @@ class EventToken extends Model {
   }
 
   public static initialize(sequelize: Sequelize) {
-    this.init(
-      {
-        image: {
-          type: DataTypes.STRING,
-          defaultValue: 'no image uploaded'
-        },
-        consumer_points: {
-          type: DataTypes.INTEGER,
-          allowNull: false
-        },
-        edition_number: {
-          type: DataTypes.INTEGER,
-          allowNull: false
-        },
-        total_editions: {
-          type: DataTypes.INTEGER,
-          allowNull: false
-        },
-      },
-      { sequelize })
+    this.init( {}, { sequelize })
   }
 }
 export { EventToken };

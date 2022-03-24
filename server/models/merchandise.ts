@@ -18,6 +18,9 @@ class Merchandise extends Model {
   public name!: string;
   public type!: string;
   public description?: string;
+  public number_of_tokens!: number;
+  public tokens_image!: string;
+  public tokens_value!: number;
 
   //Auto-generated
   public id!: number;
@@ -59,7 +62,19 @@ class Merchandise extends Model {
         },
         description: {
           type: DataTypes.STRING,
-        }
+        }, 
+        number_of_tokens: {
+          type: DataTypes.INTEGER,
+          allowNull: false
+        },
+        tokens_image: {
+          type: DataTypes.STRING,
+          allowNull: false
+        },
+        tokens_value: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      }
       }, 
     {sequelize})
   }
