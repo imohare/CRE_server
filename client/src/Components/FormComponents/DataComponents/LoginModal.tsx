@@ -75,10 +75,11 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
     console.log('in register handler')
     console.log('artist user info in context', artistInfo)
     const check = await checkIfInDB(isArtist); //should return falsy
-    console.log("check", check)
-    //setDisplayStage(4);
+    //if falsey, we want to create a new user to our DB
     if (!check) {
+      console.log("in! check")
       let res;
+<<<<<<< HEAD
       if (isArtist) res = await registerWithEthAddress(isArtist, artistInfo)
       if (!isArtist) res = await registerWithEthAddress(isArtist, consumerInfo);//setting the user in the global context
       console.log(res)
@@ -86,8 +87,20 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
 
 
 
+=======
+      //stalling here!
+      if (isArtist) {
+        console.log("Stalling portion artist");
+        res = await registerWithEthAddress(isArtist, artistInfo)
+        console.log("res", res)
+      }
+      if (!isArtist) { res = await registerWithEthAddress(isArtist, consumerInfo); }//setting the user in the global context
+      console.log(res, "logging res");
+>>>>>>> aonia_login
       setDisplayStage(6) //successful registration
     } else {
+      console.log("in else check")
+      console.log('returning truthy')
       setDisplayStage(4);
     }
   }

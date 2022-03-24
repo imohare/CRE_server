@@ -24,16 +24,16 @@ const getConsumerByUsername = (consumerUsername: string) => {
         .catch(err => console.log(err))
 }
 
-const getConsumerByEthAddress = (consumerEthAddress: string) => {
-    fetch(`${BASE_URL}/getConsumerByEthAddress/${consumerEthAddress}`)
+const getConsumerByEthAddress = (eth_address: string) => {
+    fetch(`${BASE_URL}/getConsumerByEthAddress/${eth_address}`)
         .then(res => res.json())
         .catch(err => console.log(err))
 }
 
 
 const deleteConsumer = (consumerId: number) => {
-    return fetch(`${BASE_URL}/deleteConsumer/${consumerId}`, 
-    {method: "DELETE"});
+    return fetch(`${BASE_URL}/deleteConsumer/${consumerId}`,
+        { method: "DELETE" });
 }
 
 export { createConsumer, getConsumerById, getConsumerByUsername, deleteConsumer, getConsumerByEthAddress }
