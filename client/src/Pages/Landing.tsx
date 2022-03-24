@@ -7,6 +7,7 @@ import LoginModal from '../Components/FormComponents/DataComponents/LoginModal';
 import StyledPage from '../Styles/styledComponents/styledPage';
 import ScrollList from '../Components/ReuseableComponents/ScrollList';
 import ArtistCardTemplate from '../Components/ReuseableComponents/CardTemplates/ArtistCardTemplate';
+import AlbumCardTemplate from 'Components/ReuseableComponents/CardTemplates/AlbumCardTemplate';
 //styling
 
 //contexts
@@ -17,7 +18,9 @@ import { UserContext } from 'Data/UserContext';
 
 
 ///////testing/////////
-import { exampleArtist } from '../testing/exampleUsers';
+import { exampleArtist, exampleAlbum } from '../testing/exampleObjects';
+
+
 
 
 
@@ -60,9 +63,10 @@ const LandingPage: React.FunctionComponent = () => {
         </div>
         </FormContextProvider>
 
-      
       <ScrollList>
-        <ArtistCardTemplate background='https://wallpapercave.com/wp/wp7172141.jpg' artist={ exampleArtist }></ArtistCardTemplate>
+
+        <ArtistCardTemplate background='https://wallpapercave.com/wp/wp7172141.jpg' artist={exampleArtist}></ArtistCardTemplate>
+        <AlbumCardTemplate album={ exampleAlbum }></AlbumCardTemplate>
       </ScrollList>
     </StyledPage>
   )
