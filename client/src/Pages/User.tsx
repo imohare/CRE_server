@@ -11,15 +11,11 @@ import { getConsumerById } from '../Services/Consumer'
 
 const UserPage: React.FunctionComponent = () => {
   //if artist, display with additional update authorisation
-  const id = 
+  // const id = 
 
-  const asyncGetUserInfo = async () => {
-    let user = await getConsumerById()//enter user id here
-  }
-
-
-
-
+  // const asyncGetUserInfo = async () => {
+  //   let user = await getConsumerById()//enter user id here
+  // }
 
 
   return (

@@ -1,4 +1,5 @@
 //react
+import { useState } from 'react';
 //antd imports
 import { Form, Button, Input, InputNumber, DatePicker } from 'antd';
 //components
@@ -11,18 +12,21 @@ import { StaggerParentVariant, StaggerItemVariant } from '../../Styles/animation
 
 interface Props { 
   config: { [key: string]: any }[] | null;
+  onFormSubmit: (values: any)=>void;
 }
 
-const FormTemplate = ({ config }: Props) => {
+const FormTemplate = ({ config, onFormSubmit }: Props) => {
   const onFinish = (values: any) => {
-    console.log('on finish working')
-    console.log(values)
+       onFormSubmit(values)
   }
   const formField = (type: string) => {
+    // const [dateTime, setDateTime] = useState<string>('')
+
+
     switch (type) {
       case ('text'): return (<Input></Input>);
       case ('number'): return (<InputNumber></InputNumber>)
-      case ('date'): return (<DatePicker> {/*date is inside the return value _d: Date*/} </DatePicker>)
+      // case ('date'): return (<DatePicker showTime onChange={()=>setDateTime('')}> {/*date is inside the return value _d: Date*/} </DatePicker>)
     }
   }
   
@@ -36,9 +40,7 @@ const FormTemplate = ({ config }: Props) => {
       }}
       autoComplete="on"
       onFinish={onFinish}
-      onValuesChange={(changedValues, allValues) => {
-        console.log(changedValues, 'allvalues', allValues)
-      }}
+     
     >
       <motion.div
         variants={StaggerParentVariant}
