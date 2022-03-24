@@ -48,7 +48,7 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
     setName
   } = useContext(UserContext)
 
-  
+
   //sets the modal to display artist or user-login
   const [isArtist, setIsArtist] = useState(true);
   //sets the displayStage to 0 (buttons) 1 (artist/userform) and 2 (metamask signin)
@@ -79,15 +79,6 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
     if (!check) {
       console.log("in! check")
       let res;
-<<<<<<< HEAD
-      if (isArtist) res = await registerWithEthAddress(isArtist, artistInfo)
-      if (!isArtist) res = await registerWithEthAddress(isArtist, consumerInfo);//setting the user in the global context
-      console.log(res)
-//destructure {name, id} from artist
-
-
-
-=======
       //stalling here!
       if (isArtist) {
         console.log("Stalling portion artist");
@@ -96,7 +87,7 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
       }
       if (!isArtist) { res = await registerWithEthAddress(isArtist, consumerInfo); }//setting the user in the global context
       console.log(res, "logging res");
->>>>>>> aonia_login
+
       setDisplayStage(6) //successful registration
     } else {
       console.log("in else check")
