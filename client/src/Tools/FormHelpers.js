@@ -15,19 +15,19 @@ const getEthAddress = () => {
   }
 }
 
-const registerWithEthAddress = async (userT, info) => {
+const registerWithEthAddress = async (isArtist, info) => {
   const eth = await getEthAddress();
   let result;
-  if (userT)  result = await createArtist({ eth_address: eth, ...info });
-  if (!userT) result = await createConsumer({ eth_address: eth, ...info });
+  if (isArtist)  result = await createArtist({ eth_address: eth, ...info });
+  if (!isArtist) result = await createConsumer({ eth_address: eth, ...info });
   return result;
 }
 
-const checkIfInDB = async (user) => {
+const checkIfInDB = async (isArtist) => {
   const eth = await getEthAddress();
   let result;
-  if (user) result = await getArtistByEthAddress(eth)
-  if (!user) result = await getConsumerByEthAddress(eth)
+  if (isArtist) result = await getArtistByEthAddress(eth)
+  if (!isArtist) result = await getConsumerByEthAddress(eth)
   //result should be truthy or falsy
   return result;
 }
