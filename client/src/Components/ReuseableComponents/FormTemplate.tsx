@@ -1,4 +1,5 @@
 //react
+import { useState } from 'react';
 //antd imports
 import { Form, Button, Input, InputNumber, DatePicker } from 'antd';
 //components
@@ -19,10 +20,13 @@ const FormTemplate = ({ config, onFormSubmit }: Props) => {
        onFormSubmit(values)
   }
   const formField = (type: string) => {
+    // const [dateTime, setDateTime] = useState<string>('')
+
+
     switch (type) {
       case ('text'): return (<Input></Input>);
       case ('number'): return (<InputNumber></InputNumber>)
-      case ('date'): return (<DatePicker> {/*date is inside the return value _d: Date*/} </DatePicker>)
+      // case ('date'): return (<DatePicker showTime onChange={()=>setDateTime('')}> {/*date is inside the return value _d: Date*/} </DatePicker>)
     }
   }
   

@@ -21,6 +21,12 @@ interface ModalProps {
   onCancel: any;
 };
 
+// interface IUserData {
+//   userType: string;
+//   currentId: number;
+//   name: string;
+// }
+
 
 const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
 
@@ -34,8 +40,11 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
   } = useContext(FormContext)
 
   const {
+    userType,
     setUserType,
+    currentId,
     setCurrentId,
+    name,
     setName
   } = useContext(UserContext)
   //sets the modal to display artist or user-login
@@ -54,45 +63,47 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
   }, [displayStage])
   
   const registerFormSubmit = (values: any) => {
-    console.log('message from the module component', values)
-    isArtist ? setArtistInfo((...prev) => { return { ...prev, ...values } }) : setConsumerInfo((prev) => { return { ...prev, ...values }})
+    isArtist ? setArtistInfo({ ...values }) : setConsumerInfo({ ...values })
+    console.log('message from the context, artistInfo is:', artistInfo, 'consumer is ', consumerInfo)
     setDisplayStage(2);
-  
   }
 
   const registerHandler = async () => {
-    const res = await checkIfInDB(isArtist); //should return truthy
-    //stagechange to display message to signup first if result is undefined
-    if (res) {
-      if (isArtist) registerWithEthAddress(isArtist, artistInfo)
+    const check = await checkIfInDB(isArtist); //should return falsy
+    setDisplayStage(4);
+    if (!check) {
+      let res;
+      if (isArtist) res = registerWithEthAddress(isArtist, artistInfo)
       if (!isArtist) registerWithEthAddress(isArtist, consumerInfo);//setting the user in the global context
-      setDisplayStage(5)
+      console.log(res)
+      setDisplayStage(6) //successful registration
     } else {
-      setDisplayStage(7)
+      setDisplayStage(5) //registration failed, this could happen if the user is already in the db
     }
-    
   }
-  const loginHandler = async (u: boolean) => {
+
+  const loginHandler = async (u: boolean):Promise<void> => {
       const check = await checkIfInDB(u);
       if (check) {
         const eth = await getEthAddress();
-        //check if eth_address is needed in c
         if (u) {
-          const artistObj = await getArtistByEthAddress(eth);
-          //get id and name from return of artist
-          // const { name, id } = artistObj;
-            setUserType('artist');
+          const artistObjResponse = await getArtistByEthAddress(eth);
+          // const { name, id } = await artistObjResponse;
+          // setCurrentId(id);
+          // setName(name)
+          setUserType('artist');
         }
         if (!u) {
-          const consumerObj = await getConsumerByEthAddress(eth);
+          const consumerObjResponse = await getConsumerByEthAddress(eth);
+          // const { username, consumerId } = consumerObjResponse;
+          // setCurrentId(id);
+          // setName(username)
           setUserType('consumer');
         }
     }
-      setDisplayStage(6)
-    
+      setDisplayStage(7)
   }
 
-    
 const submitUser = () => {
   console.log('logged in')
     }
@@ -106,8 +117,16 @@ const submitUser = () => {
       </>)
     }
     if (displayStage === 1) return <FormTemplate onFormSubmit={ registerFormSubmit } config={isArtist ? artistConfig : consumerConfig} />
-      if (displayStage === 2) return <button onClick={ registerHandler }>sign up with metamask</button>
-    if (displayStage === 3) return <><button onClick={ () => loginHandler(true) }>log in as artist</button><button onClick={()=>loginHandler(false)}>log in as user</button></>
+      if (displayStage === 2) return <Button onClick={ registerHandler }>sign up with metamask</Button>
+      if (displayStage === 3) return <><Button onClick={() => loginHandler(true)}>log in as artist</Button><Button onClick={() => loginHandler(false)}>log in as user</Button></>
+      // 4: already registered
+      if (displayStage === 4) return <><div>You are already registered, please log in:</div><Button onClick={()=>setDisplayStage(3)}>click here to log in</Button></>
+      //7: registration failed
+      if (displayStage === 5) return <div>Registration failed for unknown reasons. Please try again and contact us if it still doesn't work</div>
+      // 5 successful registration
+      if (displayStage === 6) return <div>Thank you for registering!</div>
+      // 6: successful login
+      if (displayStage === 7) return <div>You are now logged in</div>
   }
   
   return (
@@ -115,7 +134,7 @@ const submitUser = () => {
       visible={isVisible}
       onOk={submitUser}
       onCancel={onCancel}
-      footer={null}
+      footer={ displayStage > 5 && (<Button onClick={onCancel}>start browsing!</Button>)}
       >
       { displayContent() }
     </Modal>
