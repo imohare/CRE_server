@@ -82,13 +82,13 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
     }
   }
 
-  const loginHandler = async (u: boolean) => {
+  const loginHandler = async (u: boolean):Promise<void> => {
       const check = await checkIfInDB(u);
       if (check) {
         const eth = await getEthAddress();
         if (u) {
           const artistObjResponse = await getArtistByEthAddress(eth);
-          // const { name, id } = artistObjResponse;
+          // const { name, id } = await artistObjResponse;
           // setCurrentId(id);
           // setName(name)
           setUserType('artist');
