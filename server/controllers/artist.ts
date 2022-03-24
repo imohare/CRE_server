@@ -25,11 +25,27 @@ async function getArtistById(req: Request, res: Response) {
     res.status(500);
     res.json(error);
   }
- }
+}
 
- async function getArtistByName(req: Request, res: Response) {
+
+async function getArtistByEthAddress(req: Request, res: Response) {
   try {
-    const _artists = await Artist.findAll({where:{name: req.body.name}});
+    const _artist = await Artist.findOne({ where: { eth_address: req.params.eth_address } });
+    res.status(200);
+    res.json(_artist);
+  } catch (error) {
+    console.log(error);
+    res.status(500);
+    res.json(error);
+  }
+}
+
+
+
+
+async function getArtistByName(req: Request, res: Response) {
+  try {
+    const _artists = await Artist.findAll({ where: { name: req.body.name } });
     res.status(200);
     res.json(_artists);
   } catch (error) {
@@ -37,7 +53,7 @@ async function getArtistById(req: Request, res: Response) {
     res.status(500);
     res.json(error);
   }
- }
+}
 
 async function getArtists(req: Request, res: Response) {
   try {
@@ -53,16 +69,16 @@ async function getArtists(req: Request, res: Response) {
 
 async function deleteArtist(req: Request, res: Response) {
   const artistId = req.params.artistId;
-  await AlbumToken.destroy({where: {ArtistId: artistId}});
-  await MerchandiseToken.destroy({where: {ArtistId: artistId}});
-  await EventToken.destroy({where: {ArtistId: artistId}});
-  await Album.destroy({where: {ArtistId: artistId}});
-  await Event.destroy({where: {ArtistId: artistId}});
-  await Merchandise.destroy({where: {ArtistId: artistId}});
-  await Points.destroy({where: {ArtistId: artistId}});
-  await Artist.destroy({where: {id: artistId}});
+  await AlbumToken.destroy({ where: { ArtistId: artistId } });
+  await MerchandiseToken.destroy({ where: { ArtistId: artistId } });
+  await EventToken.destroy({ where: { ArtistId: artistId } });
+  await Album.destroy({ where: { ArtistId: artistId } });
+  await Event.destroy({ where: { ArtistId: artistId } });
+  await Merchandise.destroy({ where: { ArtistId: artistId } });
+  await Points.destroy({ where: { ArtistId: artistId } });
+  await Artist.destroy({ where: { id: artistId } });
   res.status(201);
-  res.json();  
+  res.json();
 }
 
-export { createArtist, getArtistById, getArtists, deleteArtist, getArtistByName };
+export { createArtist, getArtistById, getArtists, deleteArtist, getArtistByName, getArtistByEthAddress };
