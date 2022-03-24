@@ -47,11 +47,14 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
     name,
     setName
   } = useContext(UserContext)
+
+  
   //sets the modal to display artist or user-login
   const [isArtist, setIsArtist] = useState(true);
   //sets the displayStage to 0 (buttons) 1 (artist/userform) and 2 (metamask signin)
   const [displayStage, setDisplayStage] = useState(initialStage);
-
+  
+  
   
   const loginAs = (artist: boolean) => {
     setDisplayStage(1)
@@ -75,6 +78,10 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
       if (isArtist) res = await registerWithEthAddress(isArtist, artistInfo)
       if (!isArtist) res = await registerWithEthAddress(isArtist, consumerInfo);//setting the user in the global context
       console.log(res)
+//destructure {name, id} from artist
+
+
+
       setDisplayStage(6) //successful registration
     } else {
       setDisplayStage(4);

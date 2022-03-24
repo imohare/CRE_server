@@ -1,14 +1,12 @@
 //react
 import { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
 //antd imports
-import { Button } from 'antd';
+import { Button, Card } from 'antd';
 //components
 import LoginModal from '../Components/FormComponents/DataComponents/LoginModal';
 import StyledPage from '../Styles/styledComponents/styledPage';
 import ScrollList from '../Components/ReuseableComponents/ScrollList';
-import CardTemplate from '../Components/ReuseableComponents/CardTemplate';
-
+import ArtistCardTemplate from '../Components/ReuseableComponents/CardTemplates/ArtistCardTemplate';
 //styling
 
 //contexts
@@ -17,8 +15,13 @@ import { FormContextProvider } from '../Data/FormConfigs/FormContext';
 import { UserContext } from 'Data/UserContext';
 
 
-const LandingPage: React.FunctionComponent = () => {
 
+///////testing/////////
+import { exampleArtist } from '../testing/exampleUsers';
+
+
+
+const LandingPage: React.FunctionComponent = () => {
   //public view
   //login popup is set to visible on clicking the login button and to invisible on clicking cancel on Modal component:
   const [isRegister, setIsRegister] = useState(false);
@@ -40,8 +43,7 @@ const LandingPage: React.FunctionComponent = () => {
       <h1>Landing page</h1>
       {/* Header */}
       <div>
-     
-      {
+       {
           isRegister
         ? <LoginModal isVisible={isRegister} initialStage={3} onCancel={()=>toggleRegister()} />
         : null
@@ -60,22 +62,12 @@ const LandingPage: React.FunctionComponent = () => {
 
       
       <ScrollList>
-        {/* map through children in here: */}
-        <CardTemplate></CardTemplate>
-        <CardTemplate></CardTemplate>
-        <CardTemplate></CardTemplate>
-        <CardTemplate></CardTemplate>
-        <CardTemplate></CardTemplate>
-        <CardTemplate></CardTemplate>
-        <CardTemplate></CardTemplate>
-        <CardTemplate></CardTemplate>
-        <CardTemplate></CardTemplate>
-        <CardTemplate></CardTemplate>
-        <CardTemplate></CardTemplate>
-        <CardTemplate></CardTemplate>
+        <ArtistCardTemplate background='https://wallpapercave.com/wp/wp7172141.jpg' artist={ exampleArtist }></ArtistCardTemplate>
       </ScrollList>
     </StyledPage>
   )
 }
 
 export default LandingPage;
+
+//look for a random background generator api!   https://wallpapercave.com/wp/wp7172141.jpg'
