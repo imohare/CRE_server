@@ -63,13 +63,17 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
   }, [displayStage])
 
   const registerFormSubmit = (values: any) => {
+    console.log({ ...values });
     isArtist ? setArtistInfo({ ...values }) : setConsumerInfo({ ...values })
     console.log('message from the context, artistInfo is:', artistInfo, 'consumer is ', consumerInfo)
     setDisplayStage(2);
   }
 
   const registerHandler = async () => {
+    console.log('in register handler')
+    console.log('artist user info in context', artistInfo)
     const check = await checkIfInDB(isArtist); //should return falsy
+    console.log("check", check)
     setDisplayStage(4);
     if (!check) {
       let res;

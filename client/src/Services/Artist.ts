@@ -33,12 +33,12 @@ const getArtistByName = (artistName: string) => {
 const getArtistByEthAddress = (artistEthAddress: string) => {
     return fetch(`${BASE_URL}/getArtistByEthAddress/${artistEthAddress}`)
         .then(res => res.json)
-        .catch(err => console.log(err, "error"))
+        .catch(err => { return null })
 }
 
 const deleteArtist = (artistId: number) => {
-    return fetch(`${BASE_URL}/deleteArtist/${artistId}`, 
-    {method: "DELETE"});
+    return fetch(`${BASE_URL}/deleteArtist/${artistId}`,
+        { method: "DELETE" });
 }
 
 export { createArtist, getArtists, getArtistById, getArtistByName, deleteArtist, getArtistByEthAddress }
