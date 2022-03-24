@@ -24,4 +24,4 @@ const getArtistsAlbumTokens = (artistId: number) => {
         .catch(err => console.log(err, "errors"))
 }
 
-export { createAlbumToken, getAlbumTokenById, getAlbumTokens, getConsumersAlbumTokens, getArtistsAlbumTokens }
+export { getAlbumTokenById, getAlbumTokens, getConsumersAlbumTokens, getArtistsAlbumTokens }
