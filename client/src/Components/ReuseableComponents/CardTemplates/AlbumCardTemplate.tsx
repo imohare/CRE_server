@@ -12,8 +12,14 @@ const AlbumCardTemplate = ({album}: IProps) => {
   return (
     <Link to={`/album/${album.id}`}>
       <StyledAlbumCardTemplate background={background}>
-      <div className='title'><h4>{ album.name }</h4></div>
-      <div className='portrait'></div>
+
+        <div className="coverImg">
+        </div>
+
+        <div className='title'><h4>{ album.name }</h4></div>
+        <div className='portrait'></div>
+        
+
       </StyledAlbumCardTemplate>
      </Link>
   )
