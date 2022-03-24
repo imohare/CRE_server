@@ -21,35 +21,44 @@ const LandingPage: React.FunctionComponent = () => {
 
   //public view
   //login popup is set to visible on clicking the login button and to invisible on clicking cancel on Modal component:
-  const [isVisible, setIsVisible] = useState(false);
-
+  const [isRegister, setIsRegister] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
 
   const { userType, setUserType } = useContext(UserContext);
 
   const toggleLogin = () => {
-     setIsVisible(prevVisibility => !prevVisibility)
+        setIsLogin(prev => !prev)
+  }
+  const toggleRegister = () => {
+    setIsRegister(prev => !prev)
   }
 
   return (
     //if user, display personalised component on top -> artist || user - else, have a login sign up option
     <StyledPage>
+       <FormContextProvider>
       <h1>Landing page</h1>
       {/* Header */}
-      <p>public view without personalisation but with login/signup option</p>
-      <FormContextProvider>
+      <div>
+     
       {
-        isVisible
-            ? <LoginModal isVisible={isVisible} initialStage={0} onCancel={ toggleLogin } />
+          isRegister
+        ? <LoginModal isVisible={isRegister} initialStage={3} onCancel={()=>toggleRegister()} />
         : null
         }
-      </FormContextProvider>
-      { userType === 'artist' ? <h1>hello artist</h1> : null}
-      <Button type="primary" onClick={ toggleLogin }>sign up</Button>
-      <p>for user and artist with personalised components at the top</p>
-      <p>user view with recommendations</p>
-      <Link to="/event">each link to an event </Link>/<Link to="/artist"> artist</Link>
-      <p>artist view with upcoming</p>
-      <Link to="/artist">each a link to an upcoming event</Link>
+      <Button type="primary" onClick={ toggleLogin}>sign up</Button>
+        </div>
+        <div>
+        {
+          isLogin
+        ? <LoginModal isVisible={isLogin} initialStage={0} onCancel={()=>toggleLogin()} />
+        : null
+        }
+      <Button type="primary" onClick={ toggleRegister}>log in</Button>
+        </div>
+        </FormContextProvider>
+
+      
       <ScrollList>
         {/* map through children in here: */}
         <CardTemplate></CardTemplate>
