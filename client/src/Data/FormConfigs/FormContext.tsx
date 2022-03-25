@@ -7,7 +7,8 @@ import {
 } from '../DataTypes/FormContextType';
 //change that to ./DataTypes and put the IFomrContext into DataTypes
 
-export const FormContext = createContext<IFormContext>(null!);
+// @ts-ignore
+export const FormContext = createContext<IFormContext>({});
 
 
 //Form context with consumer and artist sign up form configs
