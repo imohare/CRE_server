@@ -16,14 +16,14 @@ import { motion } from 'framer-motion'
 import {StaggerParentVariant} from '../../../Styles/animations/formAnimations';
 
 
+// interface IExpectedResponse {
+//   name: String;
+//   date: object;
+//   description: String;
+//   number_of_tokens: Number;
+//   tokens_value: Number;
+// }
 
-interface IExpectedResponse {
-  name: String;
-  date: object;
-  description: String;
-  number_of_tokens: Number;
-  tokens_value: Number;
-}
 interface IProps {
   onSubmitForm: (res: any)=>void;
 }
@@ -31,45 +31,29 @@ interface IProps {
 
 const AlbumForm = ({ onSubmitForm }: IProps) => {
   
-  const [date, setDate] = useState(new Date);
+  const [date, setDate] = useState('');
 
   const [image, setImage] = useState(null);
 
-
-
   
   const formatResult = (res:any) => {
-  //gets the date out of the nesting:
     const { name, description, number_of_tokens, tokens_value } = res;
-    console.log(name, description, number_of_tokens, tokens_value)
-
-
+    const result = {
+      name: name,
+      description: description,
+      number_of_tokens: number_of_tokens,
+      tokens_value: tokens_value,
+      date: date
+    }
+    onSubmitForm(result)
 }
-
-  // const registerFormSubmit = (values: any) => {
-  //   setAlbumInfo({ ...values })
-  //   console.log("values", albumInfo, values.date._d)
-
-  // }
-
-  // const onChange = (date, dateString) => {
-  //   console.log(date, dateString)
-  // }
-
-  // const registerHandler = async (info:any) => {
-  //   await createAlbum.apply(null, info)
-  // }
-
-  // const submitAlbum = () => {
-  //   console.log('album submitted')
-  // }
 
   return (
      
     <Card title="new album">
       <Form
 
-        onFinish={(values: IExpectedResponse) => { 
+        onFinish={(values: any) => { 
             formatResult(values)
         }}
       labelCol={{
@@ -96,10 +80,9 @@ const AlbumForm = ({ onSubmitForm }: IProps) => {
           label='Date'
             rules={[{ required: true, message: 'Please select when your album was created' }]}
           >
-            <DatePicker onChange={(date, dateString) => {
-              console.log('unformatted: ', date)
-              console.log('back to javascript:', date?.toDate())
-
+            <DatePicker
+              onChange={(date, dateString) => {
+              setDate(moment(date).format('MMMM Do YYYY, h:mm:ss a'))      
               }} picker="month" />
           </Form.Item>
 

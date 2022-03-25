@@ -35,8 +35,10 @@ const handleEventState = () => setType('event');
   
 
   const handleAlbumFormSubmit=(album: IAlbum) => {
-    console.log(album)
+    console.log('greetings', album)
   }
+
+
   // const handleEventFormSubmit = (event: IEvent) => {
   //   console.log(event)
   // }
@@ -44,8 +46,6 @@ const handleEventState = () => setType('event');
   //   console.log(merch)
   // }
   
-
-
 
   return (
     <StyledPage>
