@@ -91,44 +91,44 @@ const LandingPage: React.FunctionComponent = () => {
   return (
     //if user, display personalised component on top -> artist || user - else, have a login sign up option
     <div>
-      <Parallax>
+      {/* <Parallax> */}
 
-        <StyledHeader>
-          <FormContextProvider>
-            <h1>Landing page</h1>
-            <div className='login'>
-              <div className='buttons'>
-                {
-                  isRegister
-                    ? <LoginModal isVisible={isRegister} initialStage={3} onCancel={() => toggleRegister()} />
-                    : null
-                }
-                <StyledButton type="primary" onClick={toggleLogin}>sign up</StyledButton>
-                {
-                  isLogin
-                    ? <LoginModal isVisible={isLogin} initialStage={0} onCancel={() => toggleLogin()} />
-                    : null
-                }
-                <StyledButton type="primary" onClick={toggleRegister}>log in</StyledButton>
-              </div>
+      <StyledHeader>
+        <FormContextProvider>
+          <h1>Landing page</h1>
+          <div className='login'>
+            <div className='buttons'>
+              {
+                isRegister
+                  ? <LoginModal isVisible={isRegister} initialStage={3} onCancel={() => toggleRegister()} />
+                  : null
+              }
+              <StyledButton type="primary" onClick={toggleLogin}>sign up</StyledButton>
+              {
+                isLogin
+                  ? <LoginModal isVisible={isLogin} initialStage={0} onCancel={() => toggleLogin()} />
+                  : null
+              }
+              <StyledButton type="primary" onClick={toggleRegister}>log in</StyledButton>
             </div>
-          </FormContextProvider>
+          </div>
+        </FormContextProvider>
 
-        </StyledHeader>
+      </StyledHeader>
 
-        <StyledPage>
-          <ScrollList title='Artists'>
-            <ArtistCardTemplate background='https://wallpapercave.com/wp/wp7172141.jpg' artist={exampleArtist}></ArtistCardTemplate>
-          </ScrollList>
-          <ScrollList>
-            <AlbumCardTemplate album={exampleAlbum} background='https://t2.genius.com/unsafe/600x600/https%3A%2F%2Fimages.genius.com%2F7f2b5d24f103535739f89b984b5ec818.1000x1000x1.png'></AlbumCardTemplate>
-          </ScrollList>
-          <EventCardTemplate background='https://wallpapercave.com/wp/wp7172141.jpg' event={exampleEvent}></EventCardTemplate>
-          <ScrollList title='Merchandise'>
-            <MerchCardTemplate background='https://wallpapercave.com/wp/wp7172141.jpg' merchandise={exampleMerchandise}></MerchCardTemplate>
-          </ScrollList>
-        </StyledPage>
-      </Parallax>
+      <StyledPage>
+        <ScrollList title='Artists'>
+          <ArtistCardTemplate background='https://wallpapercave.com/wp/wp7172141.jpg' artist={exampleArtist}></ArtistCardTemplate>
+        </ScrollList>
+        <ScrollList>
+          <AlbumCardTemplate album={exampleAlbum} background='https://t2.genius.com/unsafe/600x600/https%3A%2F%2Fimages.genius.com%2F7f2b5d24f103535739f89b984b5ec818.1000x1000x1.png'></AlbumCardTemplate>
+        </ScrollList>
+        <EventCardTemplate background='https://wallpapercave.com/wp/wp7172141.jpg' event={exampleEvent}></EventCardTemplate>
+        <ScrollList title='Merchandise'>
+          <MerchCardTemplate background='https://wallpapercave.com/wp/wp7172141.jpg' merchandise={exampleMerchandise}></MerchCardTemplate>
+        </ScrollList>
+      </StyledPage>
+      {/* </Parallax> */}
       <h3>New Albums: </h3>
       {albums.map(album => album.name)}
       <h3>New Merchandise: </h3>

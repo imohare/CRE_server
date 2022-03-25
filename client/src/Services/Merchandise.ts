@@ -17,9 +17,9 @@ const createMerchandise = (merchandise: IMerchandise, artistId: number) => {
 const getAllMerchandises = () => {
     return fetch(`${BASE_URL}/getMerchandises`)
         .then(res => res.json())
-        .then(res => {
-            return res.map((merchandise:any) => ({...merchandise, createdAt: new Date(merchandise.createdAt)}))
-        })
+        // .then(res => {
+        //     return res.map((merchandise: any) => ({ ...merchandise, createdAt: new Date(merchandise.createdAt) }))
+        // })
         .catch(err => console.log(err, "error"))
 }
 
