@@ -64,21 +64,21 @@ export const MerchandiseFormContextProvider = ({ children }: ContextProps) => {
       ],
       type: 'number'
     },
-    {
-      attr: {
-        name: 'tokens_image',
-        key: 'merchandise_tokens_image',
-        label: 'NFT image',
-      },
-      rules: [
-        {
-          required: true,
-          type: 'string',
-          message: 'You must chose an imgage for your NFT',
-        },
-      ],
-      type: 'string'
-    },
+    // {
+    //   attr: {
+    //     name: 'tokens_image',
+    //     key: 'merchandise_tokens_image',
+    //     label: 'NFT image',
+    //   },
+    //   rules: [
+    //     {
+    //       required: true,
+    //       type: 'string',
+    //       message: 'You must chose an imgage for your NFT',
+    //     },
+    //   ],
+    //   type: 'string'
+    // },
     {
       attr: {
         name: 'tokens_value',
