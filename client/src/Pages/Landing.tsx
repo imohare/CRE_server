@@ -9,6 +9,7 @@ import StyledPage from '../Styles/styledComponents/styledPage';
 import ScrollList from '../Components/ReuseableComponents/ScrollList';
 import { EventCardTemplate, AlbumCardTemplate, ArtistCardTemplate, MerchCardTemplate } from '../Components/ReuseableComponents/CardTemplates';
 import {FormContextProvider} from '../Data/FormConfigs/FormContext'
+import AlbumList from 'Components/Lists/albumList';
 //styling
 import StyledHeader from '../Styles/styledComponents/StyledHeader';
 import Parallax from '../Styles/animations/ParallaxAnimation';
@@ -17,10 +18,9 @@ import { UserContext } from 'Data/UserContext';
 //data 
 import { getAllAlbums } from "Services/Album";
 
-
 ///////testing/////////
-
 import { exampleArtist, exampleAlbum, exampleEvent, exampleMerchandise } from '../Testing/exampleObjects';
+import { IAlbum } from 'Data/DataTypes';
 
 
 
@@ -41,7 +41,7 @@ const LandingPage: React.FunctionComponent = () => {
 
   //album stuff
 
-  const [albums, setAlbums] = useState([]);
+  const [albums, setAlbums] = useState<IAlbum[] | []>([]);
 
   useEffect(() => {
   getAllAlbums()
@@ -53,6 +53,8 @@ const LandingPage: React.FunctionComponent = () => {
       console.log("Error occured.")
     })
   }, [])
+
+  console.log("albums", albums)
 
   return (
     //if user, display personalised component on top -> artist || user - else, have a login sign up option
@@ -95,6 +97,7 @@ const LandingPage: React.FunctionComponent = () => {
       </ScrollList>
       </StyledPage>
       </Parallax>
+      <AlbumList />
       </div>
   )
 }
