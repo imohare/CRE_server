@@ -11,7 +11,7 @@ const { createMerchandise, getMerchandises, getMerchandise, getArtistMerchandise
 
 const { createConsumer, getConsumerById, getConsumerByUsername, deleteConsumer, getConsumerByEthAddress } = require('./controllers/consumer.ts');
 
-const { createAlbumToken, getAlbumToken, getAlbumTokens, getConsumerAlbumTokens, getArtistAlbumsTokens, getConsumerAlbumTokensByConsumerId } = require('./controllers/albumToken.ts');
+const { createAlbumToken, getAlbumToken, getAlbumTokens, getConsumerAlbumTokens, getArtistAlbumsTokens, getConsumerAlbumTokensByConsumerId, getAlbumTokenByAlbumId } = require('./controllers/albumToken.ts');
 
 const { createMerchandiseToken, getMerchandiseToken, getMerchandiseTokens, getConsumerMerchandiseTokens, getArtistMerchandisesTokens, getConsumerMerchTokensByConsumerId } = require('./controllers/merchandiseToken.ts');
 
@@ -20,15 +20,15 @@ const { createEventToken, getEventToken, getEventTokens, getConsumerEventTokens,
 const { albumTokenPurchase, eventTokenPurchase, merchandiseTokenPurchase } = require('./controllers/purchasing.ts');
 
 // Artist
-router.post('/createArtist', createArtist);
-router.get('/getArtists', getArtists);
-router.get('/getArtistByEthAddress/:eth_address', getArtistByEthAddress)
-router.get('/getArtistById/:artistId', getArtistById);
-router.get('/getArtistByName/:artistName', getArtistByName);
-router.delete('/deleteArtist/:artistId', deleteArtist);
+router.post('/createArtist', createArtist); //works
+router.get('/getArtists', getArtists); //works
+router.get('/getArtistByEthAddress/:eth_address', getArtistByEthAddress) //works
+router.get('/getArtistById/:artistId', getArtistById); //works
+router.get('/getArtistByName/:artistName', getArtistByName); // doesn't work
+router.delete('/deleteArtist/:artistId', deleteArtist); // works
 
 // Album
-router.post('/createAlbum/:artistId', createAlbum);
+router.post('/createAlbum/:artistId', createAlbum); // works
 router.get('/getAlbums', getAlbums);
 router.get('/getAlbum/:albumId', getAlbum);
 router.get('/getArtistAlbums/:artistId', getArtistAlbums);
@@ -64,6 +64,7 @@ router.get('/getAlbumTokens', getAlbumTokens);
 router.get('/getConsumerAlbumTokens/:albumId/:consumerId', getConsumerAlbumTokens);
 router.get('/getArtistAlbumsTokens/:artistId', getArtistAlbumsTokens);
 router.get('/getConsumerAlbumTokensByConsumerId/:consumerId', getConsumerAlbumTokensByConsumerId);
+router.get('/getAlbumTokenByAlbumId/:albumId', getAlbumTokenByAlbumId)
 
 // Merchandise Token 
 router.get('/getMerchandiseToken/:tokenId', getMerchandiseToken);

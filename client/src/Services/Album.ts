@@ -17,6 +17,9 @@ const createAlbum = (album: IAlbum, artistId: number) => {
 const getAllAlbums = () => {
     return fetch(`${BASE_URL}/getAlbums`)
         .then(res => res.json())
+        .then(res => {
+            return res.map((album:any) => ({...album, createdAt: new Date(album.createdAt)}))
+        })
         .catch(err => console.log(err, "error"))
 }
 
@@ -39,8 +42,8 @@ const getAlbumbyArtistId = (albumId: number, artistId: number) => {
 }
 
 const deleteAlbum = (albumId: number) => {
-    return fetch(`${BASE_URL}/deleteAlbum/${albumId}`, 
-    {method: "DELETE"});
+    return fetch(`${BASE_URL}/deleteAlbum/${albumId}`,
+        { method: "DELETE" });
 }
 
 export { createAlbum, getAllAlbums, getAlbumById, getAllAlbumsbyArtistId, getAlbumbyArtistId, deleteAlbum }
