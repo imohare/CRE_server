@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { NotIn } from 'sequelize-typescript';
 import { AlbumToken, Album, Artist, Consumer } from "../models";
 import { errorHandler } from "./error";
 
@@ -39,6 +40,26 @@ async function getArtistAlbumsTokens(req: Request, res: Response) {
   } catch (error) { errorHandler(res, error) }
 }
 
+
+
+async function getAlbumTokenByAlbumId(req: Request, res: Response) {
+  try {
+    if (!req.params.albumId) {
+      res.status(400);
+      res.json('incorrect schema for request');
+    } else {
+      const albumId = req.params.albumId;
+      const _albumToken = AlbumToken.findOne({ where: { AlbumId: albumId } });
+      res.json(_albumToken);
+    }
+  }
+  catch (err) {
+    errorHandler(res, err);
+  }
+}
+
+
+
 async function getConsumerAlbumTokens(req: Request, res: Response) {
   try {
     if (!req.params.albumId || !req.params.consumerId) {
@@ -74,12 +95,12 @@ async function getConsumerAlbumTokensByConsumerId(req: Request, res: Response) {
     } else {
       const consumerId = req.params.consumerId;
       const consumer = await Consumer.findByPk(consumerId);
-      
+
       if (!consumer) {
         res.status(400);
         res.json('Consumer not found');
       } else {
-        const _tokens = await AlbumToken.findAll({ where: {ConsumerId: consumerId } });
+        const _tokens = await AlbumToken.findAll({ where: { ConsumerId: consumerId } });
         res.json(_tokens);
         res.status(201);
       }
@@ -87,4 +108,4 @@ async function getConsumerAlbumTokensByConsumerId(req: Request, res: Response) {
   } catch (error) { errorHandler(res, error) }
 }
 
-export { getAlbumTokens, getAlbumToken, getConsumerAlbumTokens, getArtistAlbumsTokens, getConsumerAlbumTokensByConsumerId }
+export { getAlbumTokens, getAlbumToken, getConsumerAlbumTokens, getArtistAlbumsTokens, getConsumerAlbumTokensByConsumerId, getAlbumTokenByAlbumId }

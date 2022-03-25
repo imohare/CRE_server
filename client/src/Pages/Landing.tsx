@@ -8,10 +8,15 @@ import LoginModal from '../Components/FormComponents/DataComponents/LoginModal';
 import StyledPage from '../Styles/styledComponents/styledPage';
 import ScrollList from '../Components/ReuseableComponents/ScrollList';
 import { EventCardTemplate, AlbumCardTemplate, ArtistCardTemplate, MerchCardTemplate } from '../Components/ReuseableComponents/CardTemplates';
+
 import { FormContextProvider } from '../Data/FormConfigs/FormContext'
 //styling
 import StyledHeader from '../Styles/styledComponents/StyledHeader';
 import Parallax from '../Styles/animations/ParallaxAnimation';
+
+
+//stylingß
+import StyledHeader from '../Styles/styledComponents/StyledHeader'
 //contexts
 import { UserContext } from 'Data/UserContext';
 
@@ -65,6 +70,7 @@ const LandingPage: React.FunctionComponent = () => {
 
       <StyledPage>
 
+
         <ScrollList title='Artists'>
           <ArtistCardTemplate background='https://wallpapercave.com/wp/wp7172141.jpg' artist={exampleArtist}></ArtistCardTemplate>
         </ScrollList>
@@ -77,6 +83,7 @@ const LandingPage: React.FunctionComponent = () => {
         </ScrollList>
       </StyledPage>
     </Parallax>
+
   )
 }
 

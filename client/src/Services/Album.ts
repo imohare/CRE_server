@@ -39,8 +39,8 @@ const getAlbumbyArtistId = (albumId: number, artistId: number) => {
 }
 
 const deleteAlbum = (albumId: number) => {
-    return fetch(`${BASE_URL}/deleteAlbum/${albumId}`, 
-    {method: "DELETE"});
+    return fetch(`${BASE_URL}/deleteAlbum/${albumId}`,
+        { method: "DELETE" });
 }
 
 export { createAlbum, getAllAlbums, getAlbumById, getAllAlbumsbyArtistId, getAlbumbyArtistId, deleteAlbum }
