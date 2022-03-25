@@ -23,7 +23,6 @@ const App:React.FunctionComponent = () => (
     <GlobalStyles />
     <UserContextProvider> 
     <Routes>
-      <Route path="/register" element={<RegisterPage />} />
       <Route path="/artist/:artistId" element={<ArtistPage />} />
       <Route path="/album/:albumId" element={ <AlbumPage /> } />
       <Route path="/event/:eventId" element={ <EventPage /> } />

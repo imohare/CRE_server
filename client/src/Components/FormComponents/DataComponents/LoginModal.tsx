@@ -48,7 +48,7 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
     setName
   } = useContext(UserContext)
 
-  
+
   //sets the modal to display artist or user-login
   const [isArtist, setIsArtist] = useState(true);
   //sets the displayStage to 0 (buttons) 1 (artist/userform) and 2 (metamask signin)
@@ -65,29 +65,36 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
   }, [displayStage])
 
   const registerFormSubmit = (values: any) => {
-    console.log({ ...values });
     isArtist ? setArtistInfo({ ...values }) : setConsumerInfo({ ...values })
     console.log('message from the context, artistInfo is:', artistInfo, 'consumer is ', consumerInfo)
     setDisplayStage(2);
   }
 
+
+  //here now
   const registerHandler = async () => {
     console.log('in register handler')
-    console.log('artist user info in context', artistInfo)
+    console.log('artist info in context 1:" consumer info in context 2', artistInfo, consumerInfo)
     const check = await checkIfInDB(isArtist); //should return falsy
-    console.log("check", check)
-    //setDisplayStage(4);
+    //if falsey, we want to create a new user to our DB
     if (!check) {
+      console.log("in! check")
       let res;
-      if (isArtist) res = await registerWithEthAddress(isArtist, artistInfo)
-      if (!isArtist) res = await registerWithEthAddress(isArtist, consumerInfo);//setting the user in the global context
-      console.log(res)
-//destructure {name, id} from artist
 
+      if (isArtist) {
+        res = await registerWithEthAddress(isArtist, artistInfo)
+        console.log("res", res)
+      }
+      if (!isArtist) {
 
+        res = await registerWithEthAddress(isArtist, consumerInfo);
+      }//setting the user in the global context
+      console.log(res, "user res logged");
 
       setDisplayStage(6) //successful registration
     } else {
+      console.log("in else check")
+      console.log('returning truthy')
       setDisplayStage(4);
     }
   }
