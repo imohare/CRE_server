@@ -74,11 +74,7 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
   //here now
   const registerHandler = async () => {
     console.log('in register handler')
-<<<<<<< HEAD
-    console.log('artist/consumer user info in context', artistInfo)
-=======
     console.log('artist info in context 1:" consumer info in context 2', artistInfo, consumerInfo)
->>>>>>> aonia_login
     const check = await checkIfInDB(isArtist); //should return falsy
     //if falsey, we want to create a new user to our DB
     if (!check) {
@@ -88,14 +84,10 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
         res = await registerWithEthAddress(isArtist, artistInfo)
         console.log("res", res)
       }
-<<<<<<< HEAD
-      if (!isArtist) { res = await registerWithEthAddress(isArtist, consumerInfo); }//setting the user in the global context
-=======
       if (!isArtist) {
 
         res = await registerWithEthAddress(isArtist, consumerInfo);
       }//setting the user in the global context
->>>>>>> aonia_login
       console.log(res, "user res logged");
 
       setDisplayStage(6) //successful registration
