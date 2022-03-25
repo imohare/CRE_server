@@ -35,7 +35,6 @@ const handleMerchandiseState = () => setType('merchandise');
 
   return (
     <StyledPage>
-      <AlbumFormContextProvider>
         <Link to="/">home</Link>
         <h1>Artist</h1>
       <p>To upload new NFTs to your profile, please select 
@@ -48,8 +47,6 @@ const handleMerchandiseState = () => setType('merchandise');
       { (type === 'merchandise') ? <MerchandiseForm /> : null}
     <p>artist view with option to update offers</p>
     <p>user view without any authorisations but with fake follow button</p>
-    <Link to="/event">specific event</Link>
-      </AlbumFormContextProvider>
     </StyledPage>
   )
 }

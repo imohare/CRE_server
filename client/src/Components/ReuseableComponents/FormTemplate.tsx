@@ -20,6 +20,7 @@ interface Props {
 const FormTemplate = ({ config, onFormSubmit }: Props) => {
 
   const onFinish = (values: any) => {
+    
     onFormSubmit(values)
   }
 
@@ -35,7 +36,6 @@ const FormTemplate = ({ config, onFormSubmit }: Props) => {
          format="YYYY-MM-DD HH:mm"
          showTime={{ defaultValue: moment('12:00PM', 'HH:mm') }}
          inputReadOnly
-        
        >
       </DatePicker>
         );
