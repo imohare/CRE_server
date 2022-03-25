@@ -99,6 +99,18 @@ const StyledEventCardTemplate = styled(StyledCardTemplate)`
 
 const StyledMerchCardTemplate = styled(StyledCardTemplate)`
 
+.image {
+  dixplay: flex;
+
+  text-align: center;
+  background-image: url(${props => props.background});
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 50%;
+  width: 100%;
+  justify-content: flex-end;
+}
 `
 
 export {
