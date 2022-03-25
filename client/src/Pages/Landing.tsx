@@ -8,9 +8,10 @@ import LoginModal from '../Components/FormComponents/DataComponents/LoginModal';
 import StyledPage from '../Styles/styledComponents/styledPage';
 import ScrollList from '../Components/ReuseableComponents/ScrollList';
 import { EventCardTemplate, AlbumCardTemplate, ArtistCardTemplate, MerchCardTemplate } from '../Components/ReuseableComponents/CardTemplates';
-
+import {FormContextProvider} from '../Data/FormConfigs/FormContext'
 //styling
-import StyledHeader from '../Styles/styledComponents/StyledHeader'
+import StyledHeader from '../Styles/styledComponents/StyledHeader';
+import Parallax from '../Styles/animations/ParallaxAnimation';
 //contexts
 import { UserContext } from 'Data/UserContext';
 
@@ -37,9 +38,9 @@ const LandingPage: React.FunctionComponent = () => {
 
   return (
     //if user, display personalised component on top -> artist || user - else, have a login sign up option
-      <>
+      <Parallax>
       <StyledHeader>
-       {/* <FormContextProvider> */}
+       <FormContextProvider>
       <h1>Landing page</h1>
       <div className='login'>
       <div className='buttons'>
@@ -57,7 +58,7 @@ const LandingPage: React.FunctionComponent = () => {
         <StyledButton type="primary" onClick={ toggleRegister}>log in</StyledButton>
      </div>
   </div>
-    {/* </FormContextProvider> */}
+    </FormContextProvider>
       
  </StyledHeader>
     
@@ -74,7 +75,7 @@ const LandingPage: React.FunctionComponent = () => {
         <MerchCardTemplate background='https://wallpapercave.com/wp/wp7172141.jpg' merchandise={exampleMerchandise}></MerchCardTemplate>
       </ScrollList>
       </StyledPage>
-      </>
+      </Parallax>
   )
 }
 

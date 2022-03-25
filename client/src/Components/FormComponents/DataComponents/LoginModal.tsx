@@ -80,6 +80,7 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
     if (!check) {
       console.log("in! check")
       let res;
+
       if (isArtist) {
         res = await registerWithEthAddress(isArtist, artistInfo)
         console.log("res", res)
