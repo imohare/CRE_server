@@ -8,6 +8,7 @@ import { getArtistById } from '../Services/Artist';
 import "./Album.css"
 import moment from 'moment';
 
+
 // simport { listenerCount } from 'process';
 import { IAlbum } from 'Data/DataTypes';
 import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
@@ -61,8 +62,6 @@ const AlbumPage: React.FunctionComponent = () => {
         getArtistInfo(artistId);
         console.log(artistData);
     }, [])
-
-
 
 
     return (
