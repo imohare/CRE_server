@@ -16,8 +16,10 @@ const EventCardTemplate = ({event, background}: IProps) => {
         <div className='image'>
         <div className="date"><span>THU 24/03/22</span></div>
         </div>
-        <div className='title'><h4>{event.name}</h4></div>
-        <div className='location'>{ event.address}</div>
+        <div className="description">
+        <h4>{event.name}</h4>
+          <div className='location'><p>{event.address}</p></div>
+          </div>
       </StyledEventCardTemplate>
      </Link>
   )

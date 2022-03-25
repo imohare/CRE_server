@@ -29,7 +29,6 @@ border-radius: 2px;
   padding: 2px 5px;
   top: 0;
   right: 0;
-  text-shadow: 1px 1px black;
   z-index: 5;
 } 
 `
@@ -37,8 +36,6 @@ border-radius: 2px;
 const StyledCardTemplate = styled.div<{ background: any | undefined }>`
 display: flex;
 flex-direction: column;
-justify-content: center;
-align-items: center;
 height: 20rem;
 width: 15rem;
 position: relative;
@@ -50,20 +47,22 @@ padding: 5px;
   transition: transform 0.4s;
 }
 .description {
+  margin-top: 7px;
+  color: #B1D4E0;
   h4{
     font-family: 'Oswald';
     font-size: 1.6rem;
-    text-shadow: -1px -1px black;
+    text-align: center;
     line-height: 1.2;
   }
-  margin-top: 7px;
-  color: #B1D4E0;
-  text-align: center;
+  p {
+    padding-left: 1rem;
+
+  }
 }
 `
 
 const StyledAlbumCardTemplate = styled(StyledCardTemplate)`
-text-align: center;
 .coverImg {
 
   background-image: url(${props => props.background ||'https://images.onlinelabels.com/images/clip-art/Gerald_G/Gerald_G_45_RPM_Record.png'});
@@ -77,14 +76,24 @@ text-align: center;
 `
 
 const StyledEventCardTemplate = styled(StyledCardTemplate)`
-text-align: center;
+
 .image {
+  dixplay: flex;
+  text-align: center;
   background-image: url(${props => props.background ||'https://images.onlinelabels.com/images/clip-art/Gerald_G/Gerald_G_45_RPM_Record.png'});
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
   height: 50%;
   width: 100%;
+  justify-content: flex-end;
+}
+.date {
+  color: red;
+  font-family: 'Oswald';
+  align-self: flex-end;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 `
 

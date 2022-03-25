@@ -7,6 +7,7 @@ import { IEvent } from './Event';
 import { IMerchandise } from './Merchandise';
 import { IMerchToken } from './MerchandiseToken';
 import { IPoints } from './Points';
+import { IUserObject } from './UserObject';
 
 
-export type { IArtist, IAlbum, IConsumer, IEvent, IMerchandise, IAlbumToken, IEventToken, IMerchToken, IPoints }
+export type { IArtist, IAlbum, IConsumer, IEvent, IMerchandise, IAlbumToken, IEventToken, IMerchToken, IPoints, IUserObject };

@@ -68,7 +68,7 @@ const exampleAlbumToken: IAlbumToken = {
 const exampleMerchandise: IMerchandise = {
   name: 'T-shirt',
   type: 'clothing',
-  description: 'tshirt with a famous face',
+  description: 'a tshirt with a famous face',
   number_of_tokens: 4, 
   tokens_image: '', 
   tokens_value: 3, 
