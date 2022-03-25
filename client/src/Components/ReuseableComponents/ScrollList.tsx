@@ -14,11 +14,19 @@ width: 100%;
 overflow: hidden;
 `
 
-interface IProps {children: React.ReactNode;}
+interface IProps {
+  children: React.ReactNode;
+  title?: string;
+}
 
-const ScrollList = ({ children }: IProps) => {
+const ScrollList = ({ children, title }: IProps) => {
   return (
     <OuterDiv>
+      <div>
+        <h2>
+      { title }
+    </h2>
+      </div>
     <InnerCarousel>
     {children}
       </InnerCarousel>

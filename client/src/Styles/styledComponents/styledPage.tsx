@@ -12,7 +12,8 @@ width: 96%;
 }
 @media screen and (min-width: 1400px) {
   width: 70%;
-
 }
 `
+
+
 export default StyledPage;
