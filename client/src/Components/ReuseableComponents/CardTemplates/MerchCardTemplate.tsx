@@ -12,7 +12,7 @@ interface IProps {
 const MerchCardTemplate = ({merchandise, background}: IProps) => {
   return (
     <Link to={`/event/${merchandise.id}`}>
-      <StyledMerchCardTemplate>
+      <StyledMerchCardTemplate background={background}>
         <div className='image'>
         </div>
         <div className='title'><h4>{merchandise.name || 'anonymous event'}</h4></div>

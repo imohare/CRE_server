@@ -98,10 +98,12 @@ const StyledEventCardTemplate = styled(StyledCardTemplate)`
 `
 
 const StyledMerchCardTemplate = styled(StyledCardTemplate)`
+
 .image {
   dixplay: flex;
+
   text-align: center;
-  background-image: url(${props => props.background ||'https://images.onlinelabels.com/images/clip-art/Gerald_G/Gerald_G_45_RPM_Record.png'});
+  background-image: url(${props => props.background});
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
