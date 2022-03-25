@@ -19,6 +19,10 @@ async function getEventToken(req: Request, res: Response) {
   } catch (error) { errorHandler(res, error) }
 }
 
+
+
+
+
 async function getArtistEventsTokens(req: Request, res: Response) {
   try {
     if (!req.params.artistId) {
@@ -75,12 +79,12 @@ async function getConsumerEventTokensByConsumerId(req: Request, res: Response) {
     } else {
       const consumerId = req.params.consumerId;
       const consumer = await Consumer.findByPk(consumerId);
-      
+
       if (!consumer) {
         res.status(400);
         res.json('Consumer not found');
       } else {
-        const _tokens = await EventToken.findAll({ where: {ConsumerId: consumerId } });
+        const _tokens = await EventToken.findAll({ where: { ConsumerId: consumerId } });
         res.json(_tokens);
         res.status(201);
       }
