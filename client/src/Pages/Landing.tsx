@@ -13,10 +13,7 @@ import {FormContextProvider} from '../Data/FormConfigs/FormContext'
 import AlbumList from 'Components/Lists/albumList';
         
 //styling
-import StyledHeader from '../Styles/styledComponents/StyledHeader';
 import Parallax from '../Styles/animations/ParallaxAnimation';
-
-
 //stylingß
 import StyledHeader from '../Styles/styledComponents/StyledHeader'
 //contexts
@@ -26,10 +23,9 @@ import { getAllAlbums } from "Services/Album";
 
 ///////testing/////////
 import { exampleArtist, exampleAlbum, exampleEvent, exampleMerchandise } from '../Testing/exampleObjects';
-import { IAlbum } from 'Data/DataTypes';
-
-
-
+import { IAlbum, IEvent, IMerchandise } from 'Data/DataTypes';
+import { getEvents } from 'Services/Event';
+import { getAllMerchandises } from 'Services/Merchandise';
 
 const LandingPage: React.FunctionComponent = () => {
   //public view
@@ -46,22 +42,50 @@ const LandingPage: React.FunctionComponent = () => {
     setIsRegister(prev => !prev)
   }
 
-  //album stuff
-
   const [albums, setAlbums] = useState<IAlbum[] | []>([]);
+  const [events, setEvents] = useState<IEvent[] | []>([]);
+  // const [upcomingEvents, setUpcomingEvents] = useState<IEvent [] | []>([]);
+  const [merchandise, setMerchandise] = useState<IMerchandise[] | []>([]);
 
   useEffect(() => {
-  getAllAlbums()
-    .then(response => {
-      setAlbums(response)
-    })
-    .catch( error => {
-      console.log(error)
-      console.log("Error occured.")
-    })
+    getAllAlbums()
+      .then((response: IAlbum[]) => {
+        if (response) {
+          response.sort((firstItem, secondItem) => secondItem.createdAt.getTime() - firstItem.createdAt.getTime())
+          setAlbums(response)
+        }
+      })
+      .catch( error => {
+        console.log(error)
+        console.log("Error occured.")
+      })
+    getEvents()
+      .then((response: IEvent[]) => {
+        if (response) {
+          response.sort((firstItem, secondItem) => secondItem.createdAt.getTime() - firstItem.createdAt.getTime())
+          setEvents(response)
+        }
+      })
+      .catch( error => {
+        console.log(error)
+        console.log("Error occured.")
+      })
+    getAllMerchandises()
+      .then((response: IMerchandise[]) => {
+        if (response) {
+          response.sort((firstItem, secondItem) => secondItem.createdAt.getTime() - firstItem.createdAt.getTime())
+          setMerchandise(response)
+        }
+        setMerchandise(response)
+      })
   }, [])
 
-  console.log("albums", albums)
+  // const today = new Date();
+  // console.log("event date", events[0].date.getTime())
+  // console.log("today date" , today)
+  // let upcoming = events.filter(evt => evt.date >= today)
+  // console.log(upcoming)
+
 
   return (
     //if user, display personalised component on top -> artist || user - else, have a login sign up option
@@ -92,8 +116,6 @@ const LandingPage: React.FunctionComponent = () => {
       </StyledHeader>
 
       <StyledPage>
-
-
         <ScrollList title='Artists'>
           <ArtistCardTemplate background='https://wallpapercave.com/wp/wp7172141.jpg' artist={exampleArtist}></ArtistCardTemplate>
         </ScrollList>
@@ -106,9 +128,14 @@ const LandingPage: React.FunctionComponent = () => {
         </ScrollList>
       </StyledPage>
       </Parallax>
-      <AlbumList />
+        <h3>New Albums: </h3>
+        {albums.map(album => album.name)}
+        <h3>New Merchandise: </h3>
+        {merchandise.map( merchandise => merchandise.name)}
+        <h3>New Events: </h3>
+        {events.map(events => events.name)}
+        <h3>Upcoming Events: </h3>
       </div>
-
   )
 }
 
