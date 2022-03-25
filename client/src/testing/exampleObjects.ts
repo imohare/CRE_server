@@ -26,11 +26,11 @@ const exampleConsumer: IConsumer = {
 }
 
 const exampleAlbum: IAlbum = {
-  name: 'If I build a home on the moon',
+  name: 'Pink',
   year: new Date(),
-  description: 'list of titles' ,
+  description: "Pink is Lancey Foux's debut EP, posted on and featured on Hoodtapes",
   number_of_tokens: 5,
-  tokens_image: '',
+  tokens_image: 'https://t2.genius.com/unsafe/600x600/https%3A%2F%2Fimages.genius.com%2F7f2b5d24f103535739f89b984b5ec818.1000x1000x1.png',
   tokens_value: 100,
   id: 7,
   createdAt: new Date(),
@@ -39,7 +39,7 @@ const exampleAlbum: IAlbum = {
 }
 const exampleEvent: IEvent = {
   name: 'partey',
-  address: '',
+  address: '52 Horseferry Road',
   date: new Date(),
   description: '',
   number_of_tokens: 7,

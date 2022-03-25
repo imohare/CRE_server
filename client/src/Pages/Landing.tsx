@@ -12,15 +12,11 @@ import { EventCardTemplate, AlbumCardTemplate, ArtistCardTemplate, MerchCardTemp
 //styling
 import StyledHeader from '../Styles/styledComponents/StyledHeader'
 //contexts
-import { FormContextProvider } from '../Data/FormConfigs/FormContext';
-//context is being used in this component
 import { UserContext } from 'Data/UserContext';
-
 
 
 ///////testing/////////
 import { exampleArtist, exampleAlbum, exampleEvent, exampleMerchandise } from '../testing/exampleObjects';
-
 
 
 
@@ -70,13 +66,13 @@ const LandingPage: React.FunctionComponent = () => {
       <ScrollList title='Artists'>
         <ArtistCardTemplate background='https://wallpapercave.com/wp/wp7172141.jpg' artist={exampleArtist}></ArtistCardTemplate>
       </ScrollList>
-      {/* <ScrollList>
-      <AlbumCardTemplate album={ exampleAlbum }></AlbumCardTemplate>
+      <ScrollList>
+          <AlbumCardTemplate album={exampleAlbum} background='https://t2.genius.com/unsafe/600x600/https%3A%2F%2Fimages.genius.com%2F7f2b5d24f103535739f89b984b5ec818.1000x1000x1.png'></AlbumCardTemplate>
       </ScrollList>
         <EventCardTemplate background='https://wallpapercave.com/wp/wp7172141.jpg' event={exampleEvent}></EventCardTemplate>
       <ScrollList title='Merchandise'>
         <MerchCardTemplate background='https://wallpapercave.com/wp/wp7172141.jpg' merchandise={exampleMerchandise}></MerchCardTemplate>
-      </ScrollList> */}
+      </ScrollList>
       </StyledPage>
       </>
   )

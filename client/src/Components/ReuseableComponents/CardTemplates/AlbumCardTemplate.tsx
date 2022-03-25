@@ -2,23 +2,23 @@ import { StyledAlbumCardTemplate } from '../../../Styles/styledComponents/Styled
 import { Link } from 'react-router-dom';
 import { IAlbum } from '../../../Data/DataTypes'
 
-const background='https://pngimg.com/uploads/vinyl/vinyl_PNG37.png'
 
 interface IProps {
   album: IAlbum;
+  background?: any;
 }
 
-const AlbumCardTemplate = ({album}: IProps) => {
+const AlbumCardTemplate = ({album, background}: IProps) => {
   return (
     <Link to={`/album/${album.id}`}>
       <StyledAlbumCardTemplate background={background}>
 
-        <div className="coverImg">
+        <div className="coverImg" >
         </div>
-
-        <div className='title'><h4>{ album.name }</h4></div>
-        <div className='portrait'></div>
-        
+        <div className='description'>
+          <h4>{album.name}</h4>
+          <p>{ album.description }</p>
+        </div>       
 
       </StyledAlbumCardTemplate>
      </Link>

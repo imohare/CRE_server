@@ -12,10 +12,15 @@ border-radius: 2px;
 .portrait {
   background-image: url(${props => props.portrait || 'http://images4.fanpop.com/image/photos/23200000/The-Joker-the-joker-23255208-1400-1050.jpg' });
   background-size: cover;
+  background-repeat: no-repeat;
   background-position: center;
   height: 100%;
   width: 100%;
   clip-path: polygon(0 0, 20% 0, 100% 90%,100% 100%, 50% 100%, 0 20%);
+}
+&:hover {
+  transform: scale(1.05);
+  transition: transform 0.4s;
 }
 .title {
   position: absolute;
@@ -29,42 +34,62 @@ border-radius: 2px;
 } 
 `
 
-const StyledGridTemplate = styled.div<{ background: string | undefined }>`
-display: grid;
-height: 18rem;
+const StyledCardTemplate = styled.div<{ background: any | undefined }>`
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+height: 20rem;
 width: 15rem;
 position: relative;
-grid-template-columns: repeat(6, 1fr);
-grid-template-rows: repeat(8, 1fr);
-background-color: white;
+background-color: rgba(255, 255, 255, 0.5);
+box-shadow: 1px 1px 5px black;
+padding: 5px;
+&:hover {
+  transform: scale(1.05);
+  transition: transform 0.4s;
+}
+.description {
+  h4{
+    font-family: 'Oswald';
+    font-size: 1.6rem;
+    text-shadow: -1px -1px black;
+    line-height: 1.2;
+  }
+  margin-top: 7px;
+  color: #B1D4E0;
+  text-align: center;
+}
 `
-const StyledAlbumCardTemplate = styled(StyledGridTemplate)`
 
+const StyledAlbumCardTemplate = styled(StyledCardTemplate)`
+text-align: center;
 .coverImg {
-  background-image: url(${props => props.background} || 'https://pngimg.com/uploads/vinyl/vinyl_PNG37.png')
-  grid-rows: 1 / span 6;
-  grid-column: 2 / 4;
-  background-color: red;
+
+  background-image: url(${props => props.background ||'https://images.onlinelabels.com/images/clip-art/Gerald_G/Gerald_G_45_RPM_Record.png'});
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 60%;
+  width: 100%;
 }
-.title {
-  font-family: Boogaloo;
-  font-size: 1.6rem;
+
+`
+
+const StyledEventCardTemplate = styled(StyledCardTemplate)`
+text-align: center;
+.image {
+  background-image: url(${props => props.background ||'https://images.onlinelabels.com/images/clip-art/Gerald_G/Gerald_G_45_RPM_Record.png'});
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 50%;
+  width: 100%;
 }
 `
 
-const StyledEventCardTemplate = styled(StyledGridTemplate)`
-display: grid;
-min-width: 13rem;
-height: 17rem;
-background-image: url(${props => props.background})
-`
+const StyledMerchCardTemplate = styled(StyledCardTemplate)`
 
-const StyledMerchCardTemplate = styled(StyledGridTemplate)`
-display: grid;
-display: grid;
-min-width: 13rem;
-height: 30px;
-background-color: white;
 `
 
 export {
