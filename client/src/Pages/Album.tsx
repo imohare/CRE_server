@@ -3,6 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 //react
 import { useState, useContext, useEffect } from 'react';
 import { getAlbumById } from '../Services/Album';
+import { getAlbumTokenByAlbumId } from '../Services/AlbumToken';
+
 // simport { listenerCount } from 'process';
 import { IAlbum } from 'Data/DataTypes';
 import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
@@ -24,7 +26,7 @@ const AlbumPage: React.FunctionComponent = () => {
         tokens_image: '',
         tokens_value: 0
     });
-    // const [albumTokenData, setAlbumTokenData] = useState({});
+    const [albumTokenData, setAlbumTokenData] = useState({});
 
 
     const getAlbumInfo = async (albumId: number) => {
@@ -41,10 +43,8 @@ const AlbumPage: React.FunctionComponent = () => {
         const albumId: number = parseInt(location.pathname.replace(/[^0-9.]+/g, ''))
         console.log("albumID in useEffect", albumId);
         getAlbumInfo(albumId);
-
         // const _albumToken = getAlbumTokenInfo(albumId);
         // console.log(_albumToken);
-
     }, [])
 
 
@@ -54,6 +54,7 @@ const AlbumPage: React.FunctionComponent = () => {
         <>
             <Link to="/">home</Link>
             <Link to="/artist">artist</Link>
+            <img src={albumData.tokens_image} alt="album cover" />
             < h1 > album page</h1 >
             <p>user view with album purchase</p>
             <p>{albumData.name}</p>
