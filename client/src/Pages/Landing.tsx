@@ -1,5 +1,5 @@
 //react
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 //antd imports
 import { Button, Card } from 'antd';
 import StyledButton from '../Styles/styledComponents/StyledButton';
@@ -14,6 +14,8 @@ import StyledHeader from '../Styles/styledComponents/StyledHeader';
 import Parallax from '../Styles/animations/ParallaxAnimation';
 //contexts
 import { UserContext } from 'Data/UserContext';
+//data 
+import { getAllAlbums } from "Services/Album";
 
 
 ///////testing/////////
@@ -37,8 +39,24 @@ const LandingPage: React.FunctionComponent = () => {
     setIsRegister(prev => !prev)
   }
 
+  //album stuff
+
+  const [albums, setAlbums] = useState([]);
+
+  useEffect(() => {
+  getAllAlbums()
+    .then(response => {
+      setAlbums(response)
+    })
+    .catch( error => {
+      console.log(error)
+      console.log("Error occured.")
+    })
+  }, [])
+
   return (
     //if user, display personalised component on top -> artist || user - else, have a login sign up option
+      <div>
       <Parallax>
       <StyledHeader>
        <FormContextProvider>
@@ -77,6 +95,7 @@ const LandingPage: React.FunctionComponent = () => {
       </ScrollList>
       </StyledPage>
       </Parallax>
+      </div>
   )
 }
 
