@@ -4,7 +4,7 @@ import { Modal, Button } from 'antd'
 //components
 import FormTemplate from '../../ReuseableComponents/FormTemplate';
 
-import { IArtistInfo, IConsumerInfo } from '../../../Data/DataTypes/FormContextType'
+import { IArtistInfo, IConsumerInfo } from '../../../Data/DataTypes/Forms/FormContextType'
 //data
 import { FormContext } from '../../../Data/FormConfigs/FormContext';
 import { UserContext } from '../../../Data/UserContext';

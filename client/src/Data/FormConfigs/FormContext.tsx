@@ -4,7 +4,11 @@ import {
   ContextProps,
   IConsumerInfo,
   IArtistInfo,
-} from '../DataTypes/FormContextType';
+  IAttributes,
+  IUserForm,
+  IRules
+} from '../DataTypes/Forms/FormContextType';
+
 //change that to ./DataTypes and put the IFomrContext into DataTypes
 
 // @ts-ignore

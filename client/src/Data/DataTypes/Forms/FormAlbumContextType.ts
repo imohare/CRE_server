@@ -2,7 +2,7 @@ interface ContextProps {
   children: React.ReactNode;
 }
 interface IAlbumInfo {
-  [key: string]: string | number;
+  [key: string]: string | number | Date;
 }
 interface IAttributes {
   name: string;
