@@ -18,7 +18,7 @@ import { UserContext } from 'Data/UserContext';
 
 ///////testing/////////
 
-import { exampleArtist, exampleAlbum, exampleEvent, exampleMerchandise } from '../testing/exampleObjects';
+import { exampleArtist, exampleAlbum, exampleEvent, exampleMerchandise } from '../Testing/exampleObjects';
 
 
 
