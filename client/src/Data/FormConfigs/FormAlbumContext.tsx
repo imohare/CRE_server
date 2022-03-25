@@ -31,8 +31,9 @@ export const AlbumFormContextProvider = ({ children }: ContextProps) => {
       rules: [
         {
           required: true,
-          type: 'date',
+          type: 'object',
           message: 'Please select when your album was created',
+          whitespace: true
         },
       ],
       type: 'date'

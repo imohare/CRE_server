@@ -35,9 +35,7 @@ const FormTemplate = ({ config, onFormSubmit }: Props) => {
          format="YYYY-MM-DD HH:mm"
          showTime={{ defaultValue: moment('12:00PM', 'HH:mm') }}
          inputReadOnly
-         onOk={(value) => { console.log('datapicker onOK:' + value) }}
-         onChange={(value) => { console.log('datepicker on change: ', value) }}
-         onPanelChange={(value)=>{console.log('datepicker on panelchange: ', value)}}
+        
        >
       </DatePicker>
         );

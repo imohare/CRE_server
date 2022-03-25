@@ -34,7 +34,7 @@ const AlbumForm = () => {
 
   const registerFormSubmit = (values: any) => {
     setAlbumInfo({ ...values })
-    console.log("values", albumInfo)
+    console.log("values", albumInfo, values.date._d)
 
 
   }
