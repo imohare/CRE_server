@@ -14,8 +14,9 @@ import MerchandiseForm from '../Components/FormComponents/DataComponents/Merchan
 import StyledPage from '../Styles/styledComponents/styledPage';
 //styling
 
-//contexts
-import { AlbumFormContextProvider } from '../Data/FormConfigs/FormAlbumContext';
+//Datatypes
+import { IAlbum, IEvent, IMerchandise } from '../Data/DataTypes';
+
 //context is being used in this component
 import { UserContext } from 'Data/UserContext';
 
@@ -23,7 +24,6 @@ import { UserContext } from 'Data/UserContext';
 const ArtistPage: React.FunctionComponent = () => {
 const [ type, setType] = useState('');
 const [ submitted, setSubmitted ] = useState(false);
-const { userType, setUserType } = useContext(UserContext);
 
 const toggleSubmit = () => {
   setSubmitted(prev => !prev)
@@ -31,7 +31,21 @@ const toggleSubmit = () => {
 
 const handleAlbumState = () => setType('album');
 const handleEventState = () => setType('event');
-const handleMerchandiseState = () => setType('merchandise');
+  const handleMerchandiseState = () => setType('merchandise');
+  
+
+  const handleAlbumFormSubmit=(album: IAlbum) => {
+    console.log(album)
+  }
+  // const handleEventFormSubmit = (event: IEvent) => {
+  //   console.log(event)
+  // }
+  // const handleMerchandiseFormSubmit = (merch: IMerchandise) => {
+  //   console.log(merch)
+  // }
+  
+
+
 
   return (
     <StyledPage>
@@ -42,9 +56,9 @@ const handleMerchandiseState = () => setType('merchandise');
       <button onClick={handleAlbumState}>album</button>
       <button onClick={handleEventState}>event</button>
       <button onClick={handleMerchandiseState}>merchandise</button>
-      { (type === 'album') ? <AlbumForm/> : null}
-      { (type === 'event') ? <EventForm /> : null}
-      { (type === 'merchandise') ? <MerchandiseForm /> : null}
+      {(type === 'album') ? <AlbumForm onSubmitForm={ handleAlbumFormSubmit }/> : null}
+      {/* { (type === 'event') ? <EventForm  onSubmitForm={ handleEventFormSubmit } /> : null}
+      {(type === 'merchandise') ? <MerchandiseForm onSubmitForm={ handleMerchandiseFormSubmit } /> : null} */}
     <p>artist view with option to update offers</p>
     <p>user view without any authorisations but with fake follow button</p>
     </StyledPage>
