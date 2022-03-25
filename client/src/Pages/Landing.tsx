@@ -11,7 +11,7 @@ import { EventCardTemplate, AlbumCardTemplate, ArtistCardTemplate, MerchCardTemp
 
 import { FormContextProvider } from '../Data/FormConfigs/FormContext'
 //styling
-import StyledHeader from '../Styles/styledComponents/StyledHeader';
+// import StyledHeader from '../Styles/styledComponents/StyledHeader';
 import Parallax from '../Styles/animations/ParallaxAnimation';
 
 
