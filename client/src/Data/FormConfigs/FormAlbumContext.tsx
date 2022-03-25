@@ -65,21 +65,21 @@ export const AlbumFormContextProvider = ({ children }: ContextProps) => {
       ],
       type: 'number'
     },
-    {
-      attr: {
-        name: 'tokens_image',
-        key: 'album_tokens_image',
-        label: 'NFT image',
-      },
-      rules: [
-        {
-          required: true,
-          type: 'file',
-          message: 'You must chose an imgage for your NFT',
-        },
-      ],
-      type: 'file'
-    },
+    // {
+    //   attr: {
+    //     name: 'tokens_image',
+    //     key: 'album_tokens_image',
+    //     label: 'NFT image',
+    //   },
+    //   rules: [
+    //     {
+    //       required: true,
+    //       type: 'file',
+    //       message: 'You must chose an imgage for your NFT',
+    //     },
+    //   ],
+    //   type: 'file'
+    // },
     {
       attr: {
         name: 'tokens_value',

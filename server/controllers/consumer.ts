@@ -38,6 +38,7 @@ async function getConsumerByEthAddress(req: Request, res: Response) {
     res.status(500);
     res.json(error);
   }
+
 }
 
 

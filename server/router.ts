@@ -11,7 +11,7 @@ const { createMerchandise, getMerchandises, getMerchandise, getArtistMerchandise
 
 const { createConsumer, getConsumerById, getConsumerByUsername, deleteConsumer, getConsumerByEthAddress } = require('./controllers/consumer.ts');
 
-const { createAlbumToken, getAlbumToken, getAlbumTokens, getConsumerAlbumTokens, getArtistAlbumsTokens, getConsumerAlbumTokensByConsumerId } = require('./controllers/albumToken.ts');
+const { createAlbumToken, getAlbumToken, getAlbumTokens, getConsumerAlbumTokens, getArtistAlbumsTokens, getConsumerAlbumTokensByConsumerId, getAlbumTokenByAlbumId } = require('./controllers/albumToken.ts');
 
 const { createMerchandiseToken, getMerchandiseToken, getMerchandiseTokens, getConsumerMerchandiseTokens, getArtistMerchandisesTokens, getConsumerMerchTokensByConsumerId } = require('./controllers/merchandiseToken.ts');
 
@@ -64,6 +64,7 @@ router.get('/getAlbumTokens', getAlbumTokens);
 router.get('/getConsumerAlbumTokens/:albumId/:consumerId', getConsumerAlbumTokens);
 router.get('/getArtistAlbumsTokens/:artistId', getArtistAlbumsTokens);
 router.get('/getConsumerAlbumTokensByConsumerId/:consumerId', getConsumerAlbumTokensByConsumerId);
+router.get('/getAlbumTokenByAlbumId/:albumId', getAlbumTokenByAlbumId)
 
 // Merchandise Token 
 router.get('/getMerchandiseToken/:tokenId', getMerchandiseToken);

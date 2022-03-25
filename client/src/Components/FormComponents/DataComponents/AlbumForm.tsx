@@ -1,6 +1,9 @@
 import { useState, useContext, useEffect } from 'react';
+
+import styled from 'styled-components';
 //antd imports
-import { Modal, Button } from 'antd';
+import { Modal, Button, Card, DatePicker } from 'antd';
+import moment from 'moment';
 //components
 import FormTemplate from '../../ReuseableComponents/FormTemplate';
 //types
@@ -11,6 +14,7 @@ import { UserContext } from '../../../Data/UserContext';
 import { createAlbum } from '../../../Services/Album';
 //helperfunction from tools
 //styling
+
 
 //onCancel toggles setVisible in parent component
 
@@ -26,18 +30,22 @@ const AlbumForm = () => {
   //   displayContent()
   // }, []);
 
+  
+
   const registerFormSubmit = (values: any) => {
-    console.log("values", values)
-    //setAlbumInfo({ ...values })
+    setAlbumInfo({ ...values })
+    console.log("values", albumInfo)
+
+
   }
 
-  const registerHandler = async (info:any) => {
-    await createAlbum.apply(null, info)
-  }
+  // const registerHandler = async (info:any) => {
+  //   await createAlbum.apply(null, info)
+  // }
 
-  const submitAlbum = () => {
-    console.log('album submitted')
-  }
+  // const submitAlbum = () => {
+  //   console.log('album submitted')
+  // }
 
   // const displayContent = () => {
   //   <>
@@ -46,11 +54,16 @@ const AlbumForm = () => {
   //   </>
   // }
 
+  const LighterFormTemplate = styled(FormTemplate)`
+    background-color: #33468F;
+  `
+
+ 
   return (
-   <>
-      <FormTemplate onFormSubmit={registerFormSubmit} config={albumConfig} />
-      <Button onClick={registerHandler}>Upload Album</Button>
-   </>
+     
+    <Card title="new album">
+      <LighterFormTemplate onFormSubmit={registerFormSubmit} config={albumConfig} />
+   </Card>
   )
 }
 

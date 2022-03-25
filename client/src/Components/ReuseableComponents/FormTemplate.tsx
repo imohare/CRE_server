@@ -6,6 +6,8 @@ import { Form, Button, Input, InputNumber, DatePicker, Upload } from 'antd';
 //styling
 import { motion, } from 'framer-motion';
 import { StaggerParentVariant, StaggerItemVariant } from '../../Styles/animations/formAnimations';
+import moment from 'moment';
+
 
 //final state: mapping through formfields for configuration object that 
 //is inupt in props
@@ -16,17 +18,26 @@ interface Props {
 }
 
 const FormTemplate = ({ config, onFormSubmit }: Props) => {
-  const onFinish = (values: any) => {
-       onFormSubmit(values)
-  }
-  const formField = (type: string) => {
-    //const [dateTime, setDateTime] = useState<string>('')
 
-    switch (type) {
+  const onFinish = (values: any) => {
+    onFormSubmit(values)
+  }
+
+  const [dateTime, setDateTime] = useState('');
+  
+  
+  const formField = (type: string) => {
+
+     switch (type) {
       case ('text'): return (<Input></Input>);
-      case ('number'): return (<InputNumber></InputNumber>)
-      case ('date'): return (<DatePicker> {/*date is inside the return value _d: Date*/} </DatePicker>)
-      case ('date-time'): return (<DatePicker showTime> {/*date is inside the return value _d: Date*/} </DatePicker>)
+      case ('number'): return (<InputNumber></InputNumber>);
+      case ('date'): return (<DatePicker
+        format="YYYY-MM-DD HH:mm"
+         showTime={{ defaultValue: moment('12:00PM', 'HH:mm') }}
+        
+       >
+      </DatePicker>
+        );
       case ('file'): return (<Upload></Upload>);
     }
   }
