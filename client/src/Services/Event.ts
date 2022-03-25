@@ -15,6 +15,9 @@ const createEvent = (event: IEvent) => {
 const getEvents = () => {
     return fetch(`${BASE_URL}/getEvents`)
         .then(res => res.json())
+        .then(res => {
+            return res.map((event:any) => ({...event, createdAt: new Date(event.createdAt)}))
+        })
         .catch((err => console.log(err, "error")))
 }
 

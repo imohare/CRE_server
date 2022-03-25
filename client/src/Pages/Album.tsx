@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 //react
 import { useState, useContext, useEffect } from 'react';
 import { getAlbumById } from '../Services/Album';
-import { getAlbumTokenByAlbumId } from '../Services/AlbumToken';
+//import { getAlbumTokenByAlbumId } from '../Services/AlbumToken';
 
 // simport { listenerCount } from 'process';
 import { IAlbum } from 'Data/DataTypes';
@@ -46,8 +46,6 @@ const AlbumPage: React.FunctionComponent = () => {
         // const _albumToken = getAlbumTokenInfo(albumId);
         // console.log(_albumToken);
     }, [])
-
-
 
 
     return (

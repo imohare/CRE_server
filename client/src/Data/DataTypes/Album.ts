@@ -8,7 +8,7 @@ interface IAlbum {
 
     //auto-generated
     id?: number,
-    createdAt?: Date,
+    createdAt: Date,
     updatedAt?: Date,
     ArtistId?: number,
 }
