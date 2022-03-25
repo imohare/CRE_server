@@ -6,6 +6,13 @@ const getAlbumTokenById = (tokenId: number) => {
         .catch(err => console.log(err, "errors"))
 }
 
+
+const getAlbumTokenByAlbumId = (albumId: number) => {
+    return fetch(`${BASE_URL}/getAlbumTokenByAlbumId/${albumId}`)
+        .then(res => res.json())
+        .catch(err => console.log(err, "error"))
+}
+
 const getAlbumTokens = () => {
     return fetch(`${BASE_URL}/getAlbumTokens`)
         .then(res => res.json())
@@ -24,4 +31,4 @@ const getArtistsAlbumTokens = (artistId: number) => {
         .catch(err => console.log(err, "errors"))
 }
 
-export { getAlbumTokenById, getAlbumTokens, getConsumersAlbumTokens, getArtistsAlbumTokens }
+export { getAlbumTokenById, getAlbumTokens, getConsumersAlbumTokens, getArtistsAlbumTokens, getAlbumTokenByAlbumId }

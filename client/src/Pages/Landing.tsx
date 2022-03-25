@@ -9,7 +9,7 @@ import StyledPage from '../Styles/styledComponents/styledPage';
 import ScrollList from '../Components/ReuseableComponents/ScrollList';
 import { EventCardTemplate, AlbumCardTemplate, ArtistCardTemplate, MerchCardTemplate } from '../Components/ReuseableComponents/CardTemplates';
 
-//styling
+//stylingß
 import StyledHeader from '../Styles/styledComponents/StyledHeader'
 //contexts
 import { UserContext } from 'Data/UserContext';
@@ -29,7 +29,7 @@ const LandingPage: React.FunctionComponent = () => {
   const { userType, setUserType } = useContext(UserContext);
 
   const toggleLogin = () => {
-        setIsLogin(prev => !prev)
+    setIsLogin(prev => !prev)
   }
   const toggleRegister = () => {
     setIsRegister(prev => !prev)
@@ -37,44 +37,44 @@ const LandingPage: React.FunctionComponent = () => {
 
   return (
     //if user, display personalised component on top -> artist || user - else, have a login sign up option
-      <>
+    <>
       <StyledHeader>
-       {/* <FormContextProvider> */}
-      <h1>Landing page</h1>
-      <div className='login'>
-      <div className='buttons'>
-         {
-           isRegister
-          ? <LoginModal isVisible={isRegister} initialStage={3} onCancel={()=>toggleRegister()} />
-          : null
-          }
-        <StyledButton type="primary" onClick={ toggleLogin}>sign up</StyledButton>
-           {
-            isLogin
-          ? <LoginModal isVisible={isLogin} initialStage={0} onCancel={()=>toggleLogin()} />
-          : null
-          }
-        <StyledButton type="primary" onClick={ toggleRegister}>log in</StyledButton>
-     </div>
-  </div>
-    {/* </FormContextProvider> */}
-      
- </StyledHeader>
-    
-  <StyledPage>
+        {/* <FormContextProvider> */}
+        <h1>Landing page</h1>
+        <div className='login'>
+          <div className='buttons'>
+            {
+              isRegister
+                ? <LoginModal isVisible={isRegister} initialStage={3} onCancel={() => toggleRegister()} />
+                : null
+            }
+            <StyledButton type="primary" onClick={toggleLogin}>sign up</StyledButton>
+            {
+              isLogin
+                ? <LoginModal isVisible={isLogin} initialStage={0} onCancel={() => toggleLogin()} />
+                : null
+            }
+            <StyledButton type="primary" onClick={toggleRegister}>log in</StyledButton>
+          </div>
+        </div>
+        {/* </FormContextProvider> */}
 
-      <ScrollList title='Artists'>
-        <ArtistCardTemplate background='https://wallpapercave.com/wp/wp7172141.jpg' artist={exampleArtist}></ArtistCardTemplate>
-      </ScrollList>
-      <ScrollList>
+      </StyledHeader>
+
+      <StyledPage>
+
+        <ScrollList title='Artists'>
+          <ArtistCardTemplate background='https://wallpapercave.com/wp/wp7172141.jpg' artist={exampleArtist}></ArtistCardTemplate>
+        </ScrollList>
+        <ScrollList>
           <AlbumCardTemplate album={exampleAlbum} background='https://t2.genius.com/unsafe/600x600/https%3A%2F%2Fimages.genius.com%2F7f2b5d24f103535739f89b984b5ec818.1000x1000x1.png'></AlbumCardTemplate>
-      </ScrollList>
+        </ScrollList>
         <EventCardTemplate background='https://wallpapercave.com/wp/wp7172141.jpg' event={exampleEvent}></EventCardTemplate>
-      <ScrollList title='Merchandise'>
-        <MerchCardTemplate background='https://wallpapercave.com/wp/wp7172141.jpg' merchandise={exampleMerchandise}></MerchCardTemplate>
-      </ScrollList>
+        <ScrollList title='Merchandise'>
+          <MerchCardTemplate background='https://wallpapercave.com/wp/wp7172141.jpg' merchandise={exampleMerchandise}></MerchCardTemplate>
+        </ScrollList>
       </StyledPage>
-      </>
+    </>
   )
 }
 
