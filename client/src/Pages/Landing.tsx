@@ -17,7 +17,7 @@ import { UserContext } from 'Data/UserContext';
 
 
 ///////testing/////////
-import { exampleArtist } from '../testing/exampleUsers';
+import { exampleArtist } from '../Testing/exampleUsers';
 
 
 

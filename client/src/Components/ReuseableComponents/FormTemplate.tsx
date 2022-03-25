@@ -1,7 +1,7 @@
 //react
 import { useState } from 'react';
 //antd imports
-import { Form, Button, Input, InputNumber, DatePicker } from 'antd';
+import { Form, Button, Input, InputNumber, DatePicker, Upload } from 'antd';
 //components
 //styling
 import { motion, } from 'framer-motion';
@@ -20,13 +20,14 @@ const FormTemplate = ({ config, onFormSubmit }: Props) => {
        onFormSubmit(values)
   }
   const formField = (type: string) => {
-    // const [dateTime, setDateTime] = useState<string>('')
-
+    //const [dateTime, setDateTime] = useState<string>('')
 
     switch (type) {
       case ('text'): return (<Input></Input>);
       case ('number'): return (<InputNumber></InputNumber>)
-      // case ('date'): return (<DatePicker showTime onChange={()=>setDateTime('')}> {/*date is inside the return value _d: Date*/} </DatePicker>)
+      case ('date'): return (<DatePicker> {/*date is inside the return value _d: Date*/} </DatePicker>)
+      case ('date-time'): return (<DatePicker showTime> {/*date is inside the return value _d: Date*/} </DatePicker>)
+      case ('file'): return (<Upload></Upload>);
     }
   }
   

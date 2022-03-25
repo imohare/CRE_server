@@ -1,46 +1,45 @@
 import { createContext, useState } from 'react';
-import { IAlbumFormContext, ContextProps, IAlbumInfo } from '../DataTypes/Forms/FormAlbumContextType';
+import { IMerchandiseFormContext, ContextProps, IMerchandiseInfo } from '../DataTypes/Forms/FormMerchandiseContextType';
 
-export const AlbumFormContext = createContext<IAlbumFormContext>(null!);
+export const MerchandiseFormContext = createContext<IMerchandiseFormContext>(null!);
 
-export const AlbumFormContextProvider = ({ children }: ContextProps) => {
+export const MerchandiseFormContextProvider = ({ children }: ContextProps) => {
   
-  const [albumInfo, setAlbumInfo] = useState<IAlbumInfo>({});
+  const [merchandiseInfo, setMerchandiseInfo] = useState<IMerchandiseInfo>({});
   
-  const albumConfig = [
+  const merchandiseConfig = [
     {
       attr: {
         name: 'name',
-        key: 'album_name',
+        key: 'merchandise_name',
         label: 'Name',
       }, 
       rules: [
         {
           required: true,
-          message: 'Please enter a name for your album',
+          message: 'Please enter a name for your merchandise',
         },
       ],
       type: 'text'
     },
     {
       attr: {
-        name: 'date',
-        key: 'album_year',
-        label: 'Date',
+        name: 'type',
+        key: 'type',
+        label: 'Type',
       }, 
       rules: [
         {
           required: true,
-          type: 'date',
-          message: 'Please select when your album was created',
+          message: 'Please enter the type of your merchandise',
         },
       ],
-      type: 'date'
+      type: 'text'
     },
     {
       attr: {
         name: 'description',
-        key: 'album_location',
+        key: 'merchandise_location',
         label: 'Description',
       },
       rules: [
@@ -53,14 +52,14 @@ export const AlbumFormContextProvider = ({ children }: ContextProps) => {
     {
       attr: {
         name: 'number_of_tokens',
-        key: 'album_number_of_tokens',
-        label: '# of Album NFTs',
+        key: 'merchandise_number_of_tokens',
+        label: '# of Merchandise NFTs',
       },
       rules: [
         {
           required: true,
           type: 'number',
-          message: 'You must chose a number of NFTs for your album',
+          message: 'You must chose a number of NFTs for your merchandise',
         },
       ],
       type: 'number'
@@ -68,22 +67,22 @@ export const AlbumFormContextProvider = ({ children }: ContextProps) => {
     {
       attr: {
         name: 'tokens_image',
-        key: 'album_tokens_image',
+        key: 'merchandise_tokens_image',
         label: 'NFT image',
       },
       rules: [
         {
           required: true,
-          type: 'file',
+          type: 'string',
           message: 'You must chose an imgage for your NFT',
         },
       ],
-      type: 'file'
+      type: 'string'
     },
     {
       attr: {
         name: 'tokens_value',
-        key: 'album_tokens_value',
+        key: 'merchandise_tokens_value',
         label: 'NFT value',
       },
       rules: [
@@ -99,8 +98,8 @@ export const AlbumFormContextProvider = ({ children }: ContextProps) => {
   
   //wrap the formtemplate in the parent component
   return (
-    <AlbumFormContext.Provider value={{ albumConfig, albumInfo, setAlbumInfo }}>
+    <MerchandiseFormContext.Provider value={{ merchandiseConfig, merchandiseInfo, setMerchandiseInfo }}>
       { children }
-    </AlbumFormContext.Provider>
+    </MerchandiseFormContext.Provider>
   ); 
 }

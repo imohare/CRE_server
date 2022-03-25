@@ -8,7 +8,9 @@ import { storage } from '../Firebase/index'
 //services
 import { createAlbum } from 'Services/Album';
 //components
-import AlbumModal from '../Components/FormComponents/DataComponents/AlbumModal';
+import AlbumForm from '../Components/FormComponents/DataComponents/AlbumForm'
+import EventForm from '../Components/FormComponents/DataComponents/EventForm';
+import MerchandiseForm from '../Components/FormComponents/DataComponents/MerchandiseForm'
 import StyledPage from '../Styles/styledComponents/styledPage';
 //styling
 
@@ -39,11 +41,11 @@ const handleMerchandiseState = () => setType('merchandise');
       <p>To upload new NFTs to your profile, please select 
         from the following category and input required information: </p>
       <button onClick={handleAlbumState}>album</button>
-      { (type === 'album') ? <AlbumModal isVisible={true} onCancel={()=>toggleSubmit()} /> : null}
       <button onClick={handleEventState}>event</button>
       <button onClick={handleMerchandiseState}>merchandise</button>
-      <div>
-      </div>
+      { (type === 'album') ? <AlbumForm/> : null}
+      { (type === 'event') ? <EventForm /> : null}
+      { (type === 'merchandise') ? <MerchandiseForm /> : null}
     <p>artist view with option to update offers</p>
     <p>user view without any authorisations but with fake follow button</p>
     <Link to="/event">specific event</Link>

@@ -4,7 +4,7 @@ import { Modal, Button } from 'antd';
 //components
 import FormTemplate from '../../ReuseableComponents/FormTemplate';
 //types
-import { IAlbumInfo } from '../../../Data/DataTypes/FormAlbumContextType'
+import { IAlbumInfo } from '../../../Data/DataTypes/Forms/FormAlbumContextType'
 //data
 import { AlbumFormContext } from '../../../Data/FormConfigs/FormAlbumContext';
 import { UserContext } from '../../../Data/UserContext';
@@ -13,12 +13,8 @@ import { createAlbum } from '../../../Services/Album';
 //styling
 
 //onCancel toggles setVisible in parent component
-interface ModalProps {
-  isVisible: boolean;
-  onCancel: any;
-};
 
-const AlbumModal = ({ isVisible, onCancel }: ModalProps) => {
+const AlbumForm = () => {
 
   const {
     albumConfig,
@@ -26,34 +22,36 @@ const AlbumModal = ({ isVisible, onCancel }: ModalProps) => {
     setAlbumInfo,
   } = useContext(AlbumFormContext)
 
-  useEffect(() => {
-    displayContent()
-  }, []);
+  // useEffect(() => {
+  //   displayContent()
+  // }, []);
 
   const registerFormSubmit = (values: any) => {
-    setAlbumInfo({ ...values })
+    console.log("values", values)
+    //setAlbumInfo({ ...values })
   }
 
-  const registerHandler = async (info) => {
-    await createAlbum(...info)
+  const registerHandler = async (info:any) => {
+    await createAlbum.apply(null, info)
   }
 
   const submitAlbum = () => {
     console.log('album submitted')
   }
 
-  const displayContent = () => {
-    <>
-      <FormTemplate onFormSubmit={registerFormSubmit} config={albumConfig} />
-      <Button onClick={registerHandler}>upload album</Button>
-    </>
-  }
+  // const displayContent = () => {
+  //   <>
+  //     <FormTemplate onFormSubmit={registerFormSubmit} config={albumConfig} />
+  //     <Button onClick={registerHandler}>upload album</Button>
+  //   </>
+  // }
 
   return (
-    <Modal visible={isVisible} onOk={submitAlbum} onCancel={onCancel}>
-      {displayContent()}
-    </Modal>
+   <>
+      <FormTemplate onFormSubmit={registerFormSubmit} config={albumConfig} />
+      <Button onClick={registerHandler}>Upload Album</Button>
+   </>
   )
 }
 
-export default AlbumModal
+export default AlbumForm

@@ -7,7 +7,7 @@ import {
   IAttributes,
   IUserForm,
   IRules
-} from '../DataTypes/FormContextType';
+} from '../DataTypes/Forms/FormContextType';
 //change that to ./DataTypes and put the IFomrContext into DataTypes
 
 export const FormContext = createContext<IFormContext>(null!);
