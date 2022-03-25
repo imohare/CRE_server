@@ -82,9 +82,7 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
       if (isArtist) res = await registerWithEthAddress(isArtist, artistInfo)
       if (!isArtist) res = await registerWithEthAddress(isArtist, consumerInfo);//setting the user in the global context
       console.log(res)
-//destructure {name, id} from artist
-
-
+  //destructure {name, id} from artist or consumer and save in usercontext
 
       setDisplayStage(6) //successful registration
     } else {

@@ -11,8 +11,7 @@ interface IUserContext {
   setName: React.Dispatch<React.SetStateAction<string>>;
   userType: string;
   setUserType: React.Dispatch<React.SetStateAction<string>>;
-  userObject: IUserObject;
-  setUserObject: React.Dispatch<React.SetStateAction<IUserObject>>;
+
   
 }
 
@@ -23,11 +22,11 @@ export const UserContextProvider = ({ children }: IProps) => {
   const [userType, setUserType] = useState('public');
   const [currentId, setCurrentId] = useState(0);
   const [name, setName] = useState('');
-  const [userObject, setUserObject] = useState({});
+  // const [userObject, setUserObject] = useState({});
 
 
   return (
-    <UserContext.Provider value={{ currentId, setCurrentId, name, setName, userType, setUserType, userObject, setUserObject }}>
+    <UserContext.Provider value={{ currentId, setCurrentId, name, setName, userType, setUserType, }}>
       { children } 
     </UserContext.Provider>
   )
@@ -35,3 +34,8 @@ export const UserContextProvider = ({ children }: IProps) => {
 }
 
 export default UserContextProvider;
+
+//   userObject: IUserObject;
+  // setUserObject: React.Dispatch<React.SetStateAction<IUserObject>>;
+
+// userObject, setUserObject 

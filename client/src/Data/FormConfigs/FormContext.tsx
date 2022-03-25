@@ -4,14 +4,10 @@ import {
   ContextProps,
   IConsumerInfo,
   IArtistInfo,
-  IAttributes,
-  IUserForm,
-  IRules
 } from '../DataTypes/FormContextType';
 //change that to ./DataTypes and put the IFomrContext into DataTypes
 
 export const FormContext = createContext<IFormContext>(null!);
-
 
 
 //Form context with consumer and artist sign up form configs
@@ -24,16 +20,21 @@ export const FormContextProvider = ({ children }: ContextProps) => {
   const consumerConfig = [
     {
       attr: {
+        // name = same as in the results object {name: [userinput]}
         name: 'username',
+        // just for react
         key: 'username',
+        //what is on the form
         label: 'Username',
       }, 
       rules: [
         {
+          //info for antd
           required: true,
           message: 'Please enter your username!',
         },
       ],
+      //input type for the form template
       type: 'text'
     },
     {
@@ -143,7 +144,7 @@ export const FormContextProvider = ({ children }: ContextProps) => {
     }
   ]
   
-  //wrap the formtemplate in the parent component
+  //wraps the formtemplate in the parent component
   return (
     <FormContext.Provider value={{ consumerConfig, artistConfig, artistInfo, setArtistInfo, consumerInfo, setConsumerInfo }}>
       { children }

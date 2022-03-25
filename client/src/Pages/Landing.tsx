@@ -10,7 +10,8 @@ import ScrollList from '../Components/ReuseableComponents/ScrollList';
 import { EventCardTemplate, AlbumCardTemplate, ArtistCardTemplate, MerchCardTemplate } from '../Components/ReuseableComponents/CardTemplates';
 
 //styling
-import StyledHeader from '../Styles/styledComponents/StyledHeader'
+import StyledHeader from '../Styles/styledComponents/StyledHeader';
+import Parallax from '../Styles/animations/ParallaxAnimation';
 //contexts
 import { UserContext } from 'Data/UserContext';
 
@@ -37,7 +38,7 @@ const LandingPage: React.FunctionComponent = () => {
 
   return (
     //if user, display personalised component on top -> artist || user - else, have a login sign up option
-      <>
+      <Parallax>
       <StyledHeader>
        {/* <FormContextProvider> */}
       <h1>Landing page</h1>
@@ -74,7 +75,7 @@ const LandingPage: React.FunctionComponent = () => {
         <MerchCardTemplate background='https://wallpapercave.com/wp/wp7172141.jpg' merchandise={exampleMerchandise}></MerchCardTemplate>
       </ScrollList>
       </StyledPage>
-      </>
+      </Parallax>
   )
 }
 
