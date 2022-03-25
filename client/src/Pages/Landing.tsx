@@ -1,5 +1,5 @@
 //react
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 //antd imports
 import { Button, Card } from 'antd';
 import StyledButton from '../Styles/styledComponents/StyledButton';
@@ -9,7 +9,9 @@ import StyledPage from '../Styles/styledComponents/styledPage';
 import ScrollList from '../Components/ReuseableComponents/ScrollList';
 import { EventCardTemplate, AlbumCardTemplate, ArtistCardTemplate, MerchCardTemplate } from '../Components/ReuseableComponents/CardTemplates';
 
-import { FormContextProvider } from '../Data/FormConfigs/FormContext'
+import {FormContextProvider} from '../Data/FormConfigs/FormContext'
+import AlbumList from 'Components/Lists/albumList';
+        
 //styling
 import StyledHeader from '../Styles/styledComponents/StyledHeader';
 import Parallax from '../Styles/animations/ParallaxAnimation';
@@ -19,11 +21,13 @@ import Parallax from '../Styles/animations/ParallaxAnimation';
 import StyledHeader from '../Styles/styledComponents/StyledHeader'
 //contexts
 import { UserContext } from 'Data/UserContext';
-
+//data 
+import { getAllAlbums } from "Services/Album";
 
 ///////testing/////////
+import { exampleArtist, exampleAlbum, exampleEvent, exampleMerchandise } from '../Testing/exampleObjects';
+import { IAlbum } from 'Data/DataTypes';
 
-import { exampleArtist, exampleAlbum, exampleEvent, exampleMerchandise } from '../testing/exampleObjects';
 
 
 
@@ -42,9 +46,28 @@ const LandingPage: React.FunctionComponent = () => {
     setIsRegister(prev => !prev)
   }
 
+  //album stuff
+
+  const [albums, setAlbums] = useState<IAlbum[] | []>([]);
+
+  useEffect(() => {
+  getAllAlbums()
+    .then(response => {
+      setAlbums(response)
+    })
+    .catch( error => {
+      console.log(error)
+      console.log("Error occured.")
+    })
+  }, [])
+
+  console.log("albums", albums)
+
   return (
     //if user, display personalised component on top -> artist || user - else, have a login sign up option
-    <Parallax>
+      <div>
+      <Parallax>
+
       <StyledHeader>
         <FormContextProvider>
           <h1>Landing page</h1>
@@ -82,7 +105,9 @@ const LandingPage: React.FunctionComponent = () => {
           <MerchCardTemplate background='https://wallpapercave.com/wp/wp7172141.jpg' merchandise={exampleMerchandise}></MerchCardTemplate>
         </ScrollList>
       </StyledPage>
-    </Parallax>
+      </Parallax>
+      <AlbumList />
+      </div>
 
   )
 }

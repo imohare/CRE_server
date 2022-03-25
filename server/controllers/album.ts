@@ -37,6 +37,7 @@ async function createAlbum(req: Request, res: Response) {
         const _album = await Album.create(req.body)
 
         for (var tokens = 0; tokens < _album.number_of_tokens; tokens++) {
+          console.log("inside tokens")
           const _token = AlbumToken.build();
           await _token.save();
           await _token.setArtist(artist);

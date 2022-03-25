@@ -20,15 +20,15 @@ const { createEventToken, getEventToken, getEventTokens, getConsumerEventTokens,
 const { albumTokenPurchase, eventTokenPurchase, merchandiseTokenPurchase } = require('./controllers/purchasing.ts');
 
 // Artist
-router.post('/createArtist', createArtist);
-router.get('/getArtists', getArtists);
-router.get('/getArtistByEthAddress/:eth_address', getArtistByEthAddress)
-router.get('/getArtistById/:artistId', getArtistById);
-router.get('/getArtistByName/:artistName', getArtistByName);
-router.delete('/deleteArtist/:artistId', deleteArtist);
+router.post('/createArtist', createArtist); //works
+router.get('/getArtists', getArtists); //works
+router.get('/getArtistByEthAddress/:eth_address', getArtistByEthAddress) //works
+router.get('/getArtistById/:artistId', getArtistById); //works
+router.get('/getArtistByName/:artistName', getArtistByName); // doesn't work
+router.delete('/deleteArtist/:artistId', deleteArtist); // works
 
 // Album
-router.post('/createAlbum/:artistId', createAlbum);
+router.post('/createAlbum/:artistId', createAlbum); // works
 router.get('/getAlbums', getAlbums);
 router.get('/getAlbum/:albumId', getAlbum);
 router.get('/getArtistAlbums/:artistId', getArtistAlbums);
