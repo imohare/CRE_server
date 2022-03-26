@@ -11,11 +11,11 @@ const { createMerchandise, getMerchandises, getMerchandise, getArtistMerchandise
 
 const { createConsumer, getConsumerById, getConsumerByUsername, deleteConsumer, getConsumerByEthAddress } = require('./controllers/consumer.ts');
 
-const { createAlbumToken, getAlbumToken, getAlbumTokens, getConsumerAlbumTokens, getArtistAlbumsTokens, getConsumerAlbumTokensByConsumerId, getAlbumTokenByAlbumId } = require('./controllers/albumToken.ts');
+const { getAlbumToken, getAlbumTokens, getConsumerAlbumTokens, getArtistAlbumsTokens, getConsumerAlbumTokensByConsumerId, getAlbumTokenByAlbumId } = require('./controllers/albumToken.ts');
 
-const { createMerchandiseToken, getMerchandiseToken, getMerchandiseTokens, getConsumerMerchandiseTokens, getArtistMerchandisesTokens, getConsumerMerchTokensByConsumerId } = require('./controllers/merchandiseToken.ts');
+const { getMerchandiseToken, getMerchandiseTokens, getConsumerMerchandiseTokens, getArtistMerchandisesTokens, getConsumerMerchTokensByConsumerId } = require('./controllers/merchandiseToken.ts');
 
-const { createEventToken, getEventToken, getEventTokens, getConsumerEventTokens, getArtistEventsTokens, getConsumerEventTokensByConsumerId } = require('./controllers/EventToken.ts');
+const { getEventToken, getEventTokens, getConsumerEventTokens, getArtistEventsTokens, getConsumerEventTokensByConsumerId, getEventTokenByEventId } = require('./controllers/EventToken.ts');
 
 const { albumTokenPurchase, eventTokenPurchase, merchandiseTokenPurchase } = require('./controllers/purchasing.ts');
 
@@ -79,6 +79,8 @@ router.get('/getEventTokens', getEventTokens);
 router.get('/getConsumerEventTokens/:eventId/:consumerId', getConsumerEventTokens);
 router.get('/getArtistEventsTokens/:artistId', getArtistEventsTokens);
 router.get('/getConsumerEventTokensByConsumerId/:consumerId', getConsumerEventTokensByConsumerId)
+router.get('/getEventTokenByEventId/:eventId', getEventTokenByEventId)
+
 
 // Purchasing
 router.patch('/albumTokenPurchase/:artistId/:consumerId/:albumTokenId/:albumId', albumTokenPurchase);

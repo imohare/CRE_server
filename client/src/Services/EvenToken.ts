@@ -12,6 +12,12 @@ const getEventTokens = () => {
         .catch(err => console.log(err, "errors"))
 }
 
+const getEventTokenByEventId = (eventId: number) => {
+    return fetch(`${BASE_URL}/getEventTokenByEventId/${eventId}`)
+        .then(res => res.json())
+        .catch(err => console.log(err, "error"))
+}
+
 const getConsumersEventTokens = (eventId: number, consumerId: number) => {
     return fetch(`${BASE_URL}/getConsumerEventTokens/${eventId}/${consumerId}`)
         .then(res => res.json())
@@ -24,4 +30,4 @@ const getArtistsEventTokens = (artistId: number) => {
         .catch(err => console.log(err, "errors"))
 }
 
-export { getEventTokenById, getEventTokens, getConsumersEventTokens, getArtistsEventTokens }
+export { getEventTokenById, getEventTokens, getConsumersEventTokens, getArtistsEventTokens, getEventTokenByEventId }

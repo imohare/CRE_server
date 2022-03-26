@@ -7,10 +7,10 @@ interface IAlbum {
     tokens_value: number,
 
     //auto-generated
-    id?: number,
+    id: number,
     createdAt: Date,
-    updatedAt?: Date,
-    ArtistId?: number,
+    updatedAt: Date,
+    ArtistId: number,
 }
 
 export type { IAlbum };
