@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
 //antd imports
 import { Button, Card, DatePicker, Form, Input, InputNumber, Upload } from 'antd';
-import ImgCrop from 'antd-img-crop';
+// import ImgCrop from 'antd-img-crop';
 import moment from 'moment';
 //components
 import FormTemplate from '../../ReuseableComponents/FormTemplate';
@@ -167,7 +167,7 @@ const AlbumForm = ({ onSubmitForm }: IProps) => {
             <InputNumber></InputNumber>
           </Form.Item>
           <Form.Item>
-            <ImgCrop>
+            {/* <ImgCrop>
               <Upload
                 // action={(file: RcFile): Promise<string> => {
                   
@@ -181,7 +181,7 @@ const AlbumForm = ({ onSubmitForm }: IProps) => {
               >
 
               </Upload>
-              </ImgCrop> 
+              </ImgCrop>  */}
             </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit">submit</Button>

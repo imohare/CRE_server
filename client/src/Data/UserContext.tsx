@@ -24,7 +24,6 @@ export const UserContextProvider = ({ children }: IProps) => {
   const [name, setName] = useState('');
   const [userObject, setUserObject] = useState({});
 
-
   return (
     <UserContext.Provider value={{ currentId, setCurrentId, name, setName, userType, setUserType, userObject, setUserObject }}>
       { children } 

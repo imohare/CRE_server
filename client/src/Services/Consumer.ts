@@ -30,7 +30,6 @@ const getConsumerByEthAddress = (eth_address: string) => {
         .catch(err => console.log(err))
 }
 
-
 const deleteConsumer = (consumerId: number) => {
     return fetch(`${BASE_URL}/deleteConsumer/${consumerId}`,
         { method: "DELETE" });

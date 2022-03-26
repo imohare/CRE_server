@@ -2,7 +2,6 @@ import { Request, Response } from 'express';
 import { Artist, EventToken, Event, Consumer } from "../models";
 import { errorHandler } from './error';
 
-
 async function getEventTokens(req: Request, res: Response) {
   try {
     const _tokens: EventToken[] = await EventToken.findAll();
@@ -19,15 +18,18 @@ async function getEventToken(req: Request, res: Response) {
   } catch (error) { errorHandler(res, error) }
 }
 
-async function getEventTokenByEventId(req: Request, res: Response) {
+async function getEventTokensByEventId(req: Request, res: Response) {
   try {
     if (!req.params.eventId) {
       res.status(400);
       res.json('incorrect schema for request');
     } else {
       const eventId = req.params.eventId;
-      const _eventToken = EventToken.findOne({ where: { EventId: eventId } });
-      res.json(_eventToken);
+      const _eventTokens = await EventToken.findAll({ where: { EventId: eventId } });
+      console.log(_eventTokens);
+      res.json(_eventTokens);
+
+
     }
   }
   catch (err) {
@@ -104,4 +106,4 @@ async function getConsumerEventTokensByConsumerId(req: Request, res: Response) {
   } catch (error) { errorHandler(res, error) }
 }
 
-export { getEventTokens, getEventToken, getArtistEventsTokens, getConsumerEventTokens, getConsumerEventTokensByConsumerId, getEventTokenByEventId }
+export { getEventTokens, getEventToken, getArtistEventsTokens, getConsumerEventTokens, getConsumerEventTokensByConsumerId, getEventTokensByEventId }
