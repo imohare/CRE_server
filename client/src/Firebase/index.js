@@ -1,5 +1,8 @@
+// import dotenv from '.env';
 import firebase from "firebase/app";
 import "firebase/storage";
+
+// dotenv.config();
 
 const firebaseConfig = {
   apiKey: "AIzaSyAJPmmuOIQ_l3XBQcu-iBRN2SKomuFaJi0",
