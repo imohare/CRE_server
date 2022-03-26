@@ -48,7 +48,6 @@ const AlbumPage: React.FunctionComponent = () => {
     const getArtistInfo = async (artistId: number) => {
         const artistInfo = await getArtistById(artistId);
         setArtistData(artistInfo);
-
     }
 
     useEffect(() => {
