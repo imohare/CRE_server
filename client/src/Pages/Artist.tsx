@@ -35,7 +35,7 @@ const handleEventState = () => setType('event');
   
 
   const handleAlbumFormSubmit=(album: IAlbum) => {
-    console.log('greetings', album)
+    
   }
 
 
