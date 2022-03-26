@@ -40,8 +40,6 @@ async function getArtistAlbumsTokens(req: Request, res: Response) {
   } catch (error) { errorHandler(res, error) }
 }
 
-
-
 async function getAlbumTokenByAlbumId(req: Request, res: Response) {
   try {
     if (!req.params.albumId) {
@@ -57,8 +55,6 @@ async function getAlbumTokenByAlbumId(req: Request, res: Response) {
     errorHandler(res, err);
   }
 }
-
-
 
 async function getConsumerAlbumTokens(req: Request, res: Response) {
   try {

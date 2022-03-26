@@ -19,9 +19,21 @@ async function getEventToken(req: Request, res: Response) {
   } catch (error) { errorHandler(res, error) }
 }
 
-
-
-
+async function getEventTokenByEventId(req: Request, res: Response) {
+  try {
+    if (!req.params.eventId) {
+      res.status(400);
+      res.json('incorrect schema for request');
+    } else {
+      const eventId = req.params.eventId;
+      const _eventToken = EventToken.findOne({ where: { EventId: eventId } });
+      res.json(_eventToken);
+    }
+  }
+  catch (err) {
+    errorHandler(res, err);
+  }
+}
 
 async function getArtistEventsTokens(req: Request, res: Response) {
   try {
@@ -92,4 +104,4 @@ async function getConsumerEventTokensByConsumerId(req: Request, res: Response) {
   } catch (error) { errorHandler(res, error) }
 }
 
-export { getEventTokens, getEventToken, getArtistEventsTokens, getConsumerEventTokens, getConsumerEventTokensByConsumerId }
+export { getEventTokens, getEventToken, getArtistEventsTokens, getConsumerEventTokens, getConsumerEventTokensByConsumerId, getEventTokenByEventId }

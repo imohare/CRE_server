@@ -18,34 +18,44 @@ import { getEventById } from 'Services/Event';
 const EventPage: React.FunctionComponent = () => {
     const location = useLocation();
 
-    const [eventData, setEventData] = useState<IEvent>();
+    const [eventData, setEventData] = useState({
+        id: 0,
+        name: '',
+        address: '',
+        date: '2022-03-25T19:36:22.920Z', //wtf am i meant to input here
+        description: '',
+        number_of_tokens: 0,
+        tokens_image: '',
+        tokens_value: 0,
+        ArtistId: 0
+    });
     const [eventTokenData, setEventTokenData] = useState<IEventToken>();
     const [artistData, setArtistData] = useState<IArtist>();
 
-    const getEventInfo = async (eventId: number) => {
+    const setEventInfo = async (eventId: number) => {
         const event = await getEventById(eventId);
         setEventData(event);
+        // now we have event in eventData
     }
 
-    const getEventTokenInfo = async (eventId: number) => {
-        const eventToken = await getEventTokenByEventId(eventId);
+    const setEventTokenInfo = async (eventId: number): Promise<void> => {
+        const eventToken: IEventToken = await getEventTokenByEventId(eventId);
         setEventTokenData(eventToken);
+        // now we have token in eventTokenData
     }
 
-    const getArtistInfo = async (artistId: number) => {
-        const artistInfo = await getArtistById(artistId);
+    const setArtistInfo = async (artistId: number) => {
+        const artistInfo: IArtist = await getArtistById(artistId);
         setArtistData(artistInfo);
+        // now we have artist in artistData
     }
 
     useEffect(() => {
         const eventId: number = parseInt(location.pathname.replace(/[^0-9.]+/g, ''))
-        getEventInfo(eventId);
-        const _eventToken = getEventTokenInfo(eventId);
-        setEventTokenData(_eventToken)
-        // console.log(_eventToken);
+        setEventInfo(eventId);
+        setEventTokenInfo(eventId);
         const artistId = eventData.ArtistId;
-        getArtistInfo(artistId);
-        console.log(artistData);
+        setArtistInfo(artistId);
     }, [])
 
     return (
@@ -62,13 +72,11 @@ const EventPage: React.FunctionComponent = () => {
                     <div className="eventTitle">
                         < h1 > {eventData.name}</h1 >
                         <div className="dateAndName">
-                            <h3>{moment(eventData.year).format('yyyy')}</h3>
+                            <h3>{moment(eventData.date).format('yyyy')}</h3>
                             <h2>    *    </h2>
                             <h3>Lancey Foux</h3>
                             {/* <h2>{artistData.name}</h2> */}
                         </div>
-
-
                     </div>
                 </div>
                 <div className="secondHalf">
@@ -81,8 +89,6 @@ const EventPage: React.FunctionComponent = () => {
                             <h4>TOKEN INFO</h4>
                             <div>Number of Tokens: {eventData.number_of_tokens}</div>
                             <div>Token value: {eventData.number_of_tokens}</div>
-
-
                             <button>purchase event</button>
                         </div>
                     </div>
