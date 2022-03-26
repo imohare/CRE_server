@@ -29,7 +29,6 @@ export const UserContextProvider = ({ children }: IProps) => {
       { children } 
     </UserContext.Provider>
   )
-  
 }
 
 export default UserContextProvider;
