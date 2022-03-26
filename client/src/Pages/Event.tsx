@@ -1,7 +1,7 @@
 //react
 import { Link, useLocation } from 'react-router-dom';
 //react
-import { useState, useContext, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { getEventTokenByEventId } from '../Services/EvenToken';
 import { getArtistById } from '../Services/Artist';
 import "./Event.css"
@@ -9,7 +9,6 @@ import moment from 'moment';
 
 // simport { listenerCount } from 'process';
 import { IArtist, IEvent, IEventToken } from 'Data/DataTypes';
-import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
 import { getEventById } from 'Services/Event';
 
 //components
@@ -29,33 +28,24 @@ const EventPage: React.FunctionComponent = () => {
         tokens_value: 0,
         ArtistId: 0
     });
-    const [eventTokenData, setEventTokenData] = useState<IEventToken>();
-    const [artistData, setArtistData] = useState<IArtist>();
 
-    const setEventInfo = async (eventId: number) => {
-        const event = await getEventById(eventId);
-        setEventData(event);
-        // now we have event in eventData
-    }
-
-    const setEventTokenInfo = async (eventId: number): Promise<void> => {
-        const eventToken: IEventToken = await getEventTokenByEventId(eventId);
-        setEventTokenData(eventToken);
-        // now we have token in eventTokenData
-    }
-
-    const setArtistInfo = async (artistId: number) => {
-        const artistInfo: IArtist = await getArtistById(artistId);
-        setArtistData(artistInfo);
-        // now we have artist in artistData
-    }
+    const [artistData, setArtistData] = useState<IArtist>({
+        id: 0, 
+        eth_address: '',
+        name: '',
+        profile_picture: '',
+        website: ''
+    });
 
     useEffect(() => {
         const eventId: number = parseInt(location.pathname.replace(/[^0-9.]+/g, ''))
-        setEventInfo(eventId);
-        setEventTokenInfo(eventId);
-        const artistId = eventData.ArtistId;
-        setArtistInfo(artistId);
+        getEventById(eventId)
+            .then(async response => {
+                setEventData(response);
+                const artistId = response.ArtistId;
+                const artist = getArtistById(artistId);
+                setArtistData(await artist);
+            })
     }, [])
 
     return (
@@ -74,7 +64,6 @@ const EventPage: React.FunctionComponent = () => {
                         <div className="dateAndName">
                             <h3>{moment(eventData.date).format('yyyy')}</h3>
                             <h2>    *    </h2>
-                            <h3>Lancey Foux</h3>
                             <h2>{artistData.name}</h2>
                         </div>
                     </div>
@@ -92,12 +81,9 @@ const EventPage: React.FunctionComponent = () => {
                             <button>purchase event</button>
                         </div>
                     </div>
-                    {/* <p>artist view without event purchase</p>
-                    <p>public view without event purchase (redirect to login page?)</p> */}
                 </div>
             </div>
         </>
-
     )
 }
 
