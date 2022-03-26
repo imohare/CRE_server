@@ -1,68 +1,193 @@
 import { useState, useContext, useEffect } from 'react';
-
-import styled from 'styled-components';
 //antd imports
-import { Modal, Button, Card, DatePicker } from 'antd';
+import { Button, Card, DatePicker, Form, Input, InputNumber, Upload } from 'antd';
+import ImgCrop from 'antd-img-crop';
 import moment from 'moment';
 //components
 import FormTemplate from '../../ReuseableComponents/FormTemplate';
 //types
-import { IAlbumInfo } from '../../../Data/DataTypes/Forms/FormAlbumContextType'
+import { IAlbum } from '../../../Data/DataTypes'
 //data
-import { AlbumFormContext } from '../../../Data/FormConfigs/FormAlbumContext';
 import { UserContext } from '../../../Data/UserContext';
 import { createAlbum } from '../../../Services/Album';
 //helperfunction from tools
 //styling
+import { motion } from 'framer-motion'
+import {StaggerParentVariant} from '../../../Styles/animations/formAnimations';
+import { RcFile } from 'antd/lib/upload';
+import { NumericKeys } from 'react-hook-form/dist/types/path/common';
+import { AnyStyledComponent } from 'styled-components';
 
 
-//onCancel toggles setVisible in parent component
+//firebase
+import { storage } from '../../../Firebase';
 
-const AlbumForm = () => {
 
-  const {
-    albumConfig,
-    albumInfo,
-    setAlbumInfo,
-  } = useContext(AlbumFormContext)
+// interface IExpectedResponse {
+//   name: String;
+//   date: object;
+//   description: String;
+//   number_of_tokens: Number;
+//   tokens_value: Number;
+// }
 
-  // useEffect(() => {
-  //   displayContent()
-  // }, []);
+interface IFile {
+  [key: string]: any;
+}
 
+interface IFileProps {
+  file: IFile;
+}
+
+interface IProps {
+  onSubmitForm: (res: any)=>void;
+}
   
 
-  const registerFormSubmit = (values: any) => {
-    setAlbumInfo({ ...values })
-    console.log("values", albumInfo)
+const AlbumForm = ({ onSubmitForm }: IProps) => {
+  
+  const [date, setDate] = useState('');
+
+  const [image, setImage] = useState(null);
 
 
+
+
+
+
+  //////////////////////////////////////////////////////////////
+  // // image upload // //
+
+  const onPreview = async (file: IFile) => {
+    let src = file.url;
+    if (!src) {
+      src = await new Promise(resolve => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file.originFileObj);
+        reader.onload = () => resolve(reader.result);
+      });
+    }
+    const image = new Image();
+    image.src = src;
+    const imgWindow = window.open(src);
+    imgWindow && imgWindow.document.write(image.outerHTML);
+  };
+
+
+  const handleChange = ({ file }:IFileProps ) => {
+    console.log('file to upload', file)
+  
   }
 
-  // const registerHandler = async (info:any) => {
-  //   await createAlbum.apply(null, info)
-  // }
 
-  // const submitAlbum = () => {
-  //   console.log('album submitted')
-  // }
+  // firebasesubmit: const upload Task = storage.fer(`images/{image.name}`).put(file)
+  // uploadTask.on()
 
-  // const displayContent = () => {
-  //   <>
-  //     <FormTemplate onFormSubmit={registerFormSubmit} config={albumConfig} />
-  //     <Button onClick={registerHandler}>upload album</Button>
-  //   </>
-  // }
 
-  const LighterFormTemplate = styled(FormTemplate)`
-    background-color: #33468F;
-  `
 
- 
+
+
+////////////////////////////////////////////////////////////
+// // form submit // //
+  const formatResult = (res:any) => {
+    const { name, description, number_of_tokens, tokens_value } = res;
+    const result = {
+      name: name,
+      description: description,
+      number_of_tokens: number_of_tokens,
+      tokens_value: tokens_value,
+      date: date
+    }
+    // console.log(result)
+    onSubmitForm(result)
+  }
+  
+
   return (
-     
     <Card title="new album">
-      <LighterFormTemplate onFormSubmit={registerFormSubmit} config={albumConfig} />
+      <Form
+        onFinish={(values: any) => { 
+          formatResult(values)
+        }}
+      labelCol={{
+        span: 6
+      }}
+      wrapperCol={{
+        span: 18
+      }}
+        autoComplete="on"
+      >
+        <motion.div
+          variants={StaggerParentVariant}
+          initial="hidden"
+          animate="show"
+          exit="exit"
+        >
+          <Form.Item name='name'
+            label='Name'
+            rules={[{ required: true, message: 'Please enter a name for your album' }]}>
+            <Input></Input>
+          </Form.Item>
+          <Form.Item
+          name='date'
+          label='Date'
+            rules={[{ required: true, message: 'Please select when your album was created' }]}
+          >
+            <DatePicker
+              onChange={(date, dateString) => {
+                setDate(moment(date).format('MMMM Do YYYY, h:mm:ss a'));     
+              }} picker="month" />
+          </Form.Item>
+
+          <Form.Item name='description'
+                    label='Description'>
+            <Input></Input>
+          </Form.Item>
+
+          <Form.Item
+            name='number_of_tokens'
+            label='# of Album NFTs'
+            rules={[{
+              required: true,
+              type: 'number',
+              message: 'You must chose a number of nFTs for your album'
+            }]}
+          >
+            <InputNumber></InputNumber>
+            </Form.Item>
+          <Form.Item
+            name='tokens_value'
+            label='NFT value'
+            rules={[{
+              required: true,
+              type: 'number',
+              message: 'You must chose a number of nFTs for your album'
+            }]}
+          >
+            <InputNumber></InputNumber>
+          </Form.Item>
+          <Form.Item>
+            <ImgCrop>
+              <Upload
+                // action={(file: RcFile): Promise<string> => {
+                  
+                //  }}
+                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                listType="picture-card"
+                className="album-picture-upload"
+                showUploadList={false}   
+                onChange={handleChange}
+                onPreview={onPreview}
+              >
+
+              </Upload>
+              </ImgCrop> 
+            </Form.Item>
+          <Form.Item>
+            <Button type="primary" htmlType="submit">submit</Button>
+          </Form.Item>
+          </motion.div>
+        </Form>
    </Card>
   )
 }

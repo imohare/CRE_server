@@ -7,20 +7,15 @@ import { getAlbumTokenByAlbumId } from '../Services/AlbumToken';
 import { getArtistById } from '../Services/Artist';
 import "./Album.css"
 import moment from 'moment';
-
-
 // simport { listenerCount } from 'process';
 import { IAlbum } from 'Data/DataTypes';
 import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
-
 //components
 //styling
-
 const AlbumPage: React.FunctionComponent = () => {
-    //if user && logged in, allow ticket purchase. If artist, no ticket purchase possible. 
+    //if user && logged in, allow ticket purchase. If artist, no ticket purchase possible.
     //If not logged in, greyed out and redirect to login page
     const location = useLocation();
-
     const [albumData, setAlbumData] = useState({
         id: 0,
         name: '',
@@ -33,23 +28,18 @@ const AlbumPage: React.FunctionComponent = () => {
     });
     const [albumTokenData, setAlbumTokenData] = useState({});
     const [artistData, setArtistData] = useState({});
-
-
     const getAlbumInfo = async (albumId: number) => {
         const album = await getAlbumById(albumId);
         setAlbumData(album);
     }
-
     const getAlbumTokenInfo = async (albumId: number) => {
         const albumToken = await getAlbumTokenByAlbumId(albumId);
         setAlbumTokenData(albumToken);
     }
-
     const getArtistInfo = async (artistId: number) => {
         const artistInfo = await getArtistById(artistId);
         setArtistData(artistInfo);
     }
-
     useEffect(() => {
         const albumId: number = parseInt(location.pathname.replace(/[^0-9.]+/g, ''))
         console.log("albumID in useEffect", albumId);
@@ -61,8 +51,6 @@ const AlbumPage: React.FunctionComponent = () => {
         getArtistInfo(artistId);
         console.log(artistData);
     }, [])
-
-
     return (
         <>
             <div className="AlbumOverall">
@@ -82,8 +70,6 @@ const AlbumPage: React.FunctionComponent = () => {
                             <h3>Lancey Foux</h3>
                             {/* <h2>{artistData.name}</h2> */}
                         </div>
-
-
                     </div>
                 </div>
                 <div className="secondHalf">
@@ -96,8 +82,6 @@ const AlbumPage: React.FunctionComponent = () => {
                             <h4>TOKEN INFO</h4>
                             <div>Number of Tokens: {albumData.number_of_tokens}</div>
                             <div>Token value: {albumData.number_of_tokens}</div>
-
-
                             <button>purchase album</button>
                         </div>
                     </div>
@@ -106,8 +90,6 @@ const AlbumPage: React.FunctionComponent = () => {
                 </div>
             </div>
         </>
-
     )
 }
-
 export default AlbumPage;
