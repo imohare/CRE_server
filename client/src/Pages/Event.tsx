@@ -2,13 +2,12 @@
 import { Link, useLocation } from 'react-router-dom';
 //react
 import { useState, useEffect } from 'react';
-import { getEventTokenByEventId } from '../Services/EvenToken';
 import { getArtistById } from '../Services/Artist';
 import "./Event.css"
 import moment from 'moment';
 
 // simport { listenerCount } from 'process';
-import { IArtist, IEvent, IEventToken } from 'Data/DataTypes';
+import { IArtist } from 'Data/DataTypes';
 import { getEventById } from 'Services/Event';
 
 //components
