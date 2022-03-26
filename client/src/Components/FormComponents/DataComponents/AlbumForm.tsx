@@ -76,13 +76,10 @@ const AlbumForm = ({ onSubmitForm }: IProps) => {
 
   const handleChange = ({ file }:IFileProps ) => {
     console.log('file to upload', file)
+    const storageRef = storage.ref(`album/image/${file.name}`)
+    
   
   }
-
-
-  // firebasesubmit: const upload Task = storage.fer(`images/{image.name}`).put(file)
-  // uploadTask.on()
-
 
 
 
@@ -91,15 +88,15 @@ const AlbumForm = ({ onSubmitForm }: IProps) => {
 // // form submit // //
   const formatResult = (res:any) => {
     const { name, description, number_of_tokens, tokens_value } = res;
-    const result = {
+    const formattedResult = {
       name: name,
       description: description,
       number_of_tokens: number_of_tokens,
       tokens_value: tokens_value,
       date: date
     }
-    // console.log(result)
-    onSubmitForm(result)
+    console.log(formattedResult)
+    onSubmitForm(formattedResult)
   }
   
 
