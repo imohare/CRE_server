@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 //antd imports
 import { Button, Card,  Form, Input, InputNumber, Upload } from 'antd';
 import ImgCrop from 'antd-img-crop';
@@ -6,7 +6,7 @@ import moment from 'moment';
 //components
 import FormTemplate from '../../ReuseableComponents/FormTemplate';
 //types
-import { IMerchandiseInfo } from '../../../Data/DataTypes/Forms/FormMerchandiseContextType'
+import { IMerchandise } from '../../../Data/DataTypes'
 //data
 import { UserContext } from '../../../Data/UserContext';
 import { createMerchandise } from '../../../Services/Merchandise';
@@ -32,12 +32,13 @@ interface IProps {
 
 const MerchandiseForm = ({ onSubmitForm }: IProps) => {
 
-  const [image, setImage] = useState(null);
+  const [imageObj, setImageObj] = useState(null);
   const [imageUrl, setImageUrl] = useState('');
   const [type, setType] = useState('')
+  const { currentId } = useContext(UserContext)
 
-
-
+// testing
+setImageUrl('https://i.pinimg.com/originals/6d/ee/b5/6deeb5d98a7fe7ce5ce4daa9bfac5e81.jpg')
   ////////////////////////////////////////////////////////////
 // // form submit // //
 const formatResult = (res:any) => {
@@ -45,11 +46,13 @@ const formatResult = (res:any) => {
   const formattedResult = {
     name: name,
     type: type,
+    tokens_image: imageUrl,
     description: description,
     number_of_tokens: number_of_tokens,
     tokens_value: tokens_value,
   }
-  console.log( formattedResult)
+  console.log(formattedResult)
+  createMerchandise(formattedResult, currentId)
   onSubmitForm(formattedResult)
 }
 
@@ -74,20 +77,20 @@ const onPreview = async (file: IFile) => {
 
 const handleChange = ({ file }:IFileProps ) => {
   console.log('file to upload', file)
-  // const storageRef = storage.ref(`album/image/${file.name}`)
-  
+  // const storageRef = storage.ref(`album/image/${file.name}`)  
 
 }
-
-
-
-
-
   
   return (
     <Card title="Merchandise">
       <Form
-        onFinish={(values: any) => { 
+        onFinish={(values: {
+          name: String;
+          type: String;
+          description: String;
+          number_of_tokens: Number;
+          tokens_value: Number;
+        }) => { 
           formatResult(values)
         }}
       labelCol={{
