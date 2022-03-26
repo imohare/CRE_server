@@ -130,11 +130,18 @@ const LandingPage: React.FunctionComponent = () => {
         </StyledPage>
       </Parallax>
       <h3>New Albums: </h3>
-      {albums.map(album => album.name)}
+      {albums
+        ? albums.map(album => album.name)
+        : <p>there are no albums</p>}
       <h3>New Merchandise: </h3>
-      {merchandise.map(merchandise => merchandise.name)}
+      {merchandise
+        ? merchandise.map(merchandise => merchandise.name)
+        : <p>there is no merchandise</p>}
       <h3>New Events: </h3>
-      {events.map(events => events.name)}
+      {events
+        ? events.map(events => events.name)
+        : <p>there are no events</p>
+      }
       <h3>Upcoming Events: </h3>
     </div>
   )
