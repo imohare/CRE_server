@@ -75,7 +75,7 @@ const EventPage: React.FunctionComponent = () => {
                             <h3>{moment(eventData.date).format('yyyy')}</h3>
                             <h2>    *    </h2>
                             <h3>Lancey Foux</h3>
-                            <h2>{artistData.name}</h2>
+                            <h2>{artistData &&artistData.name}</h2>
                         </div>
                     </div>
                 </div>
