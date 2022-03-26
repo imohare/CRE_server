@@ -1,26 +1,22 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState } from 'react';
 //antd imports
 import { Button, Card, DatePicker, Form, Input, InputNumber, Upload } from 'antd';
-// import ImgCrop from 'antd-img-crop';
+import ImgCrop from 'antd-img-crop';
 import moment from 'moment';
 //components
-import FormTemplate from '../../ReuseableComponents/FormTemplate';
 //types
 import { IAlbum } from '../../../Data/DataTypes'
 //data
-import { UserContext } from '../../../Data/UserContext';
 import { createAlbum } from '../../../Services/Album';
 //helperfunction from tools
 //styling
 import { motion } from 'framer-motion'
 import {StaggerParentVariant} from '../../../Styles/animations/formAnimations';
 import { RcFile } from 'antd/lib/upload';
-import { NumericKeys } from 'react-hook-form/dist/types/path/common';
-import { AnyStyledComponent } from 'styled-components';
 
 
 //firebase
-import { storage } from '../../../Firebase';
+// import { storage } from '../../../Firebase';
 
 
 // interface IExpectedResponse {
@@ -49,6 +45,7 @@ const AlbumForm = ({ onSubmitForm }: IProps) => {
   const [date, setDate] = useState('');
 
   const [image, setImage] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
 
 
 
@@ -76,7 +73,7 @@ const AlbumForm = ({ onSubmitForm }: IProps) => {
 
   const handleChange = ({ file }:IFileProps ) => {
     console.log('file to upload', file)
-    const storageRef = storage.ref(`album/image/${file.name}`)
+    // const storageRef = storage.ref(`album/image/${file.name}`)
     
   
   }
@@ -95,7 +92,7 @@ const AlbumForm = ({ onSubmitForm }: IProps) => {
       tokens_value: tokens_value,
       date: date
     }
-    console.log(formattedResult)
+    console.log('formatted result that gets sent to api ', formattedResult)
     onSubmitForm(formattedResult)
   }
   
@@ -120,11 +117,13 @@ const AlbumForm = ({ onSubmitForm }: IProps) => {
           animate="show"
           exit="exit"
         >
-          <Form.Item name='name'
+          <Form.Item
+            name='name'
             label='Name'
             rules={[{ required: true, message: 'Please enter a name for your album' }]}>
             <Input></Input>
           </Form.Item>
+
           <Form.Item
           name='date'
           label='Date'
@@ -136,8 +135,9 @@ const AlbumForm = ({ onSubmitForm }: IProps) => {
               }} picker="month" />
           </Form.Item>
 
-          <Form.Item name='description'
-                    label='Description'>
+          <Form.Item
+            name='description'
+            label='Description'>
             <Input></Input>
           </Form.Item>
 
@@ -164,12 +164,12 @@ const AlbumForm = ({ onSubmitForm }: IProps) => {
             <InputNumber></InputNumber>
           </Form.Item>
           <Form.Item>
-            {/* <ImgCrop>
+            <ImgCrop>
               <Upload
                 // action={(file: RcFile): Promise<string> => {
                   
                 //  }}
-                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                action="gs://cre-6cbea.appspot.com"
                 listType="picture-card"
                 className="album-picture-upload"
                 showUploadList={false}   
@@ -177,8 +177,8 @@ const AlbumForm = ({ onSubmitForm }: IProps) => {
                 onPreview={onPreview}
               >
 
-              </Upload>
-              </ImgCrop>  */}
+              </Upload> 
+              </ImgCrop>  
             </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit">submit</Button>

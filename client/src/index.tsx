@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import 'antd/dist/antd.css';
 import reportWebVitals from './reportWebVitals';
-import { storage } from './Firebase'
+// import { storage } from './Firebase'
 
 
 ReactDOM.render(

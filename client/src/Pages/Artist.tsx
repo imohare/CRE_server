@@ -4,7 +4,7 @@ import { useState, useContext, useEffect } from 'react';
 //antd imports
 import { Button, Card } from 'antd';
 //firebase imports
-import { storage } from '../Firebase/index'
+// import { storage } from '../Firebase/index'
 //services
 import { createAlbum } from 'Services/Album';
 //components
@@ -39,14 +39,13 @@ const handleEventState = () => setType('event');
   }
 
 
-  // const handleEventFormSubmit = (event: IEvent) => {
-  //   console.log(event)
-  // }
-  // const handleMerchandiseFormSubmit = (merch: IMerchandise) => {
-  //   console.log(merch)
-  // }
+  const handleEventFormSubmit = (event: IEvent) => {
+    console.log('eventname: ', event)
+  }
+  const handleMerchandiseFormSubmit = (merch: IMerchandise) => {
+    console.log(merch)
+  }
   
-
   return (
     <StyledPage>
         <Link to="/">home</Link>
@@ -57,8 +56,8 @@ const handleEventState = () => setType('event');
       <button onClick={handleEventState}>event</button>
       <button onClick={handleMerchandiseState}>merchandise</button>
       {(type === 'album') ? <AlbumForm onSubmitForm={ handleAlbumFormSubmit }/> : null}
-      {/* { (type === 'event') ? <EventForm  onSubmitForm={ handleEventFormSubmit } /> : null}
-      {(type === 'merchandise') ? <MerchandiseForm onSubmitForm={ handleMerchandiseFormSubmit } /> : null} */}
+      { (type === 'event') ? <EventForm  onSubmitForm={ handleEventFormSubmit } /> : null}
+      {(type === 'merchandise') ? <MerchandiseForm onSubmitForm={ handleMerchandiseFormSubmit } /> : null}
     <p>artist view with option to update offers</p>
     <p>user view without any authorisations but with fake follow button</p>
     </StyledPage>
