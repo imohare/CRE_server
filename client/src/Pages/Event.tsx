@@ -54,17 +54,27 @@ const EventPage: React.FunctionComponent = () => {
     useEffect(() => {
         const eventId: number = parseInt(location.pathname.replace(/[^0-9.]+/g, ''))
         getEventById(eventId)
-            .then(async response => {
+            .then(response => {
                 setEventData(response);
-                const artistId = response.ArtistId;
-                const artist = getArtistById(artistId);
-                setArtistData(await artist);
+                return response;
             })
+            .then(evt => {
+                const artistId = evt.ArtistId;
+                return artistId;
+            })
+            .then(artistId => {
+                const artist = getArtistById(artistId);
+                return artist;
+            })
+            .then(artist => {
+                setArtistData(artist)
+            });    
+            
         getEventTokensByEventId(eventId)
-            .then(async response => {
-                setEventTokenData( await response)
-                const availTokens = response.filter((token: IEventToken) => token.ConsumerId === null);
-                setAvailableTokens(await availTokens);
+            .then( response => {
+                setEventTokenData(  response)
+                const availTokens =  response.filter((token: IEventToken) => token.ConsumerId === null);
+                setAvailableTokens( availTokens);
             })
     }, [])
 
