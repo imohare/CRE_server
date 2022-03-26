@@ -1,26 +1,29 @@
-//react
 import { Link, useLocation } from 'react-router-dom';
-//react
-import { useState, useEffect } from 'react';
-import { getArtistById } from '../Services/Artist';
-import "./Event.css"
+import { useState, useEffect, useContext } from 'react';
 import moment from 'moment';
 
-// simport { listenerCount } from 'process';
-import { IArtist } from 'Data/DataTypes';
-import { getEventById } from 'Services/Event';
+import { IArtist, IEventToken } from 'Data/DataTypes';
 
-//components
-//styling
+import { getEventById } from 'Services/Event';
+import { getArtistById } from '../Services/Artist';
+import { getEventTokensByEventId } from '../Services/EvenToken';
+import { eventTokenPurchase } from 'Services/Purchase';
+
+import { UserContext } from 'Data/UserContext';
+
+import "./Event.css"
 
 const EventPage: React.FunctionComponent = () => {
     const location = useLocation();
+    console.log("location", location)
+    const {currentId} = useContext(UserContext);
+    console.log("currentId", currentId);
 
     const [eventData, setEventData] = useState({
         id: 0,
         name: '',
         address: '',
-        date: '2022-03-25T19:36:22.920Z', //wtf am i meant to input here
+        date: new Date(),
         description: '',
         number_of_tokens: 0,
         tokens_image: '',
@@ -33,8 +36,20 @@ const EventPage: React.FunctionComponent = () => {
         eth_address: '',
         name: '',
         profile_picture: '',
-        website: ''
+        website: '',
+        createdAt: new Date('2022-03-25T19:36:22.920Z'),
+        updatedAt: new Date('2022-03-25T19:36:22.920Z'),
     });
+
+    const [eventTokenData, setEventTokenData] = useState<IEventToken[]>([])
+
+    const [availableTokens, setAvailableTokens] = useState<IEventToken[]>([{
+        id: 0,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        ArtistId: 0,
+        EventId: 0,
+    }]);
 
     useEffect(() => {
         const eventId: number = parseInt(location.pathname.replace(/[^0-9.]+/g, ''))
@@ -45,7 +60,23 @@ const EventPage: React.FunctionComponent = () => {
                 const artist = getArtistById(artistId);
                 setArtistData(await artist);
             })
+        getEventTokensByEventId(eventId)
+            .then(async response => {
+                setEventTokenData( await response)
+                const availTokens = response.filter((token: IEventToken) => token.ConsumerId === null);
+                setAvailableTokens(await availTokens);
+            })
     }, [])
+
+    const handleClick = () => {
+        eventTokenPurchase(currentId, availableTokens[0].id, artistData.id, eventData.id);
+      };
+    
+    const checkIfUserHasBought = (): boolean => {
+        const consumerBoughtToken = eventTokenData.filter(token => token.ConsumerId === currentId)
+        if (consumerBoughtToken) return true
+        else return false
+    }
 
     return (
         <>
@@ -80,7 +111,7 @@ const EventPage: React.FunctionComponent = () => {
                             <h4>TOKEN INFO</h4>
                             <div>Number of Tokens: {eventData.number_of_tokens}</div>
                             <div>Token value: {eventData.tokens_value}</div>
-                            <button>purchase event</button>
+                            {(availableTokens.length > 0)  ? ((checkIfUserHasBought()) ?  <button>NFT purchased</button> : <button onClick={handleClick}>purchase event NFT</button>) : <button>Event Sold Out</button>}
                         </div>
                     </div>
                 </div>

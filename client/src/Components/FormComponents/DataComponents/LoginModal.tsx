@@ -105,16 +105,18 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
       const eth = await getEthAddress();
       if (u) {
         const artistObjResponse = await getArtistByEthAddress(eth);
-        // const { name, id } = await artistObjResponse;
-        // setCurrentId(id);
-        // setName(name)
+        const { name, id } = await artistObjResponse;
+        setCurrentId(id);
+        setName(name)
         setUserType('artist');
       }
       if (!u) {
         const consumerObjResponse = await getConsumerByEthAddress(eth);
-        // const { username, consumerId } = consumerObjResponse;
-        // setCurrentId(id);
-        // setName(username)
+        const { username, id } = consumerObjResponse;
+        console.log("consumerObjResponse", consumerObjResponse)
+        setCurrentId(id);
+        console.log("currentId", currentId)
+        setName(username)
         setUserType('consumer');
       }
     }

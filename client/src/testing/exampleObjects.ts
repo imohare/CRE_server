@@ -53,7 +53,9 @@ const exampleEvent: IEvent = {
 const exampleEventToken: IEventToken = {
   id: 3,
   createdAt: new Date(),
-  updatedAt: new Date()
+  updatedAt: new Date(),
+  ArtistId: 2,
+  EventId: 8
 }
 
 const exampleAlbumToken: IAlbumToken = {

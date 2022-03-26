@@ -27,6 +27,7 @@ import { exampleArtist, exampleAlbum, exampleEvent, exampleMerchandise } from '.
 import { IAlbum, IEvent, IMerchandise } from 'Data/DataTypes';
 import { getEvents } from 'Services/Event';
 import { getAllMerchandises } from 'Services/Merchandise';
+import { NavLink } from 'react-router-dom';
 
 const LandingPage: React.FunctionComponent = () => {
   //public view
@@ -120,29 +121,26 @@ const LandingPage: React.FunctionComponent = () => {
           <ScrollList title='Artists'>
             <ArtistCardTemplate background='https://wallpapercave.com/wp/wp7172141.jpg' artist={exampleArtist}></ArtistCardTemplate>
           </ScrollList>
-          <ScrollList>
-            <AlbumCardTemplate album={exampleAlbum} background='https://t2.genius.com/unsafe/600x600/https%3A%2F%2Fimages.genius.com%2F7f2b5d24f103535739f89b984b5ec818.1000x1000x1.png'></AlbumCardTemplate>
+          <ScrollList title='Newest Albums'>
+            {albums.map(album => <div key = {album.id}>
+              <AlbumCardTemplate album={album}/>
+            </div>
+            )}        
           </ScrollList>
-          <EventCardTemplate background='https://wallpapercave.com/wp/wp7172141.jpg' event={exampleEvent}></EventCardTemplate>
-          <ScrollList title='Merchandise'>
-            <MerchCardTemplate background='https://wallpapercave.com/wp/wp7172141.jpg' merchandise={exampleMerchandise}></MerchCardTemplate>
+          <ScrollList title='Newest Events'>
+          {events.map(event => <div key = {event.id}>
+              <EventCardTemplate event={event} background={''}/>
+            </div>
+            )}  
+          </ScrollList>
+          <ScrollList title='Newest Merchandise'>
+          {merchandise.map(merchandise => <div key = {merchandise.id}>
+              <MerchCardTemplate merchandise={merchandise} background={''}/>
+            </div>
+            )}
           </ScrollList>
         </StyledPage>
       </Parallax>
-      <h3>New Albums: </h3>
-      {albums
-        ? albums.map(album => album.name)
-        : <p>there are no albums</p>}
-      <h3>New Merchandise: </h3>
-      {merchandise
-        ? merchandise.map(merchandise => merchandise.name)
-        : <p>there is no merchandise</p>}
-      <h3>New Events: </h3>
-      {events
-        ? events.map(events => events.name)
-        : <p>there are no events</p>
-      }
-      <h3>Upcoming Events: </h3>
     </div>
   )
 }

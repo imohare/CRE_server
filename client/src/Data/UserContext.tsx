@@ -24,13 +24,11 @@ export const UserContextProvider = ({ children }: IProps) => {
   const [name, setName] = useState('');
   const [userObject, setUserObject] = useState({});
 
-  setCurrentId(7);
   return (
     <UserContext.Provider value={{ currentId, setCurrentId, name, setName, userType, setUserType, userObject, setUserObject }}>
       { children } 
     </UserContext.Provider>
   )
-  
 }
 
 export default UserContextProvider;

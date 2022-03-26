@@ -10,12 +10,16 @@ import moment from 'moment';
 // simport { listenerCount } from 'process';
 import { IAlbum } from 'Data/DataTypes';
 import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
+import { UserContext } from 'Data/UserContext';
 //components
 //styling
 const AlbumPage: React.FunctionComponent = () => {
     //if user && logged in, allow ticket purchase. If artist, no ticket purchase possible.
     //If not logged in, greyed out and redirect to login page
     const location = useLocation();
+    const {currentId} = useContext(UserContext);
+    console.log("currentId", currentId)
+    
     const [albumData, setAlbumData] = useState({
         id: 0,
         name: '',

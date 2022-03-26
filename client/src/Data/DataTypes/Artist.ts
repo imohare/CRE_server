@@ -8,9 +8,9 @@ interface IArtist {
     discord?: string,
     spotify?: string,
     //auto-generated
-    id?: number,
-    createdAt?: Date,
-    updatedAt?: Date
+    id: number,
+    createdAt: Date,
+    updatedAt: Date
 }
 
 export type { IArtist };
