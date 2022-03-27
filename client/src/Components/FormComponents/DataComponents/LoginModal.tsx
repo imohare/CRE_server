@@ -154,6 +154,8 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
       onOk={submitUser}
       onCancel={onCancel}
       footer={displayStage > 5 && (<Button onClick={onCancel}>start browsing!</Button>)}
+      className="modal"
+      style={{overflowX: "hidden"}}
     >
       {displayContent()}
     </Modal>

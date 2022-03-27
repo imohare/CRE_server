@@ -14,7 +14,9 @@ padding: ${globalVariables.mobileScreenPadding};
   display: flex;
   justify-content: space between;
 }
-
+.login {
+  overflow-x: hidden;
+}
 @media screen and (min-width: ${globalVariables.smallScreenWidth}){
   padding: ${globalVariables.smallScreenPadding};
 

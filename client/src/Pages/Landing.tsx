@@ -6,7 +6,7 @@ import PublicHeader from 'Components/FormComponents/DataComponents/PublicHeader'
 import StyledPage from '../Styles/styledComponents/styledPage';
 import ScrollList from '../Components/ReuseableComponents/ScrollList';
 import { EventCardTemplate, AlbumCardTemplate, ArtistCardTemplate, MerchCardTemplate } from '../Components/ReuseableComponents/CardTemplates';
-
+import UserHeader from '../Components/FormComponents/DataComponents/UserHeader';
 import AlbumList from 'Components/Lists/albumList';
 
 //styling
@@ -83,12 +83,10 @@ const LandingPage: React.FunctionComponent = () => {
   return (
     //if user, display personalised component on top -> artist || user - else, have a login sign up option
     <div>
-
       {(userType === 'public')
         ? <PublicHeader />
-        : null
+        : <UserHeader />
       }
-      <Parallax>      
         <StyledPage>
           <ScrollList title='Artists'>
             <ArtistCardTemplate background='https://wallpapercave.com/wp/wp7172141.jpg' artist={exampleArtist}></ArtistCardTemplate>
@@ -112,7 +110,6 @@ const LandingPage: React.FunctionComponent = () => {
             )}
           </ScrollList>
         </StyledPage>
-      </Parallax>
     </div>
   )
 }
