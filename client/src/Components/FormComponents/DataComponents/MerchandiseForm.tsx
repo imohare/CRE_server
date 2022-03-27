@@ -37,8 +37,6 @@ const MerchandiseForm = ({ onSubmitForm }: IProps) => {
   const [type, setType] = useState('')
   const { currentId } = useContext(UserContext)
 
-// testing
-setImageUrl('https://i.pinimg.com/originals/6d/ee/b5/6deeb5d98a7fe7ce5ce4daa9bfac5e81.jpg')
   ////////////////////////////////////////////////////////////
 // // form submit // //
 const formatResult = (res:any) => {
@@ -46,13 +44,13 @@ const formatResult = (res:any) => {
   const formattedResult = {
     name: name,
     type: type,
-    tokens_image: imageUrl,
+    tokens_image: 'https://i.pinimg.com/originals/6d/ee/b5/6deeb5d98a7fe7ce5ce4daa9bfac5e81.jpg',
     description: description,
     number_of_tokens: number_of_tokens,
     tokens_value: tokens_value,
   }
   console.log(formattedResult)
-  createMerchandise(formattedResult, currentId)
+  createMerchandise(formattedResult, 5) //hardcode userId to something that exists in your db
   onSubmitForm(formattedResult)
 }
 
@@ -83,7 +81,7 @@ const handleChange = ({ file }:IFileProps ) => {
   
   return (
     <Card title="Merchandise">
-      <Form
+       <Form
         onFinish={(values: {
           name: String;
           type: String;
@@ -113,7 +111,7 @@ const handleChange = ({ file }:IFileProps ) => {
             rules={[{ required: true, message: 'You need to enter a name for the merchandise' }]}>
             <Input></Input>
           </Form.Item>
-{/* ///////////////tried adding select tag, didn't work. maybe later////////////////// */}
+          {/* ///////////////tried adding select tag, didn't work. maybe later//////////////////*/}
           <Form.Item
             name='type'
             label='Type'
@@ -134,9 +132,9 @@ const handleChange = ({ file }:IFileProps ) => {
               type: 'number',
               message: 'You must chose a number of NFTs for your merch'
             }]}
-          >
+          > 
             <InputNumber></InputNumber>
-            </Form.Item>
+          </Form.Item>
           <Form.Item
             name='tokens_value'
             label='NFT value'
@@ -151,9 +149,6 @@ const handleChange = ({ file }:IFileProps ) => {
           <Form.Item>
             <ImgCrop>
               <Upload
-                // action={(file: RcFile): Promise<string> => {
-                  
-                //  }}
                 action="gs://cre-6cbea.appspot.com"
                 listType="picture-card"
                 className="album-picture-upload"
@@ -169,7 +164,7 @@ const handleChange = ({ file }:IFileProps ) => {
             <Button type="primary" htmlType="submit">submit</Button>
           </Form.Item>
           </motion.div>
-        </Form>
+          </Form> 
    </Card>
   )
 
