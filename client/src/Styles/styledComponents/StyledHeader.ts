@@ -10,6 +10,11 @@ display: flex;
 justify-content: space-between;
 padding: ${globalVariables.mobileScreenPadding};
 
+.buttons {
+  display: flex;
+  justify-content: space between;
+}
+
 @media screen and (min-width: ${globalVariables.smallScreenWidth}){
   padding: ${globalVariables.smallScreenPadding};
 
