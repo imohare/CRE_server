@@ -40,7 +40,7 @@ const exampleAlbum: IAlbum = {
 const exampleEvent: IEvent = {
   name: 'partey',
   address: '52 Horseferry Road',
-  date: new Date(),
+  date: '2016-05-25',
   description: '',
   number_of_tokens: 7,
   tokens_image: '',

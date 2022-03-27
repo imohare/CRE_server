@@ -90,19 +90,24 @@ const AlbumForm = ({ onSubmitForm }: IProps) => {
       description: description,
       number_of_tokens: number_of_tokens,
       tokens_value: tokens_value,
-      date: date
+      year: date
     }
     console.log('formatted result that gets sent to api ', formattedResult)
-    onSubmitForm(formattedResult)
+    return formattedResult;
+  }
+
+  const formSubmit = async (values: IAlbum) => {
+    const formattedResults = formatResult(values);
+    console.log(formattedResults);
+    // const eventInDB = await createAlbum(formattedResults, currentId);
+    // onSubmitForm(eventInDB)
   }
   
 
   return (
     <Card title="new album">
       <Form
-        onFinish={(values: any) => { 
-          formatResult(values)
-        }}
+        onFinish={formSubmit}
       labelCol={{
         span: 6
       }}

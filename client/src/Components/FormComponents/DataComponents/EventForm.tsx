@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext } from 'react';
 //antd imports
 import { Button, Card, DatePicker, Form, Input, InputNumber, Upload } from 'antd';
 import ImgCrop from 'antd-img-crop';
@@ -6,9 +6,8 @@ import moment from 'moment';
 //components
 import FormTemplate from '../../ReuseableComponents/FormTemplate';
 //types
-import { IEventInfo } from '../../../Data/DataTypes/Forms/FormEventContextType'
+import { IEvent } from '../../../Data/DataTypes'
 //data
-import { EventFormContext } from '../../../Data/FormConfigs/FormEventContext';
 import { UserContext } from '../../../Data/UserContext';
 import { createEvent } from '../../../Services/Event';
 //styling
@@ -16,6 +15,7 @@ import { motion } from 'framer-motion'
 import {StaggerParentVariant} from '../../../Styles/animations/formAnimations';
 import { AnyStyledComponent } from 'styled-components';
 import { EndOfLineState } from 'typescript';
+import { createMerchandise } from 'Services/Merchandise';
 //onCancel toggles setVisible in parent component
 
 interface IFile {
@@ -34,8 +34,10 @@ interface IProps {
 
 const EventForm = ({ onSubmitForm }: IProps ) => {
 
-  const [date, setDate] = useState('');  
-      // const [imageUrl, setImageUrl] = useState('');
+  const [imageObj, setImageObj] = useState(null);
+  const [imageUrl, setImageUrl] = useState('');
+  const [date, setDate] = useState('');
+  const { currentId } = useContext(UserContext)
   
 
   const onPreview = async (file: IFile) => {
@@ -58,9 +60,8 @@ const EventForm = ({ onSubmitForm }: IProps ) => {
    
   }
 
-  // datacomponent sends data to the services directly and to the page component for rendering
-
-  const formatResult = (res: any) => {
+/////////////////////////form submit///////////////////////////////////////////
+  const formatResult = (res: IEvent) => {
     const { name, address, tokens_value, number_of_tokens } = res;
     const formattedResult = {
       name: name,
@@ -70,8 +71,14 @@ const EventForm = ({ onSubmitForm }: IProps ) => {
       number_of_tokens: number_of_tokens,
       // tokens_image: imageUrl
     }
-    onSubmitForm(formattedResult)
-    
+    return formattedResult;
+  }
+
+  const formSubmit = async (values: IEvent) => { 
+    const formattedResults = formatResult(values);
+    console.log(formattedResults);
+    // const eventInDB = await createEvent(formattedResults);
+    // onSubmitForm(eventInDB)
   }
 
   //allows only input of future dates
@@ -83,9 +90,7 @@ const EventForm = ({ onSubmitForm }: IProps ) => {
   return (
     <Card title="new Event">
       <Form
-        onFinish={(values: any) => { 
-          formatResult(values)
-        }}
+        onFinish={formSubmit}
       labelCol={{
         span: 6
       }}

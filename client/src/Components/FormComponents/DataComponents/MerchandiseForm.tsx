@@ -13,7 +13,6 @@ import { createMerchandise } from '../../../Services/Merchandise';
 //styling
 import { motion } from 'framer-motion'
 import {StaggerParentVariant} from '../../../Styles/animations/formAnimations';
-import { type } from '@testing-library/user-event/dist/type';
 
 
 interface IFile {
@@ -34,28 +33,40 @@ const MerchandiseForm = ({ onSubmitForm }: IProps) => {
 
   const [imageObj, setImageObj] = useState(null);
   const [imageUrl, setImageUrl] = useState('');
-  const [type, setType] = useState('')
   const { currentId } = useContext(UserContext)
 
-  ////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////
 // // form submit // //
 const formatResult = (res:any) => {
-  const { name, description, number_of_tokens, tokens_value } = res;
+  const { name, description, merchType, number_of_tokens, tokens_value } = res;
   const formattedResult = {
     name: name,
-    type: type,
+    type: merchType,
     tokens_image: 'https://i.pinimg.com/originals/6d/ee/b5/6deeb5d98a7fe7ce5ce4daa9bfac5e81.jpg',
     description: description,
     number_of_tokens: number_of_tokens,
     tokens_value: tokens_value,
   }
-  console.log(formattedResult)
-  createMerchandise(formattedResult, 5) //hardcode userId to something that exists in your db
-  onSubmitForm(formattedResult)
+  return formattedResult;
+  }
+  
+
+
+const formSubmit = async (values: {
+  name: String;
+  merchType: String;
+  description: String;
+  number_of_tokens: Number;
+  tokens_value: Number;
+}) => { 
+  const formattedResults = formatResult(values)
+  console.log(formattedResults)
+  const merchInDB = await createMerchandise(formattedResults, 5) //hardcode userId to something that exists in your db
+  onSubmitForm(merchInDB)
 }
 
-  
-  
+  //////////////////////////image///////////////////////
   
 const onPreview = async (file: IFile) => {
   let src = file.url;
@@ -78,19 +89,11 @@ const handleChange = ({ file }:IFileProps ) => {
   // const storageRef = storage.ref(`album/image/${file.name}`)  
 
 }
-  
+  ////////////////////////////tsx////////////////////////////
   return (
     <Card title="Merchandise">
        <Form
-        onFinish={(values: {
-          name: String;
-          type: String;
-          description: String;
-          number_of_tokens: Number;
-          tokens_value: Number;
-        }) => { 
-          formatResult(values)
-        }}
+        onFinish={formSubmit}
       labelCol={{
         span: 6
       }}
@@ -113,9 +116,10 @@ const handleChange = ({ file }:IFileProps ) => {
           </Form.Item>
           {/* ///////////////tried adding select tag, didn't work. maybe later//////////////////*/}
           <Form.Item
-            name='type'
+            name='merchType'
             label='Type'
-            rules={[{ required: true, message: 'Please select a type' }]}>
+            rules={[{ required: true, message: 'Please select a type' }]}
+          >
             <Input></Input>
           </Form.Item>
           <Form.Item
