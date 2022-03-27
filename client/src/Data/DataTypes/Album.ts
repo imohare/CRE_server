@@ -7,9 +7,9 @@ interface IAlbum {
     tokens_value: number,
 
     //auto-generated
-    id?: number,
-    createdAt?: Date,
-    updatedAt?: Date,
+    id: number,
+    createdAt: Date,
+    updatedAt: Date,
     ArtistId: number,
 }
 

@@ -56,6 +56,7 @@ const LandingPage: React.FunctionComponent = () => {
           response.sort((firstItem, secondItem) => secondItem.createdAt.getTime() - firstItem.createdAt.getTime())
           setAlbums(response)
         }
+        else setAlbums(response)
       })
       .catch(error => {
         console.log(error)
@@ -72,18 +73,17 @@ const LandingPage: React.FunctionComponent = () => {
         console.log(error)
         console.log("Error occured.")
       })
-    // getAllMerchandises()
-    //   .then((response: IMerchandise[]) => {
-    //     if (response) {
-    //       response.sort((firstItem, secondItem) => secondItem.createdAt.getTime() - firstItem.createdAt.getTime())
-    //       setMerchandise(response)
-    //     }
-    //     setMerchandise(response)
-    //   })
-    //   .catch(error => {
-    //     console.log(error)
-    //     console.log("Error occured.")
-    //   })
+    getAllMerchandises()
+      .then((response: IMerchandise[]) => {
+        if (response) {
+          response.sort((firstItem, secondItem) => secondItem.createdAt.getTime() - firstItem.createdAt.getTime())
+          setMerchandise(response)
+        }
+      })
+      .catch(error => {
+        console.log(error)
+        console.log("Error occured.")
+      })
   }, [])
 
   // const today = new Date();

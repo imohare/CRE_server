@@ -1,7 +1,7 @@
-import { IMerchandise } from "../Data/DataTypes"
+import { IMerchandise, IPreSQLMerchandise } from "../Data/DataTypes"
 const BASE_URL = 'http://localhost:3001'
 
-const createMerchandise = (merchandise: IMerchandise, artistId: number) => {
+const createMerchandise = (merchandise: IPreSQLMerchandise, artistId: number) => {
     const requestOptions = {
         method: 'POST',
         headers: {

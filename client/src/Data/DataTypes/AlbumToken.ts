@@ -1,10 +1,10 @@
 interface IAlbumToken {
     //auto-generated
-    id?: number,
-    createdAt?: Date,
-    updatedAt?: Date,
-    ArtistId?: number, 
-    AlbumId?: number,
+    id: number,
+    createdAt: Date,
+    updatedAt: Date,
+    ArtistId: number, 
+    AlbumId: number,
     ConsumerId?: number
 }
 

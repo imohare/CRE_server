@@ -25,17 +25,17 @@ const exampleConsumer: IConsumer = {
   updatedAt: new Date()
 }
 
-const exampleAlbum: IAlbum = {
-  name: 'Pink',
-  year: new Date(),
-  description: "Pink is Lancey Foux's debut EP, posted on and featured on Hoodtapes",
-  number_of_tokens: 5,
-  tokens_image: 'https://t2.genius.com/unsafe/600x600/https%3A%2F%2Fimages.genius.com%2F7f2b5d24f103535739f89b984b5ec818.1000x1000x1.png',
-  tokens_value: 100,
-  id: 7,
-  createdAt: new Date(),
-  updatedAt: new Date(),
-  ArtistId: 2,
+const exampleAlbum = {
+  // name: 'Pink',
+  // year: new Date(),
+  // description: "Pink is Lancey Foux's debut EP, posted on and featured on Hoodtapes",
+  // number_of_tokens: 5,
+  // tokens_image: 'https://t2.genius.com/unsafe/600x600/https%3A%2F%2Fimages.genius.com%2F7f2b5d24f103535739f89b984b5ec818.1000x1000x1.png',
+  // tokens_value: 100,
+  // id: 7,
+  // createdAt: new Date(),
+  // updatedAt: new Date(),
+  // ArtistId: 2,
 }
 const exampleEvent: IEvent = {
   name: 'partey',
@@ -47,7 +47,8 @@ const exampleEvent: IEvent = {
   tokens_value: 10,
   id: 8,
   createdAt: new Date(),
-  updatedAt: new Date()
+  updatedAt: new Date(), 
+  ArtistId: 2, 
 }
 
 const exampleEventToken: IEventToken = {
@@ -76,7 +77,8 @@ const exampleMerchandise: IMerchandise = {
   tokens_value: 3, 
   id: 8,
   createdAt: new Date(),
-  updatedAt: new Date()
+  updatedAt: new Date(),
+  ArtistId: 2,
 }
 const exampleMerchToken: IMerchToken = {
   id: 6,
