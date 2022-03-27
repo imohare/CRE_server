@@ -1,6 +1,6 @@
 import { IArtist, IAlbum, IConsumer, IEvent, IMerchandise, IAlbumToken, IEventToken, IMerchToken, IPoints } from '../Data/DataTypes';
 
-const exampleArtist:IArtist = {
+const exampleArtist: IArtist = {
   eth_address: 'kloi876thjmnbcder56ui',
   name: 'Lancey',
   profile_picture: 'https://elevator-wp-uploads.s3-us-west-2.amazonaws.com/2018/10/Lancey-Foux-11.jpg',
@@ -17,17 +17,19 @@ const exampleArtist:IArtist = {
 const exampleConsumer: IConsumer = {
   eth_address: 'r678ikjhgfvbnmr6',
   username: 'Sherlock',
-  profile_picture: '', 
+  profile_picture: '',
   location: 'London',
   email: 'user@gmail.com',
   id: 3,
-  createdAt: new Date(), 
+  createdAt: new Date(),
   updatedAt: new Date()
 }
 
 const exampleAlbum: IAlbum = {
   name: 'Pink',
-  year: new Date(),
+  // year: new Date(),  
+  year: '2016-05-25',
+
   description: "Pink is Lancey Foux's debut EP, posted on and featured on Hoodtapes",
   number_of_tokens: 5,
   tokens_image: 'https://t2.genius.com/unsafe/600x600/https%3A%2F%2Fimages.genius.com%2F7f2b5d24f103535739f89b984b5ec818.1000x1000x1.png',
@@ -62,7 +64,7 @@ const exampleAlbumToken: IAlbumToken = {
   id: 9,
   createdAt: new Date(),
   updatedAt: new Date(),
-  ArtistId: 2, 
+  ArtistId: 2,
   AlbumId: 7,
   ConsumerId: 1
 }
@@ -71,9 +73,9 @@ const exampleMerchandise: IMerchandise = {
   name: 'T-shirt',
   type: 'clothing',
   description: 'a tshirt with a famous face',
-  number_of_tokens: 4, 
-  tokens_image: '', 
-  tokens_value: 3, 
+  number_of_tokens: 4,
+  tokens_image: '',
+  tokens_value: 3,
   id: 8,
   createdAt: new Date(),
   updatedAt: new Date()
