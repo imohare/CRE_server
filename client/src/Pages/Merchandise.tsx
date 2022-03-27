@@ -8,6 +8,7 @@ import { getMerchTokenById } from '../Services/MerchToken';
 import { getArtistById } from '../Services/Artist';
 import "./Album.css"
 import moment from 'moment';
+import './Merchandise.css'
 
 
 
@@ -32,13 +33,13 @@ const MerchandisePage: React.FunctionComponent = () => {
 
 
     //handler function
-    const getMerchInfo = async (merchId: number) => {
-        const merch = await getMerchandiseById(merchId);
+    const getMerchInfo = async (merchandiseId: number) => {
+        const merch = await getMerchandiseById(merchandiseId);
         setMerchData(merch);
     }
 
-    const getMerchTokenInfo = async (merchId: number) => {
-        const merchToken = await getMerchTokenById(merchId);
+    const getMerchTokenInfo = async (merchandiseId: number) => {
+        const merchToken = await getMerchTokenById(merchandiseId);
         setMerchTokenData(merchToken);
     }
 
@@ -48,23 +49,49 @@ const MerchandisePage: React.FunctionComponent = () => {
     }
 
     useEffect(() => {
-        const merchId: number = parseInt(location.pathname.replace(/[^0-9.]+/g, ''))
-        console.log("merchID in useEffect", merchId);
-        getMerchInfo(merchId);
-        const _merchToken = getMerchTokenInfo(merchId);
-        setMerchTokenData(_merchToken);
-        const artistId = merchData.ArtistId;
-        getArtistInfo(artistId);
-        console.log(artistData);
+        const merchandiseId: number = parseInt(location.pathname.replace(/[^0-9.]+/g, ''))
+        console.log("merchID in useEffect", merchandiseId);
+        getMerchInfo(merchandiseId);
+        // const _merchToken = getMerchTokenInfo(merchandiseId);
+        // // console.log(_merchToken)
+        // setMerchTokenData(_merchToken);
+        // const artistId = merchData.ArtistId;
+        // getArtistInfo(artistId);
+        // console.log(artistData);
 
     }, [])
 
+    useEffect(() => { console.log(merchData) }, [merchData])
 
     return (
         <>
             <Link to="/">home</Link>
             <Link to="/artist">artist</Link>
-            < h1 > merchandise page</h1 >
+            <div className="merchStyling">
+                <div className="albumPic">
+                    <img src={merchData.tokens_image} alt="picture of the merch"></img>
+                </div>
+                <div className="dataHalf">
+                    <h1>TOKEN INFO</h1>
+                    <br></br>
+                    <h3>Merch: {merchData.name}</h3>
+                    <h3></h3>
+                    <br></br>
+                    <h3>Description: {merchData.description}</h3>
+                    <br></br>
+
+                    <h3>Number of Tokens: {merchData.number_of_tokens}</h3>
+                    <h3>Token value: {merchData.number_of_tokens}</h3>
+                    <br></br>
+
+                    <button>Purchase Merch</button>
+
+
+                </div>
+            </div>
+
+
+            {/* <h2>{merchData.description}</h2> */}
             {/* <p>user view with merchandise purchase</p>
             <button>purchase merchandise</button>
             <p>artist view without merchandise purchase</p>

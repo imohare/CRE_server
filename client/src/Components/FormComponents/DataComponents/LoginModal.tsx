@@ -64,6 +64,10 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
     displayContent()
   }, [displayStage])
 
+  useEffect(() => {
+    console.log(currentId)
+  }, [currentId]);
+
   const registerFormSubmit = (values: any) => {
     isArtist ? setArtistInfo({ ...values }) : setConsumerInfo({ ...values })
     console.log('message from the context, artistInfo is:', artistInfo, 'consumer is ', consumerInfo)
@@ -88,8 +92,8 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
       if (!isArtist) {
 
         res = await registerWithEthAddress(isArtist, consumerInfo);
+        console.log(res, "user res logged");
       }//setting the user in the global context
-      console.log(res, "user res logged");
 
       setDisplayStage(6) //successful registration
     } else {
@@ -105,20 +109,25 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
       const eth = await getEthAddress();
       if (u) {
         const artistObjResponse = await getArtistByEthAddress(eth);
-        // const { name, id } = await artistObjResponse;
-        // setCurrentId(id);
-        // setName(name)
+        const { name, id } = await artistObjResponse;
+        setCurrentId(id);
+        console.log(id);
+        setName(name);
         setUserType('artist');
+
       }
       if (!u) {
         const consumerObjResponse = await getConsumerByEthAddress(eth);
-        // const { username, consumerId } = consumerObjResponse;
-        // setCurrentId(id);
-        // setName(username)
+        const { username, id } = consumerObjResponse;
+        setCurrentId(id);
+        console.log(id)
+        setName(username)
         setUserType('consumer');
       }
+
     }
     setDisplayStage(7)
+    console.log("current id", currentId);
   }
 
   const submitUser = () => {

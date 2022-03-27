@@ -23,7 +23,7 @@ import { UserContext } from 'Data/UserContext';
 import { getAllAlbums } from "Services/Album";
 
 ///////testing/////////
-import { exampleArtist, exampleAlbum, exampleEvent, exampleMerchandise } from '../Testing/exampleObjects';
+import { exampleArtist, exampleAlbum, exampleEvent, exampleMerchandise } from '../testing/exampleObjects';
 import { IAlbum, IEvent, IMerchandise } from 'Data/DataTypes';
 import { getEvents } from 'Services/Event';
 import { getAllMerchandises } from 'Services/Merchandise';
@@ -52,7 +52,7 @@ const LandingPage: React.FunctionComponent = () => {
     getAllAlbums()
       .then((response: IAlbum[]) => {
         if (response) {
-          response.sort((firstItem, secondItem) => secondItem.createdAt.getTime() - firstItem.createdAt.getTime())
+          // response.sort((firstItem, secondItem) => secondItem.createdAt.getTime() - firstItem.createdAt.getTime())
           setAlbums(response)
         }
       })
@@ -63,7 +63,7 @@ const LandingPage: React.FunctionComponent = () => {
     getEvents()
       .then((response: IEvent[]) => {
         if (response) {
-          response.sort((firstItem, secondItem) => secondItem.createdAt.getTime() - firstItem.createdAt.getTime())
+          // response.sort((firstItem, secondItem) => secondItem.createdAt.getTime() - firstItem.createdAt.getTime())
           setEvents(response)
         }
       })
@@ -74,10 +74,10 @@ const LandingPage: React.FunctionComponent = () => {
     getAllMerchandises()
       .then((response: IMerchandise[]) => {
         if (response) {
-          response.sort((firstItem, secondItem) => secondItem.createdAt.getTime() - firstItem.createdAt.getTime())
+          // response.sort((firstItem, secondItem) => secondItem.createdAt.getTime() - firstItem.createdAt.getTime())
           setMerchandise(response)
         }
-        setMerchandise(response)
+        // setMerchandise(response)
       })
   }, [])
 

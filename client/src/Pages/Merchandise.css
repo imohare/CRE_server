@@ -1,0 +1,19 @@
+.merchStyling{
+    padding:100px;
+    display:flex;
+}
+
+.albumPic{
+    height:30vh;
+    width:30vw;
+}
+
+.dataHalf{
+    padding:90px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+    height:50vh;
+    width:50vw;
+}
