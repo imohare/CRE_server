@@ -12,6 +12,7 @@ async function getMerchandises(req: Request, res: Response) {
 
 async function getMerchandise(req: Request, res: Response) {
   try {
+    console.log('in get merchandise backend')
     const _merchandise = await Merchandise.findByPk(req.params.merchandiseId);
     res.json(_merchandise);
     res.status(200);
@@ -66,7 +67,7 @@ async function getArtistMerchandises(req: Request, res: Response) {
         res.status(400);
         res.json('Artist not found');
       } else {
-        const _merchandises = await Merchandise.findAll({where: {ArtistId: artistId}});
+        const _merchandises = await Merchandise.findAll({ where: { ArtistId: artistId } });
         res.json(_merchandises);
         res.status(201);
       }
@@ -93,7 +94,7 @@ async function getArtistMerchandise(req: Request, res: Response) {
         res.json('Album not found');
       }
       else {
-        const _merchandise = await Merchandise.findAll({where: {id: merchandiseId, ArtistId: artistId}});
+        const _merchandise = await Merchandise.findAll({ where: { id: merchandiseId, ArtistId: artistId } });
         res.json(_merchandise);
         res.status(201);
       }
@@ -103,8 +104,8 @@ async function getArtistMerchandise(req: Request, res: Response) {
 
 async function deleteMerchandise(req: Request, res: Response) {
   const merchandiseId = req.params.merchandiseId;
-  await MerchandiseToken.destroy({where: {MerchandiseId: merchandiseId}});
-  await Merchandise.destroy({where: {id: merchandiseId}});
+  await MerchandiseToken.destroy({ where: { MerchandiseId: merchandiseId } });
+  await Merchandise.destroy({ where: { id: merchandiseId } });
   res.status(201);
   res.json();
 }
