@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 //antd imports
 import { Button, Card,  Form, Input, InputNumber, Upload } from 'antd';
 import ImgCrop from 'antd-img-crop';
@@ -6,14 +6,13 @@ import moment from 'moment';
 //components
 import FormTemplate from '../../ReuseableComponents/FormTemplate';
 //types
-import { IMerchandiseInfo } from '../../../Data/DataTypes/Forms/FormMerchandiseContextType'
+import { IMerchandise } from '../../../Data/DataTypes'
 //data
 import { UserContext } from '../../../Data/UserContext';
 import { createMerchandise } from '../../../Services/Merchandise';
 //styling
 import { motion } from 'framer-motion'
 import {StaggerParentVariant} from '../../../Styles/animations/formAnimations';
-import { type } from '@testing-library/user-event/dist/type';
 
 
 interface IFile {
@@ -32,29 +31,42 @@ interface IProps {
 
 const MerchandiseForm = ({ onSubmitForm }: IProps) => {
 
-  const [image, setImage] = useState(null);
+  const [imageObj, setImageObj] = useState(null);
   const [imageUrl, setImageUrl] = useState('');
-  const [type, setType] = useState('')
+  const { currentId } = useContext(UserContext)
 
 
-
-  ////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
 // // form submit // //
 const formatResult = (res:any) => {
-  const { name, description, number_of_tokens, tokens_value } = res;
+  const { name, description, merchType, number_of_tokens, tokens_value } = res;
   const formattedResult = {
     name: name,
-    type: type,
+    type: merchType,
+    tokens_image: 'https://i.pinimg.com/originals/6d/ee/b5/6deeb5d98a7fe7ce5ce4daa9bfac5e81.jpg',
     description: description,
     number_of_tokens: number_of_tokens,
     tokens_value: tokens_value,
   }
-  console.log( formattedResult)
-  onSubmitForm(formattedResult)
+  return formattedResult;
+  }
+  
+
+
+const formSubmit = async (values: {
+  name: String;
+  merchType: String;
+  description: String;
+  number_of_tokens: Number;
+  tokens_value: Number;
+}) => { 
+  const formattedResults = formatResult(values)
+  console.log(formattedResults)
+  const merchInDB = await createMerchandise(formattedResults, 5) //hardcode userId to something that exists in your db
+  onSubmitForm(merchInDB)
 }
 
-  
-  
+  //////////////////////////image///////////////////////
   
 const onPreview = async (file: IFile) => {
   let src = file.url;
@@ -74,22 +86,14 @@ const onPreview = async (file: IFile) => {
 
 const handleChange = ({ file }:IFileProps ) => {
   console.log('file to upload', file)
-  // const storageRef = storage.ref(`album/image/${file.name}`)
-  
+  // const storageRef = storage.ref(`album/image/${file.name}`)  
 
 }
-
-
-
-
-
-  
+  ////////////////////////////tsx////////////////////////////
   return (
     <Card title="Merchandise">
-      <Form
-        onFinish={(values: any) => { 
-          formatResult(values)
-        }}
+       <Form
+        onFinish={formSubmit}
       labelCol={{
         span: 6
       }}
@@ -110,11 +114,12 @@ const handleChange = ({ file }:IFileProps ) => {
             rules={[{ required: true, message: 'You need to enter a name for the merchandise' }]}>
             <Input></Input>
           </Form.Item>
-{/* ///////////////tried adding select tag, didn't work. maybe later////////////////// */}
+          {/* ///////////////tried adding select tag, didn't work. maybe later//////////////////*/}
           <Form.Item
-            name='type'
+            name='merchType'
             label='Type'
-            rules={[{ required: true, message: 'Please select a type' }]}>
+            rules={[{ required: true, message: 'Please select a type' }]}
+          >
             <Input></Input>
           </Form.Item>
           <Form.Item
@@ -131,9 +136,9 @@ const handleChange = ({ file }:IFileProps ) => {
               type: 'number',
               message: 'You must chose a number of NFTs for your merch'
             }]}
-          >
+          > 
             <InputNumber></InputNumber>
-            </Form.Item>
+          </Form.Item>
           <Form.Item
             name='tokens_value'
             label='NFT value'
@@ -148,9 +153,6 @@ const handleChange = ({ file }:IFileProps ) => {
           <Form.Item>
             <ImgCrop>
               <Upload
-                // action={(file: RcFile): Promise<string> => {
-                  
-                //  }}
                 action="gs://cre-6cbea.appspot.com"
                 listType="picture-card"
                 className="album-picture-upload"
@@ -166,7 +168,7 @@ const handleChange = ({ file }:IFileProps ) => {
             <Button type="primary" htmlType="submit">submit</Button>
           </Form.Item>
           </motion.div>
-        </Form>
+          </Form> 
    </Card>
   )
 

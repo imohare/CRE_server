@@ -25,9 +25,7 @@ const ArtistPage: React.FunctionComponent = () => {
 const [ type, setType] = useState('');
 const [ submitted, setSubmitted ] = useState(false);
 
-const toggleSubmit = () => {
-  setSubmitted(prev => !prev)
-}
+
 
 const handleAlbumState = () => setType('album');
 const handleEventState = () => setType('event');
@@ -36,14 +34,19 @@ const handleEventState = () => setType('event');
 
   const handleAlbumFormSubmit=(album: IAlbum) => {
     console.log(album)
+    setType('')
   }
 
 
   const handleEventFormSubmit = (event: IEvent) => {
     console.log('eventname: ', event)
+    setType('')
+
   }
   const handleMerchandiseFormSubmit = (merch: IMerchandise) => {
     console.log(merch)
+    setType('')
+
   }
   
   return (
