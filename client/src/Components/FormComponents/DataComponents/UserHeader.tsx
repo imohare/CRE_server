@@ -2,6 +2,7 @@ import { useContext } from 'react';
 
 //data
 // import {UserContext} from 'Data/UserContext'
+import StyledHeader from 'Styles/styledComponents/StyledHeader'
 
 //styling
 import AnimatedH1 from "Styles/animations/AnimatedH1";
@@ -17,11 +18,12 @@ const UserHeader = (props: IProps) => {
   const { currentName } = props;
   console.log('lalallalala', currentName)
   return (
-    <div>
+    <StyledHeader>
+      
       <AnimatedH1>{ currentName }</AnimatedH1>
       { currentName }
       {/* <AnimatedH1>{ currentName } </AnimatedH1> */}
-    </div>
+    </StyledHeader>
   )
 }
 

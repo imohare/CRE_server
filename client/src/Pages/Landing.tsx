@@ -29,13 +29,13 @@ import { getEvents } from 'Services/Event';
 import { getAllMerchandises } from 'Services/Merchandise';
 
 import { Link, NavLink } from 'react-router-dom';
-import StyledHeader from 'Styles/styledComponents/StyledHeader';
 import { FormContextProvider } from 'Data/FormConfigs/FormContext';
 import LoginModal from 'Components/FormComponents/DataComponents/LoginModal';
 import StyledButton from 'Styles/styledComponents/StyledButton';
 
 
 const LandingPage: React.FunctionComponent = () => {
+  
   //public view
   //login popup is set to visible on clicking the login button and to invisible on clicking cancel on Modal component:
 
@@ -52,7 +52,8 @@ const LandingPage: React.FunctionComponent = () => {
 
   const filters = ['newest', 'rarest', 'most popular', 'upcoming']
 
-  const [selected, setSelected] = useState(filters[0])
+  const [selected, setSelected] = useState(filters[0]);
+
   const [albums, setAlbums] = useState<IAlbum[] | []>([]);
   const [events, setEvents] = useState<IEvent[] | []>([]);
   // const [upcomingEvents, setUpcomingEvents] = useState<IEvent [] | []>([]);
@@ -116,7 +117,7 @@ const LandingPage: React.FunctionComponent = () => {
               {filters.map((filter: string) => (<ShuffleSelector
                 key={filter}
                 filterName={selected}
-                whileHover={() => setSelected(filter)}
+                hoverOver={() => setSelected(filter)}
               >{filter}
               </ShuffleSelector>))}
               </ul>

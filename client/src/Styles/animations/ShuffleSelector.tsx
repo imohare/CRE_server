@@ -7,7 +7,7 @@ import StyledShuffleSelector from 'Styles/styledComponents/StyledShuffleSelector
 interface IProps {
   children: string;
   filterName: string;
-  whileHover: () => React.SetStateAction<void>;
+  hoverOver: () => React.SetStateAction<void>;
 }
 
 // animate: whilehover, have text decoration underline and color at 1 opacity, 
@@ -23,16 +23,16 @@ const ShuffleTagVariant = {
 
 }
 
-
-
-const ShuffleSelector = ({ children }: IProps) => {
+const ShuffleSelector = ({ children, hoverOver, filterName }: IProps) => {
   return (
+    <li>
     <StyledShuffleSelector
-      layoutId="underline"
-      variants={ShuffleTagVariant}
-      initial={"initial"}
-      whileHover={"hoverEffect"}
-    >{children}</StyledShuffleSelector>
+      // layoutId="underline"
+      // initial="initial"
+      // whileHover="hoverEffect"
+      variants={ ShuffleTagVariant }
+      >{children}</StyledShuffleSelector>
+      </li>
   )
 }
 

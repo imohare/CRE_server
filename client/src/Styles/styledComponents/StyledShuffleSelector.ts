@@ -10,6 +10,7 @@ font-weight: 600;
 margin-right: 1.5rem;
 line-height: 2rem;
 font-size: 1.6rem;
+
 `
 
 

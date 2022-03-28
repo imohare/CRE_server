@@ -12,12 +12,13 @@ justify-content: space-between;
 padding: ${globalVariables.mobileScreenPadding};
 
 .navBar {
-  display: flex: justify-content: space-between;
+  display: flex; 
+  justify-content: flex-end;
 }
 
 .buttons {
   display: flex;
-  justify-content: space between;
+  justify-content: flex-end;
 }
 .login {
   overflow-x: hidden;

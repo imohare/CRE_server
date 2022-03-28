@@ -10,11 +10,11 @@ const Parallax = ({ children }: ParallaxProps) => {
 
   const { scrollY } = useViewportScroll()
 
-  const y = useTransform(scrollY, [100, 200], [0, 500])
+  // const y = useTransform(scrollY, [100, 200], [0, 500])
 
   return (
-    <motion.div style={{ y }}>
-      { console.log('y value is', y)}
+    <motion.div >
+      {/* { console.log('y value is', y)} */}
       {children}
     </motion.div>)
 }
