@@ -72,9 +72,9 @@ class Album extends Model {
           allowNull: false
         },
         tokens_value: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-      }
+          type: DataTypes.INTEGER,
+          allowNull: false
+        }
       },
       { sequelize })
   }
