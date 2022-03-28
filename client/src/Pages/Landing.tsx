@@ -27,7 +27,7 @@ import { exampleArtist, exampleAlbum, exampleEvent, exampleMerchandise } from '.
 import { IAlbum, IEvent, IMerchandise } from 'Data/DataTypes';
 import { getEvents } from 'Services/Event';
 import { getAllMerchandises } from 'Services/Merchandise';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 const LandingPage: React.FunctionComponent = () => {
   //public view
@@ -36,7 +36,7 @@ const LandingPage: React.FunctionComponent = () => {
   const [isLogin, setIsLogin] = useState(false);
 
   const { userType, setUserType } = useContext(UserContext);
-
+  // are we not meant to set the user type here to use it later?
   const toggleLogin = () => {
     setIsLogin(prev => !prev)
   }
@@ -86,13 +86,6 @@ const LandingPage: React.FunctionComponent = () => {
       })
   }, [])
 
-  // const today = new Date();
-  // console.log("event date", events[0].date.getTime())
-  // console.log("today date" , today)
-  // let upcoming = events.filter(evt => evt.date >= today)
-  // console.log(upcoming)
-
-
   return (
     //if user, display personalised component on top -> artist || user - else, have a login sign up option
     <div>
@@ -102,23 +95,15 @@ const LandingPage: React.FunctionComponent = () => {
           <FormContextProvider>
             <h1>Landing page</h1>
             <div className='login'>
+              {/* <Link to={`/user/${consumerId}`}>Profile</Link> how do we make this work? */}
               <div className='buttons'>
-                {
-                  isRegister
-                    ? <LoginModal isVisible={isRegister} initialStage={3} onCancel={() => toggleRegister()} />
-                    : null
-                }
+                { isRegister ? <LoginModal isVisible={isRegister} initialStage={3} onCancel={() => toggleRegister()} /> : null }
                 <StyledButton type="primary" onClick={toggleLogin}>sign up</StyledButton>
-                {
-                  isLogin
-                    ? <LoginModal isVisible={isLogin} initialStage={0} onCancel={() => toggleLogin()} />
-                    : null
-                }
+                { isLogin ? <LoginModal isVisible={isLogin} initialStage={0} onCancel={() => toggleLogin()} /> : null }
                 <StyledButton type="primary" onClick={toggleRegister}>log in</StyledButton>
               </div>
             </div>
           </FormContextProvider>
-
         </StyledHeader>
 
         <StyledPage>

@@ -1,12 +1,18 @@
 import { IAlbum } from "../Data/DataTypes"
 const BASE_URL = 'http://localhost:3001'
 
-const createAlbum = (album: IAlbum, artistId: number) => {
+const createAlbum = (name: string, year: Date, description: string, number_of_tokens: number, tokens_image: string, tokens_value: number, artistId: number) => {
     const requestOptions = {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            body: JSON.stringify(album)
+            body: JSON.stringify({
+                name: name, 
+                year: year, 
+                description: description,
+                number_of_tokens: number_of_tokens, 
+                tokens_image: tokens_image, 
+                tokens_value: tokens_value})
         }
     }
     return fetch(`${BASE_URL}/createAlbum/${artistId}`, requestOptions)
@@ -17,9 +23,9 @@ const createAlbum = (album: IAlbum, artistId: number) => {
 const getAllAlbums = () => {
     return fetch(`${BASE_URL}/getAlbums`)
         .then(res => res.json())
-        // .then(res => {
-        //     return res.map((album:any) => ({...album, createdAt: new Date(album.createdAt)}))
-        // })
+        .then(res => {
+            return res.map((album:any) => ({...album, createdAt: new Date(album.createdAt)}))
+        })
         .catch(err => console.log(err, "error"))
 }
 

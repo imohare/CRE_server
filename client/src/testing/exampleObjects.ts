@@ -83,7 +83,9 @@ const exampleMerchandise: IMerchandise = {
 const exampleMerchToken: IMerchToken = {
   id: 6,
   createdAt: new Date(),
-  updatedAt: new Date()
+  updatedAt: new Date(), 
+  ArtistId: 2, 
+  MerchId: 8
 }
 
 const examplePoints: IPoints = {

@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { Artist, Consumer, MerchandiseToken, Merchandise } from "../models";
+import { errorHandler } from './error';
 
 
 async function getMerchandiseTokens(req: Request, res: Response) {
@@ -110,4 +111,21 @@ async function getConsumerMerchTokensByConsumerId(req: Request, res: Response) {
   }
 }
 
-export { getMerchandiseTokens, getMerchandiseToken, getArtistMerchandisesTokens, getConsumerMerchandiseTokens, getConsumerMerchTokensByConsumerId }
+
+async function getMerchTokensByMerchId(req: Request, res: Response) {
+  try {
+    if (!req.params.merchId) {
+      res.status(400);
+      res.json('incorrect schema for request');
+    } else {
+      const merchId = req.params.merchId;
+      const _merchTokens = await MerchandiseToken.findAll({ where: { MerchandiseId: merchId } });
+      res.json(_merchTokens);
+    }
+  }
+  catch (err) {
+    errorHandler(res, err);
+  }
+}
+
+export { getMerchandiseTokens, getMerchandiseToken, getArtistMerchandisesTokens, getConsumerMerchandiseTokens, getConsumerMerchTokensByConsumerId, getMerchTokensByMerchId }
