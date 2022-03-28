@@ -45,7 +45,7 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
     currentId,
     setCurrentId,
     name,
-    setName
+    setName,
   } = useContext(UserContext)
 
 
@@ -65,7 +65,20 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
   }, [displayStage])
 
   const registerFormSubmit = (values: any) => {
-    isArtist ? setArtistInfo({ ...values }) : setConsumerInfo({ ...values })
+    if (isArtist) {
+      setArtistInfo({ ...values });
+      setUserType('artist');
+      setCurrentId(values.id);
+      setName(values.name)
+    }
+    else {
+      setConsumerInfo({ ...values });
+      setUserType('consumer');
+      setCurrentId(values.id);
+      setName(values.username)
+    }
+
+  
     console.log('message from the context, artistInfo is:', artistInfo, 'consumer is ', consumerInfo)
     setDisplayStage(2);
   }
@@ -154,6 +167,8 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
       onOk={submitUser}
       onCancel={onCancel}
       footer={displayStage > 5 && (<Button onClick={onCancel}>start browsing!</Button>)}
+      className="modal"
+      style={{overflowX: "hidden"}}
     >
       {displayContent()}
     </Modal>

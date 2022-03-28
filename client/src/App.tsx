@@ -4,7 +4,6 @@ import { UserContextProvider } from './Data/UserContext';
 //Pages
 import {
   LandingPage,
-  RegisterPage,
   EventPage,
   ArtistPage,
   AlbumPage,

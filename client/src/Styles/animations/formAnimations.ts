@@ -2,18 +2,19 @@ const StaggerParentVariant = {
   show: {
     transition: {
       staggerChildren: 0.3,
-      staggerDirection: -1
     }
   }
 }
 const StaggerItemVariant = {
   hidden: {
     opacity: 0,
-    y: '-50'
+    y: '-50',
+    x: '150px'
   },
   show: {
     opacity: 1,
     y: 0,
+    x: 0,
     transition: {
       ease: [0.6, 0.01, -0.05, 0.95],
       duration: 0.8,

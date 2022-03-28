@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import { Button } from 'antd';
 
-const StyledButton = styled(Button)`
+const StyledHtmlButton = styled.button`
   display:flex;
   justify-content: center;
   align-items: center;
@@ -39,4 +38,4 @@ transform: scale(1.05);
 }
 `
 
-export default StyledButton;
+export default StyledHtmlButton;

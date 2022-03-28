@@ -10,7 +10,7 @@ background-size: cover;
 margin: 0 0.6rem;
 border-radius: 2px;
 .portrait {
-  background-image: url(${props => props.portrait || 'http://images4.fanpop.com/image/photos/23200000/The-Joker-the-joker-23255208-1400-1050.jpg' });
+  background-image: url(${props => props.portrait || '/images/background.jpg' });
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -57,7 +57,6 @@ padding: 5px;
   }
   p {
     padding-left: 1rem;
-
   }
 }
 `
@@ -72,7 +71,6 @@ const StyledAlbumCardTemplate = styled(StyledCardTemplate)`
   height: 60%;
   width: 100%;
 }
-
 `
 
 const StyledEventCardTemplate = styled(StyledCardTemplate)`
@@ -119,3 +117,6 @@ export {
   StyledEventCardTemplate, 
   StyledMerchCardTemplate
 }
+
+
+//background portrait as before: http://images4.fanpop.com/image/photos/23200000/The-Joker-the-joker-23255208-1400-1050.jpg
