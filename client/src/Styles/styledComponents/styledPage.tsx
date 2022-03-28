@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 const StyledPage = styled.div`
+position: relative;
 margin: 10px auto;
 padding: 0 7px;
 width: 96%;

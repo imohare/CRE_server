@@ -12,11 +12,11 @@ interface IProps {
 const ArtistCardTemplate = ({background, artist}: IProps) => {
   return (
     <Link to={`/artist/${artist.id}`}>
-
+      
       <StyledArtistCardTemplate portrait={artist.profile_picture}>
         <div className="bgImage">
-        <img src={background} alt="" />
-         </div>
+          <img src={background} alt="" />
+          </div>
          <div className='portrait'></div>
          <div className='title'><h4>{ artist.name }</h4></div>
 

@@ -1,38 +1,35 @@
 //react
 import { useState, useContext, useEffect } from 'react';
 //antd imports
-import PublicHeader from 'Components/FormComponents/DataComponents/PublicHeader';
 //components
 import StyledPage from 'Styles/styledComponents/styledPage';
 import ScrollList from 'Components/ReuseableComponents/ScrollList';
 import { EventCardTemplate, AlbumCardTemplate, ArtistCardTemplate, MerchCardTemplate } from '../Components/ReuseableComponents/CardTemplates';
+import PublicHeader from 'Components/FormComponents/DataComponents/PublicHeader';
 import UserHeader from 'Components/FormComponents/DataComponents/UserHeader';
-import AlbumList from 'Components/Lists/albumList';
 
 //styling
 import { LayoutGroup } from 'framer-motion';
 import Parallax from 'Styles/animations/ParallaxAnimation';
 import ShuffleSelector from 'Styles/animations/ShuffleSelector';
 import Transition from 'Styles/animations/PageTransitions';
+import Background from 'Styles/animations/LandingPageAnim';
 //styling
-
+import discoballs from 'images/header_background.jpg'
 import background1 from 'images/background1.jpg';
 
 //contexts
 import { UserContext } from 'Data/UserContext';
 //data 
 import { getAllAlbums } from "Services/Album";
+import { getAllMerchandises } from 'Services/Merchandise';
+import { getEvents } from 'Services/Event';
+import { getArtists } from 'Services/Artist';
 
 ///////testing/////////
 import { exampleArtist, exampleAlbum, exampleEvent, exampleMerchandise } from '../testing/exampleObjects';
-import { IAlbum, IEvent, IMerchandise } from 'Data/DataTypes';
-import { getEvents } from 'Services/Event';
-import { getAllMerchandises } from 'Services/Merchandise';
+import { IAlbum, IEvent, IMerchandise, IArtist } from 'Data/DataTypes';
 
-import { Link, NavLink } from 'react-router-dom';
-import { FormContextProvider } from 'Data/FormConfigs/FormContext';
-import LoginModal from 'Components/FormComponents/DataComponents/LoginModal';
-import StyledButton from 'Styles/styledComponents/StyledButton';
 
 
 const LandingPage: React.FunctionComponent = () => {
@@ -54,12 +51,24 @@ const LandingPage: React.FunctionComponent = () => {
 
   const [selected, setSelected] = useState(filters[0]);
 
+
+
+  const [artists, setArtists] = useState<IArtist[] | []>([]);
   const [albums, setAlbums] = useState<IAlbum[] | []>([]);
   const [events, setEvents] = useState<IEvent[] | []>([]);
   // const [upcomingEvents, setUpcomingEvents] = useState<IEvent [] | []>([]);
   const [merchandise, setMerchandise] = useState<IMerchandise[] | []>([]);
 
   useEffect(() => {
+     getArtists()
+      .then((response: IArtist[]) => {
+       if (response) {
+           setArtists(response)
+       } else {
+         console.log('no artistsfound')
+       }
+       })
+
     getAllAlbums()
       .then((response: IAlbum[]) => {
         if (response) {
@@ -95,20 +104,23 @@ const LandingPage: React.FunctionComponent = () => {
         console.log("Error occured.")
       })
   }, [])
+
   
+
   return (
     //if user, display personalised component on top -> artist || user - else, have a login sign up option
     <Transition>
-
       <Parallax>
       
       {(userType === 'public')
         ? <PublicHeader />
-        : <UserHeader currentName={ name } />
+          : <UserHeader discoballs={ discoballs } currentName={ name } />
       }
      
      </Parallax>
       <StyledPage>
+      <Background />
+
         <div>
           <h3>Show me the</h3>
           <p className="shuffle colorchange filter">
@@ -125,8 +137,12 @@ const LandingPage: React.FunctionComponent = () => {
         </p>
           <p><span className="colorchange select">Events</span><span className="colorchange select">Albums</span><span className="colorchange select">Merch</span></p>
           </div>
-          <ScrollList title='Artists'>
-            <ArtistCardTemplate background={background1} artist={exampleArtist}></ArtistCardTemplate>
+        <ScrollList title='Artists'>
+          {
+            artists.map((artist: IArtist) => {
+             return <ArtistCardTemplate background={background1} artist={artist}></ArtistCardTemplate>
+            })
+          }
           </ScrollList>
           <ScrollList title='Newest Albums'>
             {albums.map(album => <div key = {album.id}>

@@ -9,19 +9,21 @@ function AlbumInputBar(props: any) {
 
   const [image, setImage] = useState();
   const [name, setName] = useState('');
-  const [year, setYear] = useState(new Date());
+  // const [year, setYear] = useState(new Date());
   const [description, setDescription] = useState('');
   const [tokensNumber, setTokensNumber] = useState(0);
   const [tokensValue, setTokensValue] = useState(0);
   const [progress, setProgress] = useState(0);
   const [artistId, setArtistId] = useState(1);
 
-  const addAlbum = async (name: string, year: Date, description: string, tokensNumber: number, img_url: string, tokensValue: number, artistId: number) => {
-    const newAlbums = props.albums.slice();
-    const response = await createAlbum(name, year, description, tokensNumber, img_url, tokensValue, artistId)
-    newAlbums.push(response)
-    props.setAlbums(newAlbums); // need to import this from app
-  }
+  // const addAlbum = async (name: string,
+  //   year: Date,
+  //   description: string, tokensNumber: number, img_url: string, tokensValue: number, artistId: number) => {
+  //   const newAlbums = props.albums.slice();
+  //   const response = await createAlbum(name, year, description, tokensNumber, img_url, tokensValue, artistId)
+  //   newAlbums.push(response)
+  //   props.setAlbums(newAlbums); // need to import this from app
+  // }
 
   moment.prototype.toMySqlDateTime = function () {
     return this.format('YYYY-MM-DD HH:mm:ss');
@@ -52,19 +54,19 @@ function AlbumInputBar(props: any) {
           .getDownloadURL()
           .then((img: any) => {
             console.log(name, "name");
-            console.log(year, "year"); // this needs to be turned into the correct format
+            // console.log(year, "year"); // this needs to be turned into the correct format
             console.log(description, "description");
             console.log(tokensNumber, "tokensNumber");
             console.log(img, "img");
             console.log(tokensValue, "tokensValue");
             console.log(artistId, "artistId");
-            addAlbum(name, year, description, tokensNumber, img, tokensValue, artistId);
+            // addAlbum(name, year, description, tokensNumber, img, tokensValue, artistId);
           })
       }
     )
     evt.preventDefault();
     setName((name: string) => name = '');
-    setYear((year: Date) => year = new Date());
+    // setYear((year: Date) => year = new Date());
     setDescription((description: string) => description = '');
     setTokensNumber((tokensNumber: number) => tokensNumber = 0);
     setTokensValue((tokensValue: number) => tokensValue = 0);
@@ -80,7 +82,7 @@ function AlbumInputBar(props: any) {
         <br />
         {/* @ts-ignore */}
         <Label>Release Date</Label>
-        <input type="datetime-local" name="year" value={year} onChange={(evt: { target: { value: any; }; }) => setYear(evt.target.value)} required></input>
+        {/* <input type="datetime-local" name="year" value={year} onChange={(evt: { target: { value: any; }; }) => setYear(evt.target.value)} required></input> */}
         <br />
         <br />
         <Label>Description of the Album</Label>
