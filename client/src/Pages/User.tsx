@@ -22,20 +22,20 @@ const UserPage: React.FunctionComponent = () => {
   console.log(location)
   const { currentId } = useContext(UserContext);
 
-  useEffect(() => {
-    //get conssumerbyid
+  // useEffect(() => {
+  //   //get conssumerbyid
 
-    const _consumer = getConsumerById(currentId);
-
-
-    // events
-    const _events =
+  //   const _consumer = getConsumerById(currentId);
 
 
-    //albums
+  //   // events
+  //   const _events =
 
-    //nfts
-  }, [])
+
+  //   //albums
+
+  //   //nfts
+  // }, [])
 
 
 
