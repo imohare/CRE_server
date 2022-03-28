@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import {storage} from '../../../Firebase/index'
-import { Input } from '@rebass/forms'
+import { storage } from '../../../Firebase/index'
+import { Input, Label } from '@rebass/forms'
 import { Text, Button } from "rebass";
 import { createAlbum } from 'Services/Album';
 import moment from 'moment';
 
-function AlbumInputBar (props: any) {
+function AlbumInputBar(props: any) {
 
-  const [image, setImage]= useState();
+  const [image, setImage] = useState();
   const [name, setName] = useState('');
   const [year, setYear] = useState(new Date());
   const [description, setDescription] = useState('');
@@ -25,9 +25,9 @@ function AlbumInputBar (props: any) {
 
   moment.prototype.toMySqlDateTime = function () {
     return this.format('YYYY-MM-DD HH:mm:ss');
-};
+  };
 
-  const handleChange = (e:any) => {
+  const handleChange = (e: any) => {
     const file = e.target.files[0];
     setImage(file);
   }
@@ -70,26 +70,35 @@ function AlbumInputBar (props: any) {
     setTokensValue((tokensValue: number) => tokensValue = 0);
   };
 
-  return (  
+  return (
     <div>
-      <form onSubmit={handleSubmit}> 
-        <progress value={progress} max="100"/>
-        <Input type="string" name="name" value={name} onChange={(evt: { target: { value: any; }; }) => setName(evt.target.value)} required></Input>
+      <form onSubmit={handleSubmit}>
+        <progress value={progress} max="100" />
+
+        <Label>Album Name</Label>
+        <Input type="string" name="name" value={name} placeholder="Please enter album name ..." onChange={(evt: { target: { value: any; }; }) => setName(evt.target.value)} required></Input>
         <br />
         {/* @ts-ignore */}
-        <Input type="date" name="year" value={year} onChange={(evt: { target: { value: any; }; }) => setYear(evt.target.value)} required></Input>
+        <Label>Release Date</Label>
+        <input type="datetime-local" name="year" value={year} onChange={(evt: { target: { value: any; }; }) => setYear(evt.target.value)} required></input>
         <br />
-        <Input type="string" name="description" value={description} onChange={(evt: { target: { value: any; }; }) => setDescription(evt.target.value)} required></Input>
         <br />
+        <Label>Description of the Album</Label>
+        <Input type="string" name="description" placeholder="Please enter a description of the Album ..." value={description} onChange={(evt: { target: { value: any; }; }) => setDescription(evt.target.value)} required></Input>
+        <br />
+        <Label>Number of NFT's Available</Label>
         <Input type="number" name="tokensNumber" value={tokensNumber} onChange={(evt: { target: { value: string; }; }) => setTokensNumber(parseInt(evt.target.value))} required></Input>
         <br />
+        <Label> NFT's value</Label>
         <Input type="number" name="tokensValue" value={tokensValue} onChange={(evt: { target: { value: string; }; }) => setTokensValue(parseInt(evt.target.value))} required></Input>
         <br />
+        <Label> Upload Your NFT's cover picture</Label>
+
         <Input type="file" onChange={handleChange} />
         <br />
         <Button color="#33e" type='submit'>
           <Text fontFamily='system-ui'>
-            Upload
+            Upload Your NFT's
           </Text>
         </Button>
       </form>

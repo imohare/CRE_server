@@ -10,11 +10,12 @@ import UserHeader from 'Components/FormComponents/DataComponents/UserHeader';
 import AlbumList from 'Components/Lists/albumList';
 
 //styling
-
+import { LayoutGroup } from 'framer-motion';
 import Parallax from 'Styles/animations/ParallaxAnimation';
+import ShuffleSelector from 'Styles/animations/ShuffleSelector';
 //styling
 
-import * as background1 from 'images/background1.jpg';
+import background1 from 'images/background1.jpg';
 
 //contexts
 import { UserContext } from 'Data/UserContext';
@@ -28,19 +29,20 @@ import { getEvents } from 'Services/Event';
 import { getAllMerchandises } from 'Services/Merchandise';
 
 import { Link, NavLink } from 'react-router-dom';
-import StyledHeader from 'Styles/styledComponents/StyledHeader';
 import { FormContextProvider } from 'Data/FormConfigs/FormContext';
 import LoginModal from 'Components/FormComponents/DataComponents/LoginModal';
 import StyledButton from 'Styles/styledComponents/StyledButton';
 
 
 const LandingPage: React.FunctionComponent = () => {
+  
   //public view
   //login popup is set to visible on clicking the login button and to invisible on clicking cancel on Modal component:
   const [isRegister, setIsRegister] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
   const { userType, setUserType } = useContext(UserContext);
   const {currentId} = useContext(UserContext);
+
   // are we not meant to set the user type here to use it later?
   const toggleLogin = () => {
     setIsLogin(prev => !prev)
@@ -48,6 +50,10 @@ const LandingPage: React.FunctionComponent = () => {
   const toggleRegister = () => {
     setIsRegister(prev => !prev)
   }
+
+  const filters = ['newest', 'rarest', 'most popular', 'upcoming']
+
+  const [selected, setSelected] = useState(filters[0]);
 
   const [albums, setAlbums] = useState<IAlbum[] | []>([]);
   const [events, setEvents] = useState<IEvent[] | []>([]);
@@ -113,18 +119,32 @@ const LandingPage: React.FunctionComponent = () => {
         </StyledHeader>
 
         <StyledPage>
+
       {(userType === 'public')
         ? <PublicHeader />
-        : <UserHeader />
+        : <UserHeader currentName={ name } />
       }
-      <StyledPage/>
+     
+     </Parallax>
+      <StyledPage>
         <div>
-        <h3>Show me the</h3>
-        <p><span className="shuffle colorchange filter">newest</span><span className="shuffle colorchange filter">rarest</span><span className="shuffle colorchange filter">upcoming</span><span className="shuffle colorchange filter">most popular</span></p>
+          <h3>Show me the</h3>
+          <p className="shuffle colorchange filter">
+            <LayoutGroup>
+              <ul className="filters">
+              {filters.map((filter: string) => (<ShuffleSelector
+                key={filter}
+                filterName={selected}
+                hoverOver={() => setSelected(filter)}
+              >{filter}
+              </ShuffleSelector>))}
+              </ul>
+          </LayoutGroup>
+        </p>
           <p><span className="colorchange select">Events</span><span className="colorchange select">Albums</span><span className="colorchange select">Merch</span></p>
           </div>
           <ScrollList title='Artists'>
-            <ArtistCardTemplate background={``} artist={exampleArtist}></ArtistCardTemplate>
+            <ArtistCardTemplate background={'https://wallpapercave.com/wp/wp7172141.jpg'} artist={exampleArtist}></ArtistCardTemplate>
           </ScrollList>
           <ScrollList title='Newest Albums'>
             {albums.map(album => <div key = {album.id}>
@@ -134,7 +154,7 @@ const LandingPage: React.FunctionComponent = () => {
           </ScrollList>
           <ScrollList title='Newest Events'>
           {events.map(event => <div key = {event.id}>
-              <EventCardTemplate event={event} background={''}/>
+              <EventCardTemplate event={event} background={'https://wallpapercave.com/wp/wp7172141.jpg'}/>
             </div>
             )}  
           </ScrollList>
@@ -145,7 +165,6 @@ const LandingPage: React.FunctionComponent = () => {
             )}
           </ScrollList>
         </StyledPage>
-        </Parallax>
     </div>
   )
 }

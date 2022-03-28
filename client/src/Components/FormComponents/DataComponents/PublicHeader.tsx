@@ -38,19 +38,17 @@ export const PublicHeader = () => {
                   ? <LoginModal isVisible={isRegister} initialStage={3} onCancel={() => toggleRegister()} />
                   : null
                 }
-                <StyledButton type="primary" onClick={toggleLogin}>sign up</StyledButton>
+                <StyledButton className="light" type="primary" onClick={toggleLogin}>sign up</StyledButton>
                 {
                   isLogin
                   ? <LoginModal isVisible={isLogin} initialStage={0} onCancel={() => toggleLogin()} />
                   : null
                 }
-                <StyledButton  type="primary" onClick={toggleRegister}>log in</StyledButton>
+                <StyledButton className="light" type="primary" onClick={toggleRegister}>log in</StyledButton>
               </div>
             </div>
           </FormContextProvider>
                   <AnimatedH1>Just browsing</AnimatedH1>
-                  <h2>discover our artists</h2>
-
         </StyledHeader>
 
   )
