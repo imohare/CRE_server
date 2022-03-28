@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { storage } from '../../../Firebase/index'
 import { Input, Label } from '@rebass/forms'
 import { Text, Button } from "rebass";
 import { createAlbum } from 'Services/Album';
+import { UserContext } from 'Data/UserContext';
+
 import moment from 'moment';
 
 function AlbumInputBar(props: any) {
@@ -14,7 +16,11 @@ function AlbumInputBar(props: any) {
   const [tokensNumber, setTokensNumber] = useState(0);
   const [tokensValue, setTokensValue] = useState(0);
   const [progress, setProgress] = useState(0);
-  const [artistId, setArtistId] = useState(1);
+  const { currentId } = useContext(UserContext);
+  const [artistId, setArtistId] = useState(currentId);
+  //import use context
+
+
 
   const addAlbum = async (name: string, year: Date, description: string, tokensNumber: number, img_url: string, tokensValue: number, artistId: number) => {
     console.log('in addAlbum and values are', name, year, description, tokensNumber, img_url, tokensValue, artistId)

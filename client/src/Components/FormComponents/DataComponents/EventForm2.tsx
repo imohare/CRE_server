@@ -1,12 +1,14 @@
-import { useState } from 'react';
-import {storage} from '../../../Firebase/index'
-import { Input } from '@rebass/forms'
-import { Text, Button} from "rebass";
+import { useState, useContext } from 'react';
+import { storage } from '../../../Firebase/index'
+import { Input, Label } from '@rebass/forms'
+import { Text, Button } from "rebass";
 import { createEvent } from 'Services/Event';
+import { UserContext } from 'Data/UserContext';
 
-function EventInputBar (props: any) {
 
-  const [image, setImage]= useState();
+function EventInputBar(props: any) {
+
+  const [image, setImage] = useState();
   const [name, setName] = useState('');
   const [address, setAddress] = useState('');
   const [date, setDate] = useState(new Date());
@@ -14,21 +16,27 @@ function EventInputBar (props: any) {
   const [tokensNumber, setTokensNumber] = useState(0);
   const [tokensValue, setTokensValue] = useState(0);
   const [progress, setProgress] = useState(0);
-  const [artistId, setArtistId] = useState(1);
+  const { currentId } = useContext(UserContext);
+  const [artistId, setArtistId] = useState(currentId);
+
+  //import use context
 
   const addEvent = async (name: string, address: string, date: Date, description: string, tokensNumber: number, img_url: string, tokensValue: number, artistId: number) => {
+    console.log('in advent and values are', name, address, date, description, tokensNumber, img_url, tokensValue, artistId)
     const newEvents = props.events.slice();
-    const response = await createEvent(name, address, date, description, tokensNumber, img_url, tokensValue, artistId)
+    console.log('new event', newEvents)
+    const response = await createEvent({ name, address, date, description, tokensNumber, img_url, tokensValue, artistId })
     newEvents.push(response)
     props.setEvents(newEvents); // need to import this from app
   }
 
-  const handleChange = (e:any) => {
+  const handleChange = (e: any) => {
     const file = e.target.files[0];
     setImage(file);
   }
 
   const handleSubmit = (evt: any) => {
+    console.log("artistId", artistId);
     // @ts-ignore
     const uploadTask = storage.ref(`images/${image.name}`).put(image);
     uploadTask.on(
@@ -68,21 +76,29 @@ function EventInputBar (props: any) {
     setTokensValue((tokensValue: number) => tokensValue = 0);
   };
 
-  return (  
+  return (
     <div>
-      <form onSubmit={handleSubmit}> 
-        <progress value={progress} max="100"/>
+      <form onSubmit={handleSubmit}>
+        <progress value={progress} max="100" />
+        <Label>Event Name</Label>
+
         <Input type="string" name="name" value={name} onChange={(evt: { target: { value: any; }; }) => setName(evt.target.value)} required></Input>
         <br />
+        <Label>Event Date</Label>
         {/* @ts-ignore */}
         <Input type="date" name="date" value={date} onChange={(evt: { target: { value: any; }; }) => setDate(evt.target.value)} required></Input>
         <br />
+
+        <Label>Event Address</Label>
         <Input type="string" name="address" value={address} onChange={(evt: { target: { value: any; }; }) => setAddress(evt.target.value)} required></Input>
         <br />
+        <Label>Description</Label>
         <Input type="string" name="description" value={description} onChange={(evt: { target: { value: any; }; }) => setDescription(evt.target.value)} required></Input>
         <br />
+        <Label>Number of Available NFT's </Label>
         <Input type="number" name="tokensNumber" value={tokensNumber} onChange={(evt: { target: { value: string; }; }) => setTokensNumber(parseInt(evt.target.value))} required></Input>
         <br />
+        <Label>Value of NFT</Label>
         <Input type="number" name="tokensValue" value={tokensValue} onChange={(evt: { target: { value: string; }; }) => setTokensValue(parseInt(evt.target.value))} required></Input>
         <br />
         <Input type="file" onChange={handleChange} />

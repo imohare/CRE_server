@@ -21,36 +21,39 @@ async function getEvent(req: Request, res: Response) {
 
 async function createEvent(req: Request, res: Response) {
   try {
-    if (!req.params.artistId) {
-      res.send(400);
-      res.json('incorrect schema for request');
-    } else {
-      const artist = await Artist.findByPk(req.params.artistId);
+    console.log('in createEvent server isde')
+    // if (!req.params.artistId) {
+    //   res.send(400);
+    //   res.json('incorrect schema for request');
+    // } else {
+    //   const artist = await Artist.findByPk(req.params.artistId);
 
-      if (!artist) {
-        res.status(400);
-        res.json('Artist not found');
-      } else {
-        const _event = await Event.create(req.body);
+    //   if (!artist) {
+    //     res.status(400);
+    //     res.json('Artist not found');
+    //   } else {
+    console.log("req.body of event", req.body)
+    const { name, address, date, description, tokensNumber, img_url, tokensValue, artistId } = req.body;
+    const _event = await Event.create({ name: name, address: address, date: date, description: description, number_of_tokens: tokensNumber, tokens_image: img_url, tokens_value: tokensValue });
 
-        for (var tokens = 0; tokens < _event.number_of_tokens; tokens++) {
-          const _token = EventToken.build();
-          await _token.save();
-          await _token.setArtist(artist);
-          await _token.setEvent(_event);
-        }
-
-        _event
-          .setArtist(artist)
-          .then((_event) => {
-            res.json(_event);
-            res.status(201);
-          })
-          .catch((err) => {
-            res.json('Database Error - createEvent failing')
-          });
-      }
+    for (var tokens = 0; tokens < _event.number_of_tokens; tokens++) {
+      const _token = EventToken.build();
+      await _token.save();
+      await _token.setArtist(artistId);
+      await _token.setEvent(_event);
     }
+
+    _event
+      .setArtist(artistId)
+      .then((_event) => {
+        res.json(_event);
+        res.status(201);
+      })
+      .catch((err) => {
+        res.json('Database Error - createEvent failing')
+      });
+
+
   } catch (error) { errorHandler(res, error) }
 }
 
@@ -67,13 +70,13 @@ async function getArtistEvents(req: Request, res: Response) {
         res.status(400);
         res.json('Artist not found');
       } else {
-        const _events = await Event.findAll({where: {ArtistId: artistId}});
+        const _events = await Event.findAll({ where: { ArtistId: artistId } });
         res.json(_events);
         res.status(201);
       }
     }
   } catch (error) { errorHandler(res, error) }
- }
+}
 
 async function getArtistEvent(req: Request, res: Response) {
   try {
@@ -94,20 +97,20 @@ async function getArtistEvent(req: Request, res: Response) {
         res.json('Event not found');
       }
       else {
-        const _event = await Event.findAll({where: {id: eventId, ArtistId: artistId}});
+        const _event = await Event.findAll({ where: { id: eventId, ArtistId: artistId } });
         res.json(_event);
         res.status(201);
       }
     }
   } catch (error) { errorHandler(res, error) }
- }
+}
 
- async function deleteEvent(req: Request, res: Response) {
+async function deleteEvent(req: Request, res: Response) {
   const eventId = req.params.eventId;
-  await EventToken.destroy({where: {EventId: eventId}});
-  await Event.destroy({where: {id: eventId}});
+  await EventToken.destroy({ where: { EventId: eventId } });
+  await Event.destroy({ where: { id: eventId } });
   res.status(201);
   res.json();
- }
+}
 
 export { createEvent, getEvents, getEvent, getArtistEvents, getArtistEvent, deleteEvent }
