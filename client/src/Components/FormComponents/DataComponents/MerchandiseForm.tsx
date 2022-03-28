@@ -62,8 +62,6 @@ const formSubmit = async (values: {
 }) => { 
   const formattedResults = formatResult(values)
   console.log(formattedResults)
-  const merchInDB = await createMerchandise(formattedResults, 5) //hardcode userId to something that exists in your db
-  onSubmitForm(merchInDB)
 }
 
   //////////////////////////image///////////////////////

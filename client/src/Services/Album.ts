@@ -1,4 +1,3 @@
-import { IAlbum } from "../Data/DataTypes"
 const BASE_URL = 'http://localhost:3001'
 
 const createAlbum = (name: string, year: Date, description: string, number_of_tokens: number, tokens_image: string, tokens_value: number, artistId: number) => {

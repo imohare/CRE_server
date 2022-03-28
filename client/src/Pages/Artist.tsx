@@ -2,15 +2,12 @@
 import { Link } from 'react-router-dom';
 import { useState, useContext, useEffect } from 'react';
 //antd imports
-import { Button, Card } from 'antd';
-//firebase imports
-// import { storage } from '../Firebase/index'
+import { Button } from 'antd';
 //services
-import { createAlbum, getAllAlbums } from 'Services/Album';
+import { getAllAlbums } from 'Services/Album';
+import { getEvents } from 'Services/Event';
+import { getAllMerchandises } from 'Services/Merchandise';
 //components
-import AlbumForm from '../Components/FormComponents/DataComponents/AlbumForm'
-import EventForm from '../Components/FormComponents/DataComponents/EventForm';
-import MerchandiseForm from '../Components/FormComponents/DataComponents/MerchandiseForm'
 import StyledPage from '../Styles/styledComponents/styledPage';
 //styling
 
@@ -20,8 +17,8 @@ import { IAlbum, IEvent, IMerchandise } from '../Data/DataTypes';
 //context is being used in this component
 import { UserContext } from 'Data/UserContext';
 import AlbumInputBar from 'Components/FormComponents/DataComponents/AlbumForm2';
-import { getEvents } from 'Services/Event';
-import { getAllMerchandises } from 'Services/Merchandise';
+import EventInputBar from 'Components/FormComponents/DataComponents/EventForm2';
+import MerchandiseInputBar from 'Components/FormComponents/DataComponents/MerchandiseForm2';
 
 
 const ArtistPage: React.FunctionComponent = () => {
@@ -81,13 +78,12 @@ const handleMerchandiseState = () => setType('merchandise');
         <h1>Artist</h1>
       <p>To upload new NFTs to your profile, please select 
         from the following category and input required information: </p>
-      <button onClick={handleAlbumState}>album</button>
-      <button onClick={handleEventState}>event</button>
-      <button onClick={handleMerchandiseState}>merchandise</button>
+      <Button onClick={handleAlbumState} color="#33e">album</Button>
+      <Button onClick={handleEventState}>event</Button>
+      <Button onClick={handleMerchandiseState}>merchandise</Button>
       {(type === 'album') ? <AlbumInputBar albums={albums} setAlbums={setAlbums}/> : null}
-      {(type === 'event') ? <p> Event Form</p> : null}
-      {(type === 'merchandise') ? <p> Merchandise Form</p> : null}
-    <p>artist view with option to update offers</p>
+      {(type === 'event') ? <EventInputBar events={events} setEvents={setEvents}/> : null}
+      {(type === 'merchandise') ? <MerchandiseInputBar merchandise={merchandise} setMerchandise={setMerchandise}/> : null}    <p>artist view with option to update offers</p>
     <p>user view without any authorisations but with fake follow button</p>
     </StyledPage>
   )
