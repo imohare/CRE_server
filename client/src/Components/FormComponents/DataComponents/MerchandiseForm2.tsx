@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { storage } from '../../../Firebase/index'
 import { Input, Label } from '@rebass/forms'
 import { Text, Button } from "rebass";
 import { createMerchandise } from 'Services/Merchandise';
+import { UserContext } from 'Data/UserContext';
 
 function MerchandiseInputBar(props: any) {
 
@@ -13,7 +14,10 @@ function MerchandiseInputBar(props: any) {
   const [tokensNumber, setTokensNumber] = useState(0);
   const [tokensValue, setTokensValue] = useState(0);
   const [progress, setProgress] = useState(0);
-  const [artistId, setArtistId] = useState(1);
+  const { currentId } = useContext(UserContext);
+  const [artistId, setArtistId] = useState(currentId);
+
+
 
   const addMerchandise = async (name: string, type: string, description: string, tokensNumber: number, img_url: string, tokensValue: number, artistId: number) => {
     // const newMerchandises = props.merchandises.slice();
@@ -29,6 +33,9 @@ function MerchandiseInputBar(props: any) {
   }
 
   const handleSubmit = (evt: any) => {
+    console.log("artistId", artistId)
+    console.log("currentId", currentId)
+
     // @ts-ignore
     const uploadTask = storage.ref(`images/${image.name}`).put(image);
     uploadTask.on(

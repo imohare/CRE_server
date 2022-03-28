@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { storage } from '../../../Firebase/index'
 import { Input, Label } from '@rebass/forms'
 import { Text, Button } from "rebass";
 import { createEvent } from 'Services/Event';
+import { UserContext } from 'Data/UserContext';
+
 
 function EventInputBar(props: any) {
 
@@ -14,7 +16,8 @@ function EventInputBar(props: any) {
   const [tokensNumber, setTokensNumber] = useState(0);
   const [tokensValue, setTokensValue] = useState(0);
   const [progress, setProgress] = useState(0);
-  const [artistId, setArtistId] = useState(1);
+  const { currentId } = useContext(UserContext);
+  const [artistId, setArtistId] = useState(currentId);
 
   //import use context
 
@@ -33,6 +36,7 @@ function EventInputBar(props: any) {
   }
 
   const handleSubmit = (evt: any) => {
+    console.log("artistId", artistId);
     // @ts-ignore
     const uploadTask = storage.ref(`images/${image.name}`).put(image);
     uploadTask.on(
