@@ -16,7 +16,7 @@ import { AlbumToken } from './albumToken';
 
 class Album extends Model {
   public name!: string;
-  public year!: Date;
+  public year!: string;
   public description?: string;
   public number_of_tokens!: number;
   public tokens_image!: string;
@@ -57,7 +57,7 @@ class Album extends Model {
           allowNull: false
         },
         year: {
-          type: DataTypes.DATE,
+          type: DataTypes.STRING,
           allowNull: false
         },
         description: {
@@ -69,12 +69,12 @@ class Album extends Model {
         },
         tokens_image: {
           type: DataTypes.STRING,
-          allowNull: false
+          allowNull: true
         },
         tokens_value: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-      }
+          type: DataTypes.INTEGER,
+          allowNull: false
+        }
       },
       { sequelize })
   }

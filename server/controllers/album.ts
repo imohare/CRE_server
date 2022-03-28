@@ -33,7 +33,7 @@ async function createAlbum(req: Request, res: Response) {
     //     res.status(400);
     //     res.json('Artist not found');
     //   } else {
-
+    console.log("req body", req.body);
     const { name, year, description, number_of_tokens, tokens_image, tokens_value, currentId } = req.body
     const _album = await Album.create({ name: name, year: year, description: description, number_of_tokens: number_of_tokens, tokens_image: tokens_image, tokens_value: tokens_value })
     for (var tokens = 0; tokens < _album.number_of_tokens; tokens++) {
