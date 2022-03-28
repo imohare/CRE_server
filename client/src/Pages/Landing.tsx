@@ -10,6 +10,7 @@ import UserHeader from 'Components/FormComponents/DataComponents/UserHeader';
 import AlbumList from 'Components/Lists/albumList';
 
 //styling
+import { LayoutGroup } from 'framer-motion';
 import Parallax from 'Styles/animations/ParallaxAnimation';
 import ShuffleSelector from 'Styles/animations/ShuffleSelector';
 //styling
@@ -49,8 +50,10 @@ const LandingPage: React.FunctionComponent = () => {
     setIsRegister(prev => !prev)
   }
 
+  const filters = ['newest', 'rarest', 'most popular', 'upcoming']
 
-   const [albums, setAlbums] = useState<IAlbum[] | []>([]);
+  const [selected, setSelected] = useState(filters[0])
+  const [albums, setAlbums] = useState<IAlbum[] | []>([]);
   const [events, setEvents] = useState<IEvent[] | []>([]);
   // const [upcomingEvents, setUpcomingEvents] = useState<IEvent [] | []>([]);
   const [merchandise, setMerchandise] = useState<IMerchandise[] | []>([]);
@@ -107,10 +110,19 @@ const LandingPage: React.FunctionComponent = () => {
       <StyledPage>
         <div>
           <h3>Show me the</h3>
-          <div>
-          <p className="shuffle colorchange filter"><ShuffleSelector>newest</ShuffleSelector><ShuffleSelector>rarest</ShuffleSelector><ShuffleSelector>upcoming</ShuffleSelector><ShuffleSelector>most popular</ShuffleSelector></p>
+          <p className="shuffle colorchange filter">
+            <LayoutGroup>
+              <ul className="filters">
+              {filters.map((filter: string) => (<ShuffleSelector
+                key={filter}
+                filterName={selected}
+                whileHover={() => setSelected(filter)}
+              >{filter}
+              </ShuffleSelector>))}
+              </ul>
+          </LayoutGroup>
+        </p>
           <p><span className="colorchange select">Events</span><span className="colorchange select">Albums</span><span className="colorchange select">Merch</span></p>
-          </div>
           </div>
           <ScrollList title='Artists'>
             <ArtistCardTemplate background={'https://wallpapercave.com/wp/wp7172141.jpg'} artist={exampleArtist}></ArtistCardTemplate>
