@@ -109,6 +109,7 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
         setCurrentId(id);
         setName(name)
         setUserType('artist');
+        console.log(currentId, "currentId");
       }
       if (!u) {
         const consumerObjResponse = await getConsumerByEthAddress(eth);

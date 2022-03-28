@@ -1,15 +1,17 @@
 import { IAlbum } from "../Data/DataTypes"
 const BASE_URL = 'http://localhost:3001'
 
-const createAlbum = (album: IAlbum, artistId: number) => {
+const createAlbum = (album: any) => {
+    console.log('in album and album is ', album)
     const requestOptions = {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
-            body: JSON.stringify(album)
-        }
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(album)
+
     }
-    return fetch(`${BASE_URL}/createAlbum/${artistId}`, requestOptions)
+    return fetch(`${BASE_URL}/createAlbum`, requestOptions)
         .then(res => res.json())
         .catch(err => console.log(err, "error"))
 }

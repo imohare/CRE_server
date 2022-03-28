@@ -1,20 +1,22 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 //antd imports
 import { Button, Card, DatePicker, Form, Input, InputNumber, Upload } from 'antd';
 import ImgCrop from 'antd-img-crop';
 import moment from 'moment';
 //components
 //types
-import { IAlbum } from '../../../Data/DataTypes'
+import { IAlbum } from '../../../Data/DataTypes';
 //data
 import { createAlbum } from '../../../Services/Album';
 //helperfunction from tools
 //styling
 import { motion } from 'framer-motion'
-import {StaggerParentVariant} from '../../../Styles/animations/formAnimations';
+import { StaggerParentVariant } from '../../../Styles/animations/formAnimations';
 import { RcFile } from 'antd/lib/upload';
 
 
+//context is being used in this component
+import { UserContext } from 'Data/UserContext';
 //firebase
 // import { storage } from '../../../Firebase';
 
@@ -36,18 +38,22 @@ interface IFileProps {
 }
 
 interface IProps {
-  onSubmitForm: (res: any)=>void;
+  onSubmitForm: (res: any) => void;
 }
-  
+
 
 const AlbumForm = ({ onSubmitForm }: IProps) => {
-  
+
   const [date, setDate] = useState('');
 
   const [image, setImage] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
 
 
+  const {
+    currentId,
+    setCurrentId,
+  } = useContext(UserContext);
 
 
 
@@ -71,49 +77,54 @@ const AlbumForm = ({ onSubmitForm }: IProps) => {
   };
 
 
-  const handleChange = ({ file }:IFileProps ) => {
+  const handleChange = ({ file }: IFileProps) => {
     console.log('file to upload', file)
     // const storageRef = storage.ref(`album/image/${file.name}`)
-    
-  
+
+
   }
 
 
 
 
-////////////////////////////////////////////////////////////
-// // form submit // //
-  const formatResult = (res:any) => {
+  ////////////////////////////////////////////////////////////
+  // // form submit // //
+  const formatResult = (res: IAlbum) => {
     const { name, description, number_of_tokens, tokens_value } = res;
     const formattedResult = {
       name: name,
       description: description,
       number_of_tokens: number_of_tokens,
       tokens_value: tokens_value,
-      year: date
+      year: date,
+      currentId: currentId
     }
+
+
     console.log('formatted result that gets sent to api ', formattedResult)
     return formattedResult;
   }
 
-  const formSubmit = async (values: IAlbum) => {
+  const formSubmit = async (values: any) => {
     const formattedResults = formatResult(values);
     console.log(formattedResults);
+    return createAlbum(formattedResults);
+
     // const eventInDB = await createAlbum(formattedResults, currentId);
     // onSubmitForm(eventInDB)
   }
-  
+
 
   return (
     <Card title="new album">
       <Form
         onFinish={formSubmit}
-      labelCol={{
-        span: 6
-      }}
-      wrapperCol={{
-        span: 18
-      }}
+        labelCol={{
+          span: 6
+        }}
+        wrapperCol={{
+          span: 18
+        }}
         autoComplete="on"
       >
         <motion.div
@@ -130,13 +141,13 @@ const AlbumForm = ({ onSubmitForm }: IProps) => {
           </Form.Item>
 
           <Form.Item
-          name='date'
-          label='Date'
+            name='date'
+            label='Date'
             rules={[{ required: true, message: 'Please select when your album was created' }]}
           >
             <DatePicker
               onChange={(date, dateString) => {
-                setDate(moment(date).format('MMMM Do YYYY, h:mm:ss a'));     
+                setDate(moment(date).format('MMMM Do YYYY, h:mm:ss a'));
               }} picker="month" />
           </Form.Item>
 
@@ -156,7 +167,7 @@ const AlbumForm = ({ onSubmitForm }: IProps) => {
             }]}
           >
             <InputNumber></InputNumber>
-            </Form.Item>
+          </Form.Item>
           <Form.Item
             name='tokens_value'
             label='NFT value'
@@ -172,25 +183,25 @@ const AlbumForm = ({ onSubmitForm }: IProps) => {
             <ImgCrop>
               <Upload
                 // action={(file: RcFile): Promise<string> => {
-                  
+
                 //  }}
                 action="gs://cre-6cbea.appspot.com"
                 listType="picture-card"
                 className="album-picture-upload"
-                showUploadList={false}   
+                showUploadList={false}
                 onChange={handleChange}
                 onPreview={onPreview}
               >
 
-              </Upload> 
-              </ImgCrop>  
-            </Form.Item>
+              </Upload>
+            </ImgCrop>
+          </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit">submit</Button>
           </Form.Item>
-          </motion.div>
-        </Form>
-   </Card>
+        </motion.div>
+      </Form>
+    </Card>
   )
 }
 

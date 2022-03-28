@@ -53,7 +53,7 @@ const LandingPage: React.FunctionComponent = () => {
     getAllAlbums()
       .then((response: IAlbum[]) => {
         if (response) {
-          response.sort((firstItem, secondItem) => secondItem.createdAt.getTime() - firstItem.createdAt.getTime())
+          // response.sort((firstItem, secondItem) => secondItem.createdAt.getTime() - firstItem.createdAt.getTime())
           setAlbums(response)
         }
       })
@@ -64,7 +64,7 @@ const LandingPage: React.FunctionComponent = () => {
     getEvents()
       .then((response: IEvent[]) => {
         if (response) {
-          response.sort((firstItem, secondItem) => secondItem.createdAt.getTime() - firstItem.createdAt.getTime())
+          // response.sort((firstItem, secondItem) => secondItem.createdAt.getTime() - firstItem.createdAt.getTime())
           setEvents(response)
         }
       })
@@ -126,20 +126,20 @@ const LandingPage: React.FunctionComponent = () => {
             <ArtistCardTemplate background='https://wallpapercave.com/wp/wp7172141.jpg' artist={exampleArtist}></ArtistCardTemplate>
           </ScrollList>
           <ScrollList title='Newest Albums'>
-            {albums.map(album => <div key = {album.id}>
-              <AlbumCardTemplate album={album}/>
+            {albums.map(album => <div key={album.id}>
+              <AlbumCardTemplate album={album} />
             </div>
-            )}        
+            )}
           </ScrollList>
           <ScrollList title='Newest Events'>
-          {events.map(event => <div key = {event.id}>
-              <EventCardTemplate event={event} background={''}/>
+            {events.map(event => <div key={event.id}>
+              <EventCardTemplate event={event} background={''} />
             </div>
-            )}  
+            )}
           </ScrollList>
           <ScrollList title='Newest Merchandise'>
-          {merchandise.map(merchandise => <div key = {merchandise.id}>
-              <MerchCardTemplate merchandise={merchandise} background={''}/>
+            {merchandise.map(merchandise => <div key={merchandise.id}>
+              <MerchCardTemplate merchandise={merchandise} background={''} />
             </div>
             )}
           </ScrollList>

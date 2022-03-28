@@ -1,7 +1,7 @@
 import { IEvent } from "../Data/DataTypes/Event"
 const BASE_URL = 'http://localhost:3001';
 
-const createEvent = (event: IEvent) => {
+const createEvent = (event: IEvent, artistId: number) => {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -40,8 +40,8 @@ const getArtistEventByEventAndArtistId = (eventId: number, artistId: number) => 
 }
 
 const deleteEvent = (eventId: number) => {
-    return fetch(`${BASE_URL}/deleteEvent/${eventId}`, 
-    {method: "DELETE"});
+    return fetch(`${BASE_URL}/deleteEvent/${eventId}`,
+        { method: "DELETE" });
 }
 
 export { createEvent, getEvents, getEventById, getEventsByArtistId, getArtistEventByEventAndArtistId, deleteEvent }
