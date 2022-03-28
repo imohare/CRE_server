@@ -23,9 +23,9 @@ function AlbumInputBar(props: any) {
     props.setAlbums(newAlbums); // need to import this from app
   }
 
-  moment.prototype.toMySqlDateTime = function () {
-    return this.format('YYYY-MM-DD HH:mm:ss');
-  };
+  // moment.prototype.toMySqlDateTime = function () {
+  //   return this.format('YYYY-MM-DD HH:mm:ss');
+  // };
 
   const handleChange = (e: any) => {
     const file = e.target.files[0];
@@ -78,8 +78,8 @@ function AlbumInputBar(props: any) {
         <Label>Album Name</Label>
         <Input type="string" name="name" value={name} placeholder="Please enter album name ..." onChange={(evt: { target: { value: any; }; }) => setName(evt.target.value)} required></Input>
         <br />
-        {/* @ts-ignore */}
         <Label>Release Date</Label>
+        {/* @ts-ignore */}
         <input type="datetime-local" name="year" value={year} onChange={(evt: { target: { value: any; }; }) => setYear(evt.target.value)} required></input>
         <br />
         <br />

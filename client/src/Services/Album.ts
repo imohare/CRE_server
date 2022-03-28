@@ -19,9 +19,9 @@ const createAlbum = (album: any) => {
 const getAllAlbums = () => {
     return fetch(`${BASE_URL}/getAlbums`)
         .then(res => res.json())
-        // .then(res => {
-        //     return res.map((album:any) => ({...album, createdAt: new Date(album.createdAt)}))
-        // })
+        .then(res => {
+            return res.map((album: any) => ({ ...album, createdAt: new Date(album.createdAt) }))
+        })
         .catch(err => console.log(err, "error"))
 }
 

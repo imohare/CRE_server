@@ -1,6 +1,6 @@
 const BASE_URL = 'http://localhost:3001'
 
-const createMerchandise = (name: string, type: string, description: string, number_of_tokens: number, tokens_image: string, tokens_value: number, artistId: number) => {
+const createMerchandise = (merch: any) => {
     const requestOptions = {
         method: 'POST',
         headers: {
@@ -24,7 +24,7 @@ const getAllMerchandises = () => {
     return fetch(`${BASE_URL}/getMerchandises`)
         .then(res => res.json())
         .then(res => {
-            return res.map((merchandise:any) => ({...merchandise, createdAt: new Date(merchandise.createdAt)}))
+            return res.map((merchandise: any) => ({ ...merchandise, createdAt: new Date(merchandise.createdAt) }))
         })
         .catch(err => console.log(err, "error"))
 }
