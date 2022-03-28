@@ -74,7 +74,6 @@ router.get('/getArtistMerchandisesTokens/:artistId', getArtistMerchandisesTokens
 router.get('/getConsumerMerchTokensByConsumerId/:consumerId', getConsumerMerchTokensByConsumerId);
 router.get('/getMerchTokensByMerchId/:merchId', getMerchTokensByMerchId)
 
-
 // Event Token 
 router.get('/getEventToken/:tokenId', getEventToken);
 router.get('/getEventTokens', getEventTokens);
@@ -82,7 +81,6 @@ router.get('/getConsumerEventTokens/:eventId/:consumerId', getConsumerEventToken
 router.get('/getArtistEventsTokens/:artistId', getArtistEventsTokens);
 router.get('/getConsumerEventTokensByConsumerId/:consumerId', getConsumerEventTokensByConsumerId)
 router.get('/getEventTokensByEventId/:eventId', getEventTokensByEventId)
-
 
 // Purchasing
 router.patch('/albumTokenPurchase/:artistId/:consumerId/:albumTokenId/:albumId', albumTokenPurchase);

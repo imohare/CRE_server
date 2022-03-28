@@ -28,12 +28,18 @@ import { getEvents } from 'Services/Event';
 import { getAllMerchandises } from 'Services/Merchandise';
 
 import { Link, NavLink } from 'react-router-dom';
+import StyledHeader from 'Styles/styledComponents/StyledHeader';
+import { FormContextProvider } from 'Data/FormConfigs/FormContext';
+import LoginModal from 'Components/FormComponents/DataComponents/LoginModal';
+import StyledButton from 'Styles/styledComponents/StyledButton';
 
 
 const LandingPage: React.FunctionComponent = () => {
   //public view
   //login popup is set to visible on clicking the login button and to invisible on clicking cancel on Modal component:
 
+  const [isRegister, setIsRegister] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
   const { userType, setUserType } = useContext(UserContext);
   // are we not meant to set the user type here to use it later?
   const toggleLogin = () => {
@@ -43,8 +49,7 @@ const LandingPage: React.FunctionComponent = () => {
     setIsRegister(prev => !prev)
   }
 
-
-   const [albums, setAlbums] = useState<IAlbum[] | []>([]);
+  const [albums, setAlbums] = useState<IAlbum[] | []>([]);
   const [events, setEvents] = useState<IEvent[] | []>([]);
   // const [upcomingEvents, setUpcomingEvents] = useState<IEvent [] | []>([]);
   const [merchandise, setMerchandise] = useState<IMerchandise[] | []>([]);
@@ -112,7 +117,7 @@ const LandingPage: React.FunctionComponent = () => {
         ? <PublicHeader />
         : <UserHeader />
       }
-      <StyledPage>
+      <StyledPage/>
         <div>
         <h3>Show me the</h3>
         <p><span className="shuffle colorchange filter">newest</span><span className="shuffle colorchange filter">rarest</span><span className="shuffle colorchange filter">upcoming</span><span className="shuffle colorchange filter">most popular</span></p>
@@ -140,6 +145,7 @@ const LandingPage: React.FunctionComponent = () => {
             )}
           </ScrollList>
         </StyledPage>
+        </Parallax>
     </div>
   )
 }

@@ -85,7 +85,7 @@ const handleMerchandiseState = () => setType('merchandise');
       <button onClick={handleEventState}>event</button>
       <button onClick={handleMerchandiseState}>merchandise</button>
       {(type === 'album') ? <AlbumInputBar albums={albums} setAlbums={setAlbums}/> : null}
-      { (type === 'event') ? <p> Event Form</p> : null}
+      {(type === 'event') ? <p> Event Form</p> : null}
       {(type === 'merchandise') ? <p> Merchandise Form</p> : null}
     <p>artist view with option to update offers</p>
     <p>user view without any authorisations but with fake follow button</p>

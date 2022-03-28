@@ -46,7 +46,6 @@ const MerchandisePage: React.FunctionComponent = () => {
         MerchId: 0,
     }]);
 
-
     useEffect(() => {
         const merchandiseId: number = parseInt(location.pathname.replace(/[^0-9.]+/g, ''))
         getMerchandiseById(merchandiseId)
@@ -100,7 +99,6 @@ const MerchandisePage: React.FunctionComponent = () => {
                         <div className="dateAndName">
                             <h3>{merchandiseData.type}</h3>
                             <h2>{artistData.name}</h2>
-
                         </div>
                     </div>
                 </div>
