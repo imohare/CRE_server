@@ -12,9 +12,7 @@ async function getAlbums(req: Request, res: Response) {
 
 async function getAlbum(req: Request, res: Response) {
   try {
-    console.log("PARSED INT", parseInt(req.params.albumId));
-    const _album = await Album.findByPk(+(req.params.albumId));
-    console.log(_album);
+    const _album = await Album.findByPk(req.params.albumId);
     res.status(200);
     res.json(_album);
   } catch (error) {
@@ -24,38 +22,39 @@ async function getAlbum(req: Request, res: Response) {
 
 async function createAlbum(req: Request, res: Response) {
   try {
-    if (!req.params.artistId) {
-      res.status(400);
-      res.json('incorrect schema for request');
-    } else {
-      const artist = await Artist.findByPk(parseInt(req.params.artistId));
+    console.log("in create album")
+    // if (!req.params.artistId) {
+    //   res.status(400);
+    //   res.json('incorrect schema for request');
+    // } else {
+    //   const artist = await Artist.findByPk(req.params.artistId);
 
-      if (!artist) {
-        res.status(400);
-        res.json('Artist not found');
-      } else {
-        const _album = await Album.create(req.body)
+    //   if (!artist) {
+    //     res.status(400);
+    //     res.json('Artist not found');
+    //   } else {
 
-        for (var tokens = 0; tokens < _album.number_of_tokens; tokens++) {
-          console.log("inside tokens")
-          const _token = AlbumToken.build();
-          await _token.save();
-          await _token.setArtist(artist);
-          await _token.setAlbum(_album);
-        }
-
-        _album
-          .setArtist(artist)
-          .then((_album) => {
-            res.status(201);
-            res.json(_album);
-          })
-          .catch((err) => {
-            res.json('Database Error - createAlbum failing')
-          });
-      }
+    const { name, year, description, number_of_tokens, tokens_image, tokens_value, currentId } = req.body
+    const _album = await Album.create({ name: name, year: year, description: description, number_of_tokens: number_of_tokens, tokens_image: tokens_image, tokens_value: tokens_value })
+    for (var tokens = 0; tokens < _album.number_of_tokens; tokens++) {
+      const _token = AlbumToken.build();
+      await _token.save();
+      await _token.setArtist(currentId);
+      await _token.setAlbum(_album);
     }
-  } catch (error) { errorHandler(res, error) }
+
+    _album
+      .setArtist(currentId)
+      .then((_album: any) => {
+        res.status(201);
+        res.json(_album);
+      })
+      .catch((err: any) => {
+        console.log(err, "error");
+        res.json('Database Error - createAlbum failing');
+      })
+  }
+  catch (error) { errorHandler(res, error) }
 }
 
 async function getArtistAlbums(req: Request, res: Response) {

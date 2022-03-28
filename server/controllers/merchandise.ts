@@ -20,37 +20,36 @@ async function getMerchandise(req: Request, res: Response) {
 
 async function createMerchandise(req: Request, res: Response) {
   try {
-    if (!req.params.artistId) {
-      res.send(400);
-      res.json('incorrect schema for request');
-    } else {
-      const artist = await Artist.findByPk(req.params.artistId);
+    // if (!req.params.artistId) {
+    //   res.send(400);
+    //   res.json('incorrect schema for request');
+    // } else {
+    //   const artist = await Artist.findByPk(req.params.artistId);
 
-      if (!artist) {
-        res.status(400);
-        res.json('Artist not found');
-      } else {
-        const _merchandise = await Merchandise.create(req.body);
-
-        for (var tokens = 0; tokens < _merchandise.number_of_tokens; tokens++) {
-          const _token = MerchandiseToken.build();
-          await _token.save();
-          await _token.setArtist(artist);
-          await _token.setMerchandise(_merchandise);
-        }
-
-        _merchandise
-          .setArtist(artist)
-          .then((_merchandise) => {
-            res.json(_merchandise);
-            res.status(201);
-          })
-          .catch((err) => {
-            res.json('Database Error - createMerchandise failing')
-          });
-      }
+    //   if (!artist) {
+    //     res.status(400);
+    //     res.json('Artist not found');
+    //   } else {
+    const _merchandise = await Merchandise.create(req.body);
+    const { currentId } = req.body
+    for (var tokens = 0; tokens < _merchandise.number_of_tokens; tokens++) {
+      const _token = MerchandiseToken.build();
+      await _token.save();
+      await _token.setArtist(currentId);
+      await _token.setMerchandise(_merchandise);
     }
-  } catch (error) { errorHandler(res, error) }
+
+    _merchandise
+      .setArtist(currentId)
+      .then((_merchandise) => {
+        res.json(_merchandise);
+        res.status(201);
+      })
+      .catch((err) => {
+        res.json('Database Error - createMerchandise failing')
+      });
+  }
+  catch (error) { errorHandler(res, error) }
 }
 
 async function getArtistMerchandises(req: Request, res: Response) {
@@ -66,7 +65,7 @@ async function getArtistMerchandises(req: Request, res: Response) {
         res.status(400);
         res.json('Artist not found');
       } else {
-        const _merchandises = await Merchandise.findAll({where: {ArtistId: artistId}});
+        const _merchandises = await Merchandise.findAll({ where: { ArtistId: artistId } });
         res.json(_merchandises);
         res.status(201);
       }
@@ -93,7 +92,7 @@ async function getArtistMerchandise(req: Request, res: Response) {
         res.json('Album not found');
       }
       else {
-        const _merchandise = await Merchandise.findAll({where: {id: merchandiseId, ArtistId: artistId}});
+        const _merchandise = await Merchandise.findAll({ where: { id: merchandiseId, ArtistId: artistId } });
         res.json(_merchandise);
         res.status(201);
       }
@@ -103,8 +102,8 @@ async function getArtistMerchandise(req: Request, res: Response) {
 
 async function deleteMerchandise(req: Request, res: Response) {
   const merchandiseId = req.params.merchandiseId;
-  await MerchandiseToken.destroy({where: {MerchandiseId: merchandiseId}});
-  await Merchandise.destroy({where: {id: merchandiseId}});
+  await MerchandiseToken.destroy({ where: { MerchandiseId: merchandiseId } });
+  await Merchandise.destroy({ where: { id: merchandiseId } });
   res.status(201);
   res.json();
 }
