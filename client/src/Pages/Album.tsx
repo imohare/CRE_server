@@ -1,22 +1,20 @@
-//react
 import { Link, useLocation } from 'react-router-dom';
-//react
 import { useState, useContext, useEffect } from 'react';
+
+import moment from 'moment';
+
 import { getAlbumById } from '../Services/Album';
 import { getAlbumTokenByAlbumId } from '../Services/AlbumToken';
 import { getArtistById } from '../Services/Artist';
-import "./Album.css"
-import moment from 'moment';
-// simport { listenerCount } from 'process';
-import { IAlbumToken, IArtist } from 'Data/DataTypes';
-import { UserContext } from 'Data/UserContext';
 import { albumTokenPurchase } from 'Services/Purchase';
-//components
-//styling
+
+import "./Album.css"
+
+import { IAlbumToken, IArtist } from 'Data/DataTypes';
+
+import { UserContext } from 'Data/UserContext';
 
 const AlbumPage: React.FunctionComponent = () => {
-    //if user && logged in, allow ticket purchase. If artist, no ticket purchase possible.
-    //If not logged in, greyed out and redirect to login page
     const location = useLocation();
     const {currentId} = useContext(UserContext);
     
@@ -82,7 +80,7 @@ const AlbumPage: React.FunctionComponent = () => {
         
         const checkIfUserHasBought = (): boolean => {
             const consumerBoughtToken = albumTokenData.filter(token => token.ConsumerId === currentId)
-            if (consumerBoughtToken) return true
+            if (consumerBoughtToken.length > 0) return true
             else return false
         }
 
