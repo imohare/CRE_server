@@ -1,14 +1,19 @@
 import styled from 'styled-components';
 
-const StyledArtistCardTemplate = styled.div<{ background: string | undefined, portrait: string | undefined }>`
+const StyledArtistCardTemplate = styled.div<{ portrait: string | undefined }>`
 position: relative;
 min-width: 18rem;
 height: 22rem;
-background-image: url(${props => props.background});
 background-repeat: no-repeat;
 background-size: cover;
 margin: 0 0.6rem;
 border-radius: 2px;
+.bgImage {
+  position: absolute;
+  z-index: 2;
+  overflow-x: hidden;
+  height: 100%;
+}
 .portrait {
   background-image: url(${props => props.portrait || '' });
   background-size: cover;

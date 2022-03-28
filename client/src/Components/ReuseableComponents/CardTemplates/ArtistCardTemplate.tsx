@@ -5,18 +5,23 @@ import { IArtist } from '../../../Data/DataTypes'
 
 
 interface IProps {
-  background: string | undefined;
+  background: any;
   artist: IArtist;
 }
 
 const ArtistCardTemplate = ({background, artist}: IProps) => {
   return (
     <Link to={`/artist/${artist.id}`}>
-      <StyledArtistCardTemplate background={background} portrait={artist.profile_picture}>
-      {/* name artist */}
-      <div className='title'><h4>{ artist.name }</h4></div>
-      <div className='portrait'></div>
+
+      <StyledArtistCardTemplate portrait={artist.profile_picture}>
+        <div className="bgImage">
+        <img src={background} alt="" />
+         </div>
+         <div className='portrait'></div>
+         <div className='title'><h4>{ artist.name }</h4></div>
+
       </StyledArtistCardTemplate>
+
      </Link>
   )
 }

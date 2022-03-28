@@ -13,6 +13,7 @@ import AlbumList from 'Components/Lists/albumList';
 import { LayoutGroup } from 'framer-motion';
 import Parallax from 'Styles/animations/ParallaxAnimation';
 import ShuffleSelector from 'Styles/animations/ShuffleSelector';
+import Transition from 'Styles/animations/PageTransitions';
 //styling
 
 import background1 from 'images/background1.jpg';
@@ -97,7 +98,7 @@ const LandingPage: React.FunctionComponent = () => {
   
   return (
     //if user, display personalised component on top -> artist || user - else, have a login sign up option
-    <div>
+    <Transition>
 
       <Parallax>
       
@@ -125,7 +126,7 @@ const LandingPage: React.FunctionComponent = () => {
           <p><span className="colorchange select">Events</span><span className="colorchange select">Albums</span><span className="colorchange select">Merch</span></p>
           </div>
           <ScrollList title='Artists'>
-            <ArtistCardTemplate background={'https://wallpapercave.com/wp/wp7172141.jpg'} artist={exampleArtist}></ArtistCardTemplate>
+            <ArtistCardTemplate background={background1} artist={exampleArtist}></ArtistCardTemplate>
           </ScrollList>
           <ScrollList title='Newest Albums'>
             {albums.map(album => <div key = {album.id}>
@@ -146,7 +147,7 @@ const LandingPage: React.FunctionComponent = () => {
             )}
           </ScrollList>
         </StyledPage>
-    </div>
+    </Transition>
   )
 }
 
