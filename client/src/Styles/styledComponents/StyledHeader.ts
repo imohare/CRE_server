@@ -15,7 +15,6 @@ display: flex;
 flex-direction: column;
 justify-content: space-between;
 padding: ${globalVariables.mobileScreenPadding};
-background-image: url("images/header_background")
 
 .navBar {
   display: flex;
