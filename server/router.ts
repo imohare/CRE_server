@@ -28,7 +28,7 @@ router.get('/getArtistByName/:artistName', getArtistByName); // doesn't work
 router.delete('/deleteArtist/:artistId', deleteArtist); // works
 
 // Album
-router.post('/createAlbum/:artistId', createAlbum); // works
+router.post('/createAlbum', createAlbum); // works
 router.get('/getAlbums', getAlbums);
 router.get('/getAlbum/:albumId', getAlbum);
 router.get('/getArtistAlbums/:artistId', getArtistAlbums);
