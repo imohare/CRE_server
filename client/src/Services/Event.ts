@@ -52,4 +52,3 @@ const deleteEvent = (eventId: number) => {
 }
 
 export { createEvent, getEvents, getEventById, getEventsByArtistId, getArtistEventByEventAndArtistId, deleteEvent }
-

@@ -40,6 +40,7 @@ const LandingPage: React.FunctionComponent = () => {
   const [isRegister, setIsRegister] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
   const { userType, setUserType } = useContext(UserContext);
+  const {currentId} = useContext(UserContext);
   // are we not meant to set the user type here to use it later?
   const toggleLogin = () => {
     setIsLogin(prev => !prev)
@@ -50,7 +51,6 @@ const LandingPage: React.FunctionComponent = () => {
 
   const [albums, setAlbums] = useState<IAlbum[] | []>([]);
   const [events, setEvents] = useState<IEvent[] | []>([]);
-  // const [upcomingEvents, setUpcomingEvents] = useState<IEvent [] | []>([]);
   const [merchandise, setMerchandise] = useState<IMerchandise[] | []>([]);
 
   useEffect(() => {
@@ -95,6 +95,7 @@ const LandingPage: React.FunctionComponent = () => {
     <div>
 
       <Parallax>
+      <Link to={`user/${currentId}`}>profile</Link>
 
         <StyledHeader>
           <FormContextProvider>
