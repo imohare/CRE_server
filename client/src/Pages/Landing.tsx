@@ -32,6 +32,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { FormContextProvider } from 'Data/FormConfigs/FormContext';
 import LoginModal from 'Components/FormComponents/DataComponents/LoginModal';
 import StyledButton from 'Styles/styledComponents/StyledButton';
+import StyledHeader from 'Styles/styledComponents/StyledHeader';
 
 
 const LandingPage: React.FunctionComponent = () => {
@@ -118,13 +119,11 @@ const LandingPage: React.FunctionComponent = () => {
           </FormContextProvider>
         </StyledHeader>
 
-        <StyledPage>
-
-      {(userType === 'public')
+      {/* {(userType === 'public')
         ? <PublicHeader />
         : <UserHeader currentName={ name } />
       }
-     
+      */}
      </Parallax>
       <StyledPage>
         <div>

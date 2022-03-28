@@ -78,8 +78,8 @@ function AlbumInputBar(props: any) {
         <Label>Album Name</Label>
         <Input type="string" name="name" value={name} placeholder="Please enter album name ..." onChange={(evt: { target: { value: any; }; }) => setName(evt.target.value)} required></Input>
         <br />
-        {/* @ts-ignore */}
         <Label>Release Date</Label>
+        {/* @ts-ignore */}
         <input type="datetime-local" name="year" value={year} onChange={(evt: { target: { value: any; }; }) => setYear(evt.target.value)} required></input>
         <br />
         <br />

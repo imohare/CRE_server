@@ -9,42 +9,52 @@ import { getConsumerEventTokensByConsumerId } from 'Services/EvenToken';
 import { getConsumerMerchTokensByConsumerId } from 'Services/MerchToken';
 import ScrollList from 'Components/ReuseableComponents/ScrollList';
 import { AlbumCardTemplate, EventCardTemplate, MerchCardTemplate } from 'Components/ReuseableComponents/CardTemplates';
-import { IAlbum, IEvent, IMerchandise } from 'Data/DataTypes';
+import { IAlbum, IConsumer, IEvent, IMerchandise } from 'Data/DataTypes';
 
 const UserPage: React.FunctionComponent = () => {
   const location = useLocation();
   const { currentId } = useContext(UserContext);
-  console.log(currentId)
 
   const [albums, setAlbums] = useState<IAlbum[] | []>([]);
   const [events, setEvents]  = useState<IEvent[] | []>([]);
   const [merchandises, setMerchandises] = useState<IMerchandise[] | []>([]);
+  const [user, setUser] = useState<IConsumer>({
+    eth_address: '',
+    username: '',
+    profile_picture: '',
+    location: '',
+    email: '',
+  });
 
   useEffect(() => {
     getConsumerAlbumTokensByConsumerId(currentId)
         .then(response => {
           setAlbums(response);
-          console.log(albums)
             return response;
         })
     getConsumerEventTokensByConsumerId(currentId)
       .then(response => {
           setEvents(response);
-          console.log(events)
             return response;
         })
     getConsumerMerchTokensByConsumerId(currentId)
       .then(response => {
           setMerchandises(response);
-          console.log(merchandises)
             return response;
         })
+    getConsumerById(currentId)
+      .then(response => {
+        setUser(response);
+        return response
+      })
      }, [])
 
   return (
     <>
       <Link to="/">home</Link>
-      <h1>User</h1>
+      <h1>@{user.username} Profile</h1>
+      <h2></h2>
+    
       <ScrollList title='Your NFT Albums'>
             { (albums.length > 0) ? albums.map(album => <div key = {album.id}>
               <AlbumCardTemplate album={album}/>
