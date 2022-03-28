@@ -1,9 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
 import { IUserObject } from './DataTypes'
 
-interface IProps {
-  children: React.ReactNode;
-}
 interface IUserContext {
   currentId: number;
   setCurrentId: React.Dispatch<React.SetStateAction<number>>;
@@ -14,10 +11,13 @@ interface IUserContext {
   userObject: IUserObject;
   setUserObject: React.Dispatch<React.SetStateAction<IUserObject>>;  
 }
+interface IProps {
+  children: React.ReactNode;
+}
 
-export const UserContext = createContext<IUserContext>(null!);
+const UserContext = createContext<IUserContext>(null!);
 
-export const UserContextProvider = ({ children }: IProps) => {
+const UserContextProvider = ({ children }: IProps) => {
   //userType is going to be 'artist', 'public' or 'consumer'
   const [userType, setUserType] = useState('public');
   const [currentId, setCurrentId] = useState(0);
@@ -31,5 +31,5 @@ export const UserContextProvider = ({ children }: IProps) => {
   )
 }
 
-export default UserContextProvider;
+export  {UserContextProvider, UserContext};
 

@@ -75,7 +75,8 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
       setConsumerInfo({ ...values });
       setUserType('consumer');
       setCurrentId(values.id);
-      setName(values.username)
+      setName(values.username);
+
     }
 
   
@@ -129,7 +130,7 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
         console.log("consumerObjResponse", consumerObjResponse)
         setCurrentId(id);
         console.log("currentId", currentId)
-        setName(username)
+        setName(username);
         setUserType('consumer');
       }
     }

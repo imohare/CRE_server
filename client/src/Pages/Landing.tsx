@@ -32,7 +32,7 @@ const LandingPage: React.FunctionComponent = () => {
   //login popup is set to visible on clicking the login button and to invisible on clicking cancel on Modal component:
 
 
-  const { userType } = useContext(UserContext);
+  const { userType, name } = useContext(UserContext);
 
    const [albums, setAlbums] = useState<IAlbum[] | []>([]);
   const [events, setEvents] = useState<IEvent[] | []>([]);
@@ -88,8 +88,9 @@ const LandingPage: React.FunctionComponent = () => {
     <div>
       {(userType === 'public')
         ? <PublicHeader />
-        : <UserHeader />
+        : <UserHeader currentName={ name } />
       }
+     
       <StyledPage>
         <div>
         <h3>Show me the</h3>
