@@ -1,22 +1,21 @@
 //react
 import { useState, useContext, useEffect } from 'react';
 //antd imports
-import { Button, Card } from 'antd';
-import StyledButton from '../Styles/styledComponents/StyledButton';
+import PublicHeader from 'Components/FormComponents/DataComponents/PublicHeader';
 //components
-import LoginModal from '../Components/FormComponents/DataComponents/LoginModal';
-import StyledPage from '../Styles/styledComponents/styledPage';
-import ScrollList from '../Components/ReuseableComponents/ScrollList';
+import StyledPage from 'Styles/styledComponents/styledPage';
+import ScrollList from 'Components/ReuseableComponents/ScrollList';
 import { EventCardTemplate, AlbumCardTemplate, ArtistCardTemplate, MerchCardTemplate } from '../Components/ReuseableComponents/CardTemplates';
-
-import { FormContextProvider } from '../Data/FormConfigs/FormContext'
+import UserHeader from 'Components/FormComponents/DataComponents/UserHeader';
 import AlbumList from 'Components/Lists/albumList';
 
 //styling
 
-import Parallax from '../Styles/animations/ParallaxAnimation';
-//stylingß
-import StyledHeader from '../Styles/styledComponents/StyledHeader'
+import Parallax from 'Styles/animations/ParallaxAnimation';
+//styling
+
+import * as background1 from 'images/background1.jpg';
+
 //contexts
 import { UserContext } from 'Data/UserContext';
 //data 
@@ -27,13 +26,13 @@ import { exampleArtist, exampleAlbum, exampleEvent, exampleMerchandise } from '.
 import { IAlbum, IEvent, IMerchandise } from 'Data/DataTypes';
 import { getEvents } from 'Services/Event';
 import { getAllMerchandises } from 'Services/Merchandise';
+
 import { Link, NavLink } from 'react-router-dom';
+
 
 const LandingPage: React.FunctionComponent = () => {
   //public view
   //login popup is set to visible on clicking the login button and to invisible on clicking cancel on Modal component:
-  const [isRegister, setIsRegister] = useState(false);
-  const [isLogin, setIsLogin] = useState(false);
 
   const { userType, setUserType } = useContext(UserContext);
   // are we not meant to set the user type here to use it later?
@@ -44,7 +43,8 @@ const LandingPage: React.FunctionComponent = () => {
     setIsRegister(prev => !prev)
   }
 
-  const [albums, setAlbums] = useState<IAlbum[] | []>([]);
+
+   const [albums, setAlbums] = useState<IAlbum[] | []>([]);
   const [events, setEvents] = useState<IEvent[] | []>([]);
   // const [upcomingEvents, setUpcomingEvents] = useState<IEvent [] | []>([]);
   const [merchandise, setMerchandise] = useState<IMerchandise[] | []>([]);
@@ -85,10 +85,11 @@ const LandingPage: React.FunctionComponent = () => {
         console.log("Error occured.")
       })
   }, [])
-
+  
   return (
     //if user, display personalised component on top -> artist || user - else, have a login sign up option
     <div>
+
       <Parallax>
 
         <StyledHeader>
@@ -107,8 +108,18 @@ const LandingPage: React.FunctionComponent = () => {
         </StyledHeader>
 
         <StyledPage>
+      {(userType === 'public')
+        ? <PublicHeader />
+        : <UserHeader />
+      }
+      <StyledPage>
+        <div>
+        <h3>Show me the</h3>
+        <p><span className="shuffle colorchange filter">newest</span><span className="shuffle colorchange filter">rarest</span><span className="shuffle colorchange filter">upcoming</span><span className="shuffle colorchange filter">most popular</span></p>
+          <p><span className="colorchange select">Events</span><span className="colorchange select">Albums</span><span className="colorchange select">Merch</span></p>
+          </div>
           <ScrollList title='Artists'>
-            <ArtistCardTemplate background='https://wallpapercave.com/wp/wp7172141.jpg' artist={exampleArtist}></ArtistCardTemplate>
+            <ArtistCardTemplate background={``} artist={exampleArtist}></ArtistCardTemplate>
           </ScrollList>
           <ScrollList title='Newest Albums'>
             {albums.map(album => <div key = {album.id}>
@@ -129,7 +140,6 @@ const LandingPage: React.FunctionComponent = () => {
             )}
           </ScrollList>
         </StyledPage>
-      </Parallax>
     </div>
   )
 }

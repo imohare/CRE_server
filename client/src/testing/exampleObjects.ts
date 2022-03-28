@@ -25,18 +25,19 @@ const exampleConsumer: IConsumer = {
   updatedAt: new Date()
 }
 
-const exampleAlbum = {
-  // name: 'Pink',
-  // year: new Date(),
-  // description: "Pink is Lancey Foux's debut EP, posted on and featured on Hoodtapes",
-  // number_of_tokens: 5,
-  // tokens_image: 'https://t2.genius.com/unsafe/600x600/https%3A%2F%2Fimages.genius.com%2F7f2b5d24f103535739f89b984b5ec818.1000x1000x1.png',
-  // tokens_value: 100,
-  // id: 7,
-  // createdAt: new Date(),
-  // updatedAt: new Date(),
-  // ArtistId: 2,
+const exampleAlbum: IAlbum = {
+  name: 'Pink',
+  year: '2020-03-02 23:00:23',
+  description: "Pink is Lancey Foux's debut EP, posted on and featured on Hoodtapes",
+  number_of_tokens: 5,
+  tokens_image: 'https://t2.genius.com/unsafe/600x600/https%3A%2F%2Fimages.genius.com%2F7f2b5d24f103535739f89b984b5ec818.1000x1000x1.png',
+  tokens_value: 100,
+  id: 7,
+  createdAt: new Date(),
+  updatedAt: new Date(),
+  ArtistId: 2,
 }
+
 const exampleEvent: IEvent = {
   name: 'partey',
   address: '52 Horseferry Road',
