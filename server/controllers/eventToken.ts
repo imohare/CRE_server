@@ -26,10 +26,7 @@ async function getEventTokensByEventId(req: Request, res: Response) {
     } else {
       const eventId = req.params.eventId;
       const _eventTokens = await EventToken.findAll({ where: { EventId: eventId } });
-      console.log(_eventTokens);
       res.json(_eventTokens);
-
-
     }
   }
   catch (err) {

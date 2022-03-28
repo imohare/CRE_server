@@ -15,9 +15,7 @@ import "./Event.css"
 
 const EventPage: React.FunctionComponent = () => {
     const location = useLocation();
-    console.log("location", location)
     const {currentId} = useContext(UserContext);
-    console.log("currentId", currentId);
 
     const [eventData, setEventData] = useState({
         id: 0,

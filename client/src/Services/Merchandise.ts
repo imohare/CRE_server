@@ -1,12 +1,18 @@
-import { IMerchandise, IPreSQLMerchandise } from "../Data/DataTypes"
 const BASE_URL = 'http://localhost:3001'
 
-const createMerchandise = (merchandise: IPreSQLMerchandise, artistId: number) => {
+const createMerchandise = (name: string, type: string, description: string, number_of_tokens: number, tokens_image: string, tokens_value: number, artistId: number) => {
     const requestOptions = {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            body: JSON.stringify(merchandise)
+            body: JSON.stringify({
+                name: name,
+                type: type,
+                description: description,
+                number_of_tokens: number_of_tokens,
+                tokens_image: tokens_image,
+                tokens_value: tokens_value
+            })
         }
     }
     return fetch(`${BASE_URL}/createMerchandise/${artistId}`, requestOptions)

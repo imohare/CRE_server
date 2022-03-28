@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import { NotIn } from 'sequelize-typescript';
 import { AlbumToken, Album, Artist, Consumer } from "../models";
 import { errorHandler } from "./error";
 
@@ -40,15 +39,15 @@ async function getArtistAlbumsTokens(req: Request, res: Response) {
   } catch (error) { errorHandler(res, error) }
 }
 
-async function getAlbumTokenByAlbumId(req: Request, res: Response) {
+async function getAlbumTokensByAlbumId(req: Request, res: Response) {
   try {
     if (!req.params.albumId) {
       res.status(400);
       res.json('incorrect schema for request');
     } else {
       const albumId = req.params.albumId;
-      const _albumToken = AlbumToken.findOne({ where: { AlbumId: albumId } });
-      res.json(_albumToken);
+      const _albumTokens = await AlbumToken.findAll({ where: { AlbumId: albumId } });
+      res.json(_albumTokens);
     }
   }
   catch (err) {
@@ -104,4 +103,4 @@ async function getConsumerAlbumTokensByConsumerId(req: Request, res: Response) {
   } catch (error) { errorHandler(res, error) }
 }
 
-export { getAlbumTokens, getAlbumToken, getConsumerAlbumTokens, getArtistAlbumsTokens, getConsumerAlbumTokensByConsumerId, getAlbumTokenByAlbumId }
+export { getAlbumTokens, getAlbumToken, getConsumerAlbumTokens, getArtistAlbumsTokens, getConsumerAlbumTokensByConsumerId, getAlbumTokensByAlbumId }
