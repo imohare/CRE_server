@@ -86,8 +86,11 @@ function EventInputBar(props: any) {
         <br />
         <Label>Event Date</Label>
         {/* @ts-ignore */}
-        <Input type="date" name="date" value={date} onChange={(evt: { target: { value: any; }; }) => setDate(evt.target.value)} required></Input>
+        {/* @ts-ignore */}
+        <input type="datetime-local" name="year" value={date} onChange={(evt: { target: { value: any; }; }) => setYear(evt.target.value)} required></input>
         <br />
+        {/* <Input type="date" name="date" value={date} onChange={(evt: { target: { value: any; }; }) => setDate(evt.target.value)} required></Input>
+        <br /> */}
 
         <Label>Event Address</Label>
         <Input type="string" name="address" value={address} onChange={(evt: { target: { value: any; }; }) => setAddress(evt.target.value)} required></Input>
@@ -98,14 +101,15 @@ function EventInputBar(props: any) {
         <Label>Number of Available NFT's </Label>
         <Input type="number" name="tokensNumber" value={tokensNumber} onChange={(evt: { target: { value: string; }; }) => setTokensNumber(parseInt(evt.target.value))} required></Input>
         <br />
-        <Label>Value of NFT</Label>
+        <Label>Value of the NFT</Label>
         <Input type="number" name="tokensValue" value={tokensValue} onChange={(evt: { target: { value: string; }; }) => setTokensValue(parseInt(evt.target.value))} required></Input>
         <br />
+        <Label> Upload Your NFT's cover picture</Label>
         <Input type="file" onChange={handleChange} />
         <br />
         <Button type="submit">
           <Text fontFamily='system-ui'>
-            Upload
+            Upload Your NFT's
           </Text>
         </Button>
       </form>

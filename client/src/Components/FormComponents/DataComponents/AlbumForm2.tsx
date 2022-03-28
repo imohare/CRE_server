@@ -98,7 +98,7 @@ function AlbumInputBar(props: any) {
         <Label>Number of NFT's Available</Label>
         <Input type="number" name="tokensNumber" value={tokensNumber} onChange={(evt: { target: { value: string; }; }) => setTokensNumber(parseInt(evt.target.value))} required></Input>
         <br />
-        <Label> NFT's value</Label>
+        <Label> Value of the NFT</Label>
         <Input type="number" name="tokensValue" value={tokensValue} onChange={(evt: { target: { value: string; }; }) => setTokensValue(parseInt(evt.target.value))} required></Input>
         <br />
         <Label> Upload Your NFT's cover picture</Label>
