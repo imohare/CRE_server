@@ -1,16 +1,20 @@
 const BASE_URL = 'http://localhost:3001';
 
 const createEvent = (event: any) => {
+    console.log('in create event api service')
     const requestOptions = {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ event })
+        body: JSON.stringify(event)
     }
 
-    return fetch(BASE_URL, requestOptions)
-        .then(res => res.json())
+    return fetch(`${BASE_URL}/createEvent`, requestOptions)
+        .then(res => {
+            console.log('return from fetch createEvent', res)
+            return res.json()
+        })
         .catch(err => console.log(err, "Error"))
 }
 

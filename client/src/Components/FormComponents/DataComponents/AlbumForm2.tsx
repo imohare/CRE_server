@@ -14,7 +14,10 @@ function AlbumInputBar(props: any) {
   const [tokensNumber, setTokensNumber] = useState(0);
   const [tokensValue, setTokensValue] = useState(0);
   const [progress, setProgress] = useState(0);
-  const [artistId, setArtistId] = useState(1);
+  const [artistId, setArtistId] = useState(0);
+  //import use context
+
+
 
   const addAlbum = async (name: string, year: Date, description: string, tokensNumber: number, img_url: string, tokensValue: number, artistId: number) => {
     console.log('in addAlbum and values are', name, year, description, tokensNumber, img_url, tokensValue, artistId)
