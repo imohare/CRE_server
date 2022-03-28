@@ -4,6 +4,11 @@ const StyledPage = styled.div`
 margin: 10px auto;
 padding: 0 7px;
 width: 96%;
+.filters {
+  list-style: none;
+  display: flex;
+}
+
 @media screen and (min-width: 768px) {
   padding: 1rem 2rem;
 }
