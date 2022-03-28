@@ -10,11 +10,11 @@ import UserHeader from 'Components/FormComponents/DataComponents/UserHeader';
 import AlbumList from 'Components/Lists/albumList';
 
 //styling
-
 import Parallax from 'Styles/animations/ParallaxAnimation';
+import ShuffleSelector from 'Styles/animations/ShuffleSelector';
 //styling
 
-import * as background1 from 'images/background1.jpg';
+import background1 from 'images/background1.jpg';
 
 //contexts
 import { UserContext } from 'Data/UserContext';
@@ -93,12 +93,14 @@ const LandingPage: React.FunctionComponent = () => {
      
       <StyledPage>
         <div>
-        <h3>Show me the</h3>
-        <p><span className="shuffle colorchange filter">newest</span><span className="shuffle colorchange filter">rarest</span><span className="shuffle colorchange filter">upcoming</span><span className="shuffle colorchange filter">most popular</span></p>
+          <h3>Show me the</h3>
+          <div>
+          <p className="shuffle colorchange filter"><ShuffleSelector>newest</ShuffleSelector><ShuffleSelector>rarest</ShuffleSelector><ShuffleSelector>upcoming</ShuffleSelector><ShuffleSelector>most popular</ShuffleSelector></p>
           <p><span className="colorchange select">Events</span><span className="colorchange select">Albums</span><span className="colorchange select">Merch</span></p>
           </div>
+          </div>
           <ScrollList title='Artists'>
-            <ArtistCardTemplate background={``} artist={exampleArtist}></ArtistCardTemplate>
+            <ArtistCardTemplate background={'https://wallpapercave.com/wp/wp7172141.jpg'} artist={exampleArtist}></ArtistCardTemplate>
           </ScrollList>
           <ScrollList title='Newest Albums'>
             {albums.map(album => <div key = {album.id}>
@@ -108,7 +110,7 @@ const LandingPage: React.FunctionComponent = () => {
           </ScrollList>
           <ScrollList title='Newest Events'>
           {events.map(event => <div key = {event.id}>
-              <EventCardTemplate event={event} background={''}/>
+              <EventCardTemplate event={event} background={'https://wallpapercave.com/wp/wp7172141.jpg'}/>
             </div>
             )}  
           </ScrollList>

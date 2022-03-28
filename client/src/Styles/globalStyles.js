@@ -20,7 +20,7 @@ body {
   width: 100vw;
   min-height: 100vh;
   background-color: ebony;
-  color: white;
+  // color: white;
   font-family: 'Raleway';
 }
 h1, h2, h3, h4, h5, h6 {
