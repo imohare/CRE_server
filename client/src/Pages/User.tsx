@@ -1,7 +1,8 @@
 //react
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { UserContext } from 'Data/UserContext';
 import { getConsumerById } from '../Services/Consumer'
+import { useContext } from 'react';
 
 
 
@@ -16,6 +17,10 @@ const UserPage: React.FunctionComponent = () => {
   // const asyncGetUserInfo = async () => {
   //   let user = await getConsumerById()//enter user id here
   // }
+  const location = useLocation();
+  console.log(location)
+  const { currentId } = useContext(UserContext);
+  
 
 
   return (

@@ -13,7 +13,7 @@ const { createConsumer, getConsumerById, getConsumerByUsername, deleteConsumer, 
 
 const { getAlbumToken, getAlbumTokens, getConsumerAlbumTokens, getArtistAlbumsTokens, getConsumerAlbumTokensByConsumerId, getAlbumTokenByAlbumId } = require('./controllers/albumToken.ts');
 
-const { getMerchandiseToken, getMerchandiseTokens, getConsumerMerchandiseTokens, getArtistMerchandisesTokens, getConsumerMerchTokensByConsumerId } = require('./controllers/merchandiseToken.ts');
+const { getMerchandiseToken, getMerchandiseTokens, getConsumerMerchandiseTokens, getArtistMerchandisesTokens, getConsumerMerchTokensByConsumerId, getMerchTokensByMerchId } = require('./controllers/merchandiseToken.ts');
 
 const { getEventToken, getEventTokens, getConsumerEventTokens, getArtistEventsTokens, getConsumerEventTokensByConsumerId, getEventTokensByEventId } = require('./controllers/EventToken.ts');
 
@@ -72,6 +72,7 @@ router.get('/getMerchandiseTokens', getMerchandiseTokens);
 router.get('/getConsumerMerchandiseTokens/:merchandiseId/:consumerId', getConsumerMerchandiseTokens);
 router.get('/getArtistMerchandisesTokens/:artistId', getArtistMerchandisesTokens);
 router.get('/getConsumerMerchTokensByConsumerId/:consumerId', getConsumerMerchTokensByConsumerId);
+router.get('/getMerchTokensByMerchId/:merchId', getMerchTokensByMerchId)
 
 // Event Token 
 router.get('/getEventToken/:tokenId', getEventToken);
@@ -80,7 +81,6 @@ router.get('/getConsumerEventTokens/:eventId/:consumerId', getConsumerEventToken
 router.get('/getArtistEventsTokens/:artistId', getArtistEventsTokens);
 router.get('/getConsumerEventTokensByConsumerId/:consumerId', getConsumerEventTokensByConsumerId)
 router.get('/getEventTokensByEventId/:eventId', getEventTokensByEventId)
-
 
 // Purchasing
 router.patch('/albumTokenPurchase/:artistId/:consumerId/:albumTokenId/:albumId', albumTokenPurchase);

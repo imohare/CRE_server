@@ -27,70 +27,83 @@ import { IAlbum, IEvent, IMerchandise } from 'Data/DataTypes';
 import { getEvents } from 'Services/Event';
 import { getAllMerchandises } from 'Services/Merchandise';
 
+import { Link, NavLink } from 'react-router-dom';
+import StyledHeader from 'Styles/styledComponents/StyledHeader';
+import { FormContextProvider } from 'Data/FormConfigs/FormContext';
+import LoginModal from 'Components/FormComponents/DataComponents/LoginModal';
+import StyledButton from 'Styles/styledComponents/StyledButton';
+
+
 const LandingPage: React.FunctionComponent = () => {
   //public view
   //login popup is set to visible on clicking the login button and to invisible on clicking cancel on Modal component:
 
-
+  const [isRegister, setIsRegister] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
   const { userType, name } = useContext(UserContext);
+  // are we not meant to set the user type here to use it later?
+  const toggleLogin = () => {
+    setIsLogin(prev => !prev)
+  }
+  const toggleRegister = () => {
+    setIsRegister(prev => !prev)
+  }
+
 
    const [albums, setAlbums] = useState<IAlbum[] | []>([]);
   const [events, setEvents] = useState<IEvent[] | []>([]);
   // const [upcomingEvents, setUpcomingEvents] = useState<IEvent [] | []>([]);
   const [merchandise, setMerchandise] = useState<IMerchandise[] | []>([]);
 
-  // useEffect(() => {
-  //   getAllAlbums()
-  //     .then((response: IAlbum[]) => {
-  //       if (response) {
-  //         response.sort((firstItem, secondItem) => secondItem.createdAt.getTime() - firstItem.createdAt.getTime())
-  //         setAlbums(response)
-  //       }
-  //     })
-  //     .catch(error => {
-  //       console.log(error)
-  //       console.log("Error occured.")
-  //     })
-    // getEvents()
-    //   .then((response: IEvent[]) => {
-    //     if (response) {
-    //       response.sort((firstItem, secondItem) => secondItem.createdAt.getTime() - firstItem.createdAt.getTime())
-    //       setEvents(response)
-    //     }
-    //   })
-    //   .catch(error => {
-    //     console.log(error)
-    //     console.log("Error occured.")
-    //   })
-    // getAllMerchandises()
-    //   .then((response: IMerchandise[]) => {
-    //     if (response) {
-    //       response.sort((firstItem, secondItem) => secondItem.createdAt.getTime() - firstItem.createdAt.getTime())
-    //       setMerchandise(response)
-    //     }
-    //     setMerchandise(response)
-    //   })
-    //   .catch(error => {
-    //     console.log(error)
-    //     console.log("Error occured.")
-    //   })
-  // }, [])
-
-  // const today = new Date();
-  // console.log("event date", events[0].date.getTime())
-  // console.log("today date" , today)
-  // let upcoming = events.filter(evt => evt.date >= today)
-  // console.log(upcoming)
-
-
+  useEffect(() => {
+    getAllAlbums()
+      .then((response: IAlbum[]) => {
+        if (response) {
+          response.sort((firstItem, secondItem) => secondItem.createdAt.getTime() - firstItem.createdAt.getTime())
+          setAlbums(response)
+        }
+        else setAlbums(response)
+      })
+      .catch(error => {
+        console.log(error)
+        console.log("Error occured.")
+      })
+    getEvents()
+      .then((response: IEvent[]) => {
+        if (response) {
+          response.sort((firstItem, secondItem) => secondItem.createdAt.getTime() - firstItem.createdAt.getTime())
+          setEvents(response)
+        }
+      })
+      .catch(error => {
+        console.log(error)
+        console.log("Error occured.")
+      })
+    getAllMerchandises()
+      .then((response: IMerchandise[]) => {
+        if (response) {
+          response.sort((firstItem, secondItem) => secondItem.createdAt.getTime() - firstItem.createdAt.getTime())
+          setMerchandise(response)
+        }
+      })
+      .catch(error => {
+        console.log(error)
+        console.log("Error occured.")
+      })
+  }, [])
+  
   return (
     //if user, display personalised component on top -> artist || user - else, have a login sign up option
     <div>
+
+      <Parallax>
+      
       {(userType === 'public')
         ? <PublicHeader />
         : <UserHeader currentName={ name } />
       }
      
+     </Parallax>
       <StyledPage>
         <div>
           <h3>Show me the</h3>
