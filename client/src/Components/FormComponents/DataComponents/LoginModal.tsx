@@ -75,7 +75,8 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
       setConsumerInfo({ ...values });
       setUserType('consumer');
       setCurrentId(values.id);
-      setName(values.username)
+      setName(values.username);
+
     }
 
   
