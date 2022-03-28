@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import {storage} from '../../../Firebase/index'
 import { Input } from '@rebass/forms'
-import { Text } from "rebass";
+import { Text, Button } from "rebass";
 import { createAlbum } from 'Services/Album';
-import { Button } from "antd"
+import moment from 'moment';
 
 function AlbumInputBar (props: any) {
 
@@ -23,6 +23,10 @@ function AlbumInputBar (props: any) {
     props.setAlbums(newAlbums); // need to import this from app
   }
 
+  moment.prototype.toMySqlDateTime = function () {
+    return this.format('YYYY-MM-DD HH:mm:ss');
+};
+
   const handleChange = (e:any) => {
     const file = e.target.files[0];
     setImage(file);
@@ -34,9 +38,7 @@ function AlbumInputBar (props: any) {
     uploadTask.on(
       'state_changed',
       (snapshot: { bytesTransferred: number; totalBytes: number; }) => {
-        const progress = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        );
+        const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
         setProgress(progress)
       },
       (error: any) => {
@@ -85,7 +87,7 @@ function AlbumInputBar (props: any) {
         <br />
         <Input type="file" onChange={handleChange} />
         <br />
-        <Button color="#33e">
+        <Button color="#33e" type='submit'>
           <Text fontFamily='system-ui'>
             Upload
           </Text>

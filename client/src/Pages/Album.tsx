@@ -8,11 +8,12 @@ import { getArtistById } from '../Services/Artist';
 import "./Album.css"
 import moment from 'moment';
 // simport { listenerCount } from 'process';
-import { IAlbum, IAlbumToken, IArtist } from 'Data/DataTypes';
-import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
+import { IAlbumToken, IArtist } from 'Data/DataTypes';
 import { UserContext } from 'Data/UserContext';
+import { albumTokenPurchase } from 'Services/Purchase';
 //components
 //styling
+
 const AlbumPage: React.FunctionComponent = () => {
     //if user && logged in, allow ticket purchase. If artist, no ticket purchase possible.
     //If not logged in, greyed out and redirect to login page
@@ -29,7 +30,7 @@ const AlbumPage: React.FunctionComponent = () => {
         tokens_value: 0,
         ArtistId: 0
     });
-    const [albumTokenData, setAlbumTokenData] = useState({});
+    const [albumTokenData, setAlbumTokenData] = useState<IAlbumToken[]>([]);
     
     const [artistData, setArtistData] = useState<IArtist>({
         id: 0, 
@@ -70,11 +71,20 @@ const AlbumPage: React.FunctionComponent = () => {
         getAlbumTokenByAlbumId(albumId)
             .then(response => {
                 setAlbumTokenData(response)
-                console.log(response, "Response")
                 const availTokens =  response.filter((token: IAlbumToken) => token.ConsumerId === null);
                 setAvailableTokens(availTokens);
             })
          }, [])
+
+         const handleClick = () => {
+            albumTokenPurchase(currentId, availableTokens[0].id, artistData.id, albumData.id);
+          };
+        
+        const checkIfUserHasBought = (): boolean => {
+            const consumerBoughtToken = albumTokenData.filter(token => token.ConsumerId === currentId)
+            if (consumerBoughtToken) return true
+            else return false
+        }
 
     return (
         <>
@@ -106,7 +116,7 @@ const AlbumPage: React.FunctionComponent = () => {
                             <h4>TOKEN INFO</h4>
                             <div>Number of Tokens: {albumData.number_of_tokens}</div>
                             <div>Token value: {albumData.number_of_tokens}</div>
-                            <button>purchase album</button>
+                            {(availableTokens.length > 0)  ? ((checkIfUserHasBought()) ?  <button>NFT purchased</button> : <button onClick={handleClick}>purchase album NFT</button>) : <button>Event Sold Out</button>}
                         </div>
                     </div>
                     {/* <p>artist view without album purchase</p>

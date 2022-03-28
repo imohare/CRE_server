@@ -16,8 +16,6 @@ function EventInputBar (props: any) {
   const [progress, setProgress] = useState(0);
   const [artistId, setArtistId] = useState(1);
 
-
-
   const addEvent = async (name: string, address: string, date: Date, description: string, tokensNumber: number, img_url: string, tokensValue: number, artistId: number) => {
     const newEvents = props.events.slice();
     const response = await createEvent(name, address, date, description, tokensNumber, img_url, tokensValue, artistId)

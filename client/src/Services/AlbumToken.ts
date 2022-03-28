@@ -8,7 +8,7 @@ const getAlbumTokenById = (tokenId: number) => {
 
 
 const getAlbumTokenByAlbumId = (albumId: number) => {
-    return fetch(`${BASE_URL}/getAlbumTokenByAlbumId/${albumId}`)
+    return fetch(`${BASE_URL}/getAlbumTokensByAlbumId/${albumId}`)
         .then(res => res.json())
         .catch(err => console.log(err, "error"))
 }
