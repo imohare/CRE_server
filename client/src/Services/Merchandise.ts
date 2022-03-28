@@ -1,22 +1,20 @@
 const BASE_URL = 'http://localhost:3001'
 
 const createMerchandise = (merch: any) => {
+    console.log('in create merch service ')
     const requestOptions = {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
-            body: JSON.stringify({
-                name: name,
-                type: type,
-                description: description,
-                number_of_tokens: tokensNumber,
-                tokens_image: tokens_image,
-                tokens_value: tokensValue
-            })
-        }
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(merch)
+
     }
-    return fetch(`${BASE_URL}/createMerchandise/${artistId}`, requestOptions)
-        .then(res => res.json())
+    return fetch(`${BASE_URL}/createMerchandise`, requestOptions)
+        .then(res => {
+            console.log(res);
+            return res.json();
+        })
         .catch(err => console.log(err, "error"))
 }
 
