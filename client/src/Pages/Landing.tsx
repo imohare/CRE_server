@@ -37,7 +37,6 @@ import StyledButton from 'Styles/styledComponents/StyledButton';
 const LandingPage: React.FunctionComponent = () => {
   //public view
   //login popup is set to visible on clicking the login button and to invisible on clicking cancel on Modal component:
-
   const [isRegister, setIsRegister] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
   const { userType, setUserType } = useContext(UserContext);
