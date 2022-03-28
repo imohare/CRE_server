@@ -9,9 +9,9 @@ const createMerchandise = (merch: any) => {
                 name: name,
                 type: type,
                 description: description,
-                number_of_tokens: number_of_tokens,
+                number_of_tokens: tokensNumber,
                 tokens_image: tokens_image,
-                tokens_value: tokens_value
+                tokens_value: tokensValue
             })
         }
     }
