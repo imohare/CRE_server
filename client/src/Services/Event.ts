@@ -1,11 +1,18 @@
-import { IEvent } from "../Data/DataTypes/Event"
 const BASE_URL = 'http://localhost:3001';
 
-const createEvent = (event: IEvent) => {
+const createEvent = (name: string, address: string, date: Date, description: string, number_of_tokens: number, tokens_image: string, tokens_value: number, artistId: number) => {
     const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(event)
+        headers: { 'Content-Type': 'application/json' ,
+        body: JSON.stringify({
+            name: name, 
+            address: address,
+            date: date, 
+            description: description,
+            number_of_tokens: number_of_tokens, 
+            tokens_image: tokens_image, 
+            tokens_value: tokens_value})
+        }            
     }
     return fetch(BASE_URL, requestOptions)
         .then(res => res.json())

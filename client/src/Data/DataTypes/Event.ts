@@ -1,7 +1,7 @@
 interface IEvent {
     name: string,
     address: string,
-    date: string,
+    date: Date,
     description?: string,
     number_of_tokens: number,
     tokens_image: string,

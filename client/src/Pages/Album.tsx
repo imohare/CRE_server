@@ -69,11 +69,10 @@ const AlbumPage: React.FunctionComponent = () => {
             });    
         getAlbumTokenByAlbumId(albumId)
             .then(response => {
-                
                 setAlbumTokenData(response)
-                console.log(response)
+                console.log(response, "Response")
                 const availTokens =  response.filter((token: IAlbumToken) => token.ConsumerId === null);
-                setAvailableTokens( availTokens);
+                setAvailableTokens(availTokens);
             })
          }, [])
 
