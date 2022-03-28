@@ -1,5 +1,6 @@
 //react
 import { Link, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import { UserContext } from 'Data/UserContext';
 import { getConsumerById } from '../Services/Consumer'
 import { useContext } from 'react';
@@ -20,7 +21,22 @@ const UserPage: React.FunctionComponent = () => {
   const location = useLocation();
   console.log(location)
   const { currentId } = useContext(UserContext);
-  
+
+  useEffect(() => {
+    //get conssumerbyid
+
+    const _consumer = getConsumerById(currentId);
+
+
+    // events
+    const _events =
+
+
+    //albums
+
+    //nfts
+  }, [])
+
 
 
   return (
