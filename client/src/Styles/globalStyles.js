@@ -19,7 +19,7 @@ body {
   padding: 0;
   width: 100vw;
   min-height: 100vh;
-  background-color: rgb(3, 0, 8);
+  background-color: black;
   color: white;
   font-family: 'Raleway';
 }

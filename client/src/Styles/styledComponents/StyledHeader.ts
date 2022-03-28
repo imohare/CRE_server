@@ -7,8 +7,13 @@ const StyledHeader = styled.div`
 width: 100%;
 height: 50vh;
 display: flex;
+flex-direction: column;
 justify-content: space-between;
 padding: ${globalVariables.mobileScreenPadding};
+
+.navBar {
+  display: flex: justify-content: space-between;
+}
 
 .buttons {
   display: flex;

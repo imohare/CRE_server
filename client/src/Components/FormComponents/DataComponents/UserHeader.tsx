@@ -1,7 +1,19 @@
+//data
+import UserContext from 'Data/UserContext'
+
+//styling
+import AnimatedH1 from "Styles/animations/AnimatedH1";
+
 
 const UserHeader = () => {
+
+
+
+
   return (
-    <div>UserHeader</div>
+    <div>
+      <AnimatedH1>Hello Username</AnimatedH1>
+    </div>
   )
 }
 

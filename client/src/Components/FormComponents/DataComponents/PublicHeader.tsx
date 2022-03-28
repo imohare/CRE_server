@@ -1,12 +1,13 @@
 
 import { useState } from 'react';
 //data
-import { FormContextProvider } from '../../../Data/FormConfigs/FormContext'
+import { FormContextProvider } from 'Data/FormConfigs/FormContext'
 //components
-import LoginModal from '../../../Components/FormComponents/DataComponents/LoginModal';
+import LoginModal from 'Components/FormComponents/DataComponents/LoginModal';
 //styles
-import StyledHeader from '../../../Styles/styledComponents/StyledHeader';
-import StyledButton from '../../../Styles/styledComponents/StyledButton';
+import StyledHeader from 'Styles/styledComponents/StyledHeader';
+import StyledButton from 'Styles/styledComponents/StyledButton';
+import AnimatedH1 from 'Styles/animations/AnimatedH1'
 
 //antd imports
 import { Button, Card } from 'antd';
@@ -26,27 +27,29 @@ export const PublicHeader = () => {
   }
 
 
+
   return (
     <StyledHeader>
           <FormContextProvider>
-            <h1>Landing page</h1>
             <div className='login'>
               <div className='buttons'>
                 {
                   isRegister
-                    ? <LoginModal isVisible={isRegister} initialStage={3} onCancel={() => toggleRegister()} />
-                    : null
+                  ? <LoginModal isVisible={isRegister} initialStage={3} onCancel={() => toggleRegister()} />
+                  : null
                 }
                 <StyledButton type="primary" onClick={toggleLogin}>sign up</StyledButton>
                 {
                   isLogin
-                    ? <LoginModal isVisible={isLogin} initialStage={0} onCancel={() => toggleLogin()} />
-                    : null
+                  ? <LoginModal isVisible={isLogin} initialStage={0} onCancel={() => toggleLogin()} />
+                  : null
                 }
                 <StyledButton  type="primary" onClick={toggleRegister}>log in</StyledButton>
               </div>
             </div>
           </FormContextProvider>
+                  <AnimatedH1>Just browsing</AnimatedH1>
+                  <h2>discover our artists</h2>
 
         </StyledHeader>
 
