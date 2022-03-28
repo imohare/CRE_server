@@ -28,7 +28,7 @@ router.get('/getArtistByName/:artistName', getArtistByName); // doesn't work
 router.delete('/deleteArtist/:artistId', deleteArtist); // works
 
 // Album
-router.post('/createAlbum/:artistId', createAlbum); // works
+router.post('/createAlbum', createAlbum); // works
 router.get('/getAlbums', getAlbums);
 router.get('/getAlbum/:albumId', getAlbum);
 router.get('/getArtistAlbums/:artistId', getArtistAlbums);
@@ -43,7 +43,7 @@ router.get('/getConsumerByUsername/:consumerUsername', getConsumerByUsername);
 router.delete('/deleteConsumer/:consumerId', deleteConsumer);
 
 // Event
-router.post('/createEvent/:artistId', createEvent);
+router.post('/createEvent', createEvent);
 router.get('/getEvents', getEvents);
 router.get('/getEvent/:eventId', getEvent);
 router.get('/getArtistEvents/:artistId', getArtistEvents);
@@ -51,7 +51,7 @@ router.get('/getArtistEvent/:eventId/:artistId', getArtistEvent);
 router.delete('/deleteEvent/:eventId', deleteEvent);
 
 // Merchandise
-router.post('/createMerchandise/:artistId', createMerchandise);
+router.post('/createMerchandise', createMerchandise);
 router.get('/getMerchandises', getMerchandises);
 router.get('/getMerchandise/:merchandiseId', getMerchandise);
 router.get('/getArtistMerchandises/:artistId', getArtistMerchandises);

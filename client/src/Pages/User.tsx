@@ -1,49 +1,78 @@
 //react
 import { Link, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { UserContext } from 'Data/UserContext';
 import { getConsumerById } from '../Services/Consumer'
 import { useContext } from 'react';
-
-
-
-//eventNFTsByUserId, AlbumNFTsByUserId,MervhNFTsByUserId --> by Id
-//UserdatabyID
-
+import { getConsumerAlbumTokensByConsumerId } from 'Services/AlbumToken';
+import { getConsumerEventTokensByConsumerId } from 'Services/EvenToken';
+import { getConsumerMerchTokensByConsumerId } from 'Services/MerchToken';
+import ScrollList from 'Components/ReuseableComponents/ScrollList';
+import { AlbumCardTemplate, EventCardTemplate, MerchCardTemplate } from 'Components/ReuseableComponents/CardTemplates';
+import { IAlbum, IConsumer, IEvent, IMerchandise } from 'Data/DataTypes';
 
 const UserPage: React.FunctionComponent = () => {
-  //if artist, display with additional update authorisation
-  // const id = 
-
-  // const asyncGetUserInfo = async () => {
-  //   let user = await getConsumerById()//enter user id here
-  // }
   const location = useLocation();
-  console.log(location)
   const { currentId } = useContext(UserContext);
 
-  // useEffect(() => {
-  //   //get conssumerbyid
+  const [albums, setAlbums] = useState<IAlbum[] | []>([]);
+  const [events, setEvents]  = useState<IEvent[] | []>([]);
+  const [merchandises, setMerchandises] = useState<IMerchandise[] | []>([]);
+  const [user, setUser] = useState<IConsumer>({
+    eth_address: '',
+    username: '',
+    profile_picture: '',
+    location: '',
+    email: '',
+  });
 
-  //   const _consumer = getConsumerById(currentId);
-
-
-  //   // events
-  //   const _events =
-
-
-  //   //albums
-
-  //   //nfts
-  // }, [])
-
-
+  useEffect(() => {
+    getConsumerAlbumTokensByConsumerId(currentId)
+        .then(response => {
+          setAlbums(response);
+            return response;
+        })
+    getConsumerEventTokensByConsumerId(currentId)
+      .then(response => {
+          setEvents(response);
+            return response;
+        })
+    getConsumerMerchTokensByConsumerId(currentId)
+      .then(response => {
+          setMerchandises(response);
+            return response;
+        })
+    getConsumerById(currentId)
+      .then(response => {
+        setUser(response);
+        return response
+      })
+     }, [])
 
   return (
     <>
       <Link to="/">home</Link>
-      <h1>User</h1>
-      <p>only user can look at their own profile</p>
+      <h1>@{user.username} Profile</h1>
+      <h2></h2>
+    
+      <ScrollList title='Your NFT Albums'>
+            { (albums.length > 0) ? albums.map(album => <div key = {album.id}>
+              <AlbumCardTemplate album={album}/>
+            </div>)
+            : null}        
+      </ScrollList>
+      <ScrollList title='Your NFT Events'>
+          { (events.length > 0) ? events.map(event => <div key = {event.id}>
+              <EventCardTemplate event={event} background={''}/>
+            </div>)
+            : null }  
+          </ScrollList>
+          <ScrollList title='Your NFT Merchandise'>
+          { (merchandises.length > 0) ? merchandises.map(merchandise => <div key = {merchandise.id}>
+              <MerchCardTemplate merchandise={merchandise} background={''}/>
+            </div>)
+            : null}
+          </ScrollList>
     </>)
 }
 

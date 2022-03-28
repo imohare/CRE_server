@@ -1,22 +1,20 @@
 const BASE_URL = 'http://localhost:3001'
 
-const createMerchandise = (name: string, type: string, description: string, number_of_tokens: number, tokens_image: string, tokens_value: number, artistId: number) => {
+const createMerchandise = (merch: any) => {
+    console.log('in create merch service ')
     const requestOptions = {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
-            body: JSON.stringify({
-                name: name,
-                type: type,
-                description: description,
-                number_of_tokens: number_of_tokens,
-                tokens_image: tokens_image,
-                tokens_value: tokens_value
-            })
-        }
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(merch)
+
     }
-    return fetch(`${BASE_URL}/createMerchandise/${artistId}`, requestOptions)
-        .then(res => res.json())
+    return fetch(`${BASE_URL}/createMerchandise`, requestOptions)
+        .then(res => {
+            console.log(res);
+            return res.json();
+        })
         .catch(err => console.log(err, "error"))
 }
 
@@ -24,7 +22,7 @@ const getAllMerchandises = () => {
     return fetch(`${BASE_URL}/getMerchandises`)
         .then(res => res.json())
         .then(res => {
-            return res.map((merchandise:any) => ({...merchandise, createdAt: new Date(merchandise.createdAt)}))
+            return res.map((merchandise: any) => ({ ...merchandise, createdAt: new Date(merchandise.createdAt) }))
         })
         .catch(err => console.log(err, "error"))
 }

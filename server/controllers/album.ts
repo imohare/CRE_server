@@ -24,38 +24,39 @@ async function getAlbum(req: Request, res: Response) {
 
 async function createAlbum(req: Request, res: Response) {
   try {
-    if (!req.params.artistId) {
-      res.status(400);
-      res.json('incorrect schema for request');
-    } else {
-      const artist = await Artist.findByPk(parseInt(req.params.artistId));
+    // if (!req.params.artistId) {
+    //   res.status(400);
+    //   res.json('incorrect schema for request');
+    // } else {
+    //   const artist = await Artist.findByPk(parseInt(req.params.artistId));
 
-      if (!artist) {
-        res.status(400);
-        res.json('Artist not found');
-      } else {
-        const _album = await Album.create(req.body)
+    //   if (!artist) {
+    //     res.status(400);
+    //     res.json('Artist not found');
+    //   } else {
 
-        for (var tokens = 0; tokens < _album.number_of_tokens; tokens++) {
-          console.log("inside tokens")
-          const _token = AlbumToken.build();
-          await _token.save();
-          await _token.setArtist(artist);
-          await _token.setAlbum(_album);
-        }
-
-        _album
-          .setArtist(artist)
-          .then((_album) => {
-            res.status(201);
-            res.json(_album);
-          })
-          .catch((err) => {
-            res.json('Database Error - createAlbum failing')
-          });
-      }
+    console.log("req body", req.body);
+    const { name, year, description, tokensNumber, img_url, tokensValue, currentId } = req.body
+    const _album = await Album.create({ name: name, year: year, description: description, number_of_tokens: tokensNumber, tokens_image: img_url, tokens_value: tokensValue })
+    for (var tokens = 0; tokens < _album.number_of_tokens; tokens++) {
+      const _token = AlbumToken.build();
+      await _token.save();
+      await _token.setArtist(currentId);
+      await _token.setAlbum(_album);
     }
-  } catch (error) { errorHandler(res, error) }
+
+    _album
+      .setArtist(currentId)
+      .then((_album: any) => {
+        res.status(201);
+        res.json(_album);
+      })
+      .catch((err: any) => {
+        console.log(err, "error");
+        res.json('Database Error - createAlbum failing');
+      })
+  }
+  catch (error) { errorHandler(res, error) }
 }
 
 async function getArtistAlbums(req: Request, res: Response) {

@@ -31,6 +31,12 @@ import { exampleArtist, exampleAlbum, exampleEvent, exampleMerchandise } from '.
 import { IAlbum, IEvent, IMerchandise, IArtist } from 'Data/DataTypes';
 
 
+import { Link, NavLink } from 'react-router-dom';
+import { FormContextProvider } from 'Data/FormConfigs/FormContext';
+import LoginModal from 'Components/FormComponents/DataComponents/LoginModal';
+import StyledButton from 'Styles/styledComponents/StyledButton';
+import StyledHeader from 'Styles/styledComponents/StyledHeader';
+
 
 const LandingPage: React.FunctionComponent = () => {
   
@@ -38,7 +44,9 @@ const LandingPage: React.FunctionComponent = () => {
   //login popup is set to visible on clicking the login button and to invisible on clicking cancel on Modal component:
   const [isRegister, setIsRegister] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
-  const { userType, name } = useContext(UserContext);
+  const { userType, setUserType } = useContext(UserContext);
+  const {currentId} = useContext(UserContext);
+
   // are we not meant to set the user type here to use it later?
   const toggleLogin = () => {
     setIsLogin(prev => !prev)
@@ -56,7 +64,6 @@ const LandingPage: React.FunctionComponent = () => {
   const [artists, setArtists] = useState<IArtist[] | []>([]);
   const [albums, setAlbums] = useState<IAlbum[] | []>([]);
   const [events, setEvents] = useState<IEvent[] | []>([]);
-  // const [upcomingEvents, setUpcomingEvents] = useState<IEvent [] | []>([]);
   const [merchandise, setMerchandise] = useState<IMerchandise[] | []>([]);
 
   useEffect(() => {
@@ -111,12 +118,28 @@ const LandingPage: React.FunctionComponent = () => {
     //if user, display personalised component on top -> artist || user - else, have a login sign up option
     <Transition>
       <Parallax>
-      
-      {(userType === 'public')
+      <Link to={`user/${currentId}`}>profile</Link>
+
+        <StyledHeader>
+          <FormContextProvider>
+            <h1>Landing page</h1>
+            <div className='login'>
+              {/* <Link to={`/user/${consumerId}`}>Profile</Link> how do we make this work? */}
+              <div className='buttons'>
+                { isRegister ? <LoginModal isVisible={isRegister} initialStage={3} onCancel={() => toggleRegister()} /> : null }
+                <StyledButton type="primary" onClick={toggleLogin}>sign up</StyledButton>
+                { isLogin ? <LoginModal isVisible={isLogin} initialStage={0} onCancel={() => toggleLogin()} /> : null }
+                <StyledButton type="primary" onClick={toggleRegister}>log in</StyledButton>
+              </div>
+            </div>
+          </FormContextProvider>
+        </StyledHeader>
+
+      {/* {(userType === 'public')
         ? <PublicHeader />
           : <UserHeader discoballs={ discoballs } currentName={ name } />
       }
-     
+      */}
      </Parallax>
       <StyledPage>
       <Background />

@@ -1,33 +1,41 @@
-import { useState } from 'react';
-import {storage} from '../../../Firebase/index'
-import { Input } from '@rebass/forms'
-import { Text, Button} from "rebass";
+import { useState, useContext } from 'react';
+import { storage } from '../../../Firebase/index'
+import { Input, Label } from '@rebass/forms'
+import { Text, Button } from "rebass";
 import { createMerchandise } from 'Services/Merchandise';
+import { UserContext } from 'Data/UserContext';
 
-function MerchandiseInputBar (props: any) {
+function MerchandiseInputBar(props: any) {
 
-  const [image, setImage]= useState();
+  const [image, setImage] = useState();
   const [name, setName] = useState('');
   const [type, setType] = useState('');
   const [description, setDescription] = useState('');
   const [tokensNumber, setTokensNumber] = useState(0);
   const [tokensValue, setTokensValue] = useState(0);
   const [progress, setProgress] = useState(0);
-  const [artistId, setArtistId] = useState(1);
+  const { currentId } = useContext(UserContext);
+  const [artistId, setArtistId] = useState(currentId);
+
+
 
   const addMerchandise = async (name: string, type: string, description: string, tokensNumber: number, img_url: string, tokensValue: number, artistId: number) => {
-    const newMerchandises = props.merchandises.slice();
-    const response = await createMerchandise(name, type, description, tokensNumber, img_url, tokensValue, artistId)
-    newMerchandises.push(response)
-    props.setMerchandises(newMerchandises); // need to import this from app
+    // const newMerchandises = props.merchandises.slice();
+    const response = await createMerchandise({ name, type, description, tokensNumber, img_url, tokensValue, artistId })
+    // newMerchandises.push(response)
+    // props.setMerchandises(newMerchandises); // need to import this from app
+    return response;
   }
 
-  const handleChange = (e:any) => {
+  const handleChange = (e: any) => {
     const file = e.target.files[0];
     setImage(file);
   }
 
   const handleSubmit = (evt: any) => {
+    console.log("artistId", artistId)
+    console.log("currentId", currentId)
+
     // @ts-ignore
     const uploadTask = storage.ref(`images/${image.name}`).put(image);
     uploadTask.on(
@@ -49,7 +57,7 @@ function MerchandiseInputBar (props: any) {
           .getDownloadURL()
           .then((img: any) => {
             console.log(name, "name");
-            console.log(type, "type"); 
+            console.log(type, "type");
             console.log(description, "description");
             console.log(tokensNumber, "tokensNumber");
             console.log(img, "img");
@@ -67,26 +75,32 @@ function MerchandiseInputBar (props: any) {
     setTokensValue((tokensValue: number) => tokensValue = 0);
   };
 
-  return (  
+  return (
     <div>
-      <form onSubmit={handleSubmit}> 
-        <progress value={progress} max="100"/>
+      <form onSubmit={handleSubmit}>
+        <progress value={progress} max="100" />
+        <Label>Merchandise Name</Label>
         <Input type="string" name="name" value={name} onChange={(evt: { target: { value: any; }; }) => setName(evt.target.value)} required></Input>
         <br />
-        {/* @ts-ignore */}
-        <Input type="string" name="type" value={type} onChange={(evt: { target: { value: any; }; }) => setYear(evt.target.value)} required></Input>
+        <Label>Merchandise Type</Label>
+        <Input type="string" name="type" value={type} onChange={(evt: { target: { value: any; }; }) => setType(evt.target.value)} required></Input>
         <br />
+        <Label>Description</Label>
         <Input type="string" name="description" value={description} onChange={(evt: { target: { value: any; }; }) => setDescription(evt.target.value)} required></Input>
         <br />
+        <Label>Number of NFTs</Label>
         <Input type="number" name="tokensNumber" value={tokensNumber} onChange={(evt: { target: { value: string; }; }) => setTokensNumber(parseInt(evt.target.value))} required></Input>
         <br />
+        <Label>Value of the NFT</Label>
         <Input type="number" name="tokensValue" value={tokensValue} onChange={(evt: { target: { value: string; }; }) => setTokensValue(parseInt(evt.target.value))} required></Input>
         <br />
+        <Label>Upload NFT cover</Label>
         <Input type="file" onChange={handleChange} />
         <br />
+        <Label></Label>
         <Button type="submit">
           <Text fontFamily='system-ui'>
-            Upload
+            Upload Your NFT
           </Text>
         </Button>
       </form>

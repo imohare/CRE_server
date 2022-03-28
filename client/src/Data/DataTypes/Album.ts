@@ -5,6 +5,7 @@ interface IAlbum {
     number_of_tokens: number,
     tokens_image: string,
     tokens_value: number,
+    currentId?: number,
 
     //auto-generated
     id: number,

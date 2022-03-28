@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect, useContext } from 'react';
+
 import moment from 'moment';
 
 import { IArtist, IEventToken } from 'Data/DataTypes';
@@ -16,6 +17,7 @@ import "./Event.css"
 const EventPage: React.FunctionComponent = () => {
     const location = useLocation();
     const {currentId} = useContext(UserContext);
+    console.log("id", currentId)
 
     const [eventData, setEventData] = useState({
         id: 0,
@@ -82,7 +84,7 @@ const EventPage: React.FunctionComponent = () => {
     
     const checkIfUserHasBought = (): boolean => {
         const consumerBoughtToken = eventTokenData.filter(token => token.ConsumerId === currentId)
-        if (consumerBoughtToken) return true
+        if (consumerBoughtToken.length > 0) return true
         else return false
     }
 
@@ -91,7 +93,7 @@ const EventPage: React.FunctionComponent = () => {
             <div className="EventOverall">
                 <div className="links">
                     <Link to="/">home</Link>
-                    <Link to="/artist">artist</Link>
+                    <Link to={`/artist/${artistData.id}`}>artist</Link>
                 </div>
                 <div className="eventPicAndTitle">
                     <div className="eventPic">
