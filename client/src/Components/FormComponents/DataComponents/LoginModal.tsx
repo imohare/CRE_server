@@ -126,9 +126,7 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
       if (!u) {
         const consumerObjResponse = await getConsumerByEthAddress(eth);
         const { username, id } = consumerObjResponse;
-        console.log("consumerObjResponse", consumerObjResponse)
         setCurrentId(id);
-        console.log("currentId", currentId)
         setName(username)
         setUserType('consumer');
       }

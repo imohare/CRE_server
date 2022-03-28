@@ -8,7 +8,7 @@ import { getArtistById } from '../Services/Artist';
 import "./Album.css"
 import moment from 'moment';
 // simport { listenerCount } from 'process';
-import { IAlbum } from 'Data/DataTypes';
+import { IAlbum, IAlbumToken, IArtist } from 'Data/DataTypes';
 import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
 import { UserContext } from 'Data/UserContext';
 //components
@@ -18,7 +18,6 @@ const AlbumPage: React.FunctionComponent = () => {
     //If not logged in, greyed out and redirect to login page
     const location = useLocation();
     const {currentId} = useContext(UserContext);
-    console.log("currentId", currentId)
     
     const [albumData, setAlbumData] = useState({
         id: 0,
@@ -31,30 +30,53 @@ const AlbumPage: React.FunctionComponent = () => {
         ArtistId: 0
     });
     const [albumTokenData, setAlbumTokenData] = useState({});
-    const [artistData, setArtistData] = useState({});
-    const getAlbumInfo = async (albumId: number) => {
-        const album = await getAlbumById(albumId);
-        setAlbumData(album);
-    }
-    const getAlbumTokenInfo = async (albumId: number) => {
-        const albumToken = await getAlbumTokenByAlbumId(albumId);
-        setAlbumTokenData(albumToken);
-    }
-    const getArtistInfo = async (artistId: number) => {
-        const artistInfo = await getArtistById(artistId);
-        setArtistData(artistInfo);
-    }
+    
+    const [artistData, setArtistData] = useState<IArtist>({
+        id: 0, 
+        eth_address: '',
+        name: '',
+        profile_picture: '',
+        website: '',
+        createdAt: new Date('2022-03-25T19:36:22.920Z'),
+        updatedAt: new Date('2022-03-25T19:36:22.920Z'),
+    });
+    
+    const [availableTokens, setAvailableTokens] = useState<IAlbumToken[]>([{
+        id: 0,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        ArtistId: 0,
+        AlbumId: 0,
+    }]);
+
     useEffect(() => {
         const albumId: number = parseInt(location.pathname.replace(/[^0-9.]+/g, ''))
-        console.log("albumID in useEffect", albumId);
-        getAlbumInfo(albumId);
-        const _albumToken = getAlbumTokenInfo(albumId);
-        setAlbumTokenData(_albumToken)
-        // console.log(_albumToken);
-        const artistId = albumData.ArtistId;
-        getArtistInfo(artistId);
-        console.log(artistData);
-    }, [])
+        getAlbumById(albumId)
+            .then(response => {
+                setAlbumData(response);
+                return response;
+            })
+            .then(evt => {
+                const artistId = evt.ArtistId;
+                return artistId;
+            })
+            .then(artistId => {
+                const artist = getArtistById(artistId);
+                return artist;
+            })
+            .then(artist => {
+                setArtistData(artist)
+            });    
+        getAlbumTokenByAlbumId(albumId)
+            .then(response => {
+                
+                setAlbumTokenData(response)
+                console.log(response)
+                const availTokens =  response.filter((token: IAlbumToken) => token.ConsumerId === null);
+                setAvailableTokens( availTokens);
+            })
+         }, [])
+
     return (
         <>
             <div className="AlbumOverall">
@@ -71,8 +93,7 @@ const AlbumPage: React.FunctionComponent = () => {
                         <div className="dateAndName">
                             <h3>{moment(albumData.year).format('yyyy')}</h3>
                             <h2>    *    </h2>
-                            <h3>Lancey Foux</h3>
-                            {/* <h2>{artistData.name}</h2> */}
+                            <h3>{artistData.name}</h3>
                         </div>
                     </div>
                 </div>

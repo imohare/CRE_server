@@ -1,7 +1,7 @@
-import { IMerchandise } from "../Data/DataTypes"
+import { IMerchandise, IPreSQLMerchandise } from "../Data/DataTypes"
 const BASE_URL = 'http://localhost:3001'
 
-const createMerchandise = (merchandise: IMerchandise, artistId: number) => {
+const createMerchandise = (merchandise: IPreSQLMerchandise, artistId: number) => {
     const requestOptions = {
         method: 'POST',
         headers: {
@@ -17,9 +17,9 @@ const createMerchandise = (merchandise: IMerchandise, artistId: number) => {
 const getAllMerchandises = () => {
     return fetch(`${BASE_URL}/getMerchandises`)
         .then(res => res.json())
-        // .then(res => {
-        //     return res.map((merchandise:any) => ({...merchandise, createdAt: new Date(merchandise.createdAt)}))
-        // })
+        .then(res => {
+            return res.map((merchandise:any) => ({...merchandise, createdAt: new Date(merchandise.createdAt)}))
+        })
         .catch(err => console.log(err, "error"))
 }
 

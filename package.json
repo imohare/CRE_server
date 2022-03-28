@@ -1,7 +1,9 @@
 {
   "dependencies": {
+    "@rebass/forms": "^4.0.6",
     "react-router": "^6.2.2",
-    "react-router-dom": "^6.2.2"
+    "react-router-dom": "^6.2.2",
+    "rebass": "^4.0.7"
   },
   "name": "cre",
   "description": "Web3 Token Earning Social Media Network",
@@ -19,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/imohare/CRE/issues"
   },
-  "homepage": "https://github.com/imohare/CRE#readme"
+  "homepage": "https://github.com/imohare/CRE#readme",
+  "devDependencies": {
+    "@types/rebass": "^4.0.10"
+  }
 }

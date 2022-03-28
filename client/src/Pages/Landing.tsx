@@ -27,65 +27,87 @@ import { IAlbum, IEvent, IMerchandise } from 'Data/DataTypes';
 import { getEvents } from 'Services/Event';
 import { getAllMerchandises } from 'Services/Merchandise';
 
+import { Link, NavLink } from 'react-router-dom';
+
+
 const LandingPage: React.FunctionComponent = () => {
   //public view
   //login popup is set to visible on clicking the login button and to invisible on clicking cancel on Modal component:
 
+  const { userType, setUserType } = useContext(UserContext);
+  // are we not meant to set the user type here to use it later?
+  const toggleLogin = () => {
+    setIsLogin(prev => !prev)
+  }
+  const toggleRegister = () => {
+    setIsRegister(prev => !prev)
+  }
 
-  const { userType } = useContext(UserContext);
 
    const [albums, setAlbums] = useState<IAlbum[] | []>([]);
   const [events, setEvents] = useState<IEvent[] | []>([]);
   // const [upcomingEvents, setUpcomingEvents] = useState<IEvent [] | []>([]);
   const [merchandise, setMerchandise] = useState<IMerchandise[] | []>([]);
 
-  // useEffect(() => {
-  //   getAllAlbums()
-  //     .then((response: IAlbum[]) => {
-  //       if (response) {
-  //         response.sort((firstItem, secondItem) => secondItem.createdAt.getTime() - firstItem.createdAt.getTime())
-  //         setAlbums(response)
-  //       }
-  //     })
-  //     .catch(error => {
-  //       console.log(error)
-  //       console.log("Error occured.")
-  //     })
-    // getEvents()
-    //   .then((response: IEvent[]) => {
-    //     if (response) {
-    //       response.sort((firstItem, secondItem) => secondItem.createdAt.getTime() - firstItem.createdAt.getTime())
-    //       setEvents(response)
-    //     }
-    //   })
-    //   .catch(error => {
-    //     console.log(error)
-    //     console.log("Error occured.")
-    //   })
-    // getAllMerchandises()
-    //   .then((response: IMerchandise[]) => {
-    //     if (response) {
-    //       response.sort((firstItem, secondItem) => secondItem.createdAt.getTime() - firstItem.createdAt.getTime())
-    //       setMerchandise(response)
-    //     }
-    //     setMerchandise(response)
-    //   })
-    //   .catch(error => {
-    //     console.log(error)
-    //     console.log("Error occured.")
-    //   })
-  // }, [])
-
-  // const today = new Date();
-  // console.log("event date", events[0].date.getTime())
-  // console.log("today date" , today)
-  // let upcoming = events.filter(evt => evt.date >= today)
-  // console.log(upcoming)
-
-
+  useEffect(() => {
+    getAllAlbums()
+      .then((response: IAlbum[]) => {
+        if (response) {
+          response.sort((firstItem, secondItem) => secondItem.createdAt.getTime() - firstItem.createdAt.getTime())
+          setAlbums(response)
+        }
+        else setAlbums(response)
+      })
+      .catch(error => {
+        console.log(error)
+        console.log("Error occured.")
+      })
+    getEvents()
+      .then((response: IEvent[]) => {
+        if (response) {
+          response.sort((firstItem, secondItem) => secondItem.createdAt.getTime() - firstItem.createdAt.getTime())
+          setEvents(response)
+        }
+      })
+      .catch(error => {
+        console.log(error)
+        console.log("Error occured.")
+      })
+    getAllMerchandises()
+      .then((response: IMerchandise[]) => {
+        if (response) {
+          response.sort((firstItem, secondItem) => secondItem.createdAt.getTime() - firstItem.createdAt.getTime())
+          setMerchandise(response)
+        }
+      })
+      .catch(error => {
+        console.log(error)
+        console.log("Error occured.")
+      })
+  }, [])
+  
   return (
     //if user, display personalised component on top -> artist || user - else, have a login sign up option
     <div>
+
+      <Parallax>
+
+        <StyledHeader>
+          <FormContextProvider>
+            <h1>Landing page</h1>
+            <div className='login'>
+              {/* <Link to={`/user/${consumerId}`}>Profile</Link> how do we make this work? */}
+              <div className='buttons'>
+                { isRegister ? <LoginModal isVisible={isRegister} initialStage={3} onCancel={() => toggleRegister()} /> : null }
+                <StyledButton type="primary" onClick={toggleLogin}>sign up</StyledButton>
+                { isLogin ? <LoginModal isVisible={isLogin} initialStage={0} onCancel={() => toggleLogin()} /> : null }
+                <StyledButton type="primary" onClick={toggleRegister}>log in</StyledButton>
+              </div>
+            </div>
+          </FormContextProvider>
+        </StyledHeader>
+
+        <StyledPage>
       {(userType === 'public')
         ? <PublicHeader />
         : <UserHeader />

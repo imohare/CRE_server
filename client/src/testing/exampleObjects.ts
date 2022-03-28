@@ -37,6 +37,7 @@ const exampleAlbum: IAlbum = {
   updatedAt: new Date(),
   ArtistId: 2,
 }
+
 const exampleEvent: IEvent = {
   name: 'partey',
   address: '52 Horseferry Road',
@@ -47,7 +48,8 @@ const exampleEvent: IEvent = {
   tokens_value: 10,
   id: 8,
   createdAt: new Date(),
-  updatedAt: new Date()
+  updatedAt: new Date(), 
+  ArtistId: 2, 
 }
 
 const exampleEventToken: IEventToken = {
@@ -76,12 +78,15 @@ const exampleMerchandise: IMerchandise = {
   tokens_value: 3, 
   id: 8,
   createdAt: new Date(),
-  updatedAt: new Date()
+  updatedAt: new Date(),
+  ArtistId: 2,
 }
 const exampleMerchToken: IMerchToken = {
   id: 6,
   createdAt: new Date(),
-  updatedAt: new Date()
+  updatedAt: new Date(), 
+  ArtistId: 2, 
+  MerchId: 8
 }
 
 const examplePoints: IPoints = {
