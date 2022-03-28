@@ -29,7 +29,7 @@ export const PublicHeader = () => {
 
 
   return (
-    <StyledHeader>
+    <StyledHeader discoballs='images/disco_balls.jpg'>
           <FormContextProvider>
             <div className='login'>
               <div className='buttons'>

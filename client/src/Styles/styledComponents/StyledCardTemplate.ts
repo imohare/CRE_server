@@ -1,14 +1,20 @@
 import styled from 'styled-components';
 
-const StyledArtistCardTemplate = styled.div<{ background: string | undefined, portrait: string | undefined }>`
+const StyledArtistCardTemplate = styled.div<{ portrait: string | undefined }>`
 position: relative;
-min-width: 18rem;
-height: 22rem;
-background-image: url(${props => props.background});
+min-width: 16rem;
+height: 20rem;
 background-repeat: no-repeat;
 background-size: cover;
 margin: 0 0.6rem;
 border-radius: 2px;
+img {
+  position: absolute;
+  overflow-x: hidden;
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+}
 .portrait {
   background-image: url(${props => props.portrait || '' });
   background-size: cover;
@@ -16,10 +22,10 @@ border-radius: 2px;
   background-position: center;
   height: 100%;
   width: 100%;
-  clip-path: polygon(0 0, 20% 0, 100% 90%,100% 100%, 50% 100%, 0 20%);
+  z-index: 10;
 }
 &:hover {
-  transform: scale(1.05);
+  transform: scale(1.02);
   transition: transform 0.4s;
 }
 .title {
@@ -36,10 +42,10 @@ border-radius: 2px;
 const StyledCardTemplate = styled.div<{ background: any | undefined }>`
 display: flex;
 flex-direction: column;
-height: 20rem;
-width: 15rem;
+height: 18rem;
+width: 14rem;
 position: relative;
-background-color: rgba(255, 255, 255, 0.5);
+background-color: #a7c2bf;
 box-shadow: 1px 1px 5px black;
 padding: 5px;
 &:hover {
@@ -87,7 +93,7 @@ const StyledEventCardTemplate = styled(StyledCardTemplate)`
   justify-content: flex-end;
 }
 .date {
-  color: red;
+  color: #a7c2bf;
   font-family: 'Oswald';
   align-self: flex-end;
   font-weight: 600;
