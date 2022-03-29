@@ -1,26 +1,36 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 //antd imports
 import { Button, Card, DatePicker, Form, Input, InputNumber, Upload } from 'antd';
 import ImgCrop from 'antd-img-crop';
 import moment from 'moment';
 //components
-import FormTemplate from '../../ReuseableComponents/FormTemplate';
 //types
-import { IEvent } from '../../../Data/DataTypes'
+import { IAlbum } from 'Data/DataTypes'
 //data
-import { UserContext } from '../../../Data/UserContext';
-import { createEvent } from '../../../Services/Event';
+import { createAlbum } from 'Services/Album';
+//helperfunction from tools
 //styling
 import { motion } from 'framer-motion'
-import {StaggerParentVariant} from '../../../Styles/animations/formAnimations';
-import { AnyStyledComponent } from 'styled-components';
-import { EndOfLineState } from 'typescript';
-import { createMerchandise } from 'Services/Merchandise';
-//onCancel toggles setVisible in parent component
+import {StaggerParentVariant} from 'Styles/animations/formAnimations';
+import { RcFile } from 'antd/lib/upload';
+
+
+//firebase
+// import { storage } from '../../../Firebase';
+
+
+// interface IExpectedResponse {
+//   name: String;
+//   date: object;
+//   description: String;
+//   number_of_tokens: Number;
+//   tokens_value: Number;
+// }
 
 interface IFile {
   [key: string]: any;
 }
+
 interface IFileProps {
   file: IFile;
 }
@@ -28,20 +38,25 @@ interface IFileProps {
 interface IProps {
   onSubmitForm: (res: any)=>void;
 }
-
-
-/////////////////////////////////////////////////////////////////////
-
-const EventForm = ({ onSubmitForm }: IProps ) => {
-
-  const [imageObj, setImageObj] = useState(null);
-  const [imageUrl, setImageUrl] = useState('');
-  const [date, setDate] = useState('');
-  const { currentId } = useContext(UserContext)
   
 
+const AlbumForm = ({ onSubmitForm }: IProps) => {
+  
+  const [date, setDate] = useState('');
+
+  const [image, setImage] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
+
+
+
+
+
+
+  //////////////////////////////////////////////////////////////
+  // // image upload // //
+
   const onPreview = async (file: IFile) => {
-        let src = file.url;
+    let src = file.url;
     if (!src) {
       src = await new Promise(resolve => {
         const reader = new FileReader();
@@ -56,39 +71,41 @@ const EventForm = ({ onSubmitForm }: IProps ) => {
   };
 
 
-  const handleChange = ({ file }: IFileProps) => {
-   
+  const handleChange = ({ file }:IFileProps ) => {
+    console.log('file to upload', file)
+    // const storageRef = storage.ref(`album/image/${file.name}`)
+    
+  
   }
 
-/////////////////////////form submit///////////////////////////////////////////
-  const formatResult = (res: IEvent) => {
-    const { name, address, tokens_value, number_of_tokens } = res;
+
+
+
+////////////////////////////////////////////////////////////
+// // form submit // //
+  const formatResult = (res:any) => {
+    const { name, description, number_of_tokens, tokens_value } = res;
     const formattedResult = {
       name: name,
-      address: address,
-      date: date,
-      tokens_value: tokens_value,
+      description: description,
       number_of_tokens: number_of_tokens,
-      // tokens_image: imageUrl
+      tokens_value: tokens_value,
+      year: date
     }
+    console.log('formatted result that gets sent to api ', formattedResult)
     return formattedResult;
   }
 
-  const formSubmit = async (values: IEvent) => { 
+  const formSubmit = async (values: IAlbum) => {
     const formattedResults = formatResult(values);
     console.log(formattedResults);
-    // const eventInDB = await createEvent(formattedResults);
+    // const eventInDB = await createAlbum(formattedResults, currentId);
     // onSubmitForm(eventInDB)
   }
-
-  //allows only input of future dates
-
-  const noPastEvents = (current:any) => {
-    return current && current.valueOf() < Date.now()
-  }
+  
 
   return (
-    <Card title="new Event">
+    <Card title="new album">
       <Form
         onFinish={formSubmit}
       labelCol={{
@@ -107,32 +124,20 @@ const EventForm = ({ onSubmitForm }: IProps ) => {
         >
           <Form.Item
             name='name'
-            label='Event Name'
-            rules={[{ required: true, message: 'Please enter a name for your event' }]}>
-            <Input></Input>
-          </Form.Item>
-          <Form.Item
-            name='address'
-            label='Location'
-            rules={[{ required: true, message: 'Please enter a location' }]}>
+            label='Name'
+            rules={[{ required: true, message: 'Please enter a name for your album' }]}>
             <Input></Input>
           </Form.Item>
 
           <Form.Item
-            name='date'
-            label='Date'
-            rules={[{
-              required: true, message: 'Please enter a valid date',
-            }]}
+          name='date'
+          label='Date'
+            rules={[{ required: true, message: 'Please select when your album was created' }]}
           >
             <DatePicker
               onChange={(date, dateString) => {
-                setDate(moment(date).format("MMMM Do YYYY, h:mm:ss a"));     
-              }}
-              format="MMMM Do YYYY, h:mm a"
-              showTime={{ defaultValue: moment('00:00:00', 'HH:mm:ss') }}
-              disabledDate={noPastEvents}
-            />
+                setDate(moment(date).format('MMMM Do YYYY, h:mm:ss a'));     
+              }} picker="month" />
           </Form.Item>
 
           <Form.Item
@@ -143,11 +148,11 @@ const EventForm = ({ onSubmitForm }: IProps ) => {
 
           <Form.Item
             name='number_of_tokens'
-            label='# of Event NFTs'
+            label='# of Album NFTs'
             rules={[{
               required: true,
               type: 'number',
-              message: 'You must chose a number of nFTs for your event'
+              message: 'You must chose a number of nFTs for your album'
             }]}
           >
             <InputNumber></InputNumber>
@@ -158,7 +163,7 @@ const EventForm = ({ onSubmitForm }: IProps ) => {
             rules={[{
               required: true,
               type: 'number',
-              message: 'You must chose a number of nFTs for your event'
+              message: 'You must chose a number of nFTs for your album'
             }]}
           >
             <InputNumber></InputNumber>
@@ -171,7 +176,7 @@ const EventForm = ({ onSubmitForm }: IProps ) => {
                 //  }}
                 action="gs://cre-6cbea.appspot.com"
                 listType="picture-card"
-                className="event-picture-upload"
+                className="album-picture-upload"
                 showUploadList={false}   
                 onChange={handleChange}
                 onPreview={onPreview}
@@ -187,10 +192,6 @@ const EventForm = ({ onSubmitForm }: IProps ) => {
         </Form>
    </Card>
   )
-
-
 }
 
-
-
-export default EventForm
+export default AlbumForm

@@ -33,7 +33,7 @@ const getAlbumById = (albumId: number) => {
 
 const getAllAlbumsbyArtistId = (artistId: number) => {
     return fetch(`${BASE_URL}/getArtistAlbums/${artistId}`)
-        .then(res => res.json)
+        .then(res => res.json())
         .catch(err => console.log(err, "error"))
 }
 

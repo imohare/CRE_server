@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Button } from 'antd';
 
 const StyledButton = styled(Button)`
-  display:flex;
+  display:inline-block;
   justify-content: center;
   align-items: center;
   height: 2.2rem;
@@ -34,9 +34,7 @@ background-color:#FFFFFF;
 border:0.1em solid #FFFFFF;
 transform: scale(1.05);
 }
-@media and (max-width:30em){
-  display:block;
-}
+
 `
 
 export default StyledButton;

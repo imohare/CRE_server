@@ -101,14 +101,11 @@ const LandingPage: React.FunctionComponent = () => {
   return (
     //if user, display personalised component on top -> artist || user - else, have a login sign up option
     <Transition>
-      <Parallax>
 
         {(userType === 'public')
           ? <PublicHeader />
           : <UserHeader currentName={`Welcome, ${name}!`} />
         }
-
-      </Parallax>
       <StyledPage>
         <Background />
 

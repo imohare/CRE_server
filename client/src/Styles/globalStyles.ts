@@ -17,6 +17,7 @@ const GlobalStyles = createGlobalStyle`
   box-sizing: border-box;
 }
 body {
+  position: relative;
   margin: 0;
   padding: 0;
   width: 100vw;
@@ -26,7 +27,7 @@ body {
   color: ${({ theme }) => theme.fontColor};
   highlight: ${({theme}) => theme.highlight}
   transition: all 0.5s linear;
-  background-image: url("https://firebasestorage.googleapis.com/v0/b/cre-6cbea.appspot.com/o/iStock-1199440598.jpg?alt=media&token=b5e7557e-414f-4293-93c5-5f8ce88ba61e");
+  // background-image: url("https://firebasestorage.googleapis.com/v0/b/cre-6cbea.appspot.com/o/iStock-1199440598.jpg?alt=media&token=b5e7557e-414f-4293-93c5-5f8ce88ba61e");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: fixed;

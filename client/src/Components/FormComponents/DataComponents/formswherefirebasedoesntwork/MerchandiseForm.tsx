@@ -4,15 +4,15 @@ import { Button, Card,  Form, Input, InputNumber, Upload } from 'antd';
 import ImgCrop from 'antd-img-crop';
 import moment from 'moment';
 //components
-import FormTemplate from '../../ReuseableComponents/FormTemplate';
+import FormTemplate from 'Components/ReuseableComponents/FormTemplate';
 //types
-import { IMerchandise } from '../../../Data/DataTypes'
+import { IMerchandise } from 'Data/DataTypes'
 //data
-import { UserContext } from '../../../Data/UserContext';
-import { createMerchandise } from '../../../Services/Merchandise';
+import { UserContext } from 'Data/UserContext';
+import { createMerchandise } from 'Services/Merchandise';
 //styling
 import { motion } from 'framer-motion'
-import {StaggerParentVariant} from '../../../Styles/animations/formAnimations';
+import {StaggerParentVariant} from 'Styles/animations/formAnimations';
 
 
 interface IFile {
