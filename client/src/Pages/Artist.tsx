@@ -9,7 +9,8 @@ import { getEvents } from 'Services/Event';
 import { getAllMerchandises } from 'Services/Merchandise';
 //components
 import StyledPage from '../Styles/styledComponents/styledPage';
-import ArtistProfileView from 'Components/FormComponents/DataComponents/ArtistProfileView'
+import ArtistProfileView from 'Components/FormComponents/DataComponents/ArtistProfileView';
+import ArtistHeader from 'Components/FormComponents/DataComponents/ArtistHeader';
 //styling
 
 //Datatypes
@@ -23,7 +24,8 @@ import MerchandiseInputBar from 'Components/FormComponents/DataComponents/Mercha
 import { getArtistById } from 'Services/Artist';
 
 import { useParams } from 'react-router-dom';
-import { isNullishCoalesce } from 'typescript';
+
+
 
 
 const ArtistPage: React.FunctionComponent = () => {
@@ -95,6 +97,7 @@ const handleMerchandiseState = () => setType('merchandise');
       {
         thisArtistId === currentId ? <ArtistProfileView></ArtistProfileView> : null
       }
+      <ArtistHeader artist={ thisArtist }></ArtistHeader>
         <Link to="/"></Link>
       <h1>{  thisArtist.name  }</h1>
      

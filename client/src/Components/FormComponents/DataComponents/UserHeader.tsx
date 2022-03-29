@@ -14,6 +14,7 @@ interface IProps {
 
 
 
+
 const UserHeader = (props: IProps) => {
   const { name, currentId } = useContext(UserContext);
 
@@ -23,7 +24,7 @@ const UserHeader = (props: IProps) => {
       
        <Link to={`user/${currentId}`}>
         <div className="userProfile">
-
+          <img src=""></img>
                 { name }
 
          </div>
