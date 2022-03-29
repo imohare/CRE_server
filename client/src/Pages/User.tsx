@@ -9,8 +9,7 @@ import { getConsumerEventTokensByConsumerId } from 'Services/EvenToken';
 import { getConsumerMerchTokensByConsumerId } from 'Services/MerchToken';
 import ScrollList from 'Components/ReuseableComponents/ScrollList';
 import { AlbumCardTemplate, EventCardTemplate, MerchCardTemplate } from 'Components/ReuseableComponents/CardTemplates';
-import { IAlbum, IArtist, IConsumer, IEvent, IMerchandise, IPoints } from 'Data/DataTypes';
-import { getArtistById } from 'Services/Artist';
+import { IAlbum, IConsumer, IEvent, IMerchandise, IPoints } from 'Data/DataTypes';
 
 const UserPage: React.FunctionComponent = () => {
   const location = useLocation();
@@ -71,13 +70,11 @@ const UserPage: React.FunctionComponent = () => {
       <Link to="/">home</Link>
       <h1>@{user.username} Profile</h1>
       <h2>points: {totalPoints}</h2>
-      <ScrollList title='Artists'>
       {/* { (pointData.length > 0) ? pointData.map((pointEntry: IPoints) => {
         const artistId: number  = pointEntry.ArtistId;
         const artist: IArtist = getArtistById(artistId);
         return <h2>{artist.name}: {pointEntry.points}</h2>
         }) : null } */}
-      </ScrollList>
 
     
       <ScrollList title='Your NFT Albums'>
