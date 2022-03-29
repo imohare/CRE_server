@@ -10,9 +10,6 @@ import StyledButton from 'Styles/styledComponents/StyledButton';
 import AnimatedH1 from 'Styles/animations/AnimatedH1'
 
 //antd imports
-import { Button, Card } from 'antd';
-
-
 
 export const PublicHeader = () => {
 
@@ -26,10 +23,8 @@ export const PublicHeader = () => {
     setIsRegister(prev => !prev)
   }
 
-
-
   return (
-    <StyledHeader discoballs='images/disco_balls.jpg'>
+    <StyledHeader>
           <FormContextProvider>
             <div className='login'>
               <div className='buttons'>
@@ -38,13 +33,13 @@ export const PublicHeader = () => {
                   ? <LoginModal isVisible={isRegister} initialStage={3} onCancel={() => toggleRegister()} />
                   : null
                 }
-                <StyledButton className="light" type="primary" onClick={toggleLogin}>sign up</StyledButton>
+                <StyledButton type="primary" onClick={toggleLogin}>sign up</StyledButton>
                 {
                   isLogin
                   ? <LoginModal isVisible={isLogin} initialStage={0} onCancel={() => toggleLogin()} />
                   : null
                 }
-                <StyledButton className="light" type="primary" onClick={toggleRegister}>log in</StyledButton>
+                <StyledButton type="primary" onClick={toggleRegister}>log in</StyledButton>
               </div>
             </div>
           </FormContextProvider>

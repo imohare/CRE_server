@@ -4,11 +4,8 @@ import { globalVariables } from '../globalStyles';
 //the grid does not work properly because it assumes that the conditional content is rendered
 //as well. the 24 fr actually have the same value as a 12 fr grid.
 
-interface IProps {
-  discoballs: string;
-}
 
-const StyledHeader = styled.div<IProps>`
+const StyledHeader = styled.div`
 width: 100%;
 height: 50vh;
 display: flex;

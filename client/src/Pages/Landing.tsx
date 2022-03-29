@@ -45,7 +45,7 @@ const LandingPage: React.FunctionComponent = () => {
   const [isRegister, setIsRegister] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
   const { userType, setUserType } = useContext(UserContext);
-  const {currentId} = useContext(UserContext);
+  const {currentId, name} = useContext(UserContext);
 
   // are we not meant to set the user type here to use it later?
   const toggleLogin = () => {
@@ -117,29 +117,13 @@ const LandingPage: React.FunctionComponent = () => {
   return (
     //if user, display personalised component on top -> artist || user - else, have a login sign up option
     <Transition>
-      <Parallax>
-      <Link to={`user/${currentId}`}>profile</Link>
+      <Parallax>  
 
-        <StyledHeader>
-          <FormContextProvider>
-            <h1>Landing page</h1>
-            <div className='login'>
-              {/* <Link to={`/user/${consumerId}`}>Profile</Link> how do we make this work? */}
-              <div className='buttons'>
-                { isRegister ? <LoginModal isVisible={isRegister} initialStage={3} onCancel={() => toggleRegister()} /> : null }
-                <StyledButton type="primary" onClick={toggleLogin}>sign up</StyledButton>
-                { isLogin ? <LoginModal isVisible={isLogin} initialStage={0} onCancel={() => toggleLogin()} /> : null }
-                <StyledButton type="primary" onClick={toggleRegister}>log in</StyledButton>
-              </div>
-            </div>
-          </FormContextProvider>
-        </StyledHeader>
-
-      {/* {(userType === 'public')
+      {(userType === 'public')
         ? <PublicHeader />
-          : <UserHeader discoballs={ discoballs } currentName={ name } />
+          : <UserHeader currentName={name} />
       }
-      */}
+     
      </Parallax>
       <StyledPage>
       <Background />

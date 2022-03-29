@@ -20,14 +20,11 @@ function AlbumInputBar(props: any) {
   const [artistId, setArtistId] = useState(currentId);
   //import use context
 
-
-
-
   const addAlbum = async (name: string, year: Date, description: string, tokensNumber: number, img_url: string, tokensValue: number, artistId: number) => {
     console.log('in addAlbum and values are', name, year, description, tokensNumber, img_url, tokensValue, artistId)
     const newAlbums = props.albums.slice();
     console.log('slice function', newAlbums);
-    const response = await createAlbum({ name, year, description, tokensNumber, img_url, tokensValue, artistId })
+    const response = await createAlbum({ name, year, description, tokensNumber, img_url, tokensValue, artistId });
     newAlbums.push(response)
     console.log('after pushing', response)
     props.setAlbums(newAlbums); // need to import this from app

@@ -78,7 +78,6 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
       setName(values.username);
 
     }
-
   
     console.log('message from the context, artistInfo is:', artistInfo, 'consumer is ', consumerInfo)
     setDisplayStage(2);
@@ -92,23 +91,15 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
     const check = await checkIfInDB(isArtist); //should return falsy
     //if falsey, we want to create a new user to our DB
     if (!check) {
-      console.log("in! check")
       let res;
-
       if (isArtist) {
         res = await registerWithEthAddress(isArtist, artistInfo)
-        console.log("res", res)
       }
       if (!isArtist) {
-
         res = await registerWithEthAddress(isArtist, consumerInfo);
       }//setting the user in the global context
-      console.log(res, "user res logged");
-
       setDisplayStage(6) //successful registration
     } else {
-      console.log("in else check")
-      console.log('returning truthy')
       setDisplayStage(4);
     }
   }
@@ -117,6 +108,7 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
     const check = await checkIfInDB(u);
     if (check) {
       const eth = await getEthAddress();
+      // this function never even runs!
       if (u) {
         const artistObjResponse = await getArtistByEthAddress(eth);
         const { name, id } = await artistObjResponse;

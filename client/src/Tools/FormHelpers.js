@@ -1,6 +1,5 @@
 import { createArtist, getArtistByEthAddress } from 'Services/Artist'
 import { createConsumer, getConsumerByEthAddress } from 'Services/Consumer'
-// import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript'
 import '../Services/Consumer'
 
 
@@ -31,10 +30,9 @@ const registerWithEthAddress = async (isArtist, info) => {
 const checkIfInDB = async (isArtist) => {
   console.log("is artist", isArtist)
   const eth = await getEthAddress();
-  console.log(eth);
-
 
   let result;
+  
   if (isArtist) {
     result = await getArtistByEthAddress(eth)
     //the result that it is returning is a function...
