@@ -32,7 +32,7 @@ img {
 }
 .title {
   position: absolute;
-  font-family: 'Boogaloo';
+  font-family: 'Raleway', sans-serif;
   font-size: 4rem;
   padding: 2px 5px;
   bottom: 0;
@@ -55,9 +55,9 @@ padding: 10px;
 }
 .description {
   margin-top: 7px;
-  color: #B1D4E0;
+  color:#c5c5c5;
   h4{
-    font-family: 'Oswald';
+    font-family: 'Raleway', sans-serif;
     font-size: 1.6rem;
     text-align: center;
     line-height: 1.2;
@@ -94,8 +94,8 @@ const StyledEventCardTemplate = styled(StyledCardTemplate)`
   justify-content: flex-end;
 }
 .date {
-  color: #a7c2bf;
-  font-family: 'Oswald';
+  color: #c5c5c5;
+  font-family: 'Raleway', sans-serif;
   align-self: flex-end;
   font-weight: 600;
   text-transform: uppercase;
@@ -106,7 +106,6 @@ const StyledMerchCardTemplate = styled(StyledCardTemplate)`
 
 .image {
   display: flex;
-
   text-align: center;
   background-image: url(${props => props.background});
   background-position: center;

@@ -62,25 +62,38 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
 
   useEffect(() => {
     displayContent()
+    console.log('artist info', artistInfo);
+    console.log('consumer info', consumerInfo);
+    console.log(displayStage);
   }, [displayStage])
 
   const registerFormSubmit = (values: any) => {
     if (isArtist) {
-      setArtistInfo({ ...values });
+      console.log(values);
+      console.log('artist', { ...values })
       setUserType('artist');
-      setCurrentId(values.id);
-      setName(values.name)
+      // setCurrentId(values.id);
+      // setName(values.name)
+      setArtistInfo({ ...values });
+      setDisplayStage(2);
+
     }
     else {
-      setConsumerInfo({ ...values });
+      console.log(values);
+
+      console.log('consumer`', { ...values })
       setUserType('consumer');
-      setCurrentId(values.id);
-      setName(values.username);
+      // setCurrentId(values.id);
+      // setName(values.username);
+      setConsumerInfo({ ...values });
+      setDisplayStage(2);
 
     }
 
     console.log('message from the context, artistInfo is:', artistInfo, 'consumer is ', consumerInfo)
     setDisplayStage(2);
+
+    console.log(displayStage);
   }
 
 
@@ -114,6 +127,7 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
         const { name, id } = await artistObjResponse;
         setCurrentId(id);
         setName(name)
+        console.log('consumer');
         setUserType('artist');
       }
       if (!u) {
@@ -122,9 +136,13 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
         setCurrentId(id);
         setName(username)
         setUserType('consumer');
+        console.log('consumer')
+        console.log('consumerloginresponse', consumerObjResponse)
+
       }
     }
     setDisplayStage(7)
+    console.log(displayStage);
   }
 
   const submitUser = () => {

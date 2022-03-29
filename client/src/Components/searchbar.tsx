@@ -1,8 +1,10 @@
+import { Input } from "@rebass/forms";
+
 export default function Form(props: any) {
   return (
     <form className="Search">
-      <input onChange={props.searchArtists} value={props.searchval} placeholder="search"></input>
+      <Input onChange={props.searchArtists} value={props.searchval} placeholder="search" color="#c5c5c5"/>
+      <br/>
     </form>
-
   )
 } 

@@ -7,8 +7,8 @@ import ScrollList from 'Components/ReuseableComponents/ScrollList';
 import { EventCardTemplate, AlbumCardTemplate, ArtistCardTemplate, MerchCardTemplate } from '../Components/ReuseableComponents/CardTemplates';
 import PublicHeader from 'Components/FormComponents/DataComponents/PublicHeader';
 import UserHeader from 'Components/FormComponents/DataComponents/UserHeader';
+import Form from '../Components/searchbar';
 
-//styling
 import { LayoutGroup } from 'framer-motion';
 import Parallax from 'Styles/animations/ParallaxAnimation';
 import ShuffleSelector from 'Styles/animations/ShuffleSelector';
@@ -17,9 +17,8 @@ import Background from 'Styles/animations/LandingPageAnim';
 //styling
 import discoballs from 'images/header_background.jpg'
 
-//contexts
 import { UserContext } from 'Data/UserContext';
-//data 
+
 import { getAllAlbums } from "Services/Album";
 import { getAllMerchandises } from 'Services/Merchandise';
 import { getEvents } from 'Services/Event';
@@ -36,12 +35,9 @@ import LoginModal from 'Components/FormComponents/DataComponents/LoginModal';
 import StyledButton from 'Styles/styledComponents/StyledButton';
 import StyledHeader from 'Styles/styledComponents/StyledHeader';
 
-import Form from '../Components/searchbar';
 
 const LandingPage: React.FunctionComponent = () => {
 
-  //public view
-  //login popup is set to visible on clicking the login button and to invisible on clicking cancel on Modal component:
   const [isRegister, setIsRegister] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
   const { userType, setUserType } = useContext(UserContext);
@@ -78,7 +74,6 @@ const LandingPage: React.FunctionComponent = () => {
           console.log('no artistsfound')
         }
       })
-
     getAllAlbums()
       .then((response: IAlbum[]) => {
         if (response) {
@@ -137,30 +132,29 @@ const LandingPage: React.FunctionComponent = () => {
     }
   }
 
+
   return (
-    <Transition>
+    <div>
+      <br />
+      <br />
+      <br />
+      <br />
 
-      {(userType === 'public')
-        ? <PublicHeader />
-        : <UserHeader currentName={name} />
-      }
-
-      <StyledPage>
-        <Background />
-
-        {/* 
       <Canvas>
-                      <Suspense fallback={null}>
-                          <ambientLight />
-                          <BetterBalls />
-                          <Balls/>
-                          <OrbitControls enablePan={true}
-                                         enableZoom={true}
-                                         enableRotate={true}/>
-                      </Suspense>
-        </Canvas> */}
+        <Suspense fallback={null}>
+          <ambientLight />
+          <BetterBalls />
+          <Balls />
+          <OrbitControls enablePan={true} enableZoom={true} enableRotate={true} />
+        </Suspense>
+      </Canvas>
 
-        <div>
+      <Transition>
+        {(userType === 'public') ? <PublicHeader /> : <UserHeader currentName={`Welcome, ${name}!`} />}
+        <StyledPage>
+          <Background />
+
+          {/* <div>
           <p className="shuffle colorchange filter">
             <LayoutGroup>
               <ul className="filters">
@@ -173,34 +167,31 @@ const LandingPage: React.FunctionComponent = () => {
               </ul>
             </LayoutGroup>
           </p>
-        </div>
-        <Form searchArtists={searchArtists} value={searchval}></Form>
-        <ScrollList title='Artists'>
-          {artists.map((artist: IArtist) => {
-            return <ArtistCardTemplate artist={artist}></ArtistCardTemplate>
-          })
-          }
-        </ScrollList>
-        <ScrollList title='Newest Albums'>
-          {albums.map(album => <div key={album.id}>
-            <AlbumCardTemplate album={album} />
-          </div>
-          )}
-        </ScrollList>
-        <ScrollList title='Newest Events'>
-          {events.map(event => <div key={event.id}>
-            <EventCardTemplate event={event} background={event.tokens_image} />
-          </div>
-          )}
-        </ScrollList>
-        <ScrollList title='Newest Merchandise'>
-          {merchandise.map(merchandise => <div key={merchandise.id}>
-            <MerchCardTemplate merchandise={merchandise} background={''} />
-          </div>
-          )}
-        </ScrollList>
-      </StyledPage>
-    </Transition>
+        </div> */}
+
+          <Form searchArtists={searchArtists} value={searchval} />
+
+          <ScrollList title='Artists'>
+            {artists.map((artist: IArtist) => <ArtistCardTemplate artist={artist} />)}
+          </ScrollList>
+
+          <ScrollList title='Newest Albums'>
+            {albums.map(album => <AlbumCardTemplate album={album} />)}
+          </ScrollList>
+
+          <ScrollList title='Newest Events'>
+            {events.map(event => <EventCardTemplate event={event} background={event.tokens_image} />)}
+          </ScrollList>
+
+          <ScrollList title='Newest Merchandise'>
+            {merchandise.map(merchandise => <MerchCardTemplate merchandise={merchandise} background={''} />)}
+          </ScrollList>
+
+        </StyledPage>
+
+      </Transition>
+
+    </div>
   )
 }
 

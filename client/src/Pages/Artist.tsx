@@ -18,6 +18,7 @@ import { UserContext } from 'Data/UserContext';
 import AlbumInputBar from 'Components/FormComponents/DataComponents/AlbumForm2';
 import EventInputBar from 'Components/FormComponents/DataComponents/EventForm2';
 import MerchandiseInputBar from 'Components/FormComponents/DataComponents/MerchandiseForm2';
+import { Box, Flex } from 'rebass';
 const ArtistPage: React.FunctionComponent = () => {
   const [type, setType] = useState('');
   const [submitted, setSubmitted] = useState(false);
@@ -74,16 +75,33 @@ const ArtistPage: React.FunctionComponent = () => {
     <StyledPage>
       <div className="artistUserView">
         <Link to="/">home</Link>
-        <h1>Artist</h1>
-        <p>To upload new NFTs to your profile, please select
-          from the following category and input required information: </p>
-        <Button onClick={handleAlbumState} color="#33e">album</Button>
-        <Button onClick={handleEventState}>event</Button>
-        <Button onClick={handleMerchandiseState}>merchandise</Button>
-        {(type === 'album') ? <AlbumInputBar albums={albums} setAlbums={setAlbums} /> : null}
-        {(type === 'event') ? <EventInputBar events={events} setEvents={setEvents} /> : null}
-        {(type === 'merchandise') ? <MerchandiseInputBar merchandise={merchandise} setMerchandise={setMerchandise} /> : null}    <p>artist view with option to update offers</p>
-        <p>user view without any authorisations but with fake follow button</p>
+        <Flex>
+          <Box width={2/6}>
+            <h1>Upload NFTs</h1>
+            <br/> <br/> <br/>
+            <h3>To upload new NFTs to your profile, please select
+              from the following category and input required information: </h3>
+              <br/> <br/> <br/> 
+              <Box>
+                <Button onClick={handleAlbumState} color="#33e">album</Button>
+              </Box>
+              <br/>
+              <Box>
+                <Button onClick={handleEventState}>event</Button>
+              </Box>
+              <br/>
+              <Box>
+                <Button onClick={handleMerchandiseState}>merchandise</Button>
+              </Box>
+          </Box>
+          <br/>
+          <Box width={1/6}/>
+          <Box width={3/6}>
+            {(type === 'album') ? <AlbumInputBar albums={albums} setAlbums={setAlbums} /> : null}
+            {(type === 'event') ? <EventInputBar events={events} setEvents={setEvents} /> : null}
+            {(type === 'merchandise') ? <MerchandiseInputBar merchandise={merchandise} setMerchandise={setMerchandise} /> : null}
+          </Box>
+        </Flex>
       </div>
     </StyledPage>
   )

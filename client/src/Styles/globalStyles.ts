@@ -29,7 +29,7 @@ body {
   background-attachment: fixed;
 }
 h1, h2, h3, h4, h5, h6 {
-  color: #a7c2bf;
+  color: #c5c5c5;
 }
 `
 

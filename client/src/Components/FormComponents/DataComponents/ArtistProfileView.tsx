@@ -31,15 +31,15 @@ const ArtistProfileView = () => {
   return (
     <div>
     <h1></h1>
-    <p>To upload new NFTs to your profile, please select 
-      from the following category and input required information: </p>
+    <h5>To upload new NFTs to your profile, please select 
+      from the following category and input required information: </h5>
     <Button onClick={handleAlbumState} color="#33e">album</Button>
     <Button onClick={handleEventState}>event</Button>
     <Button onClick={handleMerchandiseState}>merchandise</Button>
     {(type === 'album') ? <AlbumInputBar albums={albums} setAlbums={setAlbums}/> : null}
     {(type === 'event') ? <EventInputBar events={events} setEvents={setEvents}/> : null}
-    {(type === 'merchandise') ? <MerchandiseInputBar merchandise={merchandise} setMerchandise={setMerchandise}/> : null}    <p>artist view with option to update offers</p>
-  <p>user view without any authorisations but with fake follow button</p></div>
+    {(type === 'merchandise') ? <MerchandiseInputBar merchandise={merchandise} setMerchandise={setMerchandise}/> : null}
+    </div>
   )
 }
 

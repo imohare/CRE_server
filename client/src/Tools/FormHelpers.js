@@ -22,7 +22,7 @@ const registerWithEthAddress = async (isArtist, info) => {
   if (isArtist) result = await createArtist({ eth_address: eth, ...info });
   if (!isArtist) result = await createConsumer({ eth_address: eth, ...info });
   console.log("result making sure it is not yet in db: or if proper ressult is in db", result);
-  return result;
+  return
 }
 
 //input param (boolean) which indicates whether user is artist or consumer

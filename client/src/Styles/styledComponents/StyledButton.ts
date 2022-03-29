@@ -14,7 +14,7 @@ const StyledButton = styled(Button)`
   font-family:'Raleway', sans-serif;
   font-weight: 400;
   background-color: transparent;
-  color:#FFFFFF;
+  color:#c5c5c5;
   text-align:center;
   transition: all 0.2s;
   margin: 0.6rem 1rem;
@@ -22,7 +22,7 @@ const StyledButton = styled(Button)`
     color: #000;
     border: 2px solid #000;
     &:hover{
-      color:#fff;
+      color:#c5c5c5;
       background-color:#000;
       border:0.1em solid #000;
       transform: scale(1.05);
@@ -30,8 +30,8 @@ const StyledButton = styled(Button)`
   }
 &:hover{
 color:#000000;
-background-color:#FFFFFF;
-border:0.1em solid #FFFFFF;
+background-color:#c5c5c5;
+border:0.1em solid #c5c5c5;
 transform: scale(1.05);
 }
 @media and (max-width:30em){
