@@ -60,7 +60,7 @@ function AlbumInputBar(props: any) {
           .getDownloadURL()
           .then((img: any) => {
             console.log(name, "name");
-            // console.log(year, "year"); // this needs to be turned into the correct format
+            console.log(year, "year"); // this needs to be turned into the correct format
             console.log(description, "description");
             console.log(tokensNumber, "tokensNumber");
             console.log(img, "img");
@@ -72,7 +72,7 @@ function AlbumInputBar(props: any) {
     )
     evt.preventDefault();
     setName((name: string) => name = '');
-    // setYear((year: Date) => year = new Date());
+    setYear((year: Date) => year = new Date());
     setDescription((description: string) => description = '');
     setTokensNumber((tokensNumber: number) => tokensNumber = 0);
     setTokensValue((tokensValue: number) => tokensValue = 0);
