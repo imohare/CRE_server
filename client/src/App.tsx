@@ -29,9 +29,11 @@ const App: React.FunctionComponent = () => {
 
  
   return (
-    <ThemeProvider theme={themeMode}>
+    // <ThemeProvider theme={themeMode}>
    <AnimatePresence exitBeforeEnter>
+      <ThemeProvider theme={themeMode}>
       <GlobalStyles />
+      </ThemeProvider>
         <UserContextProvider>
         <Routes key={location.pathname} location={location}>
             <Route path="/artist/:artistId" element={<ArtistPage />} />
@@ -43,7 +45,7 @@ const App: React.FunctionComponent = () => {
         </Routes>
       </UserContextProvider>
     </AnimatePresence>
-  </ThemeProvider>
+  // </ThemeProvider>
   )
 }
 

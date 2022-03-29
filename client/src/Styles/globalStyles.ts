@@ -21,10 +21,10 @@ body {
   padding: 0;
   width: 100vw;
   min-height: 100vh;
+  font-family: 'Raleway';
   background-color: ${({theme})=> theme.background};
   color: ${({ theme }) => theme.fontColor};
   highlight: ${({theme}) => theme.highlight}
-  font-family: 'Raleway';
   transition: all 0.5s linear;
 }
 h1, h2, h3, h4, h5, h6 {

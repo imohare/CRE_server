@@ -1,13 +1,14 @@
 import styled from 'styled-components';
+import AnimatedCard from 'Styles/animations/CardAnimation';
+
 
 const StyledArtistCardTemplate = styled.div<{ portrait: string | undefined }>`
 position: relative;
 min-width: 16rem;
 height: 20rem;
-background-repeat: no-repeat;
-background-size: cover;
 margin: 0 0.6rem;
-border-radius: 2px;
+background-color: ${({theme})=> theme.fontColor};
+border-radius: 5px;
 img {
   position: absolute;
   overflow-x: hidden;
@@ -22,6 +23,7 @@ img {
   background-position: center;
   height: 100%;
   width: 100%;
+  clip-path: polygon(0 0, 100% 19%, 100% 100%, 59% 100%, 0 34%);
   z-index: 10;
 }
 &:hover {
@@ -33,8 +35,8 @@ img {
   font-family: 'Boogaloo';
   font-size: 4rem;
   padding: 2px 5px;
-  top: 0;
-  right: 0;
+  bottom: 0;
+  left: 0;
   z-index: 5;
 } 
 `
@@ -104,7 +106,7 @@ const StyledEventCardTemplate = styled(StyledCardTemplate)`
 const StyledMerchCardTemplate = styled(StyledCardTemplate)`
 
 .image {
-  dixplay: flex;
+  display: flex;
 
   text-align: center;
   background-image: url(${props => props.background});
