@@ -1,6 +1,6 @@
 import { IArtist, IConsumer } from '../../Data/DataTypes';
 
-const Userprofile = (user: IArtist | IConsumer) => {
+const Userprofile = () => {
   return (
     <div></div>
   )
