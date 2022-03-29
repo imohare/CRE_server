@@ -105,10 +105,7 @@ function MerchandiseInputBar(props: any) {
         <progress value={progress} max="100" />
         <br /> <br />
 
-        <Button type="submit" color="#c5c5c5">
-          <Text fontFamily='railway'>
-            Upload Your NFT
-          </Text>
+        <Button backgroundColor="#33e" variant='outline' mr={2}type="submit" color="#c5c5c5"> Upload Your NFT
         </Button>
       </form>
     </div>
