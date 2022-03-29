@@ -1,0 +1,28 @@
+.banner{
+background-image: url(https://64.media.tumblr.com/ae1c6dce8c63a10966a9d9d793c004e9/0a3c464755fde56a-86/s500x750/81de13c79f3459fb6a7dca76b316cd4e9147a1d3.gifv); 
+/* background-repeat: no-repeat; */
+background-size:cover;
+height:250px;
+
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+
+}
+
+.PP{
+    margin-left:400px;
+    margin-top:80px;
+}
+
+.item {
+    width: 200px;
+    min-height: 200px;
+    max-height: auto;
+    float: left;
+    margin-right:3px;
+    padding: 3px;
+    border-radius: 90%;
+}
