@@ -8,16 +8,15 @@ interface IProps {
   background?: any;
 }
 
-const AlbumCardTemplate = ({album, background}: IProps) => {
+const AlbumCardTemplate = ({album}: IProps) => {
   return (
     <Link to={`/album/${album.id}`}>
-      <StyledAlbumCardTemplate background={background}>
+      <StyledAlbumCardTemplate background={album.tokens_image}>
 
         <div className="coverImg" >
         </div>
         <div className='description'>
           <h4>{album.name}</h4>
-          <p>{ album.description }</p>
         </div>       
 
       </StyledAlbumCardTemplate>
