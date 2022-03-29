@@ -19,6 +19,7 @@ import AlbumInputBar from 'Components/FormComponents/DataComponents/AlbumForm2';
 import EventInputBar from 'Components/FormComponents/DataComponents/EventForm2';
 import MerchandiseInputBar from 'Components/FormComponents/DataComponents/MerchandiseForm2';
 import { Box, Flex } from 'rebass';
+import StyledButton from 'Styles/styledComponents/StyledButton';
 const ArtistPage: React.FunctionComponent = () => {
   const [type, setType] = useState('');
   const [submitted, setSubmitted] = useState(false);
@@ -83,15 +84,15 @@ const ArtistPage: React.FunctionComponent = () => {
               from the following category and input required information: </h3>
               <br/> <br/> <br/> 
               <Box>
-                <Button onClick={handleAlbumState} color="#33e">album</Button>
+                <StyledButton onClick={handleAlbumState} >album</StyledButton>
               </Box>
               <br/>
               <Box>
-                <Button onClick={handleEventState}>event</Button>
+                <StyledButton onClick={handleEventState}>event</StyledButton>
               </Box>
               <br/>
               <Box>
-                <Button onClick={handleMerchandiseState}>merchandise</Button>
+                <StyledButton onClick={handleMerchandiseState}>merchandise</StyledButton>
               </Box>
           </Box>
           <br/>
