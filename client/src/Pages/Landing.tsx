@@ -97,24 +97,10 @@ const LandingPage: React.FunctionComponent = () => {
       })
   }, [])
 
-<<<<<<< HEAD
-=======
-
->>>>>>> styling
 
   return (
     //if user, display personalised component on top -> artist || user - else, have a login sign up option
     <Transition>
-<<<<<<< HEAD
-      <Parallax>  
-
-      {/* {(userType === 'public')
-        ? <PublicHeader />
-          : <UserHeader currentName={name} />
-      } */}
-     
-     </Parallax>
-=======
       <Parallax>
 
         {(userType === 'public')
@@ -123,7 +109,6 @@ const LandingPage: React.FunctionComponent = () => {
         }
 
       </Parallax>
->>>>>>> styling
       <StyledPage>
         <Background />
 
@@ -156,33 +141,10 @@ const LandingPage: React.FunctionComponent = () => {
           <p><span className="colorchange select">Events</span><span className="colorchange select">Albums</span><span className="colorchange select">Merch</span></p>
         </div>
         <ScrollList title='Artists'>
-          {/* {
+        {
             artists.map((artist: IArtist) => {
               return <ArtistCardTemplate artist={artist}></ArtistCardTemplate>
             })
-<<<<<<< HEAD
-          } */}
-          </ScrollList>
-          <ScrollList title='Newest Albums'>
-            {albums.map(album => <div key = {album.id}>
-              <AlbumCardTemplate album={album}/>
-            </div>
-            )}        
-          </ScrollList>
-          <ScrollList title='Newest Events'>
-          {events.map(event => <div key = {event.id}>
-              <EventCardTemplate event={event} background={'https://wallpapercave.com/wp/wp7172141.jpg'}/>
-            </div>
-            )}  
-          </ScrollList>
-          <ScrollList title='Newest Merchandise'>
-          {merchandise.map(merchandise => <div key = {merchandise.id}>
-              <MerchCardTemplate merchandise={merchandise} background={''}/>
-            </div>
-            )}
-          </ScrollList>
-        </StyledPage>
-=======
           }
         </ScrollList>
         <ScrollList title='Newest Albums'>
@@ -204,7 +166,6 @@ const LandingPage: React.FunctionComponent = () => {
           )}
         </ScrollList>
       </StyledPage>
->>>>>>> styling
     </Transition>
   )
 }
