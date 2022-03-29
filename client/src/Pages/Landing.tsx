@@ -16,7 +16,6 @@ import Transition from 'Styles/animations/PageTransitions';
 import Background from 'Styles/animations/LandingPageAnim';
 //styling
 import discoballs from 'images/header_background.jpg'
-import background1 from 'Images/background1.jpg';
 
 //contexts
 import { UserContext } from 'Data/UserContext';
@@ -147,7 +146,7 @@ const LandingPage: React.FunctionComponent = () => {
         <ScrollList title='Artists'>
           {
             artists.map((artist: IArtist) => {
-             return <ArtistCardTemplate background={background1} artist={artist}></ArtistCardTemplate>
+              return <ArtistCardTemplate artist={artist}></ArtistCardTemplate>
             })
           }
           </ScrollList>

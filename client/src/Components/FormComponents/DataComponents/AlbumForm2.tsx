@@ -11,7 +11,7 @@ function AlbumInputBar(props: any) {
 
   const [image, setImage] = useState();
   const [name, setName] = useState('');
-  // const [year, setYear] = useState(new Date());
+  const [year, setYear] = useState(new Date());
   const [description, setDescription] = useState('');
   const [tokensNumber, setTokensNumber] = useState(0);
   const [tokensValue, setTokensValue] = useState(0);
@@ -66,7 +66,7 @@ function AlbumInputBar(props: any) {
             console.log(img, "img");
             console.log(tokensValue, "tokensValue");
             console.log(artistId, "artistId");
-            // addAlbum(name, year, description, tokensNumber, img, tokensValue, artistId);
+            addAlbum(name, year, description, tokensNumber, img, tokensValue, artistId);
           })
       }
     )
