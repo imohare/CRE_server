@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
+
 const StyledArtistCardTemplate = styled.div<{ portrait: string | undefined }>`
 position: relative;
 min-width: 16rem;
 height: 20rem;
-background-repeat: no-repeat;
-background-size: cover;
 margin: 0 0.6rem;
-border-radius: 2px;
+border-radius: 20px;
+background-color: ${({theme})=> theme.fontColor};
 img {
   position: absolute;
   overflow-x: hidden;
@@ -23,6 +23,9 @@ img {
   height: 100%;
   width: 100%;
   z-index: 10;
+  border-radius: 4px;
+  // clip-path: polygon(0 0, 54% 0, 100% 100%, 46% 100%, 0 24%);
+  clip-path: polygon(100% 0, 100% 66%, 60% 100%, 0 100%, 56% 0);
 }
 &:hover {
   transform: scale(1.02);
@@ -34,7 +37,7 @@ img {
   font-size: 4rem;
   padding: 2px 5px;
   top: 0;
-  right: 0;
+  left: 0;
   z-index: 5;
 } 
 `
@@ -69,7 +72,6 @@ padding: 5px;
 
 const StyledAlbumCardTemplate = styled(StyledCardTemplate)`
 .coverImg {
-
   background-image: url(${props => props.background ||'https://images.onlinelabels.com/images/clip-art/Gerald_G/Gerald_G_45_RPM_Record.png'});
   background-position: center;
   background-size: contain;

@@ -50,6 +50,11 @@ const checkIfInDB = async (isArtist) => {
   //return result;
 }
 
+const getRandomAvatar = () => {
+  fetch('https://api.multiavatar.com/')
+    .then(res => res.text())
+    .then(svg => svg)
+}
 
 
 export { getEthAddress, checkIfInDB, registerWithEthAddress }

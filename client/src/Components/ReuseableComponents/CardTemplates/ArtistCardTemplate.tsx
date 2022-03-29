@@ -15,10 +15,11 @@ const ArtistCardTemplate = ({background, artist}: IProps) => {
       
       <StyledArtistCardTemplate portrait={artist.profile_picture}>
         <div className="bgImage">
-          <img src={background} alt="" />
           </div>
          <div className='portrait'></div>
-         <div className='title'><h4>{ artist.name }</h4></div>
+        <div className='title'>
+          <h4>{artist.name}</h4>
+        </div>
 
       </StyledArtistCardTemplate>
 

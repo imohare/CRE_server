@@ -1,5 +1,6 @@
 
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 //data
 import { FormContextProvider } from 'Data/FormConfigs/FormContext'
 //components
@@ -7,7 +8,8 @@ import LoginModal from 'Components/FormComponents/DataComponents/LoginModal';
 //styles
 import StyledHeader from 'Styles/styledComponents/StyledHeader';
 import StyledButton from 'Styles/styledComponents/StyledButton';
-import AnimatedH1 from 'Styles/animations/AnimatedH1'
+import AnimatedH1 from 'Styles/animations/AnimatedH1';
+
 
 //antd imports
 
@@ -25,8 +27,12 @@ export const PublicHeader = () => {
 
   return (
     <StyledHeader>
+      
           <FormContextProvider>
-            <div className='login'>
+        <div className='login'>
+          <div>
+
+          </div>
               <div className='buttons'>
                 {
                   isRegister
