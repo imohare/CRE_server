@@ -17,7 +17,6 @@ import "./Event.css"
 const EventPage: React.FunctionComponent = () => {
     const location = useLocation();
     const {currentId} = useContext(UserContext);
-    console.log("id", currentId)
 
     const [eventData, setEventData] = useState({
         id: 0,
@@ -53,14 +52,12 @@ const EventPage: React.FunctionComponent = () => {
 
     useEffect(() => {
         const eventId: number = parseInt(location.pathname.replace(/[^0-9.]+/g, ''))
+        console.log(eventId, "eventId")
         getEventById(eventId)
-            .then(response => {
-                setEventData(response);
-                return response;
-            })
-            .then(evt => {
-                const artistId = evt.ArtistId;
-                return artistId;
+            .then(evnt => {
+                setEventData(evnt);
+                const artistId = evnt.ArtistId;
+                return artistId
             })
             .then(artistId => {
                 const artist = getArtistById(artistId);
@@ -103,9 +100,7 @@ const EventPage: React.FunctionComponent = () => {
                         < h1 > {eventData.name}</h1 >
                         <div className="dateAndName">
                             <h3>{moment(eventData.date).format('yyyy')}</h3>
-
                             <h2>{artistData.name}</h2>
-
                         </div>
                     </div>
                 </div>
