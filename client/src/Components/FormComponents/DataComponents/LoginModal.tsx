@@ -78,7 +78,7 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
       setName(values.username);
 
     }
-  
+
     console.log('message from the context, artistInfo is:', artistInfo, 'consumer is ', consumerInfo)
     setDisplayStage(2);
   }
@@ -159,7 +159,7 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
       onCancel={onCancel}
       footer={displayStage > 5 && (<Button onClick={onCancel}>start browsing!</Button>)}
       className="modal"
-      style={{overflowX: "hidden"}}
+      style={{ overflowX: "hidden" }}
     >
       {displayContent()}
     </Modal>

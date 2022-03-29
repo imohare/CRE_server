@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 //data
-import {UserContext} from 'Data/UserContext'
+import { UserContext } from 'Data/UserContext'
 import StyledHeader from 'Styles/styledComponents/StyledHeader'
 
 //styling
@@ -20,16 +20,16 @@ const UserHeader = (props: IProps) => {
   const { currentName } = props;
   return (
     <StyledHeader>
-      
-       <Link to={`user/${currentId}`}>
+
+      <Link to={`user/${currentId}`}>
         <div className="userProfile">
 
-                { name }
+          {` < ${name}'s Profile`}
 
-         </div>
-       </Link>
-      <AnimatedH1>{ currentName }</AnimatedH1>
-      { currentName }
+        </div>
+      </Link>
+      <AnimatedH1>{currentName}</AnimatedH1>
+      {/* { currentName } */}
       {/* <AnimatedH1>{ currentName } </AnimatedH1> */}
     </StyledHeader>
   )
