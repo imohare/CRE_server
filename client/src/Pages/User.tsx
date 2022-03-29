@@ -2,14 +2,15 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { UserContext } from 'Data/UserContext';
-import { getConsumerById } from '../Services/Consumer'
+import { getConsumerById, getConsumerPointsByConsumerId } from '../Services/Consumer'
 import { useContext } from 'react';
 import { getConsumerAlbumTokensByConsumerId } from 'Services/AlbumToken';
 import { getConsumerEventTokensByConsumerId } from 'Services/EvenToken';
 import { getConsumerMerchTokensByConsumerId } from 'Services/MerchToken';
 import ScrollList from 'Components/ReuseableComponents/ScrollList';
 import { AlbumCardTemplate, EventCardTemplate, MerchCardTemplate } from 'Components/ReuseableComponents/CardTemplates';
-import { IAlbum, IConsumer, IEvent, IMerchandise } from 'Data/DataTypes';
+import { IAlbum, IArtist, IConsumer, IEvent, IMerchandise, IPoints } from 'Data/DataTypes';
+import { getArtistById } from 'Services/Artist';
 
 const UserPage: React.FunctionComponent = () => {
   const location = useLocation();
@@ -25,6 +26,10 @@ const UserPage: React.FunctionComponent = () => {
     location: '',
     email: '',
   });
+  const [totalPoints, setTotalPoints] = useState(0);
+  const [pointData, setPointData] = useState<IPoints[] | []>([]);
+
+  let pointArtists: Promise<any>[] = [];
 
   useEffect(() => {
     getConsumerAlbumTokensByConsumerId(currentId)
@@ -47,13 +52,33 @@ const UserPage: React.FunctionComponent = () => {
         setUser(response);
         return response
       })
+    getConsumerPointsByConsumerId(currentId)
+      .then(pointData => {
+        let points = 0;
+        pointData.map(async (entry: IPoints) => {
+          points += entry.points;
+          setTotalPoints(points);
+        })
+        setPointData(pointData);
+      })
+    
      }, [])
+
+
 
   return (
     <>
       <Link to="/">home</Link>
       <h1>@{user.username} Profile</h1>
-      <h2></h2>
+      <h2>points: {totalPoints}</h2>
+      <ScrollList title='Artists'>
+      {/* { (pointData.length > 0) ? pointData.map((pointEntry: IPoints) => {
+        const artistId: number  = pointEntry.ArtistId;
+        const artist: IArtist = getArtistById(artistId);
+        return <h2>{artist.name}: {pointEntry.points}</h2>
+        }) : null } */}
+      </ScrollList>
+
     
       <ScrollList title='Your NFT Albums'>
             { (albums.length > 0) ? albums.map(album => <div key = {album.id}>
