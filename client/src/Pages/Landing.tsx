@@ -31,6 +31,7 @@ import {Canvas } from '@react-three/fiber'
 import BetterBalls from './4_Mirror_Balls';
 import Balls from './4_Mirror_Balls_2';
 
+import Form from '../Components/searchbar';
 
 const LandingPage: React.FunctionComponent = () => {
 
@@ -46,6 +47,8 @@ const LandingPage: React.FunctionComponent = () => {
   const [selected, setSelected] = useState(filters[0]);
 
   const [artists, setArtists] = useState<IArtist[] | []>([]);
+  const [dupeArtists, setDupeArtists] = useState<IArtist[] | []>([]);
+
   const [albums, setAlbums] = useState<IAlbum[] | []>([]);
   const [events, setEvents] = useState<IEvent[] | []>([]);
   const [merchandise, setMerchandise] = useState<IMerchandise[] | []>([]);
@@ -56,6 +59,7 @@ const LandingPage: React.FunctionComponent = () => {
       .then((response: IArtist[]) => {
         if (response) {
           setArtists(response)
+          setDupeArtists(response)
         } else {
           console.log('no artistsfound')
         }
@@ -96,22 +100,38 @@ const LandingPage: React.FunctionComponent = () => {
         console.log("Error occured.")
       })
   }, [])
-  
-  return (
-    //if user, display personalised component on top -> artist || user - else, have a login sign up option
-    <Transition>
-      <Parallax>
 
+  const [searchval, setSearchVal] = useState('');
+
+   const searchArtists = (e: any) => {
+     setSearchVal(e.target.value);
+   };
+
+   useEffect(() => {
+     searchFilter(searchval)
+   }, [searchval])
+
+  const searchFilter = (searchval: any) => {
+     if (searchval === '') setArtists(dupeArtists);
+     else {
+       const newArtistList = dupeArtists.filter((el) => {
+         const artistName= el.name.toLowerCase();
+         return artistName.includes(searchval);
+       });
+       setArtists(newArtistList);
+     }
+   }
+
+  return (
+    <Transition>
         {(userType === 'public')
           ? <PublicHeader />
           : <UserHeader currentName={`Welcome, ${name}!`} />
         }
-
-      </Parallax>
       <StyledPage>
         <Background />
 
-
+{/* 
       <Canvas>
                       <Suspense fallback={null}>
                           <ambientLight />
@@ -121,10 +141,9 @@ const LandingPage: React.FunctionComponent = () => {
                                          enableZoom={true}
                                          enableRotate={true}/>
                       </Suspense>
-        </Canvas>
+        </Canvas> */}
 
         <div>
-          <h3>Show me the</h3>
           <p className="shuffle colorchange filter">
             <LayoutGroup>
               <ul className="filters">
@@ -137,8 +156,8 @@ const LandingPage: React.FunctionComponent = () => {
               </ul>
             </LayoutGroup>
           </p>
-          <p><span className="colorchange select">Events</span><span className="colorchange select">Albums</span><span className="colorchange select">Merch</span></p>
         </div>
+        <Form searchArtists={searchArtists} value={searchval}></Form>
         <ScrollList title='Artists'>
             {artists.map((artist: IArtist) => {
               return <ArtistCardTemplate artist={artist}></ArtistCardTemplate>
@@ -153,7 +172,7 @@ const LandingPage: React.FunctionComponent = () => {
         </ScrollList>
         <ScrollList title='Newest Events'>
           {events.map(event => <div key={event.id}>
-            <EventCardTemplate event={event} background={'https://wallpapercave.com/wp/wp7172141.jpg'} />
+            <EventCardTemplate event={event} background={event.tokens_image} />
           </div>
           )}
         </ScrollList>

@@ -47,9 +47,8 @@ flex-direction: column;
 height: 18rem;
 width: 14rem;
 position: relative;
-background-color: #a7c2bf;
 box-shadow: 1px 1px 5px black;
-padding: 5px;
+padding: 10px;
 &:hover {
   transform: scale(1.05);
   transition: transform 0.4s;
@@ -72,7 +71,7 @@ padding: 5px;
 const StyledAlbumCardTemplate = styled(StyledCardTemplate)`
 .coverImg {
 
-  background-image: url(${props => props.background ||'https://images.onlinelabels.com/images/clip-art/Gerald_G/Gerald_G_45_RPM_Record.png'});
+  background-image: url(${props => props.background});
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
@@ -86,7 +85,7 @@ const StyledEventCardTemplate = styled(StyledCardTemplate)`
 .image {
   dixplay: flex;
   text-align: center;
-  background-image: url(${props => props.background ||'https://images.onlinelabels.com/images/clip-art/Gerald_G/Gerald_G_45_RPM_Record.png'});
+  background-image: url(${props => props.background});
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
