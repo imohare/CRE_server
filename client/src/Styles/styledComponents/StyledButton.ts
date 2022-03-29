@@ -29,9 +29,9 @@ const StyledButton = styled(Button)`
       }
   }
 &:hover{
-color:#000000;
-background-color:#FFFFFF;
-border:0.1em solid #FFFFFF;
+color:#000;
+background-color:#FFF;
+border:0.1em solid #FFF;
 transform: scale(1.05);
 }
 

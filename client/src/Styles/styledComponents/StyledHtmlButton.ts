@@ -5,7 +5,7 @@ const StyledHtmlButton = styled.button`
   justify-content: center;
   align-items: center;
   height: 2.2rem;
-  border: 2px solid #FFF;
+  border: 2px solid #c5c5c5;
   margin:0 0.3em 0.3em 0;
   border-radius: 8px;
   box-sizing: border-box;
@@ -13,7 +13,7 @@ const StyledHtmlButton = styled.button`
   font-family:'Raleway', sans-serif;
   font-weight: 400;
   background-color: transparent;
-  color:#FFFFFF;
+  color:#c5c5c5;
   text-align:center;
   transition: all 0.2s;
   margin: 0.6rem 1rem;
@@ -29,8 +29,8 @@ const StyledHtmlButton = styled.button`
   }
 &:hover{
 color:#000000;
-background-color:#FFFFFF;
-border:0.1em solid #FFFFFF;
+background-color:#c5c5c5;
+border:0.1em solid #c5c5c5;
 transform: scale(1.05);
 }
 @media and (max-width:30em){

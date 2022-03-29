@@ -84,9 +84,39 @@ function EventInputBar(props: any) {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <progress value={progress} max="100" />
-        <Label>Event Name</Label>
+      <br />
 
+        <Label color="#c5c5c5">Event Name</Label>
+        <Input type="string" name="name" color="#c5c5c5" value={name} onChange={(evt: { target: { value: any; }; }) => setName(evt.target.value)} required />
+        <br />
+
+        <Label color="#c5c5c5">Event Date</Label>
+        {/* @ts-ignore */}
+        <input type="datetime-local" name="date" color="#c5c5c5" value={date} onChange={(evt: { target: { value: any; }; }) => setDate(evt.target.value)} required />
+        <br /> <br />
+
+        <Label color="#c5c5c5">Event Address</Label>
+        <Input type="string" name="address" color="#c5c5c5" value={address} onChange={(evt: { target: { value: any; }; }) => setAddress(evt.target.value)} required />
+        <br />
+
+        <Label color="#c5c5c5">Description</Label>
+        <Input type="string" name="description" color="#c5c5c5" value={description} onChange={(evt: { target: { value: any; }; }) => setDescription(evt.target.value)} required />
+        <br />
+
+        <Label color="#c5c5c5">Number of Available NFT's </Label>
+        <Input type="number" name="tokensNumber" color="#c5c5c5" value={tokensNumber} onChange={(evt: { target: { value: string; }; }) => setTokensNumber(parseInt(evt.target.value))} required />
+        <br />
+
+        <Label color="#c5c5c5">Value of the NFT</Label>
+        <Input type="number" name="tokensValue" color="#c5c5c5" value={tokensValue} onChange={(evt: { target: { value: string; }; }) => setTokensValue(parseInt(evt.target.value))} required />
+        <br />
+
+        <Label color="#c5c5c5"> Upload Your NFT's cover picture</Label>
+        <Input type="file" color="#c5c5c5" onChange={handleChange} />
+        <progress value={progress} max="100" />
+        <br /> <br />
+
+<<<<<<< HEAD
         <Input type="string" name="name" value={name} onChange={(evt: { target: { value: any; }; }) => setName(evt.target.value)} required></Input>
         <br />
         <Label>Event Date</Label>
@@ -121,6 +151,9 @@ function EventInputBar(props: any) {
         <Button
           onClick={handleCancel}>cancel
         </Button>
+=======
+        <Button backgroundColor="#FFF" mr={2}type="submit" color="#000"> upload your NFTs </Button>
+>>>>>>> 930d087820967487da6cf133c9f880f53d027154
       </form>
     </div>
   )

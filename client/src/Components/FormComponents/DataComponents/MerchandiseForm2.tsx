@@ -78,31 +78,34 @@ function MerchandiseInputBar(props: any) {
   return (
     <div>
       <form onSubmit={handleSubmit}>
+      <br />
+      
+        <Label color="#c5c5c5">Merchandise Name</Label>
+        <Input type="string" name="name" color="#c5c5c5" value={name} onChange={(evt: { target: { value: any; }; }) => setName(evt.target.value)} required></Input>
+        <br />
+
+        <Label color="#c5c5c5">Merchandise Type</Label>
+        <Input type="string" name="type" color="#c5c5c5" value={type} onChange={(evt: { target: { value: any; }; }) => setType(evt.target.value)} required/>
+        <br />
+
+        <Label color="#c5c5c5">Description</Label>
+        <Input type="string" name="description" color="#c5c5c5" value={description} onChange={(evt: { target: { value: any; }; }) => setDescription(evt.target.value)} required/>
+        <br />
+
+        <Label color="#c5c5c5">Number of NFTs</Label>
+        <Input type="number" name="tokensNumber" color="#c5c5c5" value={tokensNumber} onChange={(evt: { target: { value: string; }; }) => setTokensNumber(parseInt(evt.target.value))} required />
+        <br />
+
+        <Label color="#c5c5c5">NFT Value</Label>
+        <Input type="number" name="tokensValue" color="#c5c5c5" value={tokensValue} onChange={(evt: { target: { value: string; }; }) => setTokensValue(parseInt(evt.target.value))} required />
+        <br />
+
+        <Label color="#c5c5c5">NFT Cover Image</Label>
+        <Input type="file" onChange={handleChange} color="#c5c5c5" />
         <progress value={progress} max="100" />
-        <Label>Merchandise Name</Label>
-        <Input type="string" name="name" value={name} onChange={(evt: { target: { value: any; }; }) => setName(evt.target.value)} required></Input>
-        <br />
-        <Label>Merchandise Type</Label>
-        <Input type="string" name="type" value={type} onChange={(evt: { target: { value: any; }; }) => setType(evt.target.value)} required></Input>
-        <br />
-        <Label>Description</Label>
-        <Input type="string" name="description" value={description} onChange={(evt: { target: { value: any; }; }) => setDescription(evt.target.value)} required></Input>
-        <br />
-        <Label>Number of NFTs</Label>
-        <Input type="number" name="tokensNumber" value={tokensNumber} onChange={(evt: { target: { value: string; }; }) => setTokensNumber(parseInt(evt.target.value))} required></Input>
-        <br />
-        <Label>Value of the NFT</Label>
-        <Input type="number" name="tokensValue" value={tokensValue} onChange={(evt: { target: { value: string; }; }) => setTokensValue(parseInt(evt.target.value))} required></Input>
-        <br />
-        <Label>Upload NFT cover</Label>
-        <Input type="file" onChange={handleChange} />
-        <br />
-        <Label></Label>
-        <Button type="submit">
-          <Text fontFamily='system-ui'>
-            Upload Your NFT
-          </Text>
-        </Button>
+        <br /> <br />
+
+        <Button backgroundColor="#FFF" mr={2}type="submit" color="#000"> upload your NFTs </Button>
       </form>
     </div>
   )

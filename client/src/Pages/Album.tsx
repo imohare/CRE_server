@@ -13,6 +13,7 @@ import "./Album.css"
 import { IAlbumToken, IArtist } from 'Data/DataTypes';
 
 import { UserContext } from 'Data/UserContext';
+import { Box, Flex } from 'rebass';
 
 const AlbumPage: React.FunctionComponent = () => {
     const location = useLocation();
@@ -104,20 +105,22 @@ const AlbumPage: React.FunctionComponent = () => {
                         </div>
                     </div>
                 </div>
-                <div className="secondHalf">
-                    <div>
+                <Flex>
+                    <Box width= {4/12}>
                         <h2>Description:</h2>
-                        <p>{albumData.description}</p>
-                    </div>
-                    <div className="albumTokenInfo">
-                        <div>
-                            <h4>TOKEN INFO</h4>
-                            <div>Number of Tokens: {albumData.number_of_tokens}</div>
-                            <div>Token value: {albumData.number_of_tokens}</div>
-                            {(availableTokens.length > 0)  ? ((checkIfUserHasBought()) ?  <button>NFT purchased</button> : <button onClick={handleClick}>purchase album NFT</button>) : <button>Event Sold Out</button>}
-                        </div>
-                    </div>
-                </div>
+                        <h4>{albumData.description}</h4>
+                    </Box>
+                    <Box width= {1/12}/>
+                    <Box width= {3/8}>
+                        <h2>Token Info:</h2>
+                        <h4> - Number of Tokens: {albumData.number_of_tokens}</h4>
+                        <h4> - Token value: {albumData.number_of_tokens}</h4>
+                    </Box>
+                    <Box width= {4/12}>
+                    <br/>
+                        {(availableTokens.length > 0)  ? ((checkIfUserHasBought()) ?  <button>NFT purchased</button> : <button onClick={handleClick}>purchase album NFT</button>) : <button>Album Sold Out</button>}
+                    </Box>
+                </Flex>
             </div>
         </>
     )

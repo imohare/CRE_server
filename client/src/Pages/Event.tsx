@@ -13,11 +13,11 @@ import { eventTokenPurchase } from 'Services/Purchase';
 import { UserContext } from 'Data/UserContext';
 
 import "./Event.css"
+import { Box, Flex } from 'rebass';
 
 const EventPage: React.FunctionComponent = () => {
     const location = useLocation();
     const {currentId} = useContext(UserContext);
-    console.log("id", currentId)
 
     const [eventData, setEventData] = useState({
         id: 0,
@@ -53,14 +53,12 @@ const EventPage: React.FunctionComponent = () => {
 
     useEffect(() => {
         const eventId: number = parseInt(location.pathname.replace(/[^0-9.]+/g, ''))
+        console.log(eventId, "eventId")
         getEventById(eventId)
-            .then(response => {
-                setEventData(response);
-                return response;
-            })
-            .then(evt => {
-                const artistId = evt.ArtistId;
-                return artistId;
+            .then(evnt => {
+                setEventData(evnt);
+                const artistId = evnt.ArtistId;
+                return artistId
             })
             .then(artistId => {
                 const artist = getArtistById(artistId);
@@ -103,26 +101,26 @@ const EventPage: React.FunctionComponent = () => {
                         < h1 > {eventData.name}</h1 >
                         <div className="dateAndName">
                             <h3>{moment(eventData.date).format('yyyy')}</h3>
-
                             <h2>{artistData.name}</h2>
-
                         </div>
                     </div>
                 </div>
-                <div className="secondHalf">
-                    <div>
+                <Flex>
+                    <Box width= {4/12}>
                         <h2>Description:</h2>
-                        <p>{eventData.description}</p>
-                    </div>
-                    <div className="eventTokenInfo">
-                        <div>
-                            <h4>TOKEN INFO</h4>
-                            <div>Number of Tokens: {eventData.number_of_tokens}</div>
-                            <div>Token value: {eventData.tokens_value}</div>
+                        <h4>{eventData.description}</h4>
+                    </Box>
+                    <Box width= {1/12}/>
+                    <Box width= {3/8}>
+                        <h2>Token Info: </h2>
+                        <h4> - Number of Tokens: {eventData.number_of_tokens}</h4>
+                        <h4> - Token value: {eventData.tokens_value}</h4>
+                    </Box>
+                    <Box width= {4/12}>
+                        <br/>
                             {(availableTokens.length > 0)  ? ((checkIfUserHasBought()) ?  <button>NFT purchased</button> : <button onClick={handleClick}>purchase event NFT</button>) : <button>Event Sold Out</button>}
-                        </div>
-                    </div>
-                </div>
+                    </Box>
+                </Flex>
             </div>
         </>
     )

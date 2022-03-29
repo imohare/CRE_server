@@ -1,23 +1,19 @@
-//react
 import { useState, useContext, useEffect, Suspense } from 'react';
-//antd imports
-//components
+
 import StyledPage from 'Styles/styledComponents/styledPage';
 import ScrollList from 'Components/ReuseableComponents/ScrollList';
 import { EventCardTemplate, AlbumCardTemplate, ArtistCardTemplate, MerchCardTemplate } from '../Components/ReuseableComponents/CardTemplates';
 import PublicHeader from 'Components/FormComponents/DataComponents/PublicHeader';
 import UserHeader from 'Components/FormComponents/DataComponents/UserHeader';
+import Form from '../Components/searchbar';
 
-//styling
-import { LayoutGroup } from 'framer-motion';
 import Parallax from 'Styles/animations/ParallaxAnimation';
 import ShuffleSelector from 'Styles/animations/ShuffleSelector';
 import Transition from 'Styles/animations/PageTransitions';
 import Background from 'Styles/animations/LandingPageAnim';
 
-//contexts
 import { UserContext } from 'Data/UserContext';
-//data 
+
 import { getAllAlbums } from "Services/Album";
 import { getAllMerchandises } from 'Services/Merchandise';
 import { getEvents } from 'Services/Event';
@@ -34,8 +30,6 @@ import Balls from './4_Mirror_Balls_2';
 
 const LandingPage: React.FunctionComponent = () => {
 
-  //public view
-  //login popup is set to visible on clicking the login button and to invisible on clicking cancel on Modal component:
   const [isRegister, setIsRegister] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
   const { userType, setUserType } = useContext(UserContext);
@@ -46,6 +40,8 @@ const LandingPage: React.FunctionComponent = () => {
   const [selected, setSelected] = useState(filters[0]);
 
   const [artists, setArtists] = useState<IArtist[] | []>([]);
+  const [dupeArtists, setDupeArtists] = useState<IArtist[] | []>([]);
+
   const [albums, setAlbums] = useState<IAlbum[] | []>([]);
   const [events, setEvents] = useState<IEvent[] | []>([]);
   const [merchandise, setMerchandise] = useState<IMerchandise[] | []>([]);
@@ -56,11 +52,11 @@ const LandingPage: React.FunctionComponent = () => {
       .then((response: IArtist[]) => {
         if (response) {
           setArtists(response)
+          setDupeArtists(response)
         } else {
           console.log('no artistsfound')
         }
       })
-
     getAllAlbums()
       .then((response: IAlbum[]) => {
         if (response) {
@@ -98,31 +94,50 @@ const LandingPage: React.FunctionComponent = () => {
   }, [])
 
 
+  const [searchval, setSearchVal] = useState('');
+
+   const searchArtists = (e: any) => {
+     setSearchVal(e.target.value);
+   };
+
+   useEffect(() => {
+     searchFilter(searchval)
+   }, [searchval])
+
+  const searchFilter = (searchval: any) => {
+     if (searchval === '') setArtists(dupeArtists);
+     else {
+       const newArtistList = dupeArtists.filter((el) => {
+         const artistName= el.name.toLowerCase();
+         return artistName.includes(searchval);
+       });
+       setArtists(newArtistList);
+     }
+   }
+
+
   return (
-    //if user, display personalised component on top -> artist || user - else, have a login sign up option
-    <Transition>
-
-        {(userType === 'public')
-          ? <PublicHeader />
-          : <UserHeader currentName={`Welcome, ${name}!`} />
-        }
-      <StyledPage>
-        <Background />
-
+    <div>
+      <br/>
+      <br/>    
+      <br/>
+      <br/>
 
       <Canvas>
-                      <Suspense fallback={null}>
-                          <ambientLight />
-                          <BetterBalls />
-                          <Balls/>
-                          <OrbitControls enablePan={true}
-                                         enableZoom={true}
-                                         enableRotate={true}/>
-                      </Suspense>
-        </Canvas>
+        <Suspense fallback={null}>
+          <ambientLight />
+          <BetterBalls />
+          <Balls/>
+          <OrbitControls enablePan={true} enableZoom={true} enableRotate={true}/>
+        </Suspense>
+      </Canvas>
 
-        <div>
-          <h3>Show me the</h3>
+      <Transition>
+        {(userType === 'public') ? <PublicHeader /> : <UserHeader currentName={`Welcome, ${name}!`} />}
+      <StyledPage>
+      <Background />
+
+        {/* <div>
           <p className="shuffle colorchange filter">
             <LayoutGroup>
               <ul className="filters">
@@ -135,35 +150,31 @@ const LandingPage: React.FunctionComponent = () => {
               </ul>
             </LayoutGroup>
           </p>
-          <p><span className="colorchange select">Events</span><span className="colorchange select">Albums</span><span className="colorchange select">Merch</span></p>
-        </div>
-        <ScrollList title='Artists'>
-        {
-            artists.map((artist: IArtist) => {
-              return <ArtistCardTemplate artist={artist}></ArtistCardTemplate>
-            })
-          }
-        </ScrollList>
-        <ScrollList title='Newest Albums'>
-          {albums.map(album => <div key={album.id}>
-            <AlbumCardTemplate album={album} />
-          </div>
-          )}
-        </ScrollList>
-        <ScrollList title='Newest Events'>
-          {events.map(event => <div key={event.id}>
-            <EventCardTemplate event={event} background={'https://wallpapercave.com/wp/wp7172141.jpg'} />
-          </div>
-          )}
-        </ScrollList>
-        <ScrollList title='Newest Merchandise'>
-          {merchandise.map(merchandise => <div key={merchandise.id}>
-            <MerchCardTemplate merchandise={merchandise} background={''} />
-          </div>
-          )}
-        </ScrollList>
+        </div> */}
+
+      <Form searchArtists={searchArtists} value={searchval} />
+
+      <ScrollList title='Artists'> 
+        {artists.map((artist: IArtist) =>  <ArtistCardTemplate artist={artist} /> )}
+      </ScrollList>
+
+      <ScrollList title='Newest Albums'>
+        {albums.map(album => <AlbumCardTemplate album={album} />)}
+      </ScrollList>
+
+      <ScrollList title='Newest Events'>
+        {events.map(event => <EventCardTemplate event={event} background={event.tokens_image} />)}
+      </ScrollList>
+
+      <ScrollList title='Newest Merchandise'>
+        {merchandise.map(merchandise => <MerchCardTemplate merchandise={merchandise} background={''} />)}
+      </ScrollList>
+
       </StyledPage>
+
     </Transition>
+
+    </div>
   )
 }
 

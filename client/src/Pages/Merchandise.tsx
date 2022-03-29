@@ -10,6 +10,7 @@ import { getMerchTokensByMerchId } from '../Services/MerchToken';
 import { merchandiseTokenPurchase } from 'Services/Purchase';
 
 import { UserContext } from 'Data/UserContext';
+import { Flex, Box } from 'rebass';
 
 const MerchandisePage: React.FunctionComponent = () => {
     const location = useLocation();
@@ -102,20 +103,22 @@ const MerchandisePage: React.FunctionComponent = () => {
                         </div>
                     </div>
                 </div>
-                <div className="secondHalf">
-                    <div>
+                <Flex>
+                    <Box width= {4/12}>
                         <h2>Description:</h2>
-                        <p>{merchandiseData.description}</p>
-                    </div>
-                    <div className="merchandiseTokenInfo">
-                        <div>
-                            <h4>TOKEN INFO</h4>
-                            <div>Number of Tokens: {merchandiseData.number_of_tokens}</div>
-                            <div>Token value: {merchandiseData.tokens_value}</div>
+                        <h4>{merchandiseData.description}</h4>
+                    </Box>
+                    <Box width= {1/12}/>
+                    <Box width= {3/8}>
+                        <h2>Token Info: </h2>
+                        <h4> - Number of Tokens: {merchandiseData.number_of_tokens}</h4>
+                        <h4> - Token value: {merchandiseData.tokens_value}</h4>
+                    </Box>
+                    <Box width= {4/12}>
+                        <br/>
                             {(availableTokens.length > 0)  ? ((checkIfUserHasBought()) ?  <button>NFT purchased</button> : <button onClick={handleClick}>purchase merchandise NFT</button>) : <button>Merchandise Sold Out</button>}
-                        </div>
-                    </div>
-                </div>
+                    </Box>
+                </Flex>
             </div>
         </>
     )

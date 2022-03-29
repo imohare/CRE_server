@@ -23,10 +23,8 @@ import { UserContext } from 'Data/UserContext';
 import AlbumInputBar from 'Components/FormComponents/DataComponents/AlbumForm2';
 import EventInputBar from 'Components/FormComponents/DataComponents/EventForm2';
 import MerchandiseInputBar from 'Components/FormComponents/DataComponents/MerchandiseForm2';
-import { isTypeOnlyImportOrExportDeclaration } from 'typescript';
-import { rootCertificates } from 'tls';
-
-
+import { Box, Flex } from 'rebass';
+import StyledButton from 'Styles/styledComponents/StyledButton';
 const ArtistPage: React.FunctionComponent = () => {
 
 
