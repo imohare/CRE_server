@@ -31,15 +31,3 @@
 }
 
 img{width:100%;}
-
-
-.secondHalf{
-  display:flex;
-  flex-grow:1;
-  justify-content:space-between ;
-}
-
-.eventTokenInfo{
-  margin:0px 300px 100px 10px
-
-}

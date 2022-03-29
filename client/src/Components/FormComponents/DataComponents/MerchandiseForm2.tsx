@@ -96,17 +96,16 @@ function MerchandiseInputBar(props: any) {
         <Input type="number" name="tokensNumber" color="#c5c5c5" value={tokensNumber} onChange={(evt: { target: { value: string; }; }) => setTokensNumber(parseInt(evt.target.value))} required />
         <br />
 
-        <Label color="#c5c5c5">Value of the NFT</Label>
+        <Label color="#c5c5c5">NFT Value</Label>
         <Input type="number" name="tokensValue" color="#c5c5c5" value={tokensValue} onChange={(evt: { target: { value: string; }; }) => setTokensValue(parseInt(evt.target.value))} required />
         <br />
 
-        <Label color="#c5c5c5">Upload NFT cover</Label>
+        <Label color="#c5c5c5">NFT Cover Image</Label>
         <Input type="file" onChange={handleChange} color="#c5c5c5" />
         <progress value={progress} max="100" />
         <br /> <br />
 
-        <Button backgroundColor="#33e" variant='outline' mr={2}type="submit" color="#c5c5c5"> Upload Your NFT
-        </Button>
+        <Button backgroundColor="#FFF" mr={2}type="submit" color="#000"> upload your NFTs </Button>
       </form>
     </div>
   )

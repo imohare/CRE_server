@@ -111,11 +111,7 @@ function EventInputBar(props: any) {
         <progress value={progress} max="100" />
         <br /> <br />
 
-        <Button type="submit" color="#c5c5c5">
-          <Text fontFamily='railway'>
-            Upload Your NFTs
-          </Text>
-        </Button>
+        <Button backgroundColor="#FFF" mr={2}type="submit" color="#000"> upload your NFTs </Button>
       </form>
     </div>
   )
