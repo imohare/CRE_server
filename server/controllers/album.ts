@@ -44,7 +44,7 @@ async function createAlbum(req: Request, res: Response) {
       await _token.setArtist(currentId);
       await _token.setAlbum(_album);
     }
-
+    console.log(_album)
     _album
       .setArtist(currentId)
       .then((_album: any) => {
