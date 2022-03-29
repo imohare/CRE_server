@@ -31,7 +31,7 @@ const StyledButton = styled(Button)`
 &:hover{
 color:#000000;
 background-color:#c5c5c5;
-border:0.1em solid #c5c5c5;
+border:0.1em solid #FFFFFF;
 transform: scale(1.05);
 }
 @media and (max-width:30em){
