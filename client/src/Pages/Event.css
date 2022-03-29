@@ -1,9 +1,8 @@
 .EventOverall{
-  position:relative;
+  position:fixed;
   display:flex;
   flex-direction: column;
   padding:50px 50px 100px 50px;
-  position:relative;
 }
 
 
@@ -41,6 +40,6 @@ img{width:100%;}
 }
 
 .eventTokenInfo{
-  margin:0px 300px 0px 0px
+  margin:0px 300px 100px 10px
 
 }

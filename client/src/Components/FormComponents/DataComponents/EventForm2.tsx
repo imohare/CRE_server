@@ -85,12 +85,10 @@ function EventInputBar(props: any) {
         <Input type="string" name="name" value={name} onChange={(evt: { target: { value: any; }; }) => setName(evt.target.value)} required></Input>
         <br />
         <Label>Event Date</Label>
+
         {/* @ts-ignore */}
-        {/* @ts-ignore */}
-        <input type="datetime-local" name="year" value={date} onChange={(evt: { target: { value: any; }; }) => setYear(evt.target.value)} required></input>
+        <input type="datetime-local" name="date" value={date} onChange={(evt: { target: { value: any; }; }) => setDate(evt.target.value)} required></input>
         <br />
-        {/* <Input type="date" name="date" value={date} onChange={(evt: { target: { value: any; }; }) => setDate(evt.target.value)} required></Input>
-        <br /> */}
 
         <Label>Event Address</Label>
         <Input type="string" name="address" value={address} onChange={(evt: { target: { value: any; }; }) => setAddress(evt.target.value)} required></Input>

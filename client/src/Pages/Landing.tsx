@@ -36,6 +36,7 @@ import LoginModal from 'Components/FormComponents/DataComponents/LoginModal';
 import StyledButton from 'Styles/styledComponents/StyledButton';
 import StyledHeader from 'Styles/styledComponents/StyledHeader';
 
+import Form from '../Components/searchbar';
 
 const LandingPage: React.FunctionComponent = () => {
 
@@ -61,6 +62,8 @@ const LandingPage: React.FunctionComponent = () => {
 
 
   const [artists, setArtists] = useState<IArtist[] | []>([]);
+  const [dupeArtists, setDupeArtists] = useState<IArtist[] | []>([]);
+
   const [albums, setAlbums] = useState<IAlbum[] | []>([]);
   const [events, setEvents] = useState<IEvent[] | []>([]);
   const [merchandise, setMerchandise] = useState<IMerchandise[] | []>([]);
@@ -70,6 +73,7 @@ const LandingPage: React.FunctionComponent = () => {
       .then((response: IArtist[]) => {
         if (response) {
           setArtists(response)
+          setDupeArtists(response)
         } else {
           console.log('no artistsfound')
         }
@@ -112,41 +116,69 @@ const LandingPage: React.FunctionComponent = () => {
   }, [])
 
 
+  const [searchval, setSearchVal] = useState('');
+
+  const searchArtists = (e: any) => {
+    setSearchVal(e.target.value);
+  };
+
+  useEffect(() => {
+    searchFilter(searchval)
+  }, [searchval])
+
+  const searchFilter = (searchval: any) => {
+    if (searchval === '') setArtists(dupeArtists);
+    else {
+      const newArtistList = dupeArtists.filter((el) => {
+        const artistName = el.name.toLowerCase();
+        return artistName.includes(searchval);
+      });
+      setArtists(newArtistList);
+    }
+  }
+
   return (
-    //if user, display personalised component on top -> artist || user - else, have a login sign up option
     <Transition>
-      <Parallax>
 
-        {(userType === 'public')
-          ? <PublicHeader />
-          : <UserHeader currentName={name} />
-        }
+      {(userType === 'public')
+        ? <PublicHeader />
+        : <UserHeader currentName={name} />
+      }
 
-      </Parallax>
       <StyledPage>
         <Background />
 
-        {/* // <div>
-        //   <h3>Show me the</h3>
-        //   <p className="shuffle colorchange filter">
-        //     <LayoutGroup>
-        //       <ul className="filters">
-        //         {filters.map((filter: string) => (<ShuffleSelector
-        //           key={filter}
-        //           filterName={selected}
-        //           hoverOver={() => setSelected(filter)}
-        //         >{filter}
-        //         </ShuffleSelector>))}
-        //       </ul>
-        //     </LayoutGroup>
-        //   </p>
-        //   <p><span className="colorchange select">Events</span><span className="colorchange select">Albums</span><span className="colorchange select">Merch</span></p>
-        // </div> */}
+        {/* 
+      <Canvas>
+                      <Suspense fallback={null}>
+                          <ambientLight />
+                          <BetterBalls />
+                          <Balls/>
+                          <OrbitControls enablePan={true}
+                                         enableZoom={true}
+                                         enableRotate={true}/>
+                      </Suspense>
+        </Canvas> */}
+
+        <div>
+          <p className="shuffle colorchange filter">
+            <LayoutGroup>
+              <ul className="filters">
+                {filters.map((filter: string) => (<ShuffleSelector
+                  key={filter}
+                  filterName={selected}
+                  hoverOver={() => setSelected(filter)}
+                >{filter}
+                </ShuffleSelector>))}
+              </ul>
+            </LayoutGroup>
+          </p>
+        </div>
+        <Form searchArtists={searchArtists} value={searchval}></Form>
         <ScrollList title='Artists'>
-          {
-            artists.map((artist: IArtist) => {
-              return <ArtistCardTemplate artist={artist}></ArtistCardTemplate>
-            })
+          {artists.map((artist: IArtist) => {
+            return <ArtistCardTemplate artist={artist}></ArtistCardTemplate>
+          })
           }
         </ScrollList>
         <ScrollList title='Newest Albums'>
@@ -157,7 +189,7 @@ const LandingPage: React.FunctionComponent = () => {
         </ScrollList>
         <ScrollList title='Newest Events'>
           {events.map(event => <div key={event.id}>
-            <EventCardTemplate event={event} background={'https://wallpapercave.com/wp/wp7172141.jpg'} />
+            <EventCardTemplate event={event} background={event.tokens_image} />
           </div>
           )}
         </ScrollList>
