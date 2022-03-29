@@ -112,7 +112,6 @@ const LandingPage: React.FunctionComponent = () => {
   }, [])
 
 
-
   return (
     //if user, display personalised component on top -> artist || user - else, have a login sign up option
     <Transition>
@@ -169,7 +168,7 @@ const LandingPage: React.FunctionComponent = () => {
           )}
         </ScrollList>
       </StyledPage>
-    </Transition >
+    </Transition>
   )
 }
 
