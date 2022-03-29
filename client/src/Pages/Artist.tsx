@@ -1,5 +1,5 @@
 //react
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useState, useContext, useEffect } from 'react';
 //antd imports
 import { Button } from 'antd';
@@ -72,10 +72,18 @@ const ArtistPage: React.FunctionComponent = () => {
   const handleAlbumState = () => setType('album');
   const handleEventState = () => setType('event');
   const handleMerchandiseState = () => setType('merchandise');
+  
+  let navigate = useNavigate(); 
+  const homeRouteChange = () =>{ 
+    let path = `/`; 
+    navigate(path);
+  }
+
   return (
     <StyledPage>
       <div className="artistUserView">
-        <Link to="/">home</Link>
+        
+        <StyledButton onClick={homeRouteChange}> Home</StyledButton>
         <Flex>
           <Box width={2/6}>
             <h1>Upload NFTs</h1>

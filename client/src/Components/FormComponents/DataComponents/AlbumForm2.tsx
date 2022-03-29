@@ -97,11 +97,7 @@ function AlbumInputBar(props: any) {
         <progress value={progress} max="100" />
 
         <br />  <br />
-        <Button color="#c5c5c5" type='submit'>
-          <Text  color="#12171c" fontFamily='Railway'>
-            Upload Your NFT's
-          </Text>
-        </Button>
+        <Button backgroundColor="#FFF" mr={2}type="submit" color="#000"> upload your NFTs </Button>
       </form>
     </div>
   )
