@@ -19,6 +19,8 @@ const { getEventToken, getEventTokens, getConsumerEventTokens, getArtistEventsTo
 
 const { albumTokenPurchase, eventTokenPurchase, merchandiseTokenPurchase } = require('./controllers/purchasing.ts');
 
+const { getConsumerPointsByConsumerId } = require('./controllers/points.ts');
+
 // Artist
 router.post('/createArtist', createArtist); //works
 router.get('/getArtists', getArtists); //works
@@ -81,6 +83,9 @@ router.get('/getConsumerEventTokens/:eventId/:consumerId', getConsumerEventToken
 router.get('/getArtistEventsTokens/:artistId', getArtistEventsTokens);
 router.get('/getConsumerEventTokensByConsumerId/:consumerId', getConsumerEventTokensByConsumerId)
 router.get('/getEventTokensByEventId/:eventId', getEventTokensByEventId)
+
+// Points 
+router.get('/getConsumerPointsByConsumerId/:consumerId', getConsumerPointsByConsumerId)
 
 // Purchasing
 router.patch('/albumTokenPurchase/:artistId/:consumerId/:albumTokenId/:albumId', albumTokenPurchase);

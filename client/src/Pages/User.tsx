@@ -2,12 +2,16 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { UserContext } from 'Data/UserContext';
-import { getConsumerById } from '../Services/Consumer'
+import { getConsumerById, getConsumerPointsByConsumerId } from '../Services/Consumer'
 import { useContext } from 'react';
 
+import { getConsumerAlbumTokensByConsumerId } from 'Services/AlbumToken';
+import { getConsumerEventTokensByConsumerId } from 'Services/EvenToken';
+import { getConsumerMerchTokensByConsumerId } from 'Services/MerchToken';
+import ScrollList from 'Components/ReuseableComponents/ScrollList';
+import { AlbumCardTemplate, EventCardTemplate, MerchCardTemplate } from 'Components/ReuseableComponents/CardTemplates';
+import { IAlbum, IConsumer, IEvent, IMerchandise, IPoints } from 'Data/DataTypes';
 
-
-import { IAlbum, IConsumer, IEvent, IMerchandise } from 'Data/DataTypes';
 
 //components 
 import UserProfileView from 'Components/FormComponents/DataComponents/UserProfileView';
@@ -30,14 +34,56 @@ const UserPage: React.FunctionComponent = () => {
     location: '',
     email: '',
   });
+  const [totalPoints, setTotalPoints] = useState(0);
+  const [pointData, setPointData] = useState<IPoints[] | []>([]);
+
+  let pointArtists: Promise<any>[] = [];
+
+
+  useEffect(() => {
+    getConsumerAlbumTokensByConsumerId(currentId)
+        .then(response => {
+          setAlbums(response);
+            return response;
+        })
+    getConsumerEventTokensByConsumerId(currentId)
+      .then(response => {
+          setEvents(response);
+            return response;
+        })
+    getConsumerMerchTokensByConsumerId(currentId)
+      .then(response => {
+          setMerchandises(response);
+            return response;
+        })
+    getConsumerById(currentId)
+      .then(response => {
+        setUser(response);
+        return response
+      })
+    getConsumerPointsByConsumerId(currentId)
+      .then(pointData => {
+        let points = 0;
+        pointData.map(async (entry: IPoints) => {
+          points += entry.points;
+          setTotalPoints(points);
+        })
+        setPointData(pointData);
+      })
+    
+     }, [])
+
 
 
 
   return (
     <>
+
       {
         user.username === name ? <UserProfileView></UserProfileView> : null
       }
+
+   
     </>)
 }
 

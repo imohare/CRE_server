@@ -117,8 +117,6 @@ const AlbumPage: React.FunctionComponent = () => {
                             {(availableTokens.length > 0)  ? ((checkIfUserHasBought()) ?  <button>NFT purchased</button> : <button onClick={handleClick}>purchase album NFT</button>) : <button>Event Sold Out</button>}
                         </div>
                     </div>
-                    {/* <p>artist view without album purchase</p>
-                    <p>public view without album purchase (redirect to login page?)</p> */}
                 </div>
             </div>
         </>

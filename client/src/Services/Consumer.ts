@@ -35,4 +35,10 @@ const deleteConsumer = (consumerId: number) => {
         { method: "DELETE" });
 }
 
-export { createConsumer, getConsumerById, getConsumerByUsername, deleteConsumer, getConsumerByEthAddress }
+const getConsumerPointsByConsumerId = (consumerId: number) => {
+    return fetch(`${BASE_URL}/getConsumerPointsByConsumerId/${consumerId}`)
+        .then(res => res.json())
+        .catch(err => console.log(err))
+}
+
+export { createConsumer, getConsumerById, getConsumerByUsername, deleteConsumer, getConsumerByEthAddress, getConsumerPointsByConsumerId }

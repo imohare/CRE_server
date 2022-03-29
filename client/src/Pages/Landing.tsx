@@ -16,7 +16,7 @@ import Transition from 'Styles/animations/PageTransitions';
 import Background from 'Styles/animations/LandingPageAnim';
 //styling
 import discoballs from 'images/header_background.jpg'
-import background1 from 'images/background1.jpg';
+import background1 from 'Images/background1.jpg';
 
 //contexts
 import { UserContext } from 'Data/UserContext';

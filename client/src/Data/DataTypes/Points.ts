@@ -4,8 +4,8 @@ interface IPoints {
   id?: number,
   createdAt?: Date,
   updatedAt?: Date,
-  ConsumerId?: number,
-  ArtistId?: number
+  ConsumerId: number,
+  ArtistId: number
 }
 
 export type { IPoints }
