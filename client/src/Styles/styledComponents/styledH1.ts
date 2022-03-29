@@ -10,7 +10,7 @@ const StyledH1 = styled(motion.h1)`
   max-width: 100%;
   word-break: break-word;
   z-index: 10;
-  color: #FFFFFF;
+  color: #c5c5c5;
 `;
 
 export default StyledH1;

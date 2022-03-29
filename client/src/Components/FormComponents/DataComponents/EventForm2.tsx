@@ -79,35 +79,41 @@ function EventInputBar(props: any) {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <progress value={progress} max="100" />
-        <Label>Event Name</Label>
+      <br />
 
-        <Input type="string" name="name" value={name} onChange={(evt: { target: { value: any; }; }) => setName(evt.target.value)} required />
+        <Label color="#c5c5c5">Event Name</Label>
+        <Input type="string" name="name" color="#c5c5c5" value={name} onChange={(evt: { target: { value: any; }; }) => setName(evt.target.value)} required />
         <br />
-        <Label>Event Date</Label>
 
+        <Label color="#c5c5c5">Event Date</Label>
         {/* @ts-ignore */}
-        <input type="datetime-local" name="date" value={date} onChange={(evt: { target: { value: any; }; }) => setDate(evt.target.value)} required />
+        <input type="datetime-local" name="date" color="#c5c5c5" value={date} onChange={(evt: { target: { value: any; }; }) => setDate(evt.target.value)} required />
+        <br /> <br />
+
+        <Label color="#c5c5c5">Event Address</Label>
+        <Input type="string" name="address" color="#c5c5c5" value={address} onChange={(evt: { target: { value: any; }; }) => setAddress(evt.target.value)} required />
         <br />
 
-        <Label>Event Address</Label>
-        <Input type="string" name="address" value={address} onChange={(evt: { target: { value: any; }; }) => setAddress(evt.target.value)} required />
+        <Label color="#c5c5c5">Description</Label>
+        <Input type="string" name="description" color="#c5c5c5" value={description} onChange={(evt: { target: { value: any; }; }) => setDescription(evt.target.value)} required />
         <br />
-        <Label>Description</Label>
-        <Input type="string" name="description" value={description} onChange={(evt: { target: { value: any; }; }) => setDescription(evt.target.value)} required />
+
+        <Label color="#c5c5c5">Number of Available NFT's </Label>
+        <Input type="number" name="tokensNumber" color="#c5c5c5" value={tokensNumber} onChange={(evt: { target: { value: string; }; }) => setTokensNumber(parseInt(evt.target.value))} required />
         <br />
-        <Label>Number of Available NFT's </Label>
-        <Input type="number" name="tokensNumber" value={tokensNumber} onChange={(evt: { target: { value: string; }; }) => setTokensNumber(parseInt(evt.target.value))} required />
+
+        <Label color="#c5c5c5">Value of the NFT</Label>
+        <Input type="number" name="tokensValue" color="#c5c5c5" value={tokensValue} onChange={(evt: { target: { value: string; }; }) => setTokensValue(parseInt(evt.target.value))} required />
         <br />
-        <Label>Value of the NFT</Label>
-        <Input type="number" name="tokensValue" value={tokensValue} onChange={(evt: { target: { value: string; }; }) => setTokensValue(parseInt(evt.target.value))} required />
-        <br />
-        <Label> Upload Your NFT's cover picture</Label>
-        <Input type="file" onChange={handleChange} />
-        <br />
-        <Button type="submit">
+
+        <Label color="#c5c5c5"> Upload Your NFT's cover picture</Label>
+        <Input type="file" color="#c5c5c5" onChange={handleChange} />
+        <progress value={progress} max="100" />
+        <br /> <br />
+
+        <Button type="submit" color="#c5c5c5">
           <Text fontFamily='railway'>
-            Upload Your NFT's
+            Upload Your NFTs
           </Text>
         </Button>
       </form>

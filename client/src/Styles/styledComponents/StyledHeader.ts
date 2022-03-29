@@ -21,7 +21,7 @@ padding: ${globalVariables.mobileScreenPadding};
   height: 180px;
   width: 12px;
   border-radius: 5px;
-  background-color: #FFFFFF;
+  background-color: #c5c5c5;
 }
 .buttons {
   display: flex;

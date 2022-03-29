@@ -55,7 +55,7 @@ padding: 10px;
 }
 .description {
   margin-top: 7px;
-  color:#FFFFFF;
+  color:#c5c5c5;
   h4{
     font-family: 'Raleway', sans-serif;
     font-size: 1.6rem;
@@ -94,7 +94,7 @@ const StyledEventCardTemplate = styled(StyledCardTemplate)`
   justify-content: flex-end;
 }
 .date {
-  color: #FFFFFF;
+  color: #c5c5c5;
   font-family: 'Raleway', sans-serif;
   align-self: flex-end;
   font-weight: 600;
