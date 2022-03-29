@@ -38,13 +38,13 @@ import StyledHeader from 'Styles/styledComponents/StyledHeader';
 
 
 const LandingPage: React.FunctionComponent = () => {
-  
+
   //public view
   //login popup is set to visible on clicking the login button and to invisible on clicking cancel on Modal component:
   const [isRegister, setIsRegister] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
   const { userType, setUserType } = useContext(UserContext);
-  const {currentId, name} = useContext(UserContext);
+  const { currentId, name } = useContext(UserContext);
 
   // are we not meant to set the user type here to use it later?
   const toggleLogin = () => {
@@ -66,14 +66,14 @@ const LandingPage: React.FunctionComponent = () => {
   const [merchandise, setMerchandise] = useState<IMerchandise[] | []>([]);
 
   useEffect(() => {
-     getArtists()
+    getArtists()
       .then((response: IArtist[]) => {
-       if (response) {
-           setArtists(response)
-       } else {
-         console.log('no artistsfound')
-       }
-       })
+        if (response) {
+          setArtists(response)
+        } else {
+          console.log('no artistsfound')
+        }
+      })
 
     getAllAlbums()
       .then((response: IAlbum[]) => {
@@ -111,64 +111,64 @@ const LandingPage: React.FunctionComponent = () => {
       })
   }, [])
 
-  
+
 
   return (
     //if user, display personalised component on top -> artist || user - else, have a login sign up option
     <Transition>
-      <Parallax>  
+      <Parallax>
 
-      {(userType === 'public')
-        ? <PublicHeader />
-          : <UserHeader currentName={name} />
-      }
-     
-     </Parallax>
+        {(userType === 'public')
+          ? <PublicHeader />
+          : <UserHeader currentName={`Welcome, ${name}!`} />
+        }
+
+      </Parallax>
       <StyledPage>
-      <Background />
+        <Background />
 
         <div>
           <h3>Show me the</h3>
           <p className="shuffle colorchange filter">
             <LayoutGroup>
               <ul className="filters">
-              {filters.map((filter: string) => (<ShuffleSelector
-                key={filter}
-                filterName={selected}
-                hoverOver={() => setSelected(filter)}
-              >{filter}
-              </ShuffleSelector>))}
+                {filters.map((filter: string) => (<ShuffleSelector
+                  key={filter}
+                  filterName={selected}
+                  hoverOver={() => setSelected(filter)}
+                >{filter}
+                </ShuffleSelector>))}
               </ul>
-          </LayoutGroup>
-        </p>
+            </LayoutGroup>
+          </p>
           <p><span className="colorchange select">Events</span><span className="colorchange select">Albums</span><span className="colorchange select">Merch</span></p>
-          </div>
+        </div>
         <ScrollList title='Artists'>
           {
             artists.map((artist: IArtist) => {
               return <ArtistCardTemplate artist={artist}></ArtistCardTemplate>
             })
           }
-          </ScrollList>
-          <ScrollList title='Newest Albums'>
-            {albums.map(album => <div key = {album.id}>
-              <AlbumCardTemplate album={album}/>
-            </div>
-            )}        
-          </ScrollList>
-          <ScrollList title='Newest Events'>
-          {events.map(event => <div key = {event.id}>
-              <EventCardTemplate event={event} background={'https://wallpapercave.com/wp/wp7172141.jpg'}/>
-            </div>
-            )}  
-          </ScrollList>
-          <ScrollList title='Newest Merchandise'>
-          {merchandise.map(merchandise => <div key = {merchandise.id}>
-              <MerchCardTemplate merchandise={merchandise} background={''}/>
-            </div>
-            )}
-          </ScrollList>
-        </StyledPage>
+        </ScrollList>
+        <ScrollList title='Newest Albums'>
+          {albums.map(album => <div key={album.id}>
+            <AlbumCardTemplate album={album} />
+          </div>
+          )}
+        </ScrollList>
+        <ScrollList title='Newest Events'>
+          {events.map(event => <div key={event.id}>
+            <EventCardTemplate event={event} background={'https://wallpapercave.com/wp/wp7172141.jpg'} />
+          </div>
+          )}
+        </ScrollList>
+        <ScrollList title='Newest Merchandise'>
+          {merchandise.map(merchandise => <div key={merchandise.id}>
+            <MerchCardTemplate merchandise={merchandise} background={''} />
+          </div>
+          )}
+        </ScrollList>
+      </StyledPage>
     </Transition>
   )
 }

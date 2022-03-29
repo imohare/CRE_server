@@ -70,8 +70,9 @@ const UserPage: React.FunctionComponent = () => {
   return (
     <StyledPage>
       <>
+        <div className="hotBar"></div>
         <div className="UserProfile">
-          <Link to="/">home</Link>
+          <Link to="/"> {`<`} </Link>
           <div className="banner">
             <br />
             <br />
@@ -86,17 +87,21 @@ const UserPage: React.FunctionComponent = () => {
           }) : null } */}
 
           <div className="UserNFTs">
-            <h1>@{user.username} Profile</h1>
+            <h1>@{user.username}'s Profile</h1>
             <h2>Points: {totalPoints}</h2>
-            <ScrollList title='Your NFT Albums'>
-              {(albums.length > 0) ? albums.map(album => <div key={album.id}>
-                <AlbumCardTemplate album={album} />
-              </div>)
-                : null}
-            </ScrollList>
+
+
+
             <ScrollList title='Your NFT Events'>
               {(events.length > 0) ? events.map(event => <div key={event.id}>
                 <EventCardTemplate event={event} background={''} />
+              </div>)
+                : null}
+            </ScrollList>
+
+            <ScrollList title='Your NFT Albums'>
+              {(albums.length > 0) ? albums.map(album => <div key={album.id}>
+                <AlbumCardTemplate album={album} />
               </div>)
                 : null}
             </ScrollList>
