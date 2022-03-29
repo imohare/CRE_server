@@ -101,6 +101,7 @@ const LandingPage: React.FunctionComponent = () => {
       })
   }, [])
 
+
   const [searchval, setSearchVal] = useState('');
 
    const searchArtists = (e: any) => {
@@ -124,10 +125,12 @@ const LandingPage: React.FunctionComponent = () => {
 
   return (
     <Transition>
+
         {(userType === 'public')
           ? <PublicHeader />
           : <UserHeader currentName={`Welcome, ${name}!`} />
         }
+      
       <StyledPage>
         <Background />
 
