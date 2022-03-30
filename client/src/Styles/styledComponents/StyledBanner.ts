@@ -8,18 +8,18 @@ width: 120vw;
 height: 40vh;
 position: relative;
 padding: 2rem 0;
-
+margin-bottom: 6rem;
  .image {
    position: absolute;
    height: 35vh;
-   aspect-ratio: 0.8;
+   aspect-ratio: 0.9;
    background-image: url(${props => props.image});
    border-radius: 50%;
    border: 6px ${({theme})=>theme.fontColor};
    background-size: cover;
    background-repeat: no-repeat;
    background-color: black;
-   top: 1rem;
+   top: 3rem;
    left: 50%;
    transform: translate(-50%);
   

@@ -1,12 +1,27 @@
 import styled from 'styled-components';
 import { globalVariables } from 'Styles/globalStyles';
 import { TextSpan } from 'typescript';
+import StyledBannerComponent from 'Styles/styledComponents/StyledBanner'
 
 
-const BannerComponent = () => {
-  return (<div className='background'>
-      <div className='image'></div>
-  </div>)
+interface IProps {
+  background: string;
+  image: string;
+  title: string;
+}
+
+const BannerComponent = ({ background, image, title }:IProps) => {
+  
+
+  return (
+    <StyledBannerComponent background={background} image={ image}>
+      <div className='background'>
+        
+        <div className='image'></div>¨
+        
+    </div>
+    </StyledBannerComponent>
+  )
 }
 
 export default BannerComponent;
