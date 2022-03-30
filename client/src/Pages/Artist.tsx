@@ -144,14 +144,16 @@ const closeDropdown = (e: React.MouseEvent<HTMLButtonElement>) => {
   const handleAlbumState = () => setType('album');
   const handleEventState = () => setType('event');
   const handleMerchandiseState = () => setType('merchandise');
-   console.log('albums', albums,  'events', events)
+  console.log('albums', albums, 'events', events, 'merchandise', merchandise)
  return (
    <StyledPage>
      <LogoComponent></LogoComponent>
      <StyledArtistProfile>
-       <BannerComponent></BannerComponent>
-       <h1>{artist && artist.name}</h1>
-
+       {
+         artist &&
+         <BannerComponent background={'https://unsplash.com/photos/dPgPoiUIiXk?utm_source=unsplash&utm_medium=referral&utm_content=creditShareLink'} image={artist.profile_picture} title={ artist.name } ></BannerComponent>
+       }
+ 
        {/* <StyledBannerComponent background={exampleObj.randomBackground} image={ artist.profile_picture }><div className="background"><div className="image"></div></div></StyledBannerComponent> */}
       <div className="nftBoxes">
          <motion.div className="Cevents box"
@@ -191,7 +193,8 @@ const closeDropdown = (e: React.MouseEvent<HTMLButtonElement>) => {
 
 
            {albums.length > 0 ? albums.map(album => {
-             return <DraggableAlbumCard rotation={Math.floor(Math.random()*3)} album={album}></DraggableAlbumCard> 
+             return <div className={`albumV ${albumCvisible}`}>
+               <DraggableAlbumCard rotation={Math.floor(Math.random() * 3)} album={album}></DraggableAlbumCard> </div>
            })
              : <div className={`absolute ${albumCvisible}` } >
              there are currently no albums available

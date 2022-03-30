@@ -23,7 +23,8 @@ color: white;
   justify-content: center;
   min-height: calc(10rem + 7vw);
   min-width: calc(10rem + 7vw);
-  border: solid 3px ${({ theme }) => theme.fontColor};
+  border: solid 1px ${({ theme }) => theme.fontColor};
+  padding: 2rem;
 }
 .absolute {
   position: absolute;
@@ -33,13 +34,18 @@ color: white;
 }
 
 .Calbums {
+  border: 1px solid green;
 }
 .Cmerchandise {
 
 }
-.card {
+
+.albumV {
   position: absolute;
+  left: 4vw;
+  top: 2vh;
 }
+
 
 `
 
