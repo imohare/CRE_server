@@ -17,14 +17,8 @@ function MerchandiseInputBar(props: any) {
   const { currentId } = useContext(UserContext);
   const [artistId, setArtistId] = useState(currentId);
 
-
-
   const addMerchandise = async (name: string, type: string, description: string, tokensNumber: number, img_url: string, tokensValue: number, artistId: number) => {
-    // const newMerchandises = props.merchandises.slice();
-    const response = await createMerchandise({name, type, description, tokensNumber, img_url, tokensValue, artistId})
-    // newMerchandises.push(response)
-    // props.setMerchandises(newMerchandises); // need to import this from app
-    return response;
+    await createMerchandise({name, type, description, tokensNumber, img_url, tokensValue, artistId})
   }
 
   const handleChange = (e: any) => {
@@ -56,13 +50,6 @@ function MerchandiseInputBar(props: any) {
           .child(image.name)
           .getDownloadURL()
           .then((img: any) => {
-            console.log(name, "name");
-            console.log(type, "type");
-            console.log(description, "description");
-            console.log(tokensNumber, "tokensNumber");
-            console.log(img, "img");
-            console.log(tokensValue, "tokensValue");
-            console.log(artistId, "artistId");
             addMerchandise(name, type, description, tokensNumber, img, tokensValue, artistId);
           })
       }

@@ -22,12 +22,7 @@ function EventInputBar(props: any) {
   //import use context
 
   const addEvent = async (name: string, address: string, date: Date, description: string, tokensNumber: number, img_url: string, tokensValue: number, artistId: number) => {
-    console.log('in advent and values are', name, address, date, description, tokensNumber, img_url, tokensValue, artistId)
-    const newEvents = props.events.slice();
-    console.log('new event', newEvents)
-    const response = await createEvent({name, address, date, description, tokensNumber, img_url, tokensValue, artistId})
-    newEvents.push(response)
-    props.setEvents(newEvents); // need to import this from app
+    await createEvent({name, address, date, description, tokensNumber, img_url, tokensValue, artistId})
   }
 
   const handleChange = (e: any) => {
@@ -57,13 +52,6 @@ function EventInputBar(props: any) {
           .child(image.name)
           .getDownloadURL()
           .then((img: any) => {
-            console.log(name, "name");
-            console.log(date, "date"); // this needs to be turned into the correct format
-            console.log(description, "description");
-            console.log(tokensNumber, "tokensNumber");
-            console.log(img, "img");
-            console.log(tokensValue, "tokensValue");
-            console.log(artistId, "artistId");
             addEvent(name, address, date, description, tokensNumber, img, tokensValue, artistId);
           })
       }
