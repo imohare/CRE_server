@@ -83,11 +83,11 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
 
       if (isArtist) {
         res = await registerWithEthAddress(isArtist, artistInfo)
-        console.log("res", res)
+        console.log("res artist", res)
       }
       if (!isArtist) {
-
         res = await registerWithEthAddress(isArtist, consumerInfo);
+        console.log(res, "res consumer")
       }//setting the user in the global context
       console.log(res, "user res logged");
 
@@ -114,8 +114,7 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
       }
       if (!u) {
         const consumerObjResponse = await getConsumerByEthAddress(eth);
-        console.log(consumerObjResponse, 'artist response login')
-
+        console.log(consumerObjResponse, 'artist response login');
         const { username, id } = consumerObjResponse;
         setCurrentId(id);
         setName(username)
