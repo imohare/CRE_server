@@ -117,7 +117,7 @@ const MerchandisePage: React.FunctionComponent = () => {
                     </Flex>
                     <Flex>
                         <Box>
-                        <Text fontSize={[ 10, 20, 30 ]} color='#c6c6c6' fontFamily='Raleway'>{moment(merchandiseData.type).format('yyyy')}</Text>
+                        <Text fontSize={[ 10, 20, 30 ]} color='#c6c6c6' fontFamily='Raleway'>{merchandiseData.type}</Text>
                         <Text  fontSize={[ 10, 20, 30 ]} fontWeight='bold' color='#c6c6c6' fontFamily='Raleway'> //</Text>
                         <Text  fontSize={[ 20, 30, 40 ]} color='#c6c6c6' fontFamily='Raleway'>{artistData.name}</Text>
                         </Box>

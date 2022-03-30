@@ -1,5 +1,5 @@
 .MerchandiseOverall{
-  position:fixed;
+  position:relative;
   display:flex;
   flex-direction: column;
   padding:50px 50px 100px 50px;
@@ -31,6 +31,3 @@
 }
 
 img{width:100%;}
-
-.moveMiddle{
-}
