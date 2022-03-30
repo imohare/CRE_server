@@ -22,7 +22,7 @@ const registerWithEthAddress = async (isArtist, info) => {
   if (isArtist) result = await createArtist({ eth_address: eth, ...info });
   if (!isArtist) result = await createConsumer({ eth_address: eth, ...info });
   console.log("result making sure it is not yet in db: or if proper ressult is in db", result);
-  return
+  return result;
 }
 
 //input param (boolean) which indicates whether user is artist or consumer
@@ -32,7 +32,7 @@ const checkIfInDB = async (isArtist) => {
   const eth = await getEthAddress();
 
   let result;
-  
+
   if (isArtist) {
     result = await getArtistByEthAddress(eth)
     //the result that it is returning is a function...

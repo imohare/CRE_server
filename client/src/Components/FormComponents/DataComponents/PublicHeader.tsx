@@ -25,26 +25,26 @@ export const PublicHeader = () => {
 
   return (
     <StyledHeader>
-          <FormContextProvider>
-            <div className='login'>
-              <div className='buttons'>
-                {
-                  isRegister
-                  ? <LoginModal isVisible={isRegister} initialStage={3} onCancel={() => toggleRegister()} />
-                  : null
-                }
-                <StyledButton type="primary" onClick={toggleLogin}>sign up</StyledButton>
-                {
-                  isLogin
-                  ? <LoginModal isVisible={isLogin} initialStage={0} onCancel={() => toggleLogin()} />
-                  : null
-                }
-                <StyledButton type="primary" onClick={toggleRegister}>log in</StyledButton>
-              </div>
-            </div>
-          </FormContextProvider>
-                  <AnimatedH1>Just browsing</AnimatedH1>
-        </StyledHeader>
+      <FormContextProvider>
+        <div className='login'>
+          <div className='buttons'>
+            {
+              isRegister
+                ? <LoginModal isVisible={isRegister} initialStage={3} onCancel={() => toggleRegister()} />
+                : null
+            }
+            <StyledButton type="primary" onClick={toggleLogin}>Sign Up</StyledButton>
+            {
+              isLogin
+                ? <LoginModal isVisible={isLogin} initialStage={0} onCancel={() => toggleLogin()} />
+                : null
+            }
+            <StyledButton type="primary" onClick={toggleRegister}>Log In</StyledButton>
+          </div>
+        </div>
+      </FormContextProvider>
+      <AnimatedH1>Just browsing</AnimatedH1>
+    </StyledHeader>
 
   )
 }
