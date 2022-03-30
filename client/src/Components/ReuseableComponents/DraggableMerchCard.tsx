@@ -2,13 +2,13 @@
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { IAlbum } from 'Data/DataTypes';
+import { IMerchandise } from 'Data/DataTypes';
 import { getRenderPropValue } from 'antd/lib/_util/getRenderPropValue';
 import StyledDraggableCard from 'Styles/styledComponents/styledDraggableCards'
 
 
 interface IProps {
-  album: IAlbum;
+  merch: IMerchandise;
   classified?: string;
   rotation: number;
 }
@@ -17,7 +17,7 @@ interface IProps {
 
 
 
-const DraggableAlbumCard = ({ rotation, album, classified } : IProps) => {
+const DraggableMerchCard = ({ rotation, merch, classified } : IProps) => {
 
   /* @ts-ignore */
  
@@ -26,17 +26,17 @@ const DraggableAlbumCard = ({ rotation, album, classified } : IProps) => {
     <StyledDraggableCard
       drag
       rotation={rotation}
-      background={album.tokens_image}
+      background={merch.tokens_image}
     >
       <div className={`${classified} false entire`}>
         <div className="image"></div> 
         <div className="title">
-          { album.name }
+          { merch.name }
         </div>
         <div className="value">
-          { album.tokens_value }
+          { merch.tokens_value }
         </div>
-        <Link to={`/album/${album.id}`}
+        <Link to={`/album/${merch.id}`}
         className="link">
         go to page
         </Link>
@@ -45,6 +45,4 @@ const DraggableAlbumCard = ({ rotation, album, classified } : IProps) => {
   )
 }
 
-export default DraggableAlbumCard;
-
-//<DraggableCard image={events[0].tokens_image} title={events[0].name} value={events[0].tokens_value}></DraggableCard>
+export default DraggableMerchCard;

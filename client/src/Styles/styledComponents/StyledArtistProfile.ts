@@ -13,6 +13,7 @@ color: white;
   display: flex;
   width: 100%;
   justify-content: space-between;
+  cursor: pointer;
 }
 .box {
   position: relative;
@@ -33,19 +34,11 @@ color: white;
   display: none;
 }
 
-.Calbums {
-  border: 1px solid green;
-}
-.Cmerchandise {
-
-}
-
-.albumV {
+.V {
   position: absolute;
-  left: 4vw;
+  left: 3rem;
   top: 2vh;
 }
-
 
 `
 

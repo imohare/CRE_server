@@ -13,12 +13,13 @@ interface IProps { currentName: string; }
 
 const UserHeader = (props: IProps) => {
 
-  const { name, currentId } = useContext(UserContext);
+  const { name, currentId, userType } = useContext(UserContext);
   const { currentName } = props;
 
   let navigate = useNavigate();
   const profileRouteChange = () => {
-    let path = `user/${currentId}`;
+
+    let path = userType==='user' ? `user/${currentId}` : `artist/${currentId}`
     navigate(path);
   }
 
