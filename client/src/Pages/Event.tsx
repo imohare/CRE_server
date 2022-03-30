@@ -17,7 +17,7 @@ import { Box, Flex } from 'rebass';
 
 const EventPage: React.FunctionComponent = () => {
     const location = useLocation();
-    const {currentId} = useContext(UserContext);
+    const { currentId } = useContext(UserContext);
 
     const [eventData, setEventData] = useState({
         id: 0,
@@ -32,7 +32,7 @@ const EventPage: React.FunctionComponent = () => {
     });
 
     const [artistData, setArtistData] = useState<IArtist>({
-        id: 0, 
+        id: 0,
         eth_address: '',
         name: '',
         profile_picture: '',
@@ -56,6 +56,7 @@ const EventPage: React.FunctionComponent = () => {
         console.log(eventId, "eventId")
         getEventById(eventId)
             .then(evnt => {
+                console.log(evnt, "Event")
                 setEventData(evnt);
                 const artistId = evnt.ArtistId;
                 return artistId
@@ -66,20 +67,20 @@ const EventPage: React.FunctionComponent = () => {
             })
             .then(artist => {
                 setArtistData(artist)
-            });    
-            
+            });
+
         getEventTokensByEventId(eventId)
-            .then( response => {
-                setEventTokenData(  response)
-                const availTokens =  response.filter((token: IEventToken) => token.ConsumerId === null);
-                setAvailableTokens( availTokens);
+            .then(response => {
+                setEventTokenData(response)
+                const availTokens = response.filter((token: IEventToken) => token.ConsumerId === null);
+                setAvailableTokens(availTokens);
             })
     }, [])
 
     const handleClick = () => {
         eventTokenPurchase(currentId, availableTokens[0].id, artistData.id, eventData.id);
-      };
-    
+    };
+
     const checkIfUserHasBought = (): boolean => {
         const consumerBoughtToken = eventTokenData.filter(token => token.ConsumerId === currentId)
         if (consumerBoughtToken.length > 0) return true
@@ -106,19 +107,19 @@ const EventPage: React.FunctionComponent = () => {
                     </div>
                 </div>
                 <Flex>
-                    <Box width= {4/12}>
+                    <Box width={4 / 12}>
                         <h2>Description:</h2>
                         <h4>{eventData.description}</h4>
                     </Box>
-                    <Box width= {1/12}/>
-                    <Box width= {3/8}>
+                    <Box width={1 / 12} />
+                    <Box width={3 / 8}>
                         <h2>Token Info: </h2>
                         <h4> - Number of Tokens: {eventData.number_of_tokens}</h4>
                         <h4> - Token value: {eventData.tokens_value}</h4>
                     </Box>
-                    <Box width= {4/12}>
-                        <br/>
-                            {(availableTokens.length > 0)  ? ((checkIfUserHasBought()) ?  <button>NFT purchased</button> : <button onClick={handleClick}>purchase event NFT</button>) : <button>Event Sold Out</button>}
+                    <Box width={4 / 12}>
+                        <br />
+                        {(availableTokens.length > 0) ? ((checkIfUserHasBought()) ? <button>NFT purchased</button> : <button onClick={handleClick}>purchase event NFT</button>) : <button>Event Sold Out</button>}
                     </Box>
                 </Flex>
             </div>
