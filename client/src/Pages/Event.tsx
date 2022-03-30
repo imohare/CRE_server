@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect, useContext } from 'react';
 
 import moment from 'moment';
@@ -14,6 +14,7 @@ import { UserContext } from 'Data/UserContext';
 
 import "./Event.css"
 import { Box, Flex } from 'rebass';
+import StyledButton from 'Styles/styledComponents/StyledButton';
 
 const EventPage: React.FunctionComponent = () => {
     const location = useLocation();
@@ -87,12 +88,22 @@ const EventPage: React.FunctionComponent = () => {
         else return false
     }
 
+    let navigate = useNavigate();
+    const homeRouteChange = () => {
+      let path = `/`;
+      navigate(path);
+    }
+    const profileRouteChange = () => {
+        let path = `/user/${currentId}`;
+        navigate(path);
+      }
+
     return (
         <>
             <div className="EventOverall">
                 <div className="links">
-                    <Link to="/">home</Link>
-                    <Link to={`/artist/${artistData.id}`}>artist</Link>
+                <StyledButton onClick={homeRouteChange} >home</StyledButton>
+                <StyledButton onClick={profileRouteChange} >profile</StyledButton>
                 </div>
                 <div className="eventPicAndTitle">
                     <div className="eventPic">
@@ -119,7 +130,7 @@ const EventPage: React.FunctionComponent = () => {
                     </Box>
                     <Box width={4 / 12}>
                         <br />
-                        {(availableTokens.length > 0) ? ((checkIfUserHasBought()) ? <button>NFT purchased</button> : <button onClick={handleClick}>purchase event NFT</button>) : <button>Event Sold Out</button>}
+                        {(availableTokens.length > 0) ? ((checkIfUserHasBought()) ? <StyledButton>NFT purchased</StyledButton> : <StyledButton onClick={handleClick}>purchase event NFT</StyledButton>) : <StyledButton>Event Sold Out</StyledButton>}
                     </Box>
                 </Flex>
             </div>
