@@ -19,7 +19,7 @@ const UserPage: React.FunctionComponent = () => {
 
   const [albums, setAlbums] = useState<IAlbum[] | []>([]);
   const [events, setEvents] = useState<IEvent[] | []>([]);
-  const [merchandise, setMerchandise] = useState<IMerchandise[] | []>([]);
+  const [merchandises, setMerchandises] = useState<IMerchandise[] | []>([]);
   const [user, setUser] = useState<IConsumer>({
     eth_address: '',
     username: '',
@@ -45,7 +45,7 @@ const UserPage: React.FunctionComponent = () => {
       })
     getConsumerMerchTokensByConsumerId(currentId)
       .then(response => {
-        setMerchandise(response);
+        setMerchandises(response);
         return response;
       })
     getConsumerById(currentId)
@@ -62,6 +62,8 @@ const UserPage: React.FunctionComponent = () => {
         })
         setPointData(pointData);
       })
+
+    console.log("albus", albums, "events", events, "merch", merchandises);
 
   }, [])
 
@@ -93,23 +95,17 @@ const UserPage: React.FunctionComponent = () => {
 
 
             <ScrollList title='Your NFT Events'>
-              {(events.length > 0) ? events.map(event => <div key={event.id}>
-                <EventCardTemplate event={event} background={event.tokens_image} />
-              </div>)
+              {(events.length > 0) ? events.map(event => <EventCardTemplate event={event} key={event.id} background={event.tokens_image} />)
                 : null}
             </ScrollList>
 
             <ScrollList title='Your NFT Albums'>
-              {(albums.length > 0) ? albums.map(album => <div key={album.id}>
-                <AlbumCardTemplate album={album} background={album.tokens_image} />
-              </div>)
+              {(albums.length > 0) ? albums.map(album => <AlbumCardTemplate album={album} key={album.id} background={album.tokens_image} />)
                 : null}
             </ScrollList>
 
             <ScrollList title='Your NFT Merchandise'>
-              {(merchandise.length > 0) ? merchandise.map(merchandise => <div key={merchandise.id}>
-                <MerchCardTemplate merchandise={merchandise} background={merchandise.tokens_image} />
-              </div>)
+              {(merchandises.length > 0) ? merchandises.map(merchandise => <MerchCardTemplate merchandise={merchandise} key={merchandise.id} background={merchandise.tokens_image} />)
                 : null}
             </ScrollList>
 
