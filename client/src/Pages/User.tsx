@@ -9,17 +9,21 @@ import { getConsumerEventTokensByConsumerId } from 'Services/EvenToken';
 import { getConsumerMerchTokensByConsumerId } from 'Services/MerchToken';
 import ScrollList from 'Components/ReuseableComponents/ScrollList';
 import { AlbumCardTemplate, EventCardTemplate, MerchCardTemplate } from 'Components/ReuseableComponents/CardTemplates';
-import { IAlbum, IConsumer, IEvent, IMerchandise, IPoints } from 'Data/DataTypes';
+import { IAlbum, IAlbumToken, IArtist, IConsumer, IEvent, IEventToken, IMerchandise, IMerchToken, IPoints } from 'Data/DataTypes';
 import './User.css'
 import StyledPage from 'Styles/styledComponents/styledPage';
+import { getEventById } from 'Services/Event';
+import { getArtistById } from 'Services/Artist';
 
 const UserPage: React.FunctionComponent = () => {
   const location = useLocation();
   const { currentId } = useContext(UserContext);
 
-  const [albums, setAlbums] = useState<IAlbum[] | []>([]);
-  const [events, setEvents] = useState<IEvent[] | []>([]);
-  const [merchandises, setMerchandises] = useState<IMerchandise[] | []>([]);
+  const [albumTokens, setAlbumTokens] = useState<IAlbumToken[] | []>([]);
+  const [eventTokens, setEventTokens] = useState<IEventToken[] | []>([]);
+  const [event, setEvent] = useState<IEvent>();
+  const [merchandiseTokens, setMerchandiseTokens] = useState<IMerchToken[] | []>([]);
+  const [eventArr, setEventArr] = useState<IEvent[] | []>([]);
   const [user, setUser] = useState<IConsumer>({
     eth_address: '',
     username: '',
@@ -35,17 +39,24 @@ const UserPage: React.FunctionComponent = () => {
   useEffect(() => {
     getConsumerAlbumTokensByConsumerId(currentId)
       .then(response => {
-        setAlbums(response);
+        setAlbumTokens(response);
         return response;
       })
     getConsumerEventTokensByConsumerId(currentId)
-      .then(response => {
-        setEvents(response);
-        return response;
+      .then(eventTokens => {
+        setEventTokens(eventTokens);
+        eventTokens.map(async (eventToken: any) => {
+          let eventId = eventToken.EventId
+          let event1: IEvent = await getEventById(eventId)
+          setEvent(event1);
+          setEventArr(prev => {
+            return [...prev, event1]
+          })
+        })
       })
     getConsumerMerchTokensByConsumerId(currentId)
       .then(response => {
-        setMerchandises(response);
+        setMerchandiseTokens(response);
         return response;
       })
     getConsumerById(currentId)
@@ -62,12 +73,10 @@ const UserPage: React.FunctionComponent = () => {
         })
         setPointData(pointData);
       })
-
-    console.log("albus", albums, "events", events, "merch", merchandises);
-
   }, [])
 
 
+  console.log("eventsArr2", eventArr);
 
   return (
     <StyledPage>
@@ -79,14 +88,14 @@ const UserPage: React.FunctionComponent = () => {
             <br />
             <br />
             <div className="PP">
-              <img src={user.profile_picture} className="item" />
+              <img src={user.profile_picture} className="item" alt='img' />
             </div>
           </div>
-          {/* { (pointData.length > 0) ? pointData.map((pointEntry: IPoints) => {
-            const artistId: number  = pointEntry.ArtistId;
+          {/* {(pointData.length > 0) ? pointData.map((pointEntry: IPoints) => {
+            const artistId: number = pointEntry.ArtistId;
             const artist: IArtist = getArtistById(artistId);
             return <h2>{artist.name}: {pointEntry.points}</h2>
-          }) : null } */}
+          }) : null} */}
 
           <div className="UserNFTs">
             <h1>@{user.username}'s Profile</h1>
@@ -94,11 +103,13 @@ const UserPage: React.FunctionComponent = () => {
 
 
 
-            <ScrollList title='Your NFT Events'>
-              {(events.length > 0) ? events.map(event => <EventCardTemplate event={event} key={event.id} background={event.tokens_image} />)
-                : null}
-            </ScrollList>
 
+            {/* <ScrollList title='Your NFT Events'>
+              {/* @ts-ignore */}
+            {/* {(eventArr.length) ? event.map(event => <EventCardTemplate event={event} key={event.id} background={event.tokens_image} />)
+              : null}
+          </ScrollList> */}
+            {/* 
             <ScrollList title='Your NFT Albums'>
               {(albums.length > 0) ? albums.map(album => <AlbumCardTemplate album={album} key={album.id} background={album.tokens_image} />)
                 : null}
@@ -107,13 +118,13 @@ const UserPage: React.FunctionComponent = () => {
             <ScrollList title='Your NFT Merchandise'>
               {(merchandises.length > 0) ? merchandises.map(merchandise => <MerchCardTemplate merchandise={merchandise} key={merchandise.id} background={merchandise.tokens_image} />)
                 : null}
-            </ScrollList>
+            </ScrollList> */}
 
 
           </div>
         </div>
       </>
-    </StyledPage>
+    </StyledPage >
   )
 }
 
