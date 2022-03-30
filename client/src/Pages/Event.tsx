@@ -13,6 +13,7 @@ import { eventTokenPurchase } from 'Services/Purchase';
 import { UserContext } from 'Data/UserContext';
 
 import "./Event.css"
+import { Box, Flex } from 'rebass';
 
 const EventPage: React.FunctionComponent = () => {
     const location = useLocation();
@@ -104,20 +105,22 @@ const EventPage: React.FunctionComponent = () => {
                         </div>
                     </div>
                 </div>
-                <div className="secondHalf">
-                    <div>
+                <Flex>
+                    <Box width= {4/12}>
                         <h2>Description:</h2>
-                        <p>{eventData.description}</p>
-                    </div>
-                    <div className="eventTokenInfo">
-                        <div>
-                            <h4>TOKEN INFO</h4>
-                            <div>Number of Tokens: {eventData.number_of_tokens}</div>
-                            <div>Token value: {eventData.tokens_value}</div>
+                        <h4>{eventData.description}</h4>
+                    </Box>
+                    <Box width= {1/12}/>
+                    <Box width= {3/8}>
+                        <h2>Token Info: </h2>
+                        <h4> - Number of Tokens: {eventData.number_of_tokens}</h4>
+                        <h4> - Token value: {eventData.tokens_value}</h4>
+                    </Box>
+                    <Box width= {4/12}>
+                        <br/>
                             {(availableTokens.length > 0)  ? ((checkIfUserHasBought()) ?  <button>NFT purchased</button> : <button onClick={handleClick}>purchase event NFT</button>) : <button>Event Sold Out</button>}
-                        </div>
-                    </div>
-                </div>
+                    </Box>
+                </Flex>
             </div>
         </>
     )

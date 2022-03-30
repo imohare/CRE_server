@@ -17,14 +17,8 @@ function MerchandiseInputBar(props: any) {
   const { currentId } = useContext(UserContext);
   const [artistId, setArtistId] = useState(currentId);
 
-
-
   const addMerchandise = async (name: string, type: string, description: string, tokensNumber: number, img_url: string, tokensValue: number, artistId: number) => {
-    // const newMerchandises = props.merchandises.slice();
-    const response = await createMerchandise({ name, type, description, tokensNumber, img_url, tokensValue, artistId })
-    // newMerchandises.push(response)
-    // props.setMerchandises(newMerchandises); // need to import this from app
-    return response;
+    await createMerchandise({name, type, description, tokensNumber, img_url, tokensValue, artistId})
   }
 
   const handleChange = (e: any) => {
@@ -56,13 +50,6 @@ function MerchandiseInputBar(props: any) {
           .child(image.name)
           .getDownloadURL()
           .then((img: any) => {
-            console.log(name, "name");
-            console.log(type, "type");
-            console.log(description, "description");
-            console.log(tokensNumber, "tokensNumber");
-            console.log(img, "img");
-            console.log(tokensValue, "tokensValue");
-            console.log(artistId, "artistId");
             addMerchandise(name, type, description, tokensNumber, img, tokensValue, artistId);
           })
       }
@@ -96,17 +83,16 @@ function MerchandiseInputBar(props: any) {
         <Input type="number" name="tokensNumber" color="#c5c5c5" value={tokensNumber} onChange={(evt: { target: { value: string; }; }) => setTokensNumber(parseInt(evt.target.value))} required />
         <br />
 
-        <Label color="#c5c5c5">Value of the NFT</Label>
+        <Label color="#c5c5c5">NFT Value</Label>
         <Input type="number" name="tokensValue" color="#c5c5c5" value={tokensValue} onChange={(evt: { target: { value: string; }; }) => setTokensValue(parseInt(evt.target.value))} required />
         <br />
 
-        <Label color="#c5c5c5">Upload NFT cover</Label>
+        <Label color="#c5c5c5">NFT Cover Image</Label>
         <Input type="file" onChange={handleChange} color="#c5c5c5" />
         <progress value={progress} max="100" />
         <br /> <br />
 
-        <Button backgroundColor="#33e" variant='outline' mr={2}type="submit" color="#c5c5c5"> Upload Your NFT
-        </Button>
+        <Button backgroundColor="#FFF" mr={2}type="submit" color="#000"> upload your NFTs </Button>
       </form>
     </div>
   )
