@@ -56,6 +56,7 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
 
 
   const loginAs = (artist: boolean) => {
+
     setDisplayStage(1)
     setIsArtist(artist)
   }

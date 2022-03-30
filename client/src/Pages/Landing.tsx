@@ -1,5 +1,5 @@
 //react
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext, useEffect, Suspense } from 'react';
 //antd imports
 //components
 import StyledPage from 'Styles/styledComponents/styledPage';
@@ -34,6 +34,11 @@ import { FormContextProvider } from 'Data/FormConfigs/FormContext';
 import LoginModal from 'Components/FormComponents/DataComponents/LoginModal';
 import StyledButton from 'Styles/styledComponents/StyledButton';
 import StyledHeader from 'Styles/styledComponents/StyledHeader';
+import { OrbitControls, useGLTF } from '@react-three/drei';
+import { Canvas } from '@react-three/fiber';
+import BetterBalls from './4_Mirror_Balls';
+import Balls from './4_Mirror_Balls_2';
+
 
 
 const LandingPage: React.FunctionComponent = () => {

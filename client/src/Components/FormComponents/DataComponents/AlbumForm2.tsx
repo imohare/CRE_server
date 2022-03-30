@@ -18,7 +18,7 @@ function AlbumInputBar(props: any) {
 
   const addAlbum = async (name: string, year: Date, description: string, tokensNumber: number, img_url: string, tokensValue: number, artistId: number) => {
     const newAlbums = props.albums.slice();
-    const response = await createAlbum(name, year, description, tokensNumber, img_url, tokensValue, artistId)
+    const response = await createAlbum({ name, year, description, tokensNumber, img_url, tokensValue, artistId })
     newAlbums.push(response)
     props.setAlbums(newAlbums); // need to import this from app
   }
@@ -75,7 +75,7 @@ function AlbumInputBar(props: any) {
       <form onSubmit={handleSubmit}>
 
         <Label color="#c5c5c5">Album Name</Label>
-        <Input type="string" color="#c5c5c5" name="name" value={name} placeholder="Please enter album name ..." onChange={(evt: { target: { value: any; }; }) => setName(evt.target.value)} required/>
+        <Input type="string" color="#c5c5c5" name="name" value={name} placeholder="Please enter album name ..." onChange={(evt: { target: { value: any; }; }) => setName(evt.target.value)} required />
         <br />
         <Label color="#c5c5c5">Release Date</Label>
         {/* @ts-ignore */}
@@ -89,7 +89,7 @@ function AlbumInputBar(props: any) {
         <Input type="number" name="tokensNumber" color="#c5c5c5" value={tokensNumber} onChange={(evt: { target: { value: string; }; }) => setTokensNumber(parseInt(evt.target.value))} required />
         <br />
         <Label color="#c5c5c5"> NFT's value</Label>
-        <Input type="number" name="tokensValue" color="#c5c5c5" value={tokensValue} onChange={(evt: { target: { value: string; }; }) => setTokensValue(parseInt(evt.target.value))} required/>
+        <Input type="number" name="tokensValue" color="#c5c5c5" value={tokensValue} onChange={(evt: { target: { value: string; }; }) => setTokensValue(parseInt(evt.target.value))} required />
         <br />
         <Label color="#c5c5c5"> Upload Your NFT's cover picture</Label>
 
@@ -98,7 +98,7 @@ function AlbumInputBar(props: any) {
 
         <br />  <br />
         <Button color="#c5c5c5" type='submit'>
-          <Text  color="#12171c" fontFamily='Railway'>
+          <Text color="#12171c" fontFamily='Railway'>
             Upload Your NFT's
           </Text>
         </Button>
