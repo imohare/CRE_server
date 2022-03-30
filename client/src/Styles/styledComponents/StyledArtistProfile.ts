@@ -34,7 +34,6 @@ color: white;
 }
 
 .Calbums {
-  border: 1px solid green;
 }
 .Cmerchandise {
 

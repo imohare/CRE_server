@@ -29,7 +29,7 @@ import AlbumInputBar from 'Components/FormComponents/DataComponents/AlbumForm2';
 import EventInputBar from 'Components/FormComponents/DataComponents/EventForm2';
 import MerchandiseInputBar from 'Components/FormComponents/DataComponents/MerchandiseForm2';
 
-
+import DraggableMerchCard from 'Components/ReuseableComponents/DraggableMerchCard'
 
 const ArtistPage: React.FunctionComponent = () => {
 
@@ -77,9 +77,7 @@ const closeDropdown = (e: React.MouseEvent<HTMLButtonElement>) => {
   const { currentId } = useContext(UserContext);
 
 
-  useEffect(() => {
-    
-  }, [albums, events, artist])
+
 
   useEffect(() => {
  
@@ -96,6 +94,17 @@ const closeDropdown = (e: React.MouseEvent<HTMLButtonElement>) => {
         data => console.log('albums should be here', data)
     )
     
+    // @ts-ignore
+    getEventsByArtistId(currentArtistId)
+      .then(res => {
+          console.log("hello")
+        console.log(res, "res")
+          setEvents(res)
+          console.log("eventsinside", events)
+        return res;
+      }).catch((error: any) => {
+        console.log(error)
+      })
     //@ts-ignore
     getAllMerchandisesbyArtistId(currentArtistId)
       .then(res => {
@@ -118,12 +127,7 @@ const closeDropdown = (e: React.MouseEvent<HTMLButtonElement>) => {
        console.log(error)
      })
     
-    //@ts-ignore
-    // getEventsbyArtistId(currentArtistId)
-    //   .then((res: IEvent) => {
-    //     setEvents(res)
-    //     return res;
-    //   })
+
     
     //@ts-ignore
     getArtistById(currentArtistId)
@@ -186,7 +190,8 @@ const closeDropdown = (e: React.MouseEvent<HTMLButtonElement>) => {
            exit={{rotate: '0deg'}}
          >
 
-            <div onClick={() => {
+           <div onClick={(e: any) => {
+             e.preventDefault();
              setAlbumTitle(null)
               setAlbumCsvisible('visible')
            }} className="albumTitleDiv">{albumTitle}</div>
@@ -208,12 +213,21 @@ const closeDropdown = (e: React.MouseEvent<HTMLButtonElement>) => {
            transition={{ duration: 0.5 }}
            exit={{rotate: '0deg'}}
          >
-           <div onClick={() => {
+
+
+
+           <div onClick={(e: any) => {
+             e.preventDefault();
              setMerchTitle(null)
-              setMerchCsvisible('visible')
+             setMerchCsvisible('visible')
            }} className="merchTitleDiv">{merchTitle}</div>
+
            {
-             merchandise.length > 0 ? <DraggableAlbumCard classified="true" rotation={Math.floor(Math.random() * 12) - 6} album={albums[0]} ></DraggableAlbumCard>
+             merchandise.length > 0 ? merchandise.map(merch => {
+               return <div className={`merchV ${merchCvisible}`}>
+                 <DraggableMerchCard classified="true" rotation={Math.floor(Math.random() * 12) - 6} merch={merch} ></DraggableMerchCard>
+               </div>
+             })  
              : <div className={`absolute ${merchCvisible}` } >
              there is no merchandise available
          </div>
