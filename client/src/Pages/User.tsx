@@ -19,7 +19,7 @@ const UserPage: React.FunctionComponent = () => {
 
   const [albums, setAlbums] = useState<IAlbum[] | []>([]);
   const [events, setEvents] = useState<IEvent[] | []>([]);
-  const [merchandises, setMerchandises] = useState<IMerchandise[] | []>([]);
+  const [merchandise, setMerchandise] = useState<IMerchandise[] | []>([]);
   const [user, setUser] = useState<IConsumer>({
     eth_address: '',
     username: '',
@@ -45,7 +45,7 @@ const UserPage: React.FunctionComponent = () => {
       })
     getConsumerMerchTokensByConsumerId(currentId)
       .then(response => {
-        setMerchandises(response);
+        setMerchandise(response);
         return response;
       })
     getConsumerById(currentId)
@@ -105,9 +105,9 @@ const UserPage: React.FunctionComponent = () => {
               </div>)
                 : null}
             </ScrollList>
-            
+
             <ScrollList title='Your NFT Merchandise'>
-              {(merchandises.length > 0) ? merchandises.map(merchandise => <div key={merchandise.id}>
+              {(merchandise.length > 0) ? merchandise.map(merchandise => <div key={merchandise.id}>
                 <MerchCardTemplate merchandise={merchandise} background={merchandise.tokens_image} />
               </div>)
                 : null}

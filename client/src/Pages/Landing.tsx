@@ -125,28 +125,28 @@ const LandingPage: React.FunctionComponent = () => {
   }, [searchval])
 
   const searchFilter = (searchval: any) => {
-     if (searchval === '') setArtists(dupeArtists);
-     else {
-       const newArtistList = dupeArtists.filter((el) => {
-         const artistName= el.name.toLowerCase();
-         return artistName.includes(searchval);
-       });
-       setArtists(newArtistList);
-     }
-   }
-   
+    if (searchval === '') setArtists(dupeArtists);
+    else {
+      const newArtistList = dupeArtists.filter((el) => {
+        const artistName = el.name.toLowerCase();
+        return artistName.includes(searchval);
+      });
+      setArtists(newArtistList);
+    }
+  }
+
   return (
     <div>
-      <br/>
-      <br/>    
-      <br/>
-      <br/>
-  
+      <br />
+      <br />
+      <br />
+      <br />
+
       <Canvas camera={{ fov: 55, position: [40, 150, 800] }}>
         <Suspense fallback={null}>
           <ambientLight intensity={0.7} />
           <BetterBalls />
-          <Balls/>
+          <Balls />
         </Suspense>
         <OrbitControls enableZoom={true} enablePan={false} />
       </Canvas>
