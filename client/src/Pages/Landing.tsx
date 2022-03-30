@@ -1,5 +1,7 @@
+//react
 import { useState, useContext, useEffect, Suspense } from 'react';
-
+//antd imports
+//components
 import StyledPage from 'Styles/styledComponents/styledPage';
 import ScrollList from 'Components/ReuseableComponents/ScrollList';
 import { EventCardTemplate, AlbumCardTemplate, ArtistCardTemplate, MerchCardTemplate } from '../Components/ReuseableComponents/CardTemplates';
@@ -11,6 +13,8 @@ import Parallax from 'Styles/animations/ParallaxAnimation';
 import ShuffleSelector from 'Styles/animations/ShuffleSelector';
 import Transition from 'Styles/animations/PageTransitions';
 import Background from 'Styles/animations/LandingPageAnim';
+//styling
+import discoballs from 'images/header_background.jpg'
 
 import { UserContext } from 'Data/UserContext';
 
@@ -19,13 +23,21 @@ import { getAllMerchandises } from 'Services/Merchandise';
 import { getEvents } from 'Services/Event';
 import { getArtists } from 'Services/Artist';
 
+///////testing/////////
+import { exampleArtist, exampleAlbum, exampleEvent, exampleMerchandise } from '../testing/exampleObjects';
 import { IAlbum, IEvent, IMerchandise, IArtist } from 'Data/DataTypes';
 
 
-import { OrbitControls, useGLTF } from '@react-three/drei'
-import {Canvas } from '@react-three/fiber'
+import { Link, NavLink } from 'react-router-dom';
+import { FormContextProvider } from 'Data/FormConfigs/FormContext';
+import LoginModal from 'Components/FormComponents/DataComponents/LoginModal';
+import StyledButton from 'Styles/styledComponents/StyledButton';
+import StyledHeader from 'Styles/styledComponents/StyledHeader';
+import { OrbitControls, useGLTF } from '@react-three/drei';
+import { Canvas } from '@react-three/fiber';
 import BetterBalls from './4_Mirror_Balls';
 import Balls from './4_Mirror_Balls_2';
+
 
 
 const LandingPage: React.FunctionComponent = () => {
@@ -35,9 +47,19 @@ const LandingPage: React.FunctionComponent = () => {
   const { userType, setUserType } = useContext(UserContext);
   const { currentId, name } = useContext(UserContext);
 
+  // are we not meant to set the user type here to use it later?
+  const toggleLogin = () => {
+    setIsLogin(prev => !prev)
+  }
+  const toggleRegister = () => {
+    setIsRegister(prev => !prev)
+  }
+
   const filters = ['newest', 'rarest', 'most popular', 'upcoming']
 
   const [selected, setSelected] = useState(filters[0]);
+
+
 
   const [artists, setArtists] = useState<IArtist[] | []>([]);
   const [dupeArtists, setDupeArtists] = useState<IArtist[] | []>([]);
@@ -45,7 +67,6 @@ const LandingPage: React.FunctionComponent = () => {
   const [albums, setAlbums] = useState<IAlbum[] | []>([]);
   const [events, setEvents] = useState<IEvent[] | []>([]);
   const [merchandise, setMerchandise] = useState<IMerchandise[] | []>([]);
-
 
   useEffect(() => {
     getArtists()
@@ -96,48 +117,48 @@ const LandingPage: React.FunctionComponent = () => {
 
   const [searchval, setSearchVal] = useState('');
 
-   const searchArtists = (e: any) => {
-     setSearchVal(e.target.value);
-   };
+  const searchArtists = (e: any) => {
+    setSearchVal(e.target.value);
+  };
 
-   useEffect(() => {
-     searchFilter(searchval)
-   }, [searchval])
+  useEffect(() => {
+    searchFilter(searchval)
+  }, [searchval])
 
   const searchFilter = (searchval: any) => {
-     if (searchval === '') setArtists(dupeArtists);
-     else {
-       const newArtistList = dupeArtists.filter((el) => {
-         const artistName= el.name.toLowerCase();
-         return artistName.includes(searchval);
-       });
-       setArtists(newArtistList);
-     }
-   }
+    if (searchval === '') setArtists(dupeArtists);
+    else {
+      const newArtistList = dupeArtists.filter((el) => {
+        const artistName = el.name.toLowerCase();
+        return artistName.includes(searchval);
+      });
+      setArtists(newArtistList);
+    }
+  }
 
 
   return (
     <div>
-      <br/>
-      <br/>    
-      <br/>
-      <br/>
+      <br />
+      <br />
+      <br />
+      <br />
 
       <Canvas>
         <Suspense fallback={null}>
           <ambientLight />
           <BetterBalls />
-          <Balls/>
-          <OrbitControls enablePan={true} enableZoom={true} enableRotate={true}/>
+          <Balls />
+          <OrbitControls enablePan={true} enableZoom={true} enableRotate={true} />
         </Suspense>
       </Canvas>
 
       <Transition>
         {(userType === 'public') ? <PublicHeader /> : <UserHeader currentName={`Welcome, ${name}!`} />}
-      <StyledPage>
-      <Background />
+        <StyledPage>
+          <Background />
 
-        {/* <div>
+          {/* <div>
           <p className="shuffle colorchange filter">
             <LayoutGroup>
               <ul className="filters">
@@ -152,28 +173,28 @@ const LandingPage: React.FunctionComponent = () => {
           </p>
         </div> */}
 
-      <Form searchArtists={searchArtists} value={searchval} />
+          <Form searchArtists={searchArtists} value={searchval} />
 
-      <ScrollList title='Artists'> 
-      {/* @ts-ignore */}
-        {artists.map((artist: IArtist) =>  <ArtistCardTemplate artist={artist} background={artist.profile_picture}/> )}
-      </ScrollList>
+          <ScrollList title='Artists'>
+            {/* @ts-ignore */}
+            {artists.map((artist: IArtist) => <ArtistCardTemplate artist={artist} background={artist.profile_picture} />)}
+          </ScrollList>
 
-      <ScrollList title='Newest Albums'>
-        {albums.map(album => <AlbumCardTemplate album={album} />)}
-      </ScrollList>
+          <ScrollList title='Newest Albums'>
+            {albums.map(album => <AlbumCardTemplate album={album} />)}
+          </ScrollList>
 
-      <ScrollList title='Newest Events'>
-        {events.map(event => <EventCardTemplate event={event} background={event.tokens_image} />)}
-      </ScrollList>
+          <ScrollList title='Newest Events'>
+            {events.map(event => <EventCardTemplate event={event} background={event.tokens_image} />)}
+          </ScrollList>
 
-      <ScrollList title='Newest Merchandise'>
-        {merchandise.map(merchandise => <MerchCardTemplate merchandise={merchandise} background={''} />)}
-      </ScrollList>
+          <ScrollList title='Newest Merchandise'>
+            {merchandise.map(merchandise => <MerchCardTemplate merchandise={merchandise} background={''} />)}
+          </ScrollList>
 
-      </StyledPage>
+        </StyledPage>
 
-    </Transition>
+      </Transition>
 
     </div>
   )
