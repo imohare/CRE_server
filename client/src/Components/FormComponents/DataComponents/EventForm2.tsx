@@ -30,6 +30,11 @@ function EventInputBar(props: any) {
     setImage(file);
   }
 
+  const handleCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    props.closeDropdown()
+  }
+
   const handleSubmit = (evt: any) => {
     console.log("artistId", artistId);
     // @ts-ignore
