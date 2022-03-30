@@ -111,7 +111,7 @@ const ArtistPage: React.FunctionComponent = () => {
        <Link to="/">home</Link>
        <h1>{artist && artist.name}</h1>
 
-       <StyledBannerComponent background='http://www.thewowstyle.com/wp-content/uploads/2015/03/flower-wallpaper-20.jpg' image="https://i.pinimg.com/736x/61/27/2e/61272ed635ebb3fffb8ebaf8ac00b2bb.jpg"><div className="background"><div className="image"></div></div></StyledBannerComponent>
+       <StyledBannerComponent background={exampleObj.randomBackground} image={ artist.profile_picture }><div className="background"><div className="image"></div></div></StyledBannerComponent>
       <div className="nftBoxes">
          <motion.div className="Cevents box"
            whileHover={{ rotate: ['2deg', '-2deg', '1.5deg', '-1deg'] }}
