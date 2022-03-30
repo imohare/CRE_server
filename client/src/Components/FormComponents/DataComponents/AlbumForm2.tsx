@@ -5,6 +5,7 @@ import { Text, Button } from "rebass";
 import { createAlbum } from 'Services/Album';
 import moment from 'moment';
 import { UserContext } from 'Data/UserContext';
+import DraggableCard from 'Components/ReuseableComponents/DraggableCard';
 
 function AlbumInputBar(props: any) {
 
