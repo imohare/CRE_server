@@ -124,11 +124,6 @@ const UserPage: React.FunctionComponent = () => {
               <img src={user.profile_picture} className="item" alt='img' />
             </div>
           </div>
-          {/* {(pointData.length > 0) ? pointData.map((pointEntry: IPoints) => {
-            const artistId: number = pointEntry.ArtistId;
-            const artist: IArtist = getArtistById(artistId);
-            return <h2>{artist.name}: {pointEntry.points}</h2>
-          }) : null} */}
 
           <div className="UserNFTs">
             <h1>@{user.username}'s Profile</h1>
