@@ -157,7 +157,7 @@ const LandingPage: React.FunctionComponent = () => {
         <StyledPage>
           <Background />
 
-          <Form searchArtists={searchArtists} value={searchval} />
+          <Form className="ArtistSearch" searchArtists={searchArtists} value={searchval} />
 
           <ScrollList title='Artists'>
             {/* @ts-ignore */}
