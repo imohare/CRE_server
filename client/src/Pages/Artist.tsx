@@ -172,15 +172,15 @@ const closeDropdown = (e: React.MouseEvent<HTMLButtonElement>) => {
               setEventCsvisible('visible')
            }} className="eventTitleDiv">{eventTitle}</div>
        
-           {
-             events.length > 0 ? events.map(event => {
-               
-               return <DraggableEventsCard rotation={Math.floor(Math.random() * 3)} event={event}></DraggableEventsCard>
-           })
-               : <div className={`absolute ${eventCvisible}` } >
-                 there are no events available
-               
-             </div> } 
+           {                     
+           events.length > 0 ? albums.map(event => {
+            return <div className={`V ${eventCvisible}`}>
+              <DraggableAlbumCard rotation={Math.floor(Math.random() * 3)} album={event}></DraggableAlbumCard> </div>
+          })
+            : <div className={`absolute ${eventCvisible}` } >
+            there are currently no event planned
+          
+        </div>} 
             </motion.div>
             <motion.div className="Calbums box"
            whileHover={{ rotate: ['2deg', '-2deg', '1.5deg', '-1deg'] }}
@@ -198,7 +198,7 @@ const closeDropdown = (e: React.MouseEvent<HTMLButtonElement>) => {
 
 
            {albums.length > 0 ? albums.map(album => {
-             return <div className={`albumV ${albumCvisible}`}>
+             return <div className={`V ${albumCvisible}`}>
                <DraggableAlbumCard rotation={Math.floor(Math.random() * 3)} album={album}></DraggableAlbumCard> </div>
            })
              : <div className={`absolute ${albumCvisible}` } >
@@ -224,7 +224,7 @@ const closeDropdown = (e: React.MouseEvent<HTMLButtonElement>) => {
 
            {
              merchandise.length > 0 ? merchandise.map(merch => {
-               return <div className={`merchV ${merchCvisible}`}>
+               return <div className={`V ${merchCvisible}`}>
                  <DraggableMerchCard classified="true" rotation={Math.floor(Math.random() * 12) - 6} merch={merch} ></DraggableMerchCard>
                </div>
              })  
