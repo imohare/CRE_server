@@ -25,7 +25,7 @@ function EventInputBar(props: any) {
     console.log('in advent and values are', name, address, date, description, tokensNumber, img_url, tokensValue, artistId)
     const newEvents = props.events.slice();
     console.log('new event', newEvents)
-    const response = await createEvent({ name, address, date, description, tokensNumber, img_url, tokensValue, artistId })
+    const response = await createEvent({name, address, date, description, tokensNumber, img_url, tokensValue, artistId})
     newEvents.push(response)
     props.setEvents(newEvents); // need to import this from app
   }

@@ -21,7 +21,7 @@ function MerchandiseInputBar(props: any) {
 
   const addMerchandise = async (name: string, type: string, description: string, tokensNumber: number, img_url: string, tokensValue: number, artistId: number) => {
     // const newMerchandises = props.merchandises.slice();
-    const response = await createMerchandise({ name, type, description, tokensNumber, img_url, tokensValue, artistId })
+    const response = await createMerchandise({name, type, description, tokensNumber, img_url, tokensValue, artistId})
     // newMerchandises.push(response)
     // props.setMerchandises(newMerchandises); // need to import this from app
     return response;
