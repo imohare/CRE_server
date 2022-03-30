@@ -105,6 +105,7 @@ const UserPage: React.FunctionComponent = () => {
               </div>)
                 : null}
             </ScrollList>
+            
             <ScrollList title='Your NFT Merchandise'>
               {(merchandises.length > 0) ? merchandises.map(merchandise => <div key={merchandise.id}>
                 <MerchCardTemplate merchandise={merchandise} background={merchandise.tokens_image} />

@@ -157,21 +157,6 @@ const LandingPage: React.FunctionComponent = () => {
         <StyledPage>
           <Background />
 
-          {/* <div>
-          <p className="shuffle colorchange filter">
-            <LayoutGroup>
-              <ul className="filters">
-                {filters.map((filter: string) => (<ShuffleSelector
-                  key={filter}
-                  filterName={selected}
-                  hoverOver={() => setSelected(filter)}
-                >{filter}
-                </ShuffleSelector>))}
-              </ul>
-            </LayoutGroup>
-          </p>
-        </div> */}
-
           <Form searchArtists={searchArtists} value={searchval} />
 
           <ScrollList title='Artists'>
@@ -188,7 +173,7 @@ const LandingPage: React.FunctionComponent = () => {
           </ScrollList>
 
           <ScrollList title='Newest Merchandise'>
-            {merchandise.map(merchandise => <MerchCardTemplate merchandise={merchandise} background={''} />)}
+            {merchandise.map(merchandise => <MerchCardTemplate merchandise={merchandise} background={merchandise.tokens_image} />)}
           </ScrollList>
 
         </StyledPage>
