@@ -101,10 +101,11 @@ const UserPage: React.FunctionComponent = () => {
 
             <ScrollList title='Your NFT Albums'>
               {(albums.length > 0) ? albums.map(album => <div key={album.id}>
-                <AlbumCardTemplate album={album} background={album.tokens_image}/>
+                <AlbumCardTemplate album={album} background={album.tokens_image} />
               </div>)
                 : null}
             </ScrollList>
+            
             <ScrollList title='Your NFT Merchandise'>
               {(merchandises.length > 0) ? merchandises.map(merchandise => <div key={merchandise.id}>
                 <MerchCardTemplate merchandise={merchandise} background={merchandise.tokens_image} />

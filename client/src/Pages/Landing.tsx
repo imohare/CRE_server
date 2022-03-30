@@ -9,7 +9,6 @@ import PublicHeader from 'Components/FormComponents/DataComponents/PublicHeader'
 import UserHeader from 'Components/FormComponents/DataComponents/UserHeader';
 import Form from '../Components/searchbar';
 
-import { LayoutGroup } from 'framer-motion';
 import Parallax from 'Styles/animations/ParallaxAnimation';
 import ShuffleSelector from 'Styles/animations/ShuffleSelector';
 import Transition from 'Styles/animations/PageTransitions';

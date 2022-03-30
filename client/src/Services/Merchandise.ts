@@ -35,7 +35,7 @@ const getMerchandiseById = (merchandiseId: number) => {
 
 const getAllMerchandisesbyArtistId = (artistId: number) => {
     return fetch(`${BASE_URL}/getArtistMerchandises/${artistId}`)
-        .then(res => res.json)
+        .then(res => res.json())
         .catch(err => console.log(err, "error"))
 }
 

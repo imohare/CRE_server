@@ -23,7 +23,9 @@ function AlbumInputBar(props: any) {
     const response = await createAlbum({ name, year, description, tokensNumber, img_url, tokensValue, artistId })
     newAlbums.push(response)
     props.setAlbums(newAlbums); // need to import this from app
+
     await createAlbum({ name, year, description, tokensNumber, img_url, tokensValue, artistId })
+
   }
 
   const handleChange = (e: any) => {
@@ -70,6 +72,7 @@ function AlbumInputBar(props: any) {
         <Input type="string" color="#c5c5c5" name="name" value={name} placeholder="Please enter album name ..." onChange={(evt: { target: { value: any; }; }) => setName(evt.target.value)} required />
         <br />
 
+
         <Label color="#c5c5c5">Release Date</Label>
         {/* @ts-ignore */}
         <input type="datetime-local" name="year" color="#c5c5c5" value={year} onChange={(evt: { target: { value: any; }; }) => setYear(evt.target.value)} required />
@@ -90,7 +93,7 @@ function AlbumInputBar(props: any) {
         <Label color="#c5c5c5"> Upload Your NFT's cover picture</Label>
         <Input type="file" onChange={handleChange} color="#c5c5c5" />
         <progress value={progress} max="100" />
-        <br />  <br />
+
 
         <Button backgroundColor="#FFF" mr={2} type="submit" color="#000"> upload your NFTs </Button>
       </form>
