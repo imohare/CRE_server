@@ -1,5 +1,6 @@
 //Router
-import {  Routes, Route, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { UserContextProvider } from 'Data/UserContext';
 //Pages
 import {
@@ -11,7 +12,6 @@ import {
   UserPage
 } from './Pages';
 
-
 //styling
 import GlobalStyles from 'Styles/globalStyles';
 import { ThemeProvider } from 'styled-components';
@@ -22,8 +22,13 @@ import { useDarkMode } from 'Styles/styledComponents/useDarkmode';
 
 const App: React.FunctionComponent = () => {
 
+
+  
+  
+  
   const location = useLocation();
   const [theme, themeToggler]= useDarkMode();
+  useEffect(()=>{}, [theme])
 
    const themeMode = theme === 'light' ? lightTheme : darkTheme;
 
