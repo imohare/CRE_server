@@ -17,8 +17,8 @@ import { Box, Flex } from 'rebass';
 
 const AlbumPage: React.FunctionComponent = () => {
     const location = useLocation();
-    const {currentId} = useContext(UserContext);
-    
+    const { currentId } = useContext(UserContext);
+
     const [albumData, setAlbumData] = useState({
         id: 0,
         name: '',
@@ -30,9 +30,9 @@ const AlbumPage: React.FunctionComponent = () => {
         ArtistId: 0
     });
     const [albumTokenData, setAlbumTokenData] = useState<IAlbumToken[]>([]);
-    
+
     const [artistData, setArtistData] = useState<IArtist>({
-        id: 0, 
+        id: 0,
         eth_address: '',
         name: '',
         profile_picture: '',
@@ -40,7 +40,7 @@ const AlbumPage: React.FunctionComponent = () => {
         createdAt: new Date('2022-03-25T19:36:22.920Z'),
         updatedAt: new Date('2022-03-25T19:36:22.920Z'),
     });
-    
+
     const [availableTokens, setAvailableTokens] = useState<IAlbumToken[]>([{
         id: 0,
         createdAt: new Date(),
@@ -54,6 +54,7 @@ const AlbumPage: React.FunctionComponent = () => {
         getAlbumById(albumId)
             .then(response => {
                 setAlbumData(response);
+                console.log(response);
                 return response;
             })
             .then(evt => {
@@ -66,24 +67,27 @@ const AlbumPage: React.FunctionComponent = () => {
             })
             .then(artist => {
                 setArtistData(artist)
-            });    
+            });
         getAlbumTokenByAlbumId(albumId)
             .then(response => {
                 setAlbumTokenData(response)
-                const availTokens =  response.filter((token: IAlbumToken) => token.ConsumerId === null);
+                const availTokens = response.filter((token: IAlbumToken) => token.ConsumerId === null);
                 setAvailableTokens(availTokens);
             })
-         }, [])
 
-         const handleClick = () => {
-            albumTokenPurchase(currentId, availableTokens[0].id, artistData.id, albumData.id);
-          };
-        
-        const checkIfUserHasBought = (): boolean => {
-            const consumerBoughtToken = albumTokenData.filter(token => token.ConsumerId === currentId)
-            if (consumerBoughtToken.length > 0) return true
-            else return false
-        }
+
+        // getArtistB
+    }, [])
+
+    const handleClick = () => {
+        albumTokenPurchase(currentId, availableTokens[0].id, artistData.id, albumData.id);
+    };
+
+    const checkIfUserHasBought = (): boolean => {
+        const consumerBoughtToken = albumTokenData.filter(token => token.ConsumerId === currentId)
+        if (consumerBoughtToken.length > 0) return true
+        else return false
+    }
 
     return (
         <>
@@ -106,19 +110,19 @@ const AlbumPage: React.FunctionComponent = () => {
                     </div>
                 </div>
                 <Flex>
-                    <Box width= {4/12}>
+                    <Box width={4 / 12}>
                         <h2>Description:</h2>
                         <h4>{albumData.description}</h4>
                     </Box>
-                    <Box width= {1/12}/>
-                    <Box width= {3/8}>
+                    <Box width={1 / 12} />
+                    <Box width={3 / 8}>
                         <h2>Token Info:</h2>
                         <h4> - Number of Tokens: {albumData.number_of_tokens}</h4>
                         <h4> - Token value: {albumData.number_of_tokens}</h4>
                     </Box>
-                    <Box width= {4/12}>
-                    <br/>
-                        {(availableTokens.length > 0)  ? ((checkIfUserHasBought()) ?  <button>NFT purchased</button> : <button onClick={handleClick}>purchase album NFT</button>) : <button>Album Sold Out</button>}
+                    <Box width={4 / 12}>
+                        <br />
+                        {(availableTokens.length > 0) ? ((checkIfUserHasBought()) ? <button>NFT purchased</button> : <button onClick={handleClick}>purchase album NFT</button>) : <button>Album Sold Out</button>}
                     </Box>
                 </Flex>
             </div>

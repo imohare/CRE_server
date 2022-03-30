@@ -37,8 +37,7 @@ import { OrbitControls, useGLTF } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import BetterBalls from './4_Mirror_Balls';
 import Balls from './4_Mirror_Balls_2';
-
-
+import './Landing.css'
 
 const LandingPage: React.FunctionComponent = () => {
 
@@ -126,32 +125,32 @@ const LandingPage: React.FunctionComponent = () => {
   }, [searchval])
 
   const searchFilter = (searchval: any) => {
-    if (searchval === '') setArtists(dupeArtists);
-    else {
-      const newArtistList = dupeArtists.filter((el) => {
-        const artistName = el.name.toLowerCase();
-        return artistName.includes(searchval);
-      });
-      setArtists(newArtistList);
-    }
-  }
-
-
+     if (searchval === '') setArtists(dupeArtists);
+     else {
+       const newArtistList = dupeArtists.filter((el) => {
+         const artistName= el.name.toLowerCase();
+         return artistName.includes(searchval);
+       });
+       setArtists(newArtistList);
+     }
+   }
+   
   return (
     <div>
-      <br />
-      <br />
-      <br />
-      <br />
-
-      <Canvas>
+      <br/>
+      <br/>    
+      <br/>
+      <br/>
+  
+      <Canvas camera={{ fov: 55, position: [40, 150, 800] }}>
         <Suspense fallback={null}>
-          <ambientLight />
+          <ambientLight intensity={0.7} />
           <BetterBalls />
-          <Balls />
-          <OrbitControls enablePan={true} enableZoom={true} enableRotate={true} />
+          <Balls/>
         </Suspense>
+        <OrbitControls enableZoom={true} enablePan={false} />
       </Canvas>
+
 
       <Transition>
         {(userType === 'public') ? <PublicHeader /> : <UserHeader currentName={`Welcome, ${name}!`} />}
@@ -201,5 +200,3 @@ const LandingPage: React.FunctionComponent = () => {
 }
 
 export default LandingPage;
-
-//look for a random background generator api!   https://wallpapercave.com/wp/wp7172141.jpg'
