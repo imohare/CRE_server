@@ -18,7 +18,7 @@ function AlbumInputBar(props: any) {
 
   const addAlbum = async (name: string, year: Date, description: string, tokensNumber: number, img_url: string, tokensValue: number, artistId: number) => {
     const newAlbums = props.albums.slice();
-    const response = await createAlbum(name, year, description, tokensNumber, img_url, tokensValue, artistId)
+    const response = await createAlbum({name, year, description, tokensNumber, img_url, tokensValue, artistId})
     newAlbums.push(response)
     props.setAlbums(newAlbums); // need to import this from app
   }
