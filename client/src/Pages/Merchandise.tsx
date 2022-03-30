@@ -10,7 +10,7 @@ import { getMerchTokensByMerchId } from '../Services/MerchToken';
 import { merchandiseTokenPurchase } from 'Services/Purchase';
 
 import { UserContext } from 'Data/UserContext';
-import { Flex, Box } from 'rebass';
+import { Flex, Box, Card, Image, Text } from 'rebass';
 
 import './Merchandise.css'
 import StyledButton from 'Styles/styledComponents/StyledButton';
@@ -104,25 +104,27 @@ const MerchandisePage: React.FunctionComponent = () => {
                     <StyledButton onClick={homeRouteChange} >home</StyledButton>
                     <StyledButton onClick={profileRouteChange} >profile</StyledButton>
                 </div>
-                <br />
-                <br />
-                <br />
-                <div className="moveMiddle">
-                    <div className="merchandisePicAndTitle">
-                        <div className="merchandisePic">
-                            <img src={merchandiseData.tokens_image} alt="merchandise cover" />
-                        </div>
-                        <div className="merchandiseTitle">
-                            < h1 > {merchandiseData.name}</h1 >
-                            <div className="dateAndName">
-                                <h3>{merchandiseData.type}</h3>
-                                <h2>*{artistData.name}</h2>
-                            </div>
-                        </div>
-                    </div>
-                    <br />
-                    <br />
-
+                <br /> <br /> <br />
+                <Flex>
+                    <Box width={1/2}>
+                    <Card width={[ 256, 320 ]} mx='auto'>
+                    <Image src={merchandiseData.tokens_image} />
+                    </Card>
+                    </Box>
+                    <Box width={1/2}>
+                    <Flex>
+                        <Text fontSize={[ 30, 40, 50 ]} fontWeight='bold' color='#c6c6c6' fontFamily='Raleway'> {merchandiseData.name}</Text >
+                    </Flex>
+                    <Flex>
+                        <Box>
+                        <Text fontSize={[ 10, 20, 30 ]} color='#c6c6c6' fontFamily='Raleway'>{moment(merchandiseData.type).format('yyyy')}</Text>
+                        <Text  fontSize={[ 10, 20, 30 ]} fontWeight='bold' color='#c6c6c6' fontFamily='Raleway'> //</Text>
+                        <Text  fontSize={[ 20, 30, 40 ]} color='#c6c6c6' fontFamily='Raleway'>{artistData.name}</Text>
+                        </Box>
+                    </Flex>
+                    </Box>
+                </Flex>
+                <br /> <br /><br /><br /><br />
                     <Flex>
                         <Box width={4 / 12}>
                             <h2>Description:</h2>
@@ -140,7 +142,6 @@ const MerchandisePage: React.FunctionComponent = () => {
                         </Box>
                     </Flex>
                 </div>
-            </div>
         </>
     )
 }

@@ -13,7 +13,7 @@ import { eventTokenPurchase } from 'Services/Purchase';
 import { UserContext } from 'Data/UserContext';
 
 import "./Event.css"
-import { Box, Flex } from 'rebass';
+import { Box, Card, Flex, Image, Text } from 'rebass';
 import StyledButton from 'Styles/styledComponents/StyledButton';
 
 const EventPage: React.FunctionComponent = () => {
@@ -105,26 +105,27 @@ const EventPage: React.FunctionComponent = () => {
                     <StyledButton onClick={homeRouteChange} >home</StyledButton>
                     <StyledButton onClick={profileRouteChange} >profile</StyledButton>
                 </div>
-                <br />
-                <br />
-                <br />
-
-
-                <div className="eventPicAndTitle">
-                    <div className="eventPic">
-                        <img src={eventData.tokens_image} alt="event cover" />
-                    </div>
-                    <div className="eventTitle">
-                        < h1 > {eventData.name}</h1 >
-                        <div className="dateAndName">
-                            <h3>{moment(eventData.date).format('yyyy')}</h3>
-                            <h2>{artistData.name}</h2>
-                        </div>
-                    </div>
-                </div>
-                <br />
-                <br />
-
+                <br /> <br /> <br />
+                <Flex>
+                    <Box width={1/2}>
+                    <Card width={[ 256, 320 ]} mx='auto'>
+                    <Image src={eventData.tokens_image} />
+                    </Card>
+                    </Box>
+                    <Box width={1/2}>
+                    <Flex>
+                        <Text fontSize={[ 30, 40, 50 ]} fontWeight='bold' color='#c6c6c6' fontFamily='Raleway'> {eventData.name}</Text >
+                    </Flex>
+                    <Flex>
+                        <Box>
+                        <Text fontSize={[ 10, 20, 30 ]} color='#c6c6c6' fontFamily='Raleway'>{moment(eventData.date).format('yyyy')}</Text>
+                        <Text  fontSize={[ 10, 20, 30 ]} fontWeight='bold' color='#c6c6c6' fontFamily='Raleway'> //</Text>
+                        <Text  fontSize={[ 20, 30, 40 ]} color='#c6c6c6' fontFamily='Raleway'>{artistData.name}</Text>
+                        </Box>
+                    </Flex>
+                    </Box>
+                </Flex>
+                <br /> <br /><br /><br /><br />
                 <Flex>
                     <Box width={4 / 12}>
                         <h2>Description:</h2>
