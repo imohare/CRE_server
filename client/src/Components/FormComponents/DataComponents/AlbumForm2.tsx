@@ -94,7 +94,7 @@ function AlbumInputBar(props: any) {
         <Label color="#c5c5c5"> Upload Your NFT's cover picture</Label>
         <Input type="file" onChange={handleChange} color="#c5c5c5" />
         <progress value={progress} max="100" />
-
+        <br /> <br />
 
         <Button backgroundColor="#FFF" mr={2} type="submit" color="#000"> upload your NFTs </Button>
       </form>

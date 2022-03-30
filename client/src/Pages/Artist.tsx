@@ -17,7 +17,7 @@ import StyledPage from 'Styles/styledComponents/styledPage';
 import StyledButton from 'Styles/styledComponents/StyledButton';
 //styling
 import DraggableAlbumCard from 'Components/ReuseableComponents/DraggableCard';
-import DraggableEventsCard from 'Components/ReuseableComponents/StyledDraggableEventsCard';
+import DraggableEventsCard from 'Components/ReuseableComponents/DraggableMerchCard';
 import StyledArtistProfile from 'Styles/styledComponents/StyledArtistProfile';
 import StyledBannerComponent from 'Styles/styledComponents/StyledBanner';
 // import './Artist.css'
@@ -73,10 +73,7 @@ const closeDropdown = (e: React.MouseEvent<HTMLButtonElement>) => {
 }
  
 
-
   const { currentId } = useContext(UserContext);
-
-
 
 
   useEffect(() => {
@@ -151,8 +148,8 @@ const closeDropdown = (e: React.MouseEvent<HTMLButtonElement>) => {
   console.log('albums', albums, 'events', events, 'merchandise', merchandise)
  return (
    <StyledPage>
-     <LogoComponent></LogoComponent>
      <StyledArtistProfile>
+     <LogoComponent></LogoComponent>
        {
          artist &&
          <BannerComponent background={'https://unsplash.com/photos/dPgPoiUIiXk?utm_source=unsplash&utm_medium=referral&utm_content=creditShareLink'} image={artist.profile_picture} title={ artist.name } ></BannerComponent>
@@ -173,7 +170,7 @@ const closeDropdown = (e: React.MouseEvent<HTMLButtonElement>) => {
            }} className="eventTitleDiv">{eventTitle}</div>
        
            {                     
-           events.length > 0 ? albums.map(event => {
+           events.length > 0 ? events.map(event => {
             return <div className={`V ${eventCvisible}`}>
               <DraggableAlbumCard rotation={Math.floor(Math.random() * 3)} album={event}></DraggableAlbumCard> </div>
           })

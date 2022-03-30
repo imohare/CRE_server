@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import LogoComponent from 'Components/ReuseableComponents/LogoComponent';
 
 const StyledLogo = styled.div`
-
  color: silver;
+ display: inline-block;
  text-shadow: 1px 1px grey;
  display: grid;
  height: 15vh;

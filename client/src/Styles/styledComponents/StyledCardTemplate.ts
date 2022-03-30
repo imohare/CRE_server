@@ -7,8 +7,8 @@ position: relative;
 min-width: 16rem;
 height: 20rem;
 margin: 0 0.6rem;
-background-color: ${({ theme }) => theme.fontColor};
-border-radius: 5px;
+background-color: rgba(0,0,0,0.5);
+border-radius: 5px
 img {
   position: absolute;
   overflow-x: hidden;

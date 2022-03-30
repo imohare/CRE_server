@@ -32,6 +32,10 @@ body {
 h1, h2, h3, h4, h5, h6 {
   color: #c5c5c5;
 }
+h2 {
+  font-size: 2rem;
+  padding-top: 3rem;
+}
 `
 
 export default GlobalStyles;

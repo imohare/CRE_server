@@ -36,7 +36,7 @@ const DraggableMerchCard = ({ rotation, merch, classified } : IProps) => {
         <div className="value">
           { merch.tokens_value }
         </div>
-        <Link to={`/album/${merch.id}`}
+        <Link to={`/merch/${merch.id}`}
         className="link">
         go to page
         </Link>
