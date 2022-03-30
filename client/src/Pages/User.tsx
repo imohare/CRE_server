@@ -1,5 +1,5 @@
 //react
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { UserContext } from 'Data/UserContext';
 import { getConsumerById, getConsumerPointsByConsumerId } from '../Services/Consumer'
@@ -14,16 +14,26 @@ import './User.css'
 import StyledPage from 'Styles/styledComponents/styledPage';
 import { getEventById } from 'Services/Event';
 import { getArtistById } from 'Services/Artist';
+import { getAlbumById } from 'Services/Album';
+import { getMerchandiseById } from 'Services/Merchandise';
+import StyledButton from 'Styles/styledComponents/StyledButton';
 
 const UserPage: React.FunctionComponent = () => {
   const location = useLocation();
   const { currentId } = useContext(UserContext);
 
   const [albumTokens, setAlbumTokens] = useState<IAlbumToken[] | []>([]);
+  const [album, setAlbum] = useState<IAlbum>();
+  const [albumArr, setAlbumArr] = useState<IAlbum[]| []>([]);
+
   const [eventTokens, setEventTokens] = useState<IEventToken[] | []>([]);
   const [event, setEvent] = useState<IEvent>();
-  const [merchandiseTokens, setMerchandiseTokens] = useState<IMerchToken[] | []>([]);
-  const [eventArr, setEventArr] = useState<IEvent[] | []>([]);
+  const [eventArr, setEventArr] = useState<IEvent[]| []>([]);
+
+  const [merchTokens, setMerchTokens] = useState<IMerchToken[] | []>([]);
+  const [merch, setMerch] = useState<IMerchandise>();
+  const [merchArr, setMerchArr] = useState<IMerchandise[]| []>([]);
+
   const [user, setUser] = useState<IConsumer>({
     eth_address: '',
     username: '',
@@ -38,13 +48,25 @@ const UserPage: React.FunctionComponent = () => {
 
   useEffect(() => {
     getConsumerAlbumTokensByConsumerId(currentId)
-      .then(response => {
-        setAlbumTokens(response);
-        return response;
+      .then(albumTokens => {
+        console.log(albumTokens, "albumTokens")
+        setAlbumTokens(albumTokens);
+        console.log(albumTokens, "albumTokensset")
+
+        albumTokens.map(async (albumToken: any) => {
+          let albumId = albumToken.AlbumId
+          console.log(albumId, "albumId")
+          let album1: IAlbum = await getAlbumById(albumId)
+          setAlbum(album1);
+          setAlbumArr(prev => {
+            return [...prev, album1]
+          })
+        })
       })
     getConsumerEventTokensByConsumerId(currentId)
       .then(eventTokens => {
         setEventTokens(eventTokens);
+        console.log("eventTokens", eventTokens)
         eventTokens.map(async (eventToken: any) => {
           let eventId = eventToken.EventId
           let event1: IEvent = await getEventById(eventId)
@@ -55,9 +77,17 @@ const UserPage: React.FunctionComponent = () => {
         })
       })
     getConsumerMerchTokensByConsumerId(currentId)
-      .then(response => {
-        setMerchandiseTokens(response);
-        return response;
+    .then(merchTokens => {
+      setMerchTokens(merchTokens);
+      console.log("merchTokens", merchTokens)
+      merchTokens.map(async (merchToken: any) => {
+        let merchId = merchToken.MerchId
+        let merch1: IMerchandise = await getMerchandiseById(merchId)
+        setMerch(merch1);
+        setMerchArr(prev => {
+          return [...prev, merch1]
+        })
+      })
       })
     getConsumerById(currentId)
       .then(response => {
@@ -76,14 +106,17 @@ const UserPage: React.FunctionComponent = () => {
   }, [])
 
 
-  console.log("eventsArr2", eventArr);
+  let navigate = useNavigate();
+  const homeRouteChange = () => {
+    let path = `/`;
+    navigate(path);
+  }
 
   return (
     <StyledPage>
-      <>
         <div className="hotBar"></div>
         <div className="UserProfile">
-          <Link to="/"> {`<`} </Link>
+          <StyledButton onClick={homeRouteChange}> home </StyledButton>
           <div className="banner">
             <br />
             <br />
@@ -101,29 +134,28 @@ const UserPage: React.FunctionComponent = () => {
             <h1>@{user.username}'s Profile</h1>
             <h2>Points: {totalPoints}</h2>
 
-
-
-
-            {/* <ScrollList title='Your NFT Events'>
+            <ScrollList title='Your NFT Events'>
               {/* @ts-ignore */}
-            {/* {(eventArr.length) ? event.map(event => <EventCardTemplate event={event} key={event.id} background={event.tokens_image} />)
+             {(eventArr.length > 0) ? eventArr.map(event => <EventCardTemplate event={event} key={event.id} background={event.tokens_image} />) 
               : null}
-          </ScrollList> */}
-            {/* 
-            <ScrollList title='Your NFT Albums'>
-              {(albums.length > 0) ? albums.map(album => <AlbumCardTemplate album={album} key={album.id} background={album.tokens_image} />)
-                : null}
-            </ScrollList>
+          </ScrollList>
 
-            <ScrollList title='Your NFT Merchandise'>
-              {(merchandises.length > 0) ? merchandises.map(merchandise => <MerchCardTemplate merchandise={merchandise} key={merchandise.id} background={merchandise.tokens_image} />)
-                : null}
-            </ScrollList> */}
+          <ScrollList title='Your NFT Albums'>
+              {/* @ts-ignore */}
+             {(albumArr.length > 0) ? albumArr.map(album => <AlbumCardTemplate album={album} key={album.id} background={album.tokens_image} />) 
+              : null}
+          </ScrollList>
+
+          <ScrollList title='Your NFT Merchandise'>
+              {/* @ts-ignore */}
+             {(merchArr.length > 0) ? merchArr.map(merch => <MerchCardTemplate merchandise={merch} key={merch.id} background={merch.tokens_image} />) 
+              : null}
+          </ScrollList>
 
 
           </div>
         </div>
-      </>
+      
     </StyledPage >
   )
 }
