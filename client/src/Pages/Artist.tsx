@@ -3,7 +3,6 @@ import { Link, useParams } from 'react-router-dom';
 import { useState, useContext, useEffect } from 'react';
 import { motion } from 'framer-motion';
 //antd imports
-import { Button } from 'antd';
 //services
 import { getAllAlbums, getAllAlbumsbyArtistId } from 'Services/Album';
 import { getEvents, getEventsByArtistId } from 'Services/Event';
@@ -14,7 +13,7 @@ import StyledPage from 'Styles/styledComponents/styledPage';
 import StyledButton from 'Styles/styledComponents/StyledButton';
 //styling
 import StyledArtistProfile from 'Styles/styledComponents/StyledArtistProfile';
-import StyledBannerComponent from 'Styles/styledComponents/Banner';
+import StyledBannerComponent from 'Styles/styledComponents/StyledBanner';
 // import './Artist.css'
 //Datatypes
 import { IAlbum, IArtist, IEvent, IMerchandise } from '../Data/DataTypes';
@@ -24,7 +23,7 @@ import AlbumInputBar from 'Components/FormComponents/DataComponents/AlbumForm2';
 import EventInputBar from 'Components/FormComponents/DataComponents/EventForm2';
 import MerchandiseInputBar from 'Components/FormComponents/DataComponents/MerchandiseForm2';
 import { Box, Flex } from 'rebass';
-import StyledButton from 'Styles/styledComponents/StyledButton';
+
 const ArtistPage: React.FunctionComponent = () => {
 
 
@@ -112,12 +111,14 @@ const ArtistPage: React.FunctionComponent = () => {
        <Link to="/">home</Link>
        <h1>{artist && artist.name}</h1>
 
-       <StyledBannerComponent background='http://www.thewowstyle.com/wp-content/uploads/2015/03/flower-wallpaper-20.jpg' image="https://i.pinimg.com/736x/61/27/2e/61272ed635ebb3fffb8ebaf8ac00b2bb.jpg"></StyledBannerComponent>
+       <StyledBannerComponent background='http://www.thewowstyle.com/wp-content/uploads/2015/03/flower-wallpaper-20.jpg' image="https://i.pinimg.com/736x/61/27/2e/61272ed635ebb3fffb8ebaf8ac00b2bb.jpg"><div className="background"><div className="image"></div></div></StyledBannerComponent>
       <div className="nftBoxes">
          <motion.div className="Cevents box"
-           whileHover={{transform: 'rotate(2deg)'}}
+           whileHover={{ rotate: ['2deg', '-2deg', '1.5deg', '-1deg'] }}
+           animate={{rotate: 0}}
            whileTap={{ scale: 0.8 }}
            transition={{ duration: 0.5 }}
+           exit={{rotate: '0deg'}}
          >
             </motion.div>
           <div className="Calbums box"></div>
@@ -134,7 +135,7 @@ const ArtistPage: React.FunctionComponent = () => {
       </div>
       {(type === 'album') ? <AlbumInputBar albums={albums} onClose={ closeDropdown } setAlbums={setAlbums} /> : null}
       {(type === 'event') ? <EventInputBar events={events} onClose={ closeDropdown } setEvents={setEvents} /> : null}
-       {(type === 'merchandise') ? <MerchandiseInputBar merchandise={merchandise} onClose={closeDropdown} setMerchandise={setMerchandise} /> : null} 
+      {(type === 'merchandise') ? <MerchandiseInputBar merchandise={merchandise} onClose={closeDropdown} setMerchandise={setMerchandise} /> : null} 
       </div>
       } 
     </StyledArtistProfile>

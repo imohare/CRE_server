@@ -18,7 +18,7 @@ function AlbumInputBar(props: any) {
 
   const addAlbum = async (name: string, year: Date, description: string, tokensNumber: number, img_url: string, tokensValue: number, artistId: number) => {
     const newAlbums = props.albums.slice();
-    const response = await createAlbum(name, year, description, tokensNumber, img_url, tokensValue, artistId)
+    const response = await createAlbum({ name, year, description, tokensNumber, img_url, tokensValue, artistId })
     newAlbums.push(response)
     props.setAlbums(newAlbums); // need to import this from app
   }
@@ -97,7 +97,7 @@ function AlbumInputBar(props: any) {
         <progress value={progress} max="100" />
 
         <br />  <br />
-        <Button backgroundColor="#FFF" mr={2}type="submit" color="#000"> upload your NFTs </Button>
+        <Button backgroundColor="#FFF" mr={2} type="submit" color="#000"> upload your NFTs </Button>
       </form>
     </div>
   )

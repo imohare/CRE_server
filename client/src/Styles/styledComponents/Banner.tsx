@@ -1,34 +1,15 @@
-import { motion } from 'framer-motion';
 import styled from 'styled-components';
+import { globalVariables } from 'Styles/globalStyles';
+import { TextSpan } from 'typescript';
+
 
 const BannerComponent = () => {
-  return (<div>
-            <motion.div className="background">
-             <div className="hero-image"></div>
-           </motion.div>
-         </div>)
+  return (<div className='background'>
+      <div className='image'></div>
+  </div>)
 }
 
-const StyledBannerComponent = styled(BannerComponent)<{image: string, background: string}>`
-border-radius: 5px;
-width: 100%;
-height: 20vh;
-position: relative;
-background-color: white;
+export default BannerComponent;
 
-.hero-image {
-  position: absolute;
-  background-image: url('${props => props.image}');
-  border-radius: 50%;
-  border: 6px ${({theme})=>theme.fontColor};
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-.background {
-  position: relative;
-  width: 100%;
-  background-image: url('${props => props.background}');
-}
-`
 
-export default StyledBannerComponent;
+// background='http://www.thewowstyle.com/wp-content/uploads/2015/03/flower-wallpaper-20.jpg' image="https://i.pinimg.com/736x/61/27/2e/61272ed635ebb3fffb8ebaf8ac00b2bb.jpg" 

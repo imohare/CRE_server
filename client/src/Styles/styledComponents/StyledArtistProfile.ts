@@ -9,10 +9,14 @@ const StyledArtistProfile = styled.div`
 .nftBoxes {
   display: flex;
   width: 100%;
+  justify-content: space-between;
 }
 .box {
-  height: calc(18rem + 5vw);
-  width: calc(18rem + 5vw);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(10rem + 7vw);
+  min-width: calc(10rem + 7vw);
   border: solid 3px ${({ theme }) => theme.fontColor};
 }
 .Cevents {

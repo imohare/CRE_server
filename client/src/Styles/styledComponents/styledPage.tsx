@@ -9,6 +9,9 @@ width: 96%;
   list-style: none;
   display: flex;
 }
+.logobox {
+  
+}
 
 @media screen and (min-width: 768px) {
   padding: 1rem 2rem;
