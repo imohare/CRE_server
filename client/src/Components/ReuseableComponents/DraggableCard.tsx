@@ -8,7 +8,7 @@ import StyledDraggableCard from 'Styles/styledComponents/styledDraggableCards'
 
 
 interface IProps {
-  album: IAlbum;
+  album: any;
   classified?: string;
   rotation: number;
 }

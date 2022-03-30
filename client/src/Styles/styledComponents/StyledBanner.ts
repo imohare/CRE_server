@@ -4,9 +4,8 @@ import styled from 'styled-components';
 const StyledBannerComponent = styled.div<{ image: string, background: string }>`
 right: 0;
 left: -15vw;
-width: 120vw;
+width: 100%;
 height: 40vh;
-position: relative;
 padding: 2rem 0;
 margin-bottom: 6rem;
  .image {

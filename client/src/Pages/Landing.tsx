@@ -153,11 +153,10 @@ const LandingPage: React.FunctionComponent = () => {
 
 
       <Transition>
-        {(userType === 'public') ? <PublicHeader /> : <UserHeader currentName={`Welcome, ${name}!`} />}
         <StyledPage>
+          {(userType === 'public') ? <PublicHeader /> : <UserHeader searchVal={ searchval } searchArtists={ searchArtists } currentName={`Welcome, ${name}!`} />}
           <Background />
 
-          <Form className="ArtistSearch" searchArtists={searchArtists} value={searchval} />
 
           <ScrollList title='Artists'>
             {/* @ts-ignore */}
@@ -185,3 +184,6 @@ const LandingPage: React.FunctionComponent = () => {
 }
 
 export default LandingPage;
+
+
+//           <Form className="ArtistSearch" searchArtists={searchArtists} value={searchval} />

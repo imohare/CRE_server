@@ -6,9 +6,9 @@ import { motion } from 'framer-motion';
 
 const StyledDraggableCard = styled(motion.div) <{rotation: number, background: string}>`
   transform: rotate(${props=> props.rotation}deg);
-  background-color: rgba(0, 0, 0, 0.9);
-  height: 11rem;
-  width: 9rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 8rem;
+  width: 11rem;
   position: absolute;
   border-radius: 7px;
   z-index: 0;
@@ -28,19 +28,23 @@ const StyledDraggableCard = styled(motion.div) <{rotation: number, background: s
   }
   .image {
     background-color: black;
-    height: 55%;
+    height: 100%;
     width: 100%;
     background-image: url(${props => props.background});
     background-size: cover;
 
   }
   .value {
+    display: none;
     color: #eb9800;
+    font-size: 1rem;
+    margin-bottom: -1rem;
   }
 
   .link {
     font-size: 1rem;
-    color: #00003f ;
+    // color: #00003f ;
+    color: #eb9800;
     width: 100%;
     text-align: center;
     margin: 4px;
@@ -50,7 +54,9 @@ const StyledDraggableCard = styled(motion.div) <{rotation: number, background: s
     margin-top: -0.5rem;
   }
   .link:hover {
-    color: blue;
+    color: #ffae42;
+    text-shadow: 1px 1px yellow;
+    background-color: rgb(190,190, 190)
   }
 `
 

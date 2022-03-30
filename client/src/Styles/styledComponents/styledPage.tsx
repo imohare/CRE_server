@@ -4,6 +4,7 @@ const StyledPage = styled.div`
 position: absolute;
 margin: 10px auto;
 padding: 0 7px;
+text-align: center;
 width: 96%;
 .filters {
   list-style: none;
