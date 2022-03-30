@@ -32,7 +32,7 @@ const checkIfInDB = async (isArtist) => {
   const eth = await getEthAddress();
 
   let result;
-  
+
   if (isArtist) {
     result = await getArtistByEthAddress(eth)
     //the result that it is returning is a function...
