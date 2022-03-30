@@ -9,10 +9,15 @@ import { getAllAlbums, getAllAlbumsbyArtistId } from 'Services/Album';
 import { getEvents, getEventsByArtistId } from 'Services/Event';
 import { getAllMerchandises, getAllMerchandisesbyArtistId } from 'Services/Merchandise';
 import { getArtistById } from 'Services/Artist';
+import { getEthAddress } from 'Tools/FormHelpers';
 //components
+
+import BannerComponent from 'Styles/styledComponents/Banner';
 import StyledPage from 'Styles/styledComponents/styledPage';
 import StyledButton from 'Styles/styledComponents/StyledButton';
 //styling
+import DraggableAlbumCard from 'Components/ReuseableComponents/DraggableCard';
+import DraggableEventsCard from 'Components/ReuseableComponents/StyledDraggableEventsCard';
 import StyledArtistProfile from 'Styles/styledComponents/StyledArtistProfile';
 import StyledBannerComponent from 'Styles/styledComponents/StyledBanner';
 // import './Artist.css'
@@ -23,31 +28,58 @@ import { UserContext } from 'Data/UserContext';
 import AlbumInputBar from 'Components/FormComponents/DataComponents/AlbumForm2';
 import EventInputBar from 'Components/FormComponents/DataComponents/EventForm2';
 import MerchandiseInputBar from 'Components/FormComponents/DataComponents/MerchandiseForm2';
-import { Box, Flex } from 'rebass';
+
 
 
 const ArtistPage: React.FunctionComponent = () => {
 
 
+  //updating the display of the cards
+  const [eventTitle, setEventTitle] = useState<string | null>('Events');
+  const [albumTitle, setAlbumTitle] = useState<string | null>('Albums');
+  const [merchTitle, setMerchTitle] = useState<string | null>('Merchandise');
+  const [eventCvisible, setEventCsvisible] = useState<string>('invisible');
+  const [albumCvisible, setAlbumCsvisible] = useState<string>('invisible');
+  const [merchCvisible, setMerchCsvisible] = useState<string>('invisible');
+  
+  
+  
   const [type, setType] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [albums, setAlbums] = useState<IAlbum[] | []>([]);
   const [events, setEvents] = useState<IEvent[] | []>([]);
-  const [artist, setArtist] = useState<IArtist | null>(null)
+  const [merchandise, setMerchandise] = useState<IMerchandise[] | []>([]);
+
+  const [artist, setArtist] = useState<IArtist | null>(null);
+  const [ethAddress, setEthAddress] = useState<string | null>(null);
 
   // const [upcomingEvents, setUpcomingEvents] = useState<IEvent [] | []>([]);
-  const [merchandise, setMerchandise] = useState<IMerchandise[] | []>([]);
   
   const { artistId } = useParams();
 
   const currentArtistId = artistId && parseInt(artistId);
+
+
+
+//   const reorder = (elements: any[]) => {
+//     const temp = elements.pop();
+//     elements.unshift(temp);
+// }
   
-  const closeDropdown = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    setType('');
-  }
+  
+const closeDropdown = (e: React.MouseEvent<HTMLButtonElement>) => {
+  e.preventDefault();
+  setType('');
+}
+ 
+
 
   const { currentId } = useContext(UserContext);
+
+
+  useEffect(() => {
+    
+  }, [albums, events, artist])
 
   useEffect(() => {
  
@@ -78,13 +110,20 @@ const ArtistPage: React.FunctionComponent = () => {
         console.log(error);
       })
     
+     //@ts-ignore
+     getEthAddress()
+     .then((res: string) => {
+       setEthAddress(res)
+     }).catch((error: any) => {
+       console.log(error)
+     })
+    
     //@ts-ignore
     // getEventsbyArtistId(currentArtistId)
-    //   .then(res => {
+    //   .then((res: IEvent) => {
     //     setEvents(res)
     //     return res;
     //   })
-     
     
     //@ts-ignore
     getArtistById(currentArtistId)
@@ -97,20 +136,20 @@ const ArtistPage: React.FunctionComponent = () => {
       })
       .catch(error => {
         console.log(error);
-    })
+      })    
+    
   }, [])
 
 
   const handleAlbumState = () => setType('album');
   const handleEventState = () => setType('event');
   const handleMerchandiseState = () => setType('merchandise');
-  const handleCancel = () => setType('');
-
-
+   console.log('albums', albums,  'events', events)
  return (
    <StyledPage>
      <LogoComponent></LogoComponent>
-    <StyledArtistProfile>
+     <StyledArtistProfile>
+       <BannerComponent></BannerComponent>
        <h1>{artist && artist.name}</h1>
 
        {/* <StyledBannerComponent background={exampleObj.randomBackground} image={ artist.profile_picture }><div className="background"><div className="image"></div></div></StyledBannerComponent> */}
@@ -121,18 +160,72 @@ const ArtistPage: React.FunctionComponent = () => {
            whileTap={{ scale: 0.8 }}
            transition={{ duration: 0.5 }}
            exit={{rotate: '0deg'}}
-         > Albums
+         >
+           <div onClick={() => {
+             setEventTitle(null)
+              setEventCsvisible('visible')
+           }} className="eventTitleDiv">{eventTitle}</div>
+       
+           {
+             events.length > 0 ? events.map(event => {
+               
+               return <DraggableEventsCard rotation={Math.floor(Math.random() * 3)} event={event}></DraggableEventsCard>
+           })
+               : <div className={`absolute ${eventCvisible}` } >
+                 there are no events available
+               
+             </div> } 
             </motion.div>
-          <div className="Calbums box"> Events </div>
-         <div className="Cmerchandise box"> Merchandise </div>
+            <motion.div className="Calbums box"
+           whileHover={{ rotate: ['2deg', '-2deg', '1.5deg', '-1deg'] }}
+           animate={{rotate: 0}}
+           whileTap={{ scale: 0.8 }}
+           transition={{ duration: 0.5 }}
+           exit={{rotate: '0deg'}}
+         >
+
+            <div onClick={() => {
+             setAlbumTitle(null)
+              setAlbumCsvisible('visible')
+           }} className="albumTitleDiv">{albumTitle}</div>
+
+
+           {albums.length > 0 ? albums.map(album => {
+             return <DraggableAlbumCard rotation={Math.floor(Math.random()*3)} album={album}></DraggableAlbumCard> 
+           })
+             : <div className={`absolute ${albumCvisible}` } >
+             there are currently no albums available
+           
+         </div> }
+         </motion.div>
+         <motion.div className="Cmerch box"
+           whileHover={{ rotate: ['2deg', '-2deg', '1.5deg', '-1deg'] }}
+           animate={{rotate: 0}}
+           whileTap={{ scale: 0.8 }}
+           transition={{ duration: 0.5 }}
+           exit={{rotate: '0deg'}}
+         >
+           <div onClick={() => {
+             setMerchTitle(null)
+              setMerchCsvisible('visible')
+           }} className="merchTitleDiv">{merchTitle}</div>
+           {
+             merchandise.length > 0 ? <DraggableAlbumCard classified="true" rotation={Math.floor(Math.random() * 12) - 6} album={albums[0]} ></DraggableAlbumCard>
+             : <div className={`absolute ${merchCvisible}` } >
+             there is no merchandise available
+         </div>
+           }
+         </motion.div>
          </div>
        {
-            currentId === currentArtistId ? ( <div className="profileview">
+
+           artist && artist.eth_address === ethAddress ? ( <div className="profileview">
         <p>To upload new NFTs to your profile, please select
         from the following category and input required information: </p>
       <div className="buttons">
-      <StyledButton  onClick={handleAlbumState} color="#33e">add album</StyledButton>
+ 
       <StyledButton onClick={handleEventState}>add event</StyledButton>
+       <StyledButton onClick={handleAlbumState} color="#33e">add album</StyledButton>
       <StyledButton  onClick={handleMerchandiseState}>add merchandise</StyledButton>
            </div>
               {(type === 'album') ? <AlbumInputBar albums={albums} onClose={ closeDropdown } setAlbums={setAlbums} /> : null}
