@@ -90,21 +90,26 @@ const EventPage: React.FunctionComponent = () => {
 
     let navigate = useNavigate();
     const homeRouteChange = () => {
-      let path = `/`;
-      navigate(path);
+        let path = `/`;
+        navigate(path);
     }
     const profileRouteChange = () => {
         let path = `/user/${currentId}`;
         navigate(path);
-      }
+    }
 
     return (
         <>
             <div className="EventOverall">
                 <div className="links">
-                <StyledButton onClick={homeRouteChange} >home</StyledButton>
-                <StyledButton onClick={profileRouteChange} >profile</StyledButton>
+                    <StyledButton onClick={homeRouteChange} >home</StyledButton>
+                    <StyledButton onClick={profileRouteChange} >profile</StyledButton>
                 </div>
+                <br />
+                <br />
+                <br />
+
+
                 <div className="eventPicAndTitle">
                     <div className="eventPic">
                         <img src={eventData.tokens_image} alt="event cover" />
@@ -117,6 +122,9 @@ const EventPage: React.FunctionComponent = () => {
                         </div>
                     </div>
                 </div>
+                <br />
+                <br />
+
                 <Flex>
                     <Box width={4 / 12}>
                         <h2>Description:</h2>
@@ -133,6 +141,7 @@ const EventPage: React.FunctionComponent = () => {
                         {(availableTokens.length > 0) ? ((checkIfUserHasBought()) ? <StyledButton>NFT purchased</StyledButton> : <StyledButton onClick={handleClick}>purchase event NFT</StyledButton>) : <StyledButton>Event Sold Out</StyledButton>}
                     </Box>
                 </Flex>
+
             </div>
         </>
     )

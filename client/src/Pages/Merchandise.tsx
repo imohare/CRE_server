@@ -17,7 +17,7 @@ import StyledButton from 'Styles/styledComponents/StyledButton';
 
 const MerchandisePage: React.FunctionComponent = () => {
     const location = useLocation();
-    const {currentId} = useContext(UserContext);
+    const { currentId } = useContext(UserContext);
 
     const [merchandiseData, setMerchandiseData] = useState({
         id: 0,
@@ -31,7 +31,7 @@ const MerchandisePage: React.FunctionComponent = () => {
     });
 
     const [artistData, setArtistData] = useState<IArtist>({
-        id: 0, 
+        id: 0,
         eth_address: '',
         name: '',
         profile_picture: '',
@@ -67,20 +67,20 @@ const MerchandisePage: React.FunctionComponent = () => {
             })
             .then(artist => {
                 setArtistData(artist)
-            });    
-            
-            getMerchTokensByMerchId(merchandiseId)
+            });
+
+        getMerchTokensByMerchId(merchandiseId)
             .then(response => {
                 setMerchandiseTokenData(response)
-                const availTokens =  response.filter((token: IMerchToken) => token.ConsumerId === null);
-                setAvailableTokens( availTokens);
+                const availTokens = response.filter((token: IMerchToken) => token.ConsumerId === null);
+                setAvailableTokens(availTokens);
             })
     }, [])
 
     const handleClick = () => {
         merchandiseTokenPurchase(currentId, availableTokens[0].id, artistData.id, merchandiseData.id);
-      };
-    
+    };
+
     const checkIfUserHasBought = (): boolean => {
         const consumerBoughtToken = merchandiseTokenData.filter(token => token.ConsumerId === currentId)
         if (consumerBoughtToken) return true
@@ -89,49 +89,57 @@ const MerchandisePage: React.FunctionComponent = () => {
 
     let navigate = useNavigate();
     const homeRouteChange = () => {
-      let path = `/`;
-      navigate(path);
+        let path = `/`;
+        navigate(path);
     }
     const profileRouteChange = () => {
         let path = `/user/${currentId}`;
         navigate(path);
-      }
+    }
 
     return (
         <>
             <div className="MerchandiseOverall">
                 <div className="links">
-                <StyledButton onClick={homeRouteChange} >home</StyledButton>
-                <StyledButton onClick={profileRouteChange} >profile</StyledButton>
+                    <StyledButton onClick={homeRouteChange} >home</StyledButton>
+                    <StyledButton onClick={profileRouteChange} >profile</StyledButton>
                 </div>
-                <div className="merchandisePicAndTitle">
-                    <div className="merchandisePic">
-                        <img src={merchandiseData.tokens_image} alt="merchandise cover" />
-                    </div>
-                    <div className="merchandiseTitle">
-                        < h1 > {merchandiseData.name}</h1 >
-                        <div className="dateAndName">
-                            <h3>{merchandiseData.type}</h3>
-                            <h2>*{artistData.name}</h2>
+                <br />
+                <br />
+                <br />
+                <div className="moveMiddle">
+                    <div className="merchandisePicAndTitle">
+                        <div className="merchandisePic">
+                            <img src={merchandiseData.tokens_image} alt="merchandise cover" />
+                        </div>
+                        <div className="merchandiseTitle">
+                            < h1 > {merchandiseData.name}</h1 >
+                            <div className="dateAndName">
+                                <h3>{merchandiseData.type}</h3>
+                                <h2>*{artistData.name}</h2>
+                            </div>
                         </div>
                     </div>
+                    <br />
+                    <br />
+
+                    <Flex>
+                        <Box width={4 / 12}>
+                            <h2>Description:</h2>
+                            <h4>{merchandiseData.description}</h4>
+                        </Box>
+                        <Box width={1 / 12} />
+                        <Box width={3 / 8}>
+                            <h2>Token Info: </h2>
+                            <h4> - Number of Tokens: {merchandiseData.number_of_tokens}</h4>
+                            <h4> - Token value: {merchandiseData.tokens_value}</h4>
+                        </Box>
+                        <Box width={4 / 12}>
+                            <br />
+                            {(availableTokens.length > 0) ? ((checkIfUserHasBought()) ? <StyledButton>NFT purchased</StyledButton> : <StyledButton onClick={handleClick}>purchase merchandise NFT</StyledButton>) : <StyledButton>Merchandise Sold Out</StyledButton>}
+                        </Box>
+                    </Flex>
                 </div>
-                <Flex>
-                    <Box width= {4/12}>
-                        <h2>Description:</h2>
-                        <h4>{merchandiseData.description}</h4>
-                    </Box>
-                    <Box width= {1/12}/>
-                    <Box width= {3/8}>
-                        <h2>Token Info: </h2>
-                        <h4> - Number of Tokens: {merchandiseData.number_of_tokens}</h4>
-                        <h4> - Token value: {merchandiseData.tokens_value}</h4>
-                    </Box>
-                    <Box width= {4/12}>
-                        <br/>
-                            {(availableTokens.length > 0)  ? ((checkIfUserHasBought()) ?  <StyledButton>NFT purchased</StyledButton> : <StyledButton onClick={handleClick}>purchase merchandise NFT</StyledButton>) : <StyledButton>Merchandise Sold Out</StyledButton>}
-                    </Box>
-                </Flex>
             </div>
         </>
     )
