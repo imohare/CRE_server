@@ -156,7 +156,8 @@ const LandingPage: React.FunctionComponent = () => {
       <Form searchArtists={searchArtists} value={searchval} />
 
       <ScrollList title='Artists'> 
-        {artists.map((artist: IArtist) =>  <ArtistCardTemplate artist={artist} /> )}
+      {/* @ts-ignore */}
+        {artists.map((artist: IArtist) =>  <ArtistCardTemplate artist={artist} background={artist.profile_picture}/> )}
       </ScrollList>
 
       <ScrollList title='Newest Albums'>
