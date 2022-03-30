@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useState, useContext, useEffect } from 'react';
 
 import moment from 'moment';
@@ -13,7 +13,8 @@ import "./Album.css"
 import { IAlbumToken, IArtist } from 'Data/DataTypes';
 
 import { UserContext } from 'Data/UserContext';
-import { Box, Flex } from 'rebass';
+import { Box, Button, Flex } from 'rebass';
+import StyledButton from 'Styles/styledComponents/StyledButton';
 
 const AlbumPage: React.FunctionComponent = () => {
     const location = useLocation();
@@ -89,12 +90,22 @@ const AlbumPage: React.FunctionComponent = () => {
         else return false
     }
 
+    let navigate = useNavigate();
+    const homeRouteChange = () => {
+      let path = `/`;
+      navigate(path);
+    }
+    const profileRouteChange = () => {
+        let path = `/user/${currentId}`;
+        navigate(path);
+      }
+  
     return (
         <>
             <div className="AlbumOverall">
                 <div className="links">
-                    <Link to="/">home</Link>
-                    <Link to="/artist">artist</Link>
+                    <StyledButton onClick={homeRouteChange} >home</StyledButton>
+                    <StyledButton onClick={profileRouteChange} >artist</StyledButton>
                 </div>
                 <div className="albumPicAndTitle">
                     <div className="albumPic">
@@ -122,10 +133,12 @@ const AlbumPage: React.FunctionComponent = () => {
                     </Box>
                     <Box width={4 / 12}>
                         <br />
-                        {(availableTokens.length > 0) ? ((checkIfUserHasBought()) ? <button>NFT purchased</button> : <button onClick={handleClick}>purchase album NFT</button>) : <button>Album Sold Out</button>}
+                        {(availableTokens.length > 0) ? ((checkIfUserHasBought()) ? <StyledButton>NFT purchased</StyledButton> : <StyledButton onClick={handleClick}>purchase album NFT</StyledButton>) : <StyledButton >Album Sold Out</StyledButton>}
                     </Box>
                 </Flex>
             </div>
+
+
         </>
     )
 }

@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect, useContext } from 'react';
 import moment from 'moment';
 
@@ -11,6 +11,9 @@ import { merchandiseTokenPurchase } from 'Services/Purchase';
 
 import { UserContext } from 'Data/UserContext';
 import { Flex, Box } from 'rebass';
+
+import './Merchandise.css'
+import StyledButton from 'Styles/styledComponents/StyledButton';
 
 const MerchandisePage: React.FunctionComponent = () => {
     const location = useLocation();
@@ -84,12 +87,22 @@ const MerchandisePage: React.FunctionComponent = () => {
         else return false
     }
 
+    let navigate = useNavigate();
+    const homeRouteChange = () => {
+      let path = `/`;
+      navigate(path);
+    }
+    const profileRouteChange = () => {
+        let path = `/user/${currentId}`;
+        navigate(path);
+      }
+
     return (
         <>
             <div className="MerchandiseOverall">
                 <div className="links">
-                    <Link to="/">home</Link>
-                    <Link to="/artist">artist</Link>
+                <StyledButton onClick={homeRouteChange} >home</StyledButton>
+                <StyledButton onClick={profileRouteChange} >profile</StyledButton>
                 </div>
                 <div className="merchandisePicAndTitle">
                     <div className="merchandisePic">
@@ -99,7 +112,7 @@ const MerchandisePage: React.FunctionComponent = () => {
                         < h1 > {merchandiseData.name}</h1 >
                         <div className="dateAndName">
                             <h3>{merchandiseData.type}</h3>
-                            <h2>{artistData.name}</h2>
+                            <h2>*{artistData.name}</h2>
                         </div>
                     </div>
                 </div>
@@ -116,7 +129,7 @@ const MerchandisePage: React.FunctionComponent = () => {
                     </Box>
                     <Box width= {4/12}>
                         <br/>
-                            {(availableTokens.length > 0)  ? ((checkIfUserHasBought()) ?  <button>NFT purchased</button> : <button onClick={handleClick}>purchase merchandise NFT</button>) : <button>Merchandise Sold Out</button>}
+                            {(availableTokens.length > 0)  ? ((checkIfUserHasBought()) ?  <StyledButton>NFT purchased</StyledButton> : <StyledButton onClick={handleClick}>purchase merchandise NFT</StyledButton>) : <StyledButton>Merchandise Sold Out</StyledButton>}
                     </Box>
                 </Flex>
             </div>
