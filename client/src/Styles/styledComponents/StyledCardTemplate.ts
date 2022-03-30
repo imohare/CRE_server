@@ -72,7 +72,6 @@ const StyledAlbumCardTemplate = styled(StyledCardTemplate)`
 .coverImg {
 
   background-image: url(${props => props.background});
-  background-color:green;
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
