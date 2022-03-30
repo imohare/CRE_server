@@ -1,5 +1,5 @@
 .EventOverall{
-  position:fixed;
+  position:relative;
   display:flex;
   flex-direction: column;
   padding:50px 50px 100px 50px;
@@ -27,7 +27,6 @@
 }
 .eventPicAndTitle{
   display:flex;
-
 }
 
 img{width:100%;}

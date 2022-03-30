@@ -13,7 +13,7 @@ import "./Album.css"
 import { IAlbumToken, IArtist } from 'Data/DataTypes';
 
 import { UserContext } from 'Data/UserContext';
-import { Box, Button, Flex } from 'rebass';
+import { Box, Card, Flex, Image, Text } from 'rebass';
 import StyledButton from 'Styles/styledComponents/StyledButton';
 
 const AlbumPage: React.FunctionComponent = () => {
@@ -107,28 +107,28 @@ const AlbumPage: React.FunctionComponent = () => {
                     <StyledButton onClick={homeRouteChange} >home</StyledButton>
                     <StyledButton onClick={profileRouteChange} >artist</StyledButton>
                 </div>
-                <br />
-                <br />
-                <br />
-
-                <div className="albumPicAndTitle">
-                    <div className="albumPic">
-                        <img src={albumData.tokens_image} alt="album cover" />
-                    </div>
-                    <div className="albumTitle">
-                        < h1 > {albumData.name}</h1 >
-                        <div className="dateAndName">
-                            <h3>{moment(albumData.year).format('yyyy')}</h3>
-                            <h2>    *    </h2>
-                            <h3>{artistData.name}</h3>
-                        </div>
-                    </div>
-                </div>
-                <br />
-                <br />
-
+                <br /> <br /> <br />
                 <Flex>
-                    {/* <Box width={1 / 12}>    </Box> */}
+                    <Box width={1/2}>
+                    <Card width={[ 256, 320 ]} mx='auto'>
+                    <Image src={albumData.tokens_image} />
+                    </Card>
+                    </Box>
+                    <Box width={1/2}>
+                    <Flex>
+                        <Text fontSize={[ 30, 40, 50 ]} fontWeight='bold' color='#c6c6c6' fontFamily='Raleway'> {albumData.name}</Text >
+                    </Flex>
+                    <Flex>
+                        <Box>
+                        <Text fontSize={[ 10, 20, 30 ]} color='#c6c6c6' fontFamily='Raleway'>{moment(albumData.year).format('yyyy')}</Text>
+                        <Text  fontSize={[ 10, 20, 30 ]} fontWeight='bold' color='#c6c6c6' fontFamily='Raleway'> //</Text>
+                        <Text  fontSize={[ 20, 30, 40 ]} color='#c6c6c6' fontFamily='Raleway'>{artistData.name}</Text>
+                        </Box>
+                    </Flex>
+                    </Box>
+                </Flex>
+                <br /> <br /><br /><br /><br />
+                <Flex>
                     <Box width={4 / 12}>
                         <h2>Description:</h2>
                         <h4>{albumData.description}</h4>
