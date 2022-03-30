@@ -45,7 +45,7 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
     currentId,
     setCurrentId,
     name,
-    setName,
+    setName
   } = useContext(UserContext)
 
 
@@ -56,45 +56,18 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
 
 
   const loginAs = (artist: boolean) => {
-
     setDisplayStage(1)
     setIsArtist(artist)
   }
 
   useEffect(() => {
     displayContent()
-    console.log('artist info', artistInfo);
-    console.log('consumer info', consumerInfo);
-    console.log(displayStage);
   }, [displayStage])
 
   const registerFormSubmit = (values: any) => {
-    if (isArtist) {
-      console.log(values);
-      console.log('artist', { ...values })
-      setUserType('artist');
-      // setCurrentId(values.id);
-      // setName(values.name)
-      setArtistInfo({ ...values });
-      setDisplayStage(2);
-
-    }
-    else {
-      console.log(values);
-
-      console.log('consumer`', { ...values })
-      setUserType('consumer');
-      // setCurrentId(values.id);
-      // setName(values.username);
-      setConsumerInfo({ ...values });
-      setDisplayStage(2);
-
-    }
-
+    isArtist ? setArtistInfo({ ...values }) : setConsumerInfo({ ...values })
     console.log('message from the context, artistInfo is:', artistInfo, 'consumer is ', consumerInfo)
     setDisplayStage(2);
-
-    console.log(displayStage);
   }
 
 
@@ -105,45 +78,51 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
     const check = await checkIfInDB(isArtist); //should return falsy
     //if falsey, we want to create a new user to our DB
     if (!check) {
+      console.log("in! check")
       let res;
+
       if (isArtist) {
         res = await registerWithEthAddress(isArtist, artistInfo)
+        console.log("res", res)
       }
       if (!isArtist) {
+
         res = await registerWithEthAddress(isArtist, consumerInfo);
       }//setting the user in the global context
+      console.log(res, "user res logged");
+
       setDisplayStage(6) //successful registration
     } else {
+      console.log("in else check")
+      console.log('returning truthy')
       setDisplayStage(4);
     }
   }
 
   const loginHandler = async (u: boolean): Promise<void> => {
     const check = await checkIfInDB(u);
+    console.log('check', check);
     if (check) {
       const eth = await getEthAddress();
-      // this function never even runs!
       if (u) {
         const artistObjResponse = await getArtistByEthAddress(eth);
-        const { name, id } = await artistObjResponse;
-        setCurrentId(id);
-        setName(name)
-        console.log('consumer');
+        console.log(artistObjResponse, 'artist response login')
+        // const { name, id } = await artistObjResponse;
+        // setCurrentId(id);
+        // setName(name)
         setUserType('artist');
       }
       if (!u) {
         const consumerObjResponse = await getConsumerByEthAddress(eth);
-        const { username, id } = consumerObjResponse;
-        setCurrentId(id);
-        setName(username)
-        setUserType('consumer');
-        console.log('consumer')
-        console.log('consumerloginresponse', consumerObjResponse)
+        console.log(consumerObjResponse, 'artist response login')
 
+        // const { username, consumerId } = consumerObjResponse;
+        // setCurrentId(id);
+        // setName(username)
+        setUserType('consumer');
       }
     }
     setDisplayStage(7)
-    console.log(displayStage);
   }
 
   const submitUser = () => {
@@ -177,8 +156,6 @@ const LoginModal = ({ isVisible, initialStage, onCancel }: ModalProps) => {
       onOk={submitUser}
       onCancel={onCancel}
       footer={displayStage > 5 && (<Button onClick={onCancel}>start browsing!</Button>)}
-      className="modal"
-      style={{ overflowX: "hidden" }}
     >
       {displayContent()}
     </Modal>
