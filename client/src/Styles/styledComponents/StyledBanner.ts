@@ -1,4 +1,6 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
+
+
 const StyledBannerComponent = styled.div<{ image: string, background: string }>`
 right: 0;
 left: -15vw;

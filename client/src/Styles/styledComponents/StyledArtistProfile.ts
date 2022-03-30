@@ -13,6 +13,8 @@ const StyledArtistProfile = styled.div`
 }
 .box {
   display: flex;
+  color: white;
+  font-size: 2rem;
   align-items: center;
   justify-content: center;
   min-height: calc(10rem + 7vw);

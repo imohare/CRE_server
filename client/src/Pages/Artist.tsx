@@ -2,6 +2,7 @@
 import { Link, useParams } from 'react-router-dom';
 import { useState, useContext, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import LogoComponent from 'Components/ReuseableComponents/LogoComponent';
 //antd imports
 //services
 import { getAllAlbums, getAllAlbumsbyArtistId } from 'Services/Album';
@@ -23,6 +24,7 @@ import AlbumInputBar from 'Components/FormComponents/DataComponents/AlbumForm2';
 import EventInputBar from 'Components/FormComponents/DataComponents/EventForm2';
 import MerchandiseInputBar from 'Components/FormComponents/DataComponents/MerchandiseForm2';
 import { Box, Flex } from 'rebass';
+
 
 const ArtistPage: React.FunctionComponent = () => {
 
@@ -106,9 +108,9 @@ const ArtistPage: React.FunctionComponent = () => {
 
 
  return (
-    <StyledPage>
+   <StyledPage>
+     <LogoComponent></LogoComponent>
     <StyledArtistProfile>
-       <Link to="/">home</Link>
        <h1>{artist && artist.name}</h1>
 
        {/* <StyledBannerComponent background={exampleObj.randomBackground} image={ artist.profile_picture }><div className="background"><div className="image"></div></div></StyledBannerComponent> */}
@@ -119,24 +121,25 @@ const ArtistPage: React.FunctionComponent = () => {
            whileTap={{ scale: 0.8 }}
            transition={{ duration: 0.5 }}
            exit={{rotate: '0deg'}}
-         >
+         > Albums
             </motion.div>
-          <div className="Calbums box"></div>
-         <div className="Cmerchandise box"></div>
+          <div className="Calbums box"> Events </div>
+         <div className="Cmerchandise box"> Merchandise </div>
          </div>
        {
-         <div className="profileview">
+            currentId === currentArtistId ? ( <div className="profileview">
         <p>To upload new NFTs to your profile, please select
         from the following category and input required information: </p>
       <div className="buttons">
-      <StyledButton  onClick={handleAlbumState} color="#33e">album</StyledButton>
-      <StyledButton onClick={handleEventState}>event</StyledButton>
-      <StyledButton  onClick={handleMerchandiseState}>merchandise</StyledButton>
-      </div>
-      {(type === 'album') ? <AlbumInputBar albums={albums} onClose={ closeDropdown } setAlbums={setAlbums} /> : null}
-      {(type === 'event') ? <EventInputBar events={events} onClose={ closeDropdown } setEvents={setEvents} /> : null}
-      {(type === 'merchandise') ? <MerchandiseInputBar merchandise={merchandise} onClose={closeDropdown} setMerchandise={setMerchandise} /> : null} 
-      </div>
+      <StyledButton  onClick={handleAlbumState} color="#33e">add album</StyledButton>
+      <StyledButton onClick={handleEventState}>add event</StyledButton>
+      <StyledButton  onClick={handleMerchandiseState}>add merchandise</StyledButton>
+           </div>
+              {(type === 'album') ? <AlbumInputBar albums={albums} onClose={ closeDropdown } setAlbums={setAlbums} /> : null}
+              {(type === 'event') ? <EventInputBar events={events} onClose={ closeDropdown } setEvents={setEvents} /> : null}
+              {(type === 'merchandise') ? <MerchandiseInputBar merchandise={merchandise} onClose={closeDropdown} setMerchandise={setMerchandise} /> : null} 
+               </div>)
+           : null
       } 
     </StyledArtistProfile>
   </StyledPage>
