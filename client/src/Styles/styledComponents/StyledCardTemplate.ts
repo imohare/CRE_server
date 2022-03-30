@@ -7,7 +7,7 @@ position: relative;
 min-width: 16rem;
 height: 20rem;
 margin: 0 0.6rem;
-background-color: ${({theme})=> theme.fontColor};
+background-color: ${({ theme }) => theme.fontColor};
 border-radius: 5px;
 img {
   position: absolute;
@@ -17,7 +17,7 @@ img {
   z-index: 0;
 }
 .portrait {
-  background-image: url(${props => props.portrait || '' });
+  background-image: url(${props => props.portrait || ''});
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -72,6 +72,7 @@ const StyledAlbumCardTemplate = styled(StyledCardTemplate)`
 .coverImg {
 
   background-image: url(${props => props.background});
+  background-color:green;
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
@@ -120,7 +121,7 @@ const StyledMerchCardTemplate = styled(StyledCardTemplate)`
 export {
   StyledArtistCardTemplate,
   StyledAlbumCardTemplate,
-  StyledEventCardTemplate, 
+  StyledEventCardTemplate,
   StyledMerchCardTemplate
 }
 

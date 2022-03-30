@@ -25,7 +25,7 @@ function AlbumInputBar(props: any) {
     newAlbums.push(response)
     props.setAlbums(newAlbums); // need to import this from app
 
-    await createAlbum({ name, year, description, tokensNumber, img_url, tokensValue, artistId })
+    // await createAlbum({ name, year, description, tokensNumber, img_url, tokensValue, artistId })
 
   }
 
