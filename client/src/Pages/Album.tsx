@@ -92,14 +92,14 @@ const AlbumPage: React.FunctionComponent = () => {
 
     let navigate = useNavigate();
     const homeRouteChange = () => {
-      let path = `/`;
-      navigate(path);
+        let path = `/`;
+        navigate(path);
     }
     const profileRouteChange = () => {
         let path = `/user/${currentId}`;
         navigate(path);
-      }
-  
+    }
+
     return (
         <>
             <div className="AlbumOverall">
@@ -107,6 +107,10 @@ const AlbumPage: React.FunctionComponent = () => {
                     <StyledButton onClick={homeRouteChange} >home</StyledButton>
                     <StyledButton onClick={profileRouteChange} >artist</StyledButton>
                 </div>
+                <br />
+                <br />
+                <br />
+
                 <div className="albumPicAndTitle">
                     <div className="albumPic">
                         <img src={albumData.tokens_image} alt="album cover" />
@@ -120,7 +124,11 @@ const AlbumPage: React.FunctionComponent = () => {
                         </div>
                     </div>
                 </div>
+                <br />
+                <br />
+
                 <Flex>
+                    {/* <Box width={1 / 12}>    </Box> */}
                     <Box width={4 / 12}>
                         <h2>Description:</h2>
                         <h4>{albumData.description}</h4>
