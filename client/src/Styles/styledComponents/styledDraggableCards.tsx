@@ -1,4 +1,3 @@
-import DraggableCard from 'Components/ReuseableComponents/DraggableCard';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 

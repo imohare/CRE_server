@@ -3,11 +3,12 @@ import { Link, useParams } from 'react-router-dom';
 import { useState, useContext, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import LogoComponent from 'Components/ReuseableComponents/LogoComponent';
-//antd imports
 //services
-import { getAllAlbums, getAllAlbumsbyArtistId } from 'Services/Album';
-import { getEvents, getEventsByArtistId } from 'Services/Event';
-import { getAllMerchandises, getAllMerchandisesbyArtistId } from 'Services/Merchandise';
+import { getAllAlbumsbyArtistId } from 'Services/Album';
+import { getEventsByArtistId } from 'Services/Event';
+import { getAllMerchandisesbyArtistId } from 'Services/Merchandise';
+
+
 import { getArtistById } from 'Services/Artist';
 import { getEthAddress } from 'Tools/FormHelpers';
 //components
@@ -16,8 +17,9 @@ import BannerComponent from 'Styles/styledComponents/Banner';
 import StyledPage from 'Styles/styledComponents/styledPage';
 import StyledButton from 'Styles/styledComponents/StyledButton';
 //styling
-import DraggableAlbumCard from 'Components/ReuseableComponents/DraggableCard';
-import DraggableEventsCard from 'Components/ReuseableComponents/DraggableMerchCard';
+import DraggableAlbumCard from 'Components/ReuseableComponents/CardTemplates/DraggableAlbumCard';
+import DraggableEventsCard from 'Components/ReuseableComponents/CardTemplates/DraggableEventsCard';
+import DraggableMerchCard from 'Components/ReuseableComponents/CardTemplates/DraggableMerchCard';
 import StyledArtistProfile from 'Styles/styledComponents/StyledArtistProfile';
 import StyledBannerComponent from 'Styles/styledComponents/StyledBanner';
 // import './Artist.css'
@@ -29,7 +31,6 @@ import AlbumInputBar from 'Components/FormComponents/DataComponents/AlbumForm2';
 import EventInputBar from 'Components/FormComponents/DataComponents/EventForm2';
 import MerchandiseInputBar from 'Components/FormComponents/DataComponents/MerchandiseForm2';
 
-import DraggableMerchCard from 'Components/ReuseableComponents/DraggableMerchCard'
 
 const ArtistPage: React.FunctionComponent = () => {
 
@@ -172,7 +173,7 @@ const closeDropdown = (e: React.MouseEvent<HTMLButtonElement>) => {
            {                     
            events.length > 0 ? events.map(event => {
             return <div className={`V ${eventCvisible}`}>
-              <DraggableAlbumCard rotation={Math.floor(Math.random() * 3)} album={event}></DraggableAlbumCard> </div>
+              <DraggableEventsCard rotation={Math.floor(Math.random() * 3)} event={event}></DraggableEventsCard> </div>
           })
             : <div className={`absolute ${eventCvisible}` } >
             there are currently no event planned
@@ -210,8 +211,6 @@ const closeDropdown = (e: React.MouseEvent<HTMLButtonElement>) => {
            transition={{ duration: 0.5 }}
            exit={{rotate: '0deg'}}
          >
-
-
 
            <div onClick={(e: any) => {
              e.preventDefault();
@@ -252,8 +251,6 @@ const closeDropdown = (e: React.MouseEvent<HTMLButtonElement>) => {
   </StyledPage>
   )
 }
-
-
 
 export default ArtistPage;
 
