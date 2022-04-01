@@ -1,9 +1,6 @@
 
-import { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { IMerchandise } from 'Data/DataTypes';
-import { getRenderPropValue } from 'antd/lib/_util/getRenderPropValue';
 import StyledDraggableCard from 'Styles/styledComponents/styledDraggableCards'
 
 
@@ -36,7 +33,7 @@ const DraggableMerchCard = ({ rotation, merch, classified } : IProps) => {
         <div className="value">
           { merch.tokens_value }
         </div>
-        <Link to={`/merch/${merch.id}`}
+        <Link to={`/merchandise/${merch.id}`}
         className="link">
         go to page
         </Link>
